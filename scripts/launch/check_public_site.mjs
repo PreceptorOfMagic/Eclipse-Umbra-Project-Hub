@@ -15,6 +15,12 @@ const navContract = [
   ["Umbra", "umbra.html"], ["Development", "development.html"], ["Acknowledgements", "credits.html"],
 ];
 const baseUrl = "https://preceptorofmagic.github.io/Eclipse-Umbra-Project-Hub/";
+// The website mark reuses the exact logo geometry from the GitHub banner.
+const brandMark = fs.readFileSync(path.join(siteRoot, "assets", "brand-mark.svg"), "utf8");
+const githubBanner = fs.readFileSync(path.join(siteRoot, "assets", "og-card.svg"), "utf8");
+const logoShapes = brandMark.match(/<g>([\s\S]*?)<\/g>/)?.[1]?.trim();
+const bannerLogoShapes = githubBanner.match(/<g transform="translate\(78 70\)">([\s\S]*?)<\/g>/)?.[1]?.trim();
+if (!logoShapes || logoShapes !== bannerLogoShapes) errors.push("website logo must match the GitHub banner logo");
 // Each illustrated mode keeps its natural ratio, without a fixed-height letterbox.
 const stylesheet = fs.readFileSync(path.join(siteRoot, "assets", "styles.css"), "utf8");
 const heroImageRule = stylesheet.match(/\.hero-diagram-row\s*\{([^}]+)\}/)?.[1] ?? "";
@@ -69,6 +75,10 @@ for (const name of htmlFiles) {
   const file = path.join(siteRoot, name);
   const html = fs.readFileSync(file, "utf8");
   htmlByFile.set(file, html);
+  const logoReferences = [...html.matchAll(/(?:href|src)="(assets\/brand-mark\.svg[^\"]*)"/g)];
+  if (logoReferences.length !== 3 || logoReferences.some((match) => match[1] !== "assets/brand-mark.svg?v=20261001j")) {
+    errors.push(`site/${name}: header, footer and favicon must use the current shared logo`);
+  }
   const ids = [...html.matchAll(/\bid=["']([^"']+)["']/gi)].map((match) => match[1]);
   idsByFile.set(file, new Set(ids));
   if (ids.length !== new Set(ids).size) errors.push(`site/${name}: duplicate id`);
