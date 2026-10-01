@@ -20,6 +20,7 @@
 /* Two crops of the same illustrated source: retain the artwork, give each mode room. */
 .hero-illustrations{display:grid;gap:1rem;min-width:0}
 .hero-diagram-row{display:block;width:100%;height:auto;aspect-ratio:1216 / 450;overflow:hidden;border:1px solid var(--line);border-radius:var(--radius-lg);box-shadow:var(--shadow)}
+.hero-diagram-coop{aspect-ratio:1216 / 530}
 .hero-illustrations figcaption{margin:0}
 
 /* Documentation and platform downloads */

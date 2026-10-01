@@ -22,9 +22,15 @@ if (!/\bwidth\s*:\s*100%\s*;/.test(heroImageRule) || !/\bheight\s*:\s*auto\s*;/.
   errors.push("hero artwork must scale its width and height together");
 }
 const heroArtwork = fs.readFileSync(path.join(siteRoot, "assets", "hero-art.svg"), "utf8");
-if (!heroArtwork.includes('viewBox="0 0 1216 900"')) errors.push("hero artwork must match the two illustrated viewport crops");
-for (const label of heroArtwork.matchAll(/<text\b[^>]*font-size="([\d.]+)"/g)) {
-  if (Number(label[1]) < 28) errors.push("hero artwork label is below the enlarged type-size contract");
+if (!heroArtwork.includes('viewBox="0 0 1216 980"')) errors.push("hero artwork must match the two illustrated viewport crops");
+// All type uses exactly 2x the original artwork's sizes, retaining its hierarchy.
+const heroTypeSizes = new Map([
+  ["EVERYDAY STREAMING", 40], ["TWO-HOST CO-OP", 40], ["UMBRA HOST", 36],
+  ["UMBRA A", 32], ["UMBRA B", 32], ["ECLIPSE", 38], ["CLIENT", 26], ["COMPOSER", 26],
+]);
+for (const label of heroArtwork.matchAll(/<text\b([^>]*)>([^<]+)<\/text>/g)) {
+  const actualSize = Number(label[1].match(/font-size="([\d.]+)"/)?.[1]);
+  if (actualSize !== heroTypeSizes.get(label[2])) errors.push(`hero artwork must preserve original type proportions: ${label[2]}`);
 }
 const canonicals = new Map([
   ["index.html", baseUrl], ["setup.html", `${baseUrl}setup.html`], ["eclipse.html", `${baseUrl}eclipse.html`],
