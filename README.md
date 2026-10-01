@@ -32,7 +32,7 @@ The repositories remain separate so their inherited histories, licences, release
 | [Project hub source](site/index.html) | Consumer explanation, quick start, status, media, acknowledgements and support disclosures; the [canonical site](https://preceptorofmagic.github.io/) activates at publication |
 | [Eclipse](https://github.com/PreceptorOfMagic/eclipse) | Client source, client releases and client issues |
 | [Umbra](https://github.com/PreceptorOfMagic/umbra) | Host source, host releases and host issues |
-| [CTM-USBIP](https://github.com/PreceptorOfMagic/CTM-USBIP) | Optional advanced controller/device transport |
+| [CTM-USBIP integration source](https://github.com/PreceptorOfMagic/CTM-USBIP/tree/eclipse/main) | Optional advanced controller/device transport; not required for basic co-op and no standalone project release is published yet |
 
 This project exists because others shared their work first. Moonlight was created at MHacks 2013 by Cameron Gutman, Diego Waxemberg, Aidan Campbell, Aaron Neyer, Michelle Bergeron and Andrew Hennessy. Sunshine was originally created by `@loki-47-6F-64` and is now maintained by LizardByte and contributors. The direct lineages continue through Moonlight TV by Mariotaku and Aurora by GuiDev1994 to Eclipse, and through Apollo by `@ClassicOldSong` to Umbra. See the [full acknowledgements](ACKNOWLEDGEMENTS.md) for source links, licences and the wider dependency inventory.
 
