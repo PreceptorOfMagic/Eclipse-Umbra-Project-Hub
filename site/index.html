@@ -3,417 +3,104 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#07070a">
-  <meta name="description" content="Eclipse/Umbra combines two live host sessions into one split-screen couch co-op experience on a TV or PC.">
+  <meta name="theme-color" content="#08070b">
+  <meta name="description" content="Eclipse and Umbra provide everyday game streaming plus two-PC couch co-op on one shared display.">
   <meta property="og:type" content="website">
-  <meta property="og:title" content="Eclipse/Umbra — two PCs, one screen">
-  <meta property="og:description" content="Couch co-op for games that never shipped it. Free and open source.">
-  <meta property="og:url" content="https://preceptorofmagic.github.io/">
-  <meta property="og:image" content="https://preceptorofmagic.github.io/assets/og-card.png">
-  <meta property="og:image:alt" content="Eclipse/Umbra — two PCs, one screen.">
+  <meta property="og:title" content="Eclipse/Umbra Project Hub">
+  <meta property="og:description" content="Two PCs. One screen. Couch co-op, re-engineered — with complete single-host game streaming too.">
+  <meta property="og:url" content="https://preceptorofmagic.github.io/Eclipse-Umbra-Project-Hub/">
+  <meta property="og:image" content="https://preceptorofmagic.github.io/Eclipse-Umbra-Project-Hub/assets/og-card.png">
+  <meta property="og:image:alt" content="Eclipse and Umbra support both one-PC game streaming and two-PC couch co-op.">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:image" content="https://preceptorofmagic.github.io/assets/og-card.png">
-  <meta name="twitter:image:alt" content="Eclipse/Umbra — two PCs, one screen.">
-  <title>Eclipse/Umbra — two PCs, one screen</title>
-  <link rel="canonical" href="https://preceptorofmagic.github.io/">
+  <meta name="twitter:image" content="https://preceptorofmagic.github.io/Eclipse-Umbra-Project-Hub/assets/og-card.png">
+  <meta name="twitter:image:alt" content="Eclipse and Umbra support both one-PC game streaming and two-PC couch co-op.">
+  <title>Eclipse/Umbra Project Hub</title>
+  <link rel="canonical" href="https://preceptorofmagic.github.io/Eclipse-Umbra-Project-Hub/">
   <link rel="icon" href="assets/brand-mark.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="assets/styles.css?v=20261001">
+  <link rel="stylesheet" href="assets/styles.css?v=20261001b">
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
-
   <header class="site-header">
     <div class="shell nav-row">
-      <a class="brand" href="./" aria-label="Eclipse/Umbra home">
-        <img src="assets/brand-mark.svg" alt="" width="36" height="36">
-        <span>ECLIPSE / UMBRA</span>
-      </a>
+      <a class="brand" href="./" aria-label="Eclipse/Umbra Project Hub home"><img src="assets/brand-mark.svg" alt="" width="36" height="36"><span>ECLIPSE / UMBRA</span></a>
       <nav class="main-nav" aria-label="Primary navigation">
-        <a href="./#coop">Co-op</a>
-        <a href="./#applications">Applications</a>
-        <a href="projects.html">Projects</a>
-        <a href="setup.html">Setup</a>
-        <a href="media.html">Media</a>
-        <a href="./#status">Status</a>
-        <a href="credits.html">Credits</a>
-        <a class="button" href="support.html">Support</a>
+        <a href="./" aria-current="page">Home</a><a href="setup.html">Installation Guide</a><a href="eclipse.html">Eclipse</a><a href="umbra.html">Umbra</a><a href="development.html">Development</a><a href="credits.html">Acknowledgements</a>
       </nav>
+      <span class="support-control" aria-label="Support this project">
+        <script type="text/javascript" src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js" data-name="bmc-button" data-slug="PreceptorOfMagic" data-color="#BD5FFF" data-emoji="" data-font="Cookie" data-text="Buy me a coffee" data-outline-color="#000000" data-font-color="#ffffff" data-coffee-color="#FFDD00"></script>
+      </span>
     </div>
   </header>
 
-  <div class="notice-bar">
-    <div class="shell">
-      <span class="status-dot" aria-hidden="true"></span>
-      <span><strong>Source-first preview.</strong> Explore the working co-op design, setup path and tested status while packaged installers and recorded showcase media are prepared.</span>
-    </div>
-  </div>
-
   <main id="main">
     <section class="hero">
-      <div class="shell">
-        <div class="hero-grid">
-          <div>
-            <p class="eyebrow">Open-source game streaming</p>
-            <h1>Two PCs. <span>One screen.</span></h1>
-            <p class="hero-copy">In Eclipse/Umbra, the Eclipse client composes two live Umbra host sessions into one split-screen couch co-op experience—so two people can play side by side on the same display, even when a game only provides online multiplayer. Each PC still runs its own game session, so licences, accounts and game networking remain game-specific.</p>
-            <div class="hero-actions">
-              <a class="button" href="#coop">See how co-op works</a>
-              <a class="button-secondary" href="#status">See preview status</a>
-            </div>
-            <div class="hero-meta" aria-label="Project summary">
-              <span>GPL-licensed · source hosted on GitHub</span>
-              <span>LG webOS and desktop clients</span>
-              <span>Two independent host streams</span>
-            </div>
-          </div>
-          <div class="hero-visual">
-            <div class="showcase-placeholder hero-video-placeholder" role="img" aria-label="Reserved sixteen-by-nine hero frame for verified footage of two independently controlled live host streams on one display">
-              <div class="placeholder-grid" aria-hidden="true"><span>LIVE HOST A</span><span>LIVE HOST B</span></div>
-              <div class="placeholder-copy">
-                <span class="media-type">Launch footage · recording pending</span>
-                <strong>The proof reel will live here.</strong>
-                <small>6–8 seconds · two independent players · one uninterrupted live take</small>
-                <a class="text-link" href="media.html#hero-reel">See the capture brief <span aria-hidden="true">→</span></a>
-              </div>
-            </div>
-          </div>
+      <div class="shell hero-grid">
+        <div>
+          <p class="eyebrow">Open-source game streaming</p>
+          <h1>Two PCs. One screen. <span>Couch co-op, re-engineered.</span></h1>
+          <p class="hero-copy"><strong>Eclipse</strong> is the client and <strong>Umbra</strong> is the Windows host. Use them for familiar one-PC remote game streaming—or combine two independent PCs into one side-by-side or stacked couch co-op view.</p>
+          <div class="hero-actions"><a class="button" href="setup.html">Install Eclipse/Umbra</a><a class="button-secondary" href="#how-it-works">See how it works</a></div>
+          <ul class="platform-pills" aria-label="Supported platform targets"><li>Eclipse: LG webOS</li><li>Eclipse: Windows x64</li><li>Eclipse: Linux x86_64</li><li>Umbra: Windows x64</li></ul>
         </div>
-
-        <p class="lineage-strip"><strong>Built on work shared by Moonlight’s founders and community, Sunshine creator @loki-47-6F-64 and LizardByte’s maintainers, then Mariotaku’s Moonlight TV, GuiDev1994’s Aurora and ClassicOldSong’s Apollo.</strong> <a href="credits.html">Meet the people and projects behind it.</a></p>
-      </div>
-    </section>
-
-    <section class="section" id="coop">
-      <div class="shell">
-        <div class="section-head">
-          <div>
-            <p class="eyebrow">The headline feature</p>
-            <h2>Couch co-op without asking the game.</h2>
-          </div>
-          <p class="section-lede">Each PC renders its own game and sends its own live stream. The Eclipse client joins the two pictures, routes each assigned controller to its chosen Umbra host, and presents one split-screen experience on the shared display. Neither player is a spectator and neither host is reduced to a recording.</p>
-        </div>
-
-        <div class="card-grid">
-          <article class="card">
-            <span class="card-number">01</span>
-            <h3>Choose two hosts</h3>
-            <p>Pick two paired PCs from the co-op entry point. The Umbra host provides the compatible co-op stream path on each machine.</p>
-          </article>
-          <article class="card">
-            <span class="card-number">02</span>
-            <h3>Set the room</h3>
-            <p>Choose side-by-side or stacked panes, decide which PC is Player 1—the left pane side by side or the top pane when stacked—and assign controllers and supported keyboard/mouse input before launch.</p>
-          </article>
-          <article class="card">
-            <span class="card-number">03</span>
-            <h3>Play together</h3>
-            <p>Both independent host sessions continue encoding in real time while the Eclipse client presents one split-screen experience on the TV or desktop.</p>
-          </article>
-        </div>
-
-        <div class="mode-grid" style="margin-top: 1rem">
-          <article class="mode-card">
-            <div class="mode-screen vertical" role="img" aria-label="Side-by-side co-op layout">
-              <span>PLAYER 1</span><span>PLAYER 2</span>
-            </div>
-            <h3>Side by side</h3>
-            <p>Two tall half-width panes share the display. Either host can occupy Player 1, the primary pane on the left.</p>
-          </article>
-          <article class="mode-card">
-            <div class="mode-screen horizontal" role="img" aria-label="Stacked co-op layout">
-              <span>PLAYER 1</span><span>PLAYER 2</span>
-            </div>
-            <h3>Stacked</h3>
-            <p>Two wide half-height panes divide the display horizontally. Player 1 is the primary pane on top, and either host can take that position.</p>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <section class="section" id="applications">
-      <div class="shell">
-        <div class="section-head">
-          <div>
-            <p class="eyebrow">One experience, two codebases</p>
-            <h2>Eclipse and Umbra have clear jobs.</h2>
-          </div>
-          <p class="section-lede">The public hub stays unified while the software remains split where it should: Eclipse is the client people use; Umbra is the host software installed on the gaming PCs. Each repository keeps its own source and technical instructions; release artifacts will be published separately.</p>
-        </div>
-
-        <div class="project-grid">
-          <article class="project-card">
-            <p class="project-kicker">Client · fork lineage: Moonlight TV → Aurora</p>
-            <h3>Eclipse client</h3>
-            <p>The large-screen client and co-op composer, built around the Moonlight streaming core and a remote-, keyboard- and gamepad-friendly LVGL interface.</p>
-            <ul>
-              <li>Co-op host selection, pane layout and input assignment</li>
-              <li>Decoder-gated resolution choices through 4K and separate frame-rate choices through 240 fps</li>
-              <li>Capability-gated H.264, HEVC, AV1 and HDR paths on compatible webOS hardware</li>
-              <li>Performance overlay, on-screen keyboard and virtual mouse</li>
-              <li>Single-host streaming remains part of the same client</li>
-            </ul>
-            <a class="text-link" href="https://github.com/PreceptorOfMagic/eclipse">Eclipse client repository <span aria-hidden="true">→</span></a>
-          </article>
-
-          <article class="project-card">
-            <p class="project-kicker">Host · fork lineage: Sunshine → Apollo</p>
-            <h3>Umbra host</h3>
-            <p>The matching host fork for co-op. It retains Apollo’s self-hosted streaming foundation and virtual-display workflow while carrying the host-side behaviour Eclipse needs.</p>
-            <ul>
-              <li>On-demand virtual display at the client-selected size and refresh rate, with lifecycle-aware cleanup</li>
-              <li>Browser configuration, PIN pairing and per-device permissions</li>
-              <li>Per-device display overrides, text clipboard sync and session hooks</li>
-              <li>Optional input-only access and client-requested HDR path</li>
-              <li>Runtime-probed NVIDIA, Intel, AMD and software encoders</li>
-            </ul>
-            <a class="text-link" href="https://github.com/PreceptorOfMagic/umbra">Umbra host repository <span aria-hidden="true">→</span></a>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <section class="section" aria-labelledby="streaming-title">
-      <div class="shell">
-        <div class="section-head">
-          <div>
-            <p class="eyebrow">Beyond the headline feature</p>
-            <h2 id="streaming-title">Co-op sits on a complete streaming stack.</h2>
-          </div>
-          <p class="section-lede">Eclipse still works as a conventional one-host client, while Umbra retains the self-hosted controls inherited from Apollo. Co-op adds a second live session without discarding the tools that make ordinary game streaming useful.</p>
-        </div>
-
-        <div class="project-grid">
-          <article class="project-card">
-            <p class="project-kicker">Eclipse · stream choices</p>
-            <h3>Tune the session to the client.</h3>
-            <p>Choose decoder-gated presets from 720p through 4K—including 3584×2016 “3.6K”—or use native and custom resolutions. Frame-rate presets run from 30 to 240 fps, with custom fractional rates where the active decoder allows them.</p>
-            <p>Automatic bitrate follows resolution and refresh rate until manual control is used. The selector spans 5–400 Mbps; current Moonlight protocol negotiation caps the resulting video allocation at 100 Mbps.</p>
-          </article>
-
-          <article class="project-card">
-            <p class="project-kicker">Eclipse · picture and control</p>
-            <h3>Keep the useful controls in reach.</h3>
-            <p>Compatible webOS hardware can expose H.264, HEVC, AV1 and HDR10 paths; current desktop previews expose H.264 and HEVC. The in-stream overlay reports the negotiated codec, resolution, frame rate, round-trip time, drops, bitrate and processing latency.</p>
-            <p>A full on-screen keyboard and opt-in gamepad virtual mouse remain available. Capability-aware forwarding can include touchpad, rumble, trigger rumble, accelerometer, gyro and RGB features when the controller, client and host support them. In co-op, relative mouse movement and the virtual mouse target Player 1, the primary left/top pane.</p>
-          </article>
-
-          <article class="project-card">
-            <p class="project-kicker">Umbra · display and access</p>
-            <h3>Build the host around each paired device.</h3>
-            <p>Umbra can create a Windows virtual display at the client-requested size and refresh rate, apply a device-specific display override and follow a client HDR request where the Windows, driver and display path support it. It removes the display when the application or session is terminated; a temporary disconnect can retain a resumable session instead.</p>
-            <p>Its browser interface covers configuration, application management and PIN pairing. Paired devices can receive granular viewing, launch, input, clipboard and command permissions rather than sharing one unrestricted profile.</p>
-          </article>
-
-          <article class="project-card">
-            <p class="project-kicker">Umbra · host plumbing</p>
-            <h3>Use the encoder path that actually works.</h3>
-            <p>Umbra probes NVIDIA NVENC, Intel Quick Sync, AMD AMF and software encoder paths at runtime and selects a viable option. It also retains text clipboard synchronisation, connection and disconnection hooks, input-only access and stereo, 5.1 or 7.1 low-delay audio configurations for ordinary single-host sessions. Co-op deliberately requests stereo from both hosts so Eclipse can mix them or play one selected source.</p>
-            <p>Codec, HDR, resolution and frame-rate availability still depends on the GPU, driver, Windows version, client and display; an implementation path is not a universal compatibility promise.</p>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <section class="section" aria-labelledby="architecture-title">
-      <div class="shell">
-        <div class="section-head">
-          <div>
-            <p class="eyebrow">The shape of a session</p>
-            <h2 id="architecture-title">Streaming stays live from end to end.</h2>
-          </div>
-          <p class="section-lede">Co-op is not prerecorded playback and it is not remote viewing of a single shared desktop. Two hosts keep producing current game frames; the client composes them for one display and keeps input ownership explicit.</p>
-        </div>
-
-        <div class="architecture" aria-label="Co-op architecture">
-          <article class="architecture-node">
-            <div><small>Sources</small><strong>Two host PCs</strong></div>
-            <p>Each PC runs a game, renders its own desktop and streams through the Umbra host.</p>
-          </article>
-          <div class="architecture-arrow" aria-hidden="true">→</div>
-          <article class="architecture-node">
-            <div><small>Client</small><strong>Eclipse client</strong></div>
-            <p>Receives both sessions, composes the chosen geometry and routes input.</p>
-          </article>
-          <div class="architecture-arrow" aria-hidden="true">→</div>
-          <article class="architecture-node">
-            <div><small>Shared output</small><strong>One display</strong></div>
-            <p>Presents the joined picture on LG webOS or a supported desktop client.</p>
-          </article>
-        </div>
-        <figure class="architecture-figure">
-          <img src="assets/hero-art.svg" alt="Two Umbra host PCs feeding side-by-side panels through the Eclipse client to one television" width="1440" height="760">
-          <figcaption>Architecture illustration—not gameplay evidence. The launch film will use verified live footage.</figcaption>
+        <figure class="hero-visual">
+          <img src="assets/hero-art.svg" alt="A regular one-PC stream and a two-PC co-op stream both flowing through Eclipse to a shared display" width="1440" height="900">
+          <figcaption>One client for ordinary streaming and two-host co-op.</figcaption>
         </figure>
       </div>
+      <div class="shell lineage-strip"><strong>Built from Moonlight and Sunshine, through Moonlight TV, Aurora and Apollo.</strong> <a href="credits.html">See the creators and open-source projects that made this possible.</a></div>
     </section>
 
-    <section class="section" id="setup">
+    <section class="section" id="how-it-works">
       <div class="shell">
-        <div class="section-head">
-          <div>
-            <p class="eyebrow">Setup at a glance</p>
-            <h2>Understand the stack before touching a config file.</h2>
-          </div>
-          <p class="section-lede">Public packages are not available yet. These links describe the current build and co-op setup work; the repositories, guides and release artifacts must be made public together before launch.</p>
-        </div>
-
-        <div class="card-grid">
-          <article class="feature-card">
-            <h3>1. Install the Umbra hosts</h3>
-            <p>Install the compatible Umbra host on both Windows gaming PCs, then configure the dedicated co-op application entry on each.</p>
-            <a class="text-link" href="https://github.com/PreceptorOfMagic/umbra/blob/beta/vega-coop/docs/umbra-windows-build.md">Umbra host build guide <span aria-hidden="true">→</span></a>
-          </article>
-          <article class="feature-card">
-            <h3>2. Install the Eclipse client</h3>
-            <p>Build or install the client for the device attached to the shared display, then pair it with both hosts.</p>
-            <a class="text-link" href="https://github.com/PreceptorOfMagic/eclipse/blob/main/docs/BUILD_WEBOS.md">webOS build guide <span aria-hidden="true">→</span></a>
-          </article>
-          <article class="feature-card">
-            <h3>3. Start from Co-op</h3>
-            <p>Open the two-PC co-op entry, choose hosts, layout and inputs, then launch the joined session.</p>
-            <a class="text-link" href="https://github.com/PreceptorOfMagic/eclipse/blob/main/docs/windows-coop-setup.md#pair-and-start-a-session">Co-op launch steps <span aria-hidden="true">→</span></a>
-          </article>
-        </div>
-        <div class="hero-actions" style="margin-top: 1.5rem">
-          <a class="button" href="setup.html">Open the complete quick start</a>
+        <div class="section-head"><div><p class="eyebrow">The complete streaming stack</p><h2>Start with one host. Add a second when the couch fills up.</h2></div><p class="section-lede">Co-op is the defining addition, not a replacement for standard game streaming. Eclipse and Umbra retain the normal host pairing, app launching, video, audio and input experience expected from their Moonlight/Sunshine lineage.</p></div>
+        <div class="mode-grid">
+          <article class="project-card"><p class="project-kicker">Standard streaming</p><h3>One host → one client</h3><p>Pair Eclipse with Umbra, choose a game or desktop, and stream to the TV or desktop client. Configure resolution, frame rate, bitrate, codec, HDR, audio and input according to the capabilities of the client, host and network.</p><ul><li>Remote game and desktop launch</li><li>H.264 and HEVC, with AV1/HDR paths where supported</li><li>Gamepads, keyboard and mouse</li><li>Performance overlay and session diagnostics</li></ul></article>
+          <article class="project-card"><p class="project-kicker">Two-host co-op</p><h3>Two hosts → one shared screen</h3><p>Choose two paired Umbra PCs. Eclipse receives both live sessions, places them side by side or stacked, and routes each player's assigned controls to the correct host.</p><ul><li>Two independently rendered games</li><li>Side-by-side or top-and-bottom layouts</li><li>Explicit Player 1 and input ownership</li><li>Automatic compatible encoder selection</li></ul></article>
         </div>
       </div>
     </section>
 
-    <section class="section" id="media">
+    <section class="section media-section" aria-labelledby="video-title">
       <div class="shell">
-        <div class="section-head">
-          <div>
-            <p class="eyebrow">Real footage, not a render</p>
-            <h2>The demo is being prepared for recording.</h2>
-          </div>
-          <p class="section-lede">The launch media will show the physical display, both active panes, the host-selection flow and real independent input. Until that footage is captured, these deliberately labelled slots avoid passing mock-ups off as gameplay.</p>
+        <div class="section-head"><div><p class="eyebrow">Gameplay showcase</p><h2 id="video-title">See both modes in one continuous run.</h2></div><p class="section-lede">This frame is reserved for the final project video.</p></div>
+        <div class="showcase-placeholder showcase-placeholder-wide" role="img" aria-label="Video placeholder showing a planned transition from a normal one-host stream to a two-host couch co-op stream">
+          <div class="placeholder-grid placeholder-three" aria-hidden="true"><span>ONE-PC STREAM</span><span>CO-OP · PLAYER 1</span><span>CO-OP · PLAYER 2</span></div>
+          <div class="placeholder-copy"><span class="media-type">Video placeholder</span><strong>Standard streaming → co-op → both layouts</strong><small>Record a single 45–60 second 4K capture from the client, showing game launch, isolated control of both players, side-by-side and stacked layouts. Export H.264 MP4 plus a captioned WebM.</small></div>
         </div>
+      </div>
+    </section>
 
-        <div class="showcase-placeholder showcase-placeholder-wide showcase-placeholder-photo" role="img" aria-label="Reserved wide photograph of the physical co-op setup with one display and two controllers">
-          <div class="photo-silhouette" aria-hidden="true"><span></span><i></i><i></i></div>
-          <div class="placeholder-copy">
-            <span class="media-type">Wide setup photograph · capture pending</span>
-            <strong>One display, two players, two host PCs</strong>
-            <small>Physical-room context · two controllers visible · no private details</small>
-            <a class="text-link" href="media.html#photography">See the photography brief <span aria-hidden="true">→</span></a>
-          </div>
+    <section class="section">
+      <div class="shell">
+        <div class="section-head"><div><p class="eyebrow">Why they are paired</p><h2>Cross-vendor co-op needs both ends of the connection.</h2></div><p class="section-lede">Two independently encoded streams cannot always be joined safely when the hosts use different GPU vendors. Eclipse and Umbra are developed together so the client can request a compatible co-op mode and the host can use the custom encoder path and stream contract it requires.</p></div>
+        <div class="architecture" aria-label="Eclipse and Umbra co-op architecture">
+          <article class="architecture-node"><div><small>Gaming PCs</small><strong>Umbra hosts</strong></div><p>Capture each game, choose a compatible hardware or custom co-op encoder, and send two independent sessions.</p></article><div class="architecture-arrow" aria-hidden="true">→</div><article class="architecture-node"><div><small>Shared display</small><strong>Eclipse client</strong></div><p>Negotiates the co-op contract, composes the panes, mixes or selects audio, and keeps input ownership separate.</p></article><div class="architecture-arrow" aria-hidden="true">→</div><article class="architecture-node"><div><small>Players</small><strong>One couch</strong></div><p>Each player controls their own PC while both games appear on one television or desktop display.</p></article>
         </div>
-
-        <div class="media-grid" style="margin-top: 1rem">
-          <article class="media-card media-card-detailed">
-            <div class="media-mini-frame media-mini-frame-split" aria-hidden="true"><span></span><span></span></div>
-            <span class="media-type">GIF-style loop · planned</span>
-            <h3>Independent input</h3>
-            <p>One player moves, then the other, then both at once. The web delivery will loop as efficient muted video rather than a heavyweight GIF.</p>
-          </article>
-          <article class="media-card media-card-detailed">
-            <div class="media-mini-frame media-mini-frame-stack" aria-hidden="true"><span></span><span></span></div>
-            <span class="media-type">GIF-style loop · planned</span>
-            <h3>Both layouts</h3>
-            <p>A real transition from side by side to stacked, with no cut hiding a restart or prerecorded pane.</p>
-          </article>
-          <article class="media-card media-card-detailed">
-            <div class="media-mini-frame media-mini-frame-ui" aria-hidden="true"><span></span><span></span><span></span></div>
-            <span class="media-type">Interface still · planned</span>
-            <h3>Host and input picker</h3>
-            <p>Two public-safe Umbra aliases, the layout choice and separate controller ownership, readable at site size.</p>
-          </article>
-          <article class="media-card media-card-detailed">
-            <div class="media-mini-frame media-mini-frame-photo" aria-hidden="true"><span></span></div>
-            <span class="media-type">Photography · planned</span>
-            <h3>The real room</h3>
-            <p>One TV, two controllers and the physical shared-screen context, with reflections and private details cleared.</p>
-          </article>
-          <article class="media-card media-card-detailed">
-            <span class="media-type">Walkthrough · planned</span>
-            <h3>From two hosts to one screen</h3>
-            <p>An approximately 100-second captioned film covering setup, controller assignment, both layouts, creator credits and a clean teardown.</p>
-            <a class="text-link" href="walkthrough.html">Prepared accessible page <span aria-hidden="true">→</span></a>
-          </article>
-          <article class="media-card media-card-detailed">
-            <span class="media-type">Diagram · ready</span>
-            <h3>The architecture in one glance</h3>
-            <p>The two-host composition graphic is already built and can remain alongside the real-world footage.</p>
-          </article>
-        </div>
-        <div class="hero-actions" style="margin-top: 1.5rem">
-          <a class="button" href="media.html">Open the media production board</a>
-          <a class="button-secondary" href="walkthrough.html">Open the walkthrough shell</a>
-        </div>
+        <p class="section-note">The work was kept as a coordinated client-and-host project because broad co-op compatibility required changes on both sides. Anyone is welcome to adapt the functionality for Aurora, Apollo, or any other Moonlight/Sunshine fork.</p>
       </div>
     </section>
 
     <section class="section" id="status">
       <div class="shell">
-        <div class="section-head">
-          <div>
-            <p class="eyebrow">No launch-day surprises</p>
-            <h2>Current status, stated plainly.</h2>
-          </div>
-          <p class="section-lede">The matrix separates what has been exercised from what is still being packaged or tuned, and will grow from measured results rather than aspirational feature copy.</p>
-        </div>
-
-        <div class="status-table-wrap">
-          <table class="status-table">
-            <caption class="visually-hidden">Current validation and release status by supported surface</caption>
-            <thead>
-              <tr><th scope="col">Surface</th><th scope="col">Status</th><th scope="col">What that means today</th></tr>
-            </thead>
-            <tbody>
-              <tr><td>LG webOS client</td><td><span class="tag tag-tested">Tested rig</span></td><td>The main co-op path is exercised on the project’s LG TV; broad model support still needs public release validation.</td></tr>
-              <tr><td>Windows x64 client</td><td><span class="tag tag-preview">Source-build preview</span></td><td>The portable build uses D3D11VA hardware decode and runs co-op; a reviewed packaged download is not available yet.</td></tr>
-              <tr><td>Umbra Windows host</td><td><span class="tag tag-preview">Development source</span></td><td>Browser UI, pairing, permissions, virtual-display and encoder paths are present in the development source; final installer validation remains in progress.</td></tr>
-              <tr><td>Linux client</td><td><span class="tag tag-planned">Integration</span></td><td>The port has been exercised on Ubuntu, Fedora and Arch test environments; integration into the release branch is unfinished.</td></tr>
-              <tr><td>Co-op with an AMD host (HEVC beta)</td><td><span class="tag tag-preview">Active tuning</span></td><td>Known NVIDIA/AMD or AMD/AMD pairings automatically select the experimental HEVC encoder on both hosts. Live synthetic stress passed; rapid-motion quality, real-game acceptance, both roles and clean lifecycle remain open.</td></tr>
-              <tr><td>Windows client also hosts a pane</td><td><span class="tag tag-preview">Preview</span></td><td>The Windows local-host flow has been exercised; physical-controller isolation remains partial.</td></tr>
-              <tr><td>Consumer installers</td><td><span class="tag tag-planned">Not released</span></td><td>No consumer installers are public; use source-build instructions until checksummed artifacts and migration guidance are published.</td></tr>
-            </tbody>
-          </table>
-        </div>
-        <p class="section-lede" style="margin-top: 1rem">The release compatibility matrix will name exact client and host commits, hardware, operating systems, codecs, HDR state, resolutions, refresh rates, controllers and audio modes. Source paths establish implementation—not a pass result for every combination. <a href="https://github.com/PreceptorOfMagic/PreceptorOfMagic.github.io/blob/main/docs/launch/feature-claims.md">Read the current evidence ledger.</a></p>
+        <div class="section-head"><div><p class="eyebrow">Current status</p><h2>What has been tested—and what still needs your hardware.</h2></div><p class="section-lede">The table separates working targets from combinations that have actually been exercised. A supported code path is not the same as a promise that every TV, OS, GPU and driver combination has been verified.</p></div>
+        <div class="status-table-wrap"><table class="status-table"><caption>Compatibility and test coverage as of October 2026</caption><thead><tr><th scope="col">Area</th><th scope="col">Tested hardware / software</th><th scope="col">Result</th><th scope="col">Coverage gap</th></tr></thead><tbody>
+          <tr><td>LG webOS client</td><td>LG G5, webOS 26 (11.2.0 / firmware 43.21.77), wired through a UE300 USB Ethernet adapter</td><td><span class="tag tag-tested">Tested</span> Standard streaming and the two-host co-op path run on the project television.</td><td>Other LG models, SoCs, decoder combinations and earlier/later webOS releases need community testing.</td></tr>
+          <tr><td>Windows client</td><td>Windows 11 x64 on the Radeon RX Vega test PC; D3D11VA hardware decode</td><td><span class="tag tag-tested">Tested</span> Standard and co-op sessions, diagnostics and recovery have been exercised.</td><td>Windows 10, Windows on ARM, Intel-only clients, other GPU generations and broader decoder/driver combinations remain unverified.</td></tr>
+          <tr><td>Linux client</td><td>x86_64 builds exercised in Ubuntu, Fedora and Arch environments</td><td><span class="tag tag-tested">Tested</span> Core streaming, co-op and diagnostic paths have been exercised in the project environments.</td><td>Other distributions, desktop stacks, packaging formats and VAAPI/NVIDIA/AMD decoder combinations need wider testing.</td></tr>
+          <tr><td>Umbra hosts</td><td>Windows 11 x64; NVIDIA RTX 4070, NVIDIA RTX 3070 and AMD Radeon RX Vega systems</td><td><span class="tag tag-tested">Tested</span> Single-host streaming and host diagnostics work across the project systems.</td><td>Windows 10, Windows Server, Windows on ARM, Intel Arc/iGPU hosts and newer AMD generations need coverage.</td></tr>
+          <tr><td>NVIDIA + NVIDIA co-op</td><td>RTX 4070 + RTX 3070, Windows 11; 10-bit HEVC/HDR path</td><td><span class="tag tag-tested">Measured</span> Two-host co-op has been used and measured on the primary rig.</td><td>Other NVIDIA architectures, driver branches, resolutions and refresh rates need reports.</td></tr>
+          <tr><td>NVIDIA + AMD co-op</td><td>RTX 4070 + Radeon RX Vega, Windows 11; mixed-vendor H.264/custom co-op path</td><td><span class="tag tag-tested">Measured</span> Live mixed-vendor co-op has been demonstrated.</td><td>Real-game coverage, both host orders, newer AMD encoders, HDR and longer-duration sessions need broader validation.</td></tr>
+          <tr><td>AMD + AMD co-op</td><td>No second AMD host is available on the project rig</td><td><span class="tag tag-open">Needs testing</span> The code path exists but this pairing has not been run on two physical AMD hosts.</td><td>AMD × AMD is a priority community test, especially RDNA-era GPUs and HDR-capable hardware.</td></tr>
+          <tr><td>Intel and mixed Intel co-op</td><td>No representative Intel host pair in the project rig</td><td><span class="tag tag-open">Needs testing</span> Intel encoder paths are present but co-op combinations are not verified.</td><td>Intel × Intel, Intel × NVIDIA and Intel × AMD reports are needed.</td></tr>
+        </tbody></table></div>
+        <div class="callout report-callout"><div><p class="eyebrow">Your setup is useful evidence</p><h3>Try it outside the tested matrix.</h3><p>If something fails, open an Eclipse or Umbra issue—or reply in the project’s community thread—with the exact OS, GPU, driver, client and display. Eclipse’s Share/diagnostics feature packages system capabilities, settings, session events, performance totals, host logs and crash or unclean-exit records so a report can be investigated without guesswork. Review the bundle for personal information before attaching it.</p></div><div class="stacked-actions"><a class="button" href="https://github.com/PreceptorOfMagic/Eclipse/issues/new/choose">Report an Eclipse issue</a><a class="button-secondary" href="https://github.com/PreceptorOfMagic/Umbra/issues/new/choose">Report an Umbra issue</a></div></div>
       </div>
     </section>
 
-    <section class="section" aria-labelledby="thanks-title">
-      <div class="shell">
-        <div class="callout">
-          <div>
-            <p class="eyebrow">Credit is part of the product</p>
-            <h2 id="thanks-title">Built because other people shared their work.</h2>
-            <p>Moonlight founders Cameron Gutman, Diego Waxemberg, Aidan Campbell, Aaron Neyer, Michelle Bergeron and Andrew Hennessy; Sunshine creator @loki-47-6F-64 and current LizardByte maintainers; Mariotaku’s Moonlight TV; GuiDev1994’s Aurora; ClassicOldSong’s Apollo; and the principal shipped third-party components are named with direct source and licence links.</p>
-          </div>
-          <a class="button" href="credits.html">Read the acknowledgements</a>
-        </div>
-      </div>
-    </section>
-
-    <section class="section" aria-labelledby="support-title">
-      <div class="shell">
-        <div class="callout">
-          <div>
-            <p class="eyebrow">Optional support</p>
-            <h2 id="support-title">Support the maintainer, if you want to.</h2>
-            <p>If the published work has been useful, optional one-time or monthly support goes to the individual maintainer for use at their discretion. It buys no feature, access or priority. The support page explains the recipient, recurring option, fees, privacy, tax and unresolved Queensland classification.</p>
-          </div>
-          <a class="button bmc-button" href="support.html">See support details</a>
-        </div>
-      </div>
-    </section>
+    <section class="section compact-section"><div class="shell project-grid"><article class="project-card"><p class="project-kicker">Client</p><h3>Eclipse</h3><p>Install on the television or computer where you want to play. Pair it with one Umbra host for regular streaming or two for co-op.</p><a class="text-link" href="eclipse.html">Explore Eclipse <span aria-hidden="true">→</span></a></article><article class="project-card"><p class="project-kicker">Host</p><h3>Umbra</h3><p>Install on each Windows gaming PC. It provides the normal host experience plus the encoder and session behaviour required by Eclipse co-op.</p><a class="text-link" href="umbra.html">Explore Umbra <span aria-hidden="true">→</span></a></article></div></section>
   </main>
 
-  <footer class="site-footer">
-    <div class="shell">
-      <div class="footer-grid">
-        <div class="footer-brand">
-          <a class="brand" href="./" aria-label="Eclipse/Umbra home"><img src="assets/brand-mark.svg" alt="" width="36" height="36"><span>ECLIPSE / UMBRA</span></a>
-          <p>An independent, free and open-source game-streaming project. Not affiliated with or endorsed by Moonlight, Sunshine, LG Electronics, NVIDIA, AMD, Amazon, DXC or the Eclipse Foundation.</p>
-        </div>
-        <div class="footer-links"><strong>Applications</strong><a href="https://github.com/PreceptorOfMagic/eclipse">Eclipse client source</a><a href="https://github.com/PreceptorOfMagic/umbra">Umbra host source</a><a href="https://github.com/PreceptorOfMagic/eclipse/issues">Eclipse issues</a><a href="https://github.com/PreceptorOfMagic/umbra/issues">Umbra issues</a></div>
-        <div class="footer-links"><strong>About</strong><a href="credits.html">Acknowledgements</a><a href="projects.html">Project map</a><a href="media.html">Media plan</a><a href="support.html">Support</a><a href="./#status">Release status</a><a href="https://github.com/PreceptorOfMagic/PreceptorOfMagic.github.io/blob/main/CONTRIBUTING.md">Contributing</a><a href="https://github.com/PreceptorOfMagic/PreceptorOfMagic.github.io/blob/main/LICENSE.txt">Repository licence text</a></div>
-      </div>
-      <p class="legal-line">Eclipse/Umbra is one project: Eclipse is its client application and Umbra is its host application. Independent and not affiliated with or endorsed by the upstream projects or named vendors.</p>
-    </div>
-  </footer>
+  <footer class="site-footer"><div class="shell"><div class="footer-top"><a class="brand" href="./"><img src="assets/brand-mark.svg" alt="" width="36" height="36"><span>ECLIPSE / UMBRA</span></a><nav class="footer-nav" aria-label="Footer navigation"><a href="./">Home</a><a href="setup.html">Installation Guide</a><a href="eclipse.html">Eclipse</a><a href="umbra.html">Umbra</a><a href="development.html">Development</a><a href="credits.html">Acknowledgements</a></nav></div><p class="legal-line">Eclipse/Umbra is an independent, free and open-source project. Eclipse is its client application and Umbra is its host application. Not affiliated with or endorsed by the upstream projects or named vendors.</p></div></footer>
 </body>
 </html>

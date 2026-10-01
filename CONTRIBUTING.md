@@ -3,8 +3,8 @@
 This repository is limited to the Eclipse/Umbra website, launch documentation and media-delivery tooling.
 
 - Report or fix website copy, accessibility, navigation, launch documentation and reviewed delivery-media issues here after the repository is public.
-- Send Eclipse client behaviour, build and packaging work to the [Eclipse repository](https://github.com/PreceptorOfMagic/eclipse).
-- Send Umbra capture, encoding, pairing, virtual-display, service and installer work to the [Umbra repository](https://github.com/PreceptorOfMagic/umbra).
+- Send Eclipse client behaviour, build and packaging work to the [Eclipse repository](https://github.com/PreceptorOfMagic/Eclipse).
+- Send Umbra capture, encoding, pairing, virtual-display, service and installer work to the [Umbra repository](https://github.com/PreceptorOfMagic/Umbra).
 - Never attach pairing codes, credentials, account details, addresses, private logs, unredacted screenshots or raw recording masters.
 
 For site changes, run:

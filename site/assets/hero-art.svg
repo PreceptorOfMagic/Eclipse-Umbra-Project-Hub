@@ -1,64 +1,32 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 760" role="img" aria-labelledby="title desc">
-  <title id="title">Two computers streaming into one television</title>
-  <desc id="desc">A diagram with two host windows flowing into side-by-side panels on a large display.</desc>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 900" role="img" aria-labelledby="title desc">
+  <title id="title">Eclipse and Umbra support regular streaming and two-PC couch co-op</title>
+  <desc id="desc">The upper path shows one Umbra gaming PC streaming through Eclipse to a full television screen. The lower path shows two Umbra PCs streaming through Eclipse to a split television screen.</desc>
   <defs>
-    <linearGradient id="bg" x1="0" x2="1" y1="0" y2="1">
-      <stop offset="0" stop-color="#120d20"/>
-      <stop offset="0.5" stop-color="#08080c"/>
-      <stop offset="1" stop-color="#11101b"/>
-    </linearGradient>
-    <linearGradient id="paneA" x1="0" x2="1" y1="0" y2="1">
-      <stop offset="0" stop-color="#7c3aed"/>
-      <stop offset="1" stop-color="#27134f"/>
-    </linearGradient>
-    <linearGradient id="paneB" x1="0" x2="1" y1="1" y2="0">
-      <stop offset="0" stop-color="#2e1065"/>
-      <stop offset="1" stop-color="#c084fc"/>
-    </linearGradient>
-    <filter id="glow" x="-60%" y="-60%" width="220%" height="220%">
-      <feGaussianBlur stdDeviation="24"/>
-    </filter>
+    <linearGradient id="bg" x1="0" x2="1" y1="0" y2="1"><stop stop-color="#171020"/><stop offset=".5" stop-color="#08070b"/><stop offset="1" stop-color="#130d1e"/></linearGradient>
+    <linearGradient id="a" x1="0" x2="1" y1="0" y2="1"><stop stop-color="#8b5cf6"/><stop offset="1" stop-color="#2e1065"/></linearGradient>
+    <linearGradient id="b" x1="0" x2="1" y1="1" y2="0"><stop stop-color="#3b0764"/><stop offset="1" stop-color="#d8b4fe"/></linearGradient>
+    <filter id="glow" x="-80%" y="-80%" width="260%" height="260%"><feGaussianBlur stdDeviation="32"/></filter>
   </defs>
-  <rect width="1440" height="760" rx="40" fill="url(#bg)"/>
-  <circle cx="720" cy="380" r="150" fill="#7c3aed" opacity=".16" filter="url(#glow)"/>
-  <g fill="none" stroke="#a78bfa" stroke-linecap="round" stroke-width="4" opacity=".72">
-    <path d="M316 245C470 245 482 328 590 350"/>
-    <path d="M316 515C470 515 482 432 590 410"/>
+  <rect width="1440" height="900" rx="42" fill="url(#bg)"/>
+  <circle cx="822" cy="450" r="210" fill="#7c3aed" opacity=".12" filter="url(#glow)"/>
+  <path d="M70 450H1370" stroke="#d8b4fe" stroke-opacity=".13"/>
+  <g font-family="ui-sans-serif,system-ui,sans-serif">
+    <text x="72" y="76" fill="#a78bfa" font-size="20" font-weight="800" letter-spacing="3">EVERYDAY STREAMING</text>
+    <text x="72" y="505" fill="#a78bfa" font-size="20" font-weight="800" letter-spacing="3">TWO-HOST CO-OP</text>
   </g>
-  <g transform="translate(92 166)">
-    <rect width="224" height="158" rx="18" fill="#15131d" stroke="#5b5270" stroke-width="3"/>
-    <rect x="18" y="34" width="188" height="101" rx="10" fill="url(#paneA)"/>
-    <circle cx="27" cy="19" r="5" fill="#c084fc"/>
-    <circle cx="44" cy="19" r="5" fill="#4c1d95"/>
-    <path d="M58 151h108" stroke="#5b5270" stroke-width="8"/>
+  <g transform="translate(74 135)">
+    <g><rect width="220" height="150" rx="18" fill="#14111a" stroke="#655a72" stroke-width="3"/><rect x="18" y="30" width="184" height="96" rx="9" fill="url(#a)"/><circle cx="27" cy="17" r="4" fill="#d8b4fe"/><path d="M62 143h96" stroke="#655a72" stroke-width="7"/><text x="110" y="178" fill="#f5f3ff" font-family="ui-sans-serif,system-ui,sans-serif" font-size="18" font-weight="800" text-anchor="middle">UMBRA HOST</text></g>
+    <path d="M248 76H452" stroke="#a78bfa" stroke-width="4" stroke-linecap="round"/><path d="m441 65 14 11-14 11" fill="none" stroke="#a78bfa" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+    <g transform="translate(474 32)"><rect width="162" height="88" rx="22" fill="#1a1424" stroke="#a78bfa" stroke-width="3"/><text x="81" y="42" fill="#fff" font-family="ui-sans-serif,system-ui,sans-serif" font-size="19" font-weight="900" text-anchor="middle">ECLIPSE</text><text x="81" y="65" fill="#bdb4c8" font-family="ui-sans-serif,system-ui,sans-serif" font-size="13" text-anchor="middle">CLIENT</text></g>
+    <path d="M660 76H830" stroke="#a78bfa" stroke-width="4" stroke-linecap="round"/><path d="m819 65 14 11-14 11" fill="none" stroke="#a78bfa" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+    <g transform="translate(854 -35)"><rect width="430" height="244" rx="23" fill="#050507" stroke="#80758f" stroke-width="5"/><rect x="18" y="18" width="394" height="208" rx="10" fill="url(#a)"/><g fill="none" stroke="#fff" stroke-opacity=".42"><circle cx="215" cy="120" r="62" stroke-width="3"/><path d="m177 142 38-62 38 62Z" stroke-width="5"/></g><path d="M185 244h60l13 39h-86l13-39Z" fill="#302a39"/><path d="M142 283h146" stroke="#80758f" stroke-width="12" stroke-linecap="round"/></g>
   </g>
-  <g transform="translate(92 436)">
-    <rect width="224" height="158" rx="18" fill="#15131d" stroke="#5b5270" stroke-width="3"/>
-    <rect x="18" y="34" width="188" height="101" rx="10" fill="url(#paneB)"/>
-    <circle cx="27" cy="19" r="5" fill="#c084fc"/>
-    <circle cx="44" cy="19" r="5" fill="#4c1d95"/>
-    <path d="M58 151h108" stroke="#5b5270" stroke-width="8"/>
-  </g>
-  <g transform="translate(590 174)">
-    <rect width="758" height="426" rx="27" fill="#050507" stroke="#80758f" stroke-width="5"/>
-    <clipPath id="screen"><rect x="21" y="21" width="716" height="384" rx="12"/></clipPath>
-    <g clip-path="url(#screen)">
-      <rect x="21" y="21" width="358" height="384" fill="url(#paneA)"/>
-      <rect x="379" y="21" width="358" height="384" fill="url(#paneB)"/>
-      <path d="M379 21v384" stroke="#fff" stroke-width="4"/>
-      <g fill="none" stroke="#fff" opacity=".45">
-        <circle cx="197" cy="214" r="70" stroke-width="2"/>
-        <path d="m154 236 43-70 43 70Z" stroke-width="5"/>
-        <rect x="488" y="142" width="140" height="140" rx="28" stroke-width="4"/>
-        <path d="m524 214 32 32 46-64" stroke-width="7"/>
-      </g>
-    </g>
-    <path d="M326 426h106l18 52H308l18-52Z" fill="#302a39"/>
-    <path d="M258 478h242" stroke="#80758f" stroke-linecap="round" stroke-width="14"/>
-  </g>
-  <g font-family="ui-sans-serif,system-ui,sans-serif" font-weight="700" fill="#f5f3ff">
-    <text x="112" y="144" font-size="24">HOST A</text>
-    <text x="112" y="414" font-size="24">HOST B</text>
-    <text x="640" y="142" font-size="24">ONE CO-OP SESSION</text>
+  <g transform="translate(74 596)">
+    <g transform="translate(0 -52)"><rect width="190" height="126" rx="16" fill="#14111a" stroke="#655a72" stroke-width="3"/><rect x="16" y="27" width="158" height="78" rx="8" fill="url(#a)"/><text x="95" y="151" fill="#f5f3ff" font-family="ui-sans-serif,system-ui,sans-serif" font-size="16" font-weight="800" text-anchor="middle">UMBRA A</text></g>
+    <g transform="translate(0 127)"><rect width="190" height="126" rx="16" fill="#14111a" stroke="#655a72" stroke-width="3"/><rect x="16" y="27" width="158" height="78" rx="8" fill="url(#b)"/><text x="95" y="151" fill="#f5f3ff" font-family="ui-sans-serif,system-ui,sans-serif" font-size="16" font-weight="800" text-anchor="middle">UMBRA B</text></g>
+    <path d="M216 11C340 11 350 57 452 76M216 190C340 190 350 95 452 76" fill="none" stroke="#a78bfa" stroke-width="4" stroke-linecap="round"/><path d="m441 65 14 11-14 11" fill="none" stroke="#a78bfa" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+    <g transform="translate(474 32)"><rect width="162" height="88" rx="22" fill="#1a1424" stroke="#a78bfa" stroke-width="3"/><text x="81" y="42" fill="#fff" font-family="ui-sans-serif,system-ui,sans-serif" font-size="19" font-weight="900" text-anchor="middle">ECLIPSE</text><text x="81" y="65" fill="#bdb4c8" font-family="ui-sans-serif,system-ui,sans-serif" font-size="13" text-anchor="middle">COMPOSER</text></g>
+    <path d="M660 76H830" stroke="#a78bfa" stroke-width="4" stroke-linecap="round"/><path d="m819 65 14 11-14 11" fill="none" stroke="#a78bfa" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+    <g transform="translate(854 -35)"><rect width="430" height="244" rx="23" fill="#050507" stroke="#80758f" stroke-width="5"/><clipPath id="screen"><rect x="18" y="18" width="394" height="208" rx="10"/></clipPath><g clip-path="url(#screen)"><rect x="18" y="18" width="197" height="208" fill="url(#a)"/><rect x="215" y="18" width="197" height="208" fill="url(#b)"/><path d="M215 18v208" stroke="#fff" stroke-width="3"/><g fill="none" stroke="#fff" stroke-opacity=".42"><circle cx="117" cy="120" r="52" stroke-width="3"/><path d="m87 140 30-51 30 51Z" stroke-width="5"/><rect x="264" y="72" width="98" height="98" rx="20" stroke-width="4"/><path d="m288 121 22 22 33-45" stroke-width="6"/></g></g><path d="M185 244h60l13 39h-86l13-39Z" fill="#302a39"/><path d="M142 283h146" stroke="#80758f" stroke-width="12" stroke-linecap="round"/></g>
   </g>
 </svg>

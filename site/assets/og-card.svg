@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" role="img" aria-labelledby="title desc">
-  <title id="title">Eclipse/Umbra co-op streaming</title>
-  <desc id="desc">Two PCs, one screen: couch co-op for games that never shipped it.</desc>
+  <title id="title">Eclipse/Umbra game streaming</title>
+  <desc id="desc">Everyday one-PC streaming and two-PC couch co-op in one open-source project.</desc>
   <defs>
     <linearGradient id="bg" x1="0" x2="1" y1="0" y2="1">
       <stop offset="0" stop-color="#170c2c"/>
@@ -25,8 +25,8 @@
     <text x="165" y="112" font-size="34" font-weight="700">ECLIPSE / UMBRA</text>
     <text x="78" y="255" font-size="74" font-weight="800">Two PCs. One screen.</text>
     <text x="78" y="338" font-size="52" font-weight="650" fill="url(#accent)">Couch co-op, re-engineered.</text>
-    <text x="80" y="438" font-size="27" fill="#d4d4d8">Two live host sessions composed for one shared display.</text>
-    <text x="80" y="483" font-size="27" fill="#d4d4d8">GPL-licensed. Built on Moonlight, Sunshine, Moonlight TV, Aurora and Apollo.</text>
-    <text x="80" y="558" font-size="23" font-weight="700" fill="#a78bfa">ENGINEERING PREVIEW</text>
+    <text x="80" y="438" font-size="27" fill="#d4d4d8">Everyday one-PC streaming and two-PC couch co-op.</text>
+    <text x="80" y="483" font-size="27" fill="#d4d4d8">Eclipse client · Umbra host · free and open source.</text>
+    <text x="80" y="558" font-size="23" font-weight="700" fill="#a78bfa">LG WEBOS · WINDOWS · LINUX</text>
   </g>
 </svg>

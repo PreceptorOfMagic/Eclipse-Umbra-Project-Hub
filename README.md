@@ -1,47 +1,38 @@
 <p align="center">
-  <a href="site/index.html">
-    <img src="site/assets/og-card.png" alt="Eclipse/Umbra — two PCs, one screen" width="960">
-  </a>
+  <a href="site/index.html"><img src="site/assets/og-card.png" alt="Eclipse/Umbra — two PCs, one screen" width="960"></a>
 </p>
+
+<p align="center"><strong>The website for Eclipse and Umbra: everyday game streaming plus two-PC couch co-op on one shared display.</strong></p>
 
 <p align="center">
-  <strong>The public hub for Eclipse/Umbra: an Eclipse client, two Umbra hosts and two live PCs on one shared couch co-op display.</strong>
+  <a href="site/index.html">Home</a> ·
+  <a href="site/setup.html">Installation Guide</a> ·
+  <a href="site/eclipse.html">Eclipse</a> ·
+  <a href="site/umbra.html">Umbra</a> ·
+  <a href="site/development.html">Development</a> ·
+  <a href="site/credits.html">Acknowledgements</a>
 </p>
 
-<p align="center">
-  <a href="site/index.html">Review homepage</a> ·
-  <a href="site/setup.html">Review setup</a> ·
-  <a href="site/projects.html">Review project map</a> ·
-  <a href="site/credits.html">Review acknowledgements</a> ·
-  <a href="site/support.html">Review support</a>
-</p>
-
-Canonical Pages URL after publication: `https://preceptorofmagic.github.io/`
-
-> [!NOTE]
-> This repository contains the project website and launch documentation, not the client or host source histories. It remains private while the presentation and release material are reviewed.
+Canonical Pages URL after publication: `https://preceptorofmagic.github.io/Eclipse-Umbra-Project-Hub/`
 
 ## One project, two applications
 
-**Eclipse/Umbra** is the project identity. **Eclipse** is the large-screen client application derived through Moonlight TV and Aurora. **Umbra** is the matching Windows host application derived through Sunshine and Apollo. The defining addition is a two-host mode that presents two independent live streams side by side or stacked on one TV or desktop display.
+**Eclipse** is the LG webOS, Windows and Linux client. **Umbra** is the Windows host. Together they provide conventional one-host game streaming and a coordinated two-host mode that presents independent live games side by side or stacked on one television or desktop display.
 
-The repositories remain separate so their inherited histories, licences, release pipelines and issue scopes stay understandable:
+The repositories remain separate so their histories, licences, releases and issue scopes stay clear:
 
-| Surface | Responsibility |
+| Repository | Responsibility |
 |---|---|
-| [Project hub source](site/index.html) | Consumer explanation, quick start, status, media, acknowledgements and support disclosures; the [canonical site](https://preceptorofmagic.github.io/) activates at publication |
-| [Eclipse](https://github.com/PreceptorOfMagic/eclipse) | Client source, client releases and client issues |
-| [Umbra](https://github.com/PreceptorOfMagic/umbra) | Host source, host releases and host issues |
-| [CTM-USBIP integration source](https://github.com/PreceptorOfMagic/CTM-USBIP/tree/eclipse/main) | Optional advanced controller/device transport; not required for basic co-op and no standalone project release is published yet |
-
-This project exists because others shared their work first. Moonlight was created at MHacks 2013 by Cameron Gutman, Diego Waxemberg, Aidan Campbell, Aaron Neyer, Michelle Bergeron and Andrew Hennessy. Sunshine was originally created by `@loki-47-6F-64` and is now maintained by LizardByte and contributors. The direct lineages continue through Moonlight TV by Mariotaku and Aurora by GuiDev1994 to Eclipse, and through Apollo by `@ClassicOldSong` to Umbra. See the [full acknowledgements](ACKNOWLEDGEMENTS.md) for source links, licences and the wider dependency inventory.
+| [Eclipse/Umbra Project Hub](https://github.com/PreceptorOfMagic/Eclipse-Umbra-Project-Hub) | Website, installation path, status, development overview and acknowledgements |
+| [Eclipse](https://github.com/PreceptorOfMagic/Eclipse) | Client source, client releases and client issues |
+| [Umbra](https://github.com/PreceptorOfMagic/Umbra) | Host source, host releases and host issues |
 
 ## Website source
 
-- `site/` is the complete static site uploaded to GitHub Pages.
-- `docs/launch/` contains the publication, recording, media and community-post material.
-- `scripts/launch/` validates the public site, support route and final media package.
-- `.github/workflows/pages.yml` deploys only after this repository is public.
+- `site/` is the complete static GitHub Pages site.
+- `docs/launch/` contains private-to-public publishing, recording and community-post material.
+- `scripts/launch/` validates the site boundary, navigation, funding control, links and media contracts.
+- `.github/workflows/pages.yml` validates private pushes and deploys only after the repository is public.
 
 Run the private-safe checks with:
 
@@ -52,18 +43,10 @@ node --test scripts/launch/check_media.test.mjs
 node scripts/launch/check_hub_boundary.mjs
 ```
 
-The stricter `node scripts/launch/check_launch_ready.mjs` is expected to remain red until compatible releases, real recorded footage, captions and the remaining identity/compliance evidence are complete.
+The stricter `node scripts/launch/check_launch_ready.mjs` remains a final-media and release-evidence gate; the website deliberately retains labelled media placeholders until the approved footage and images replace them.
 
 ## Publication boundary
 
-This clean hub deliberately excludes application source history, diagnostic logs, test captures, private user photographs, raw recording masters and IDE state. `check_hub_boundary.mjs` enforces the top-level allowlist, rejects private-development directories, archives, binaries, raw capture formats, symlinks, oversized files and common credential/local-path patterns. Making this repository public therefore exposes only the reviewed website and launch material. The Eclipse and Umbra repositories have their own independent public-history and release reviews.
+The hub excludes application source history, diagnostic logs, test captures, private photographs, raw recording masters, packages and IDE state. `check_hub_boundary.mjs` enforces that boundary. Changing the repository to public triggers the deployment workflow; it does not change the visibility of Eclipse or Umbra.
 
-The first Pages deployment may require one enablement step immediately after the repository becomes public on GitHub Free; the exact sequence is recorded in [the publishing guide](docs/launch/publish-site.md). Nothing in the private workflow changes repository visibility.
-
-## Support and independence
-
-Optional reward-free support uses one [Buy Me a Coffee](https://buymeacoffee.com/preceptorofmagic) destination. One-time or monthly support buys no access, features, priority, exclusive content or influence. The Australian recipient, fees, currency, cancellation, privacy, tax and legal caveats are set out in [SUPPORT.md](SUPPORT.md).
-
-Eclipse/Umbra is an independent community project, not affiliated with or endorsed by Moonlight, Sunshine, LG Electronics, NVIDIA, AMD, Amazon, DXC or the Eclipse Foundation. Third-party names identify lineage or compatibility; their names and marks remain the property of their respective owners.
-
-The website source is provided under GPL-3.0-or-later unless a file states otherwise. Third-party projects and media retain their own notices and terms; see [LICENSE.txt](LICENSE.txt) and [ACKNOWLEDGEMENTS.md](ACKNOWLEDGEMENTS.md).
+Eclipse/Umbra is an independent community project, not affiliated with or endorsed by Moonlight, Sunshine, LG Electronics, NVIDIA, AMD, Intel, Amazon, DXC or the Eclipse Foundation. Third-party names identify lineage or compatibility. The website source is provided under GPL-3.0-or-later unless a file states otherwise; see [LICENSE.txt](LICENSE.txt) and [ACKNOWLEDGEMENTS.md](ACKNOWLEDGEMENTS.md).

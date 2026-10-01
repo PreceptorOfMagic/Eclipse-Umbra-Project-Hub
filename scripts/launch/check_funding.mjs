@@ -16,7 +16,7 @@ if (result.errors.length > 0) {
 }
 
 if (result.mode === "enabled") {
-  console.log(`Funding policy check passed: Buy Me a Coffee recipient ${result.username} matches the disclosed payment route.`);
+  console.log(`Funding policy check passed: the shared Buy Me a Coffee button matches recipient ${result.username}.`);
 } else {
   console.log("Funding policy check passed: funding is consistently disabled.");
 }

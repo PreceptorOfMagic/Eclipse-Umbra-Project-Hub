@@ -1,8 +1,8 @@
 {
   "source": "site/assets/og-card.svg",
-  "sourceSha256": "cbfa99db62f636f1680a2021d4ee2ba95132191df44390474940108c18298ea8",
+  "sourceSha256": "9de6c32cf82029dd447804aa4e0abc91ab44c7bf86a9d363a978b145c2ed4512",
   "output": "site/assets/og-card.png",
-  "outputSha256": "227ece0db3b27d398659cd134e48ad697f8b66a3f75cd11b20869cb1be16f03e",
+  "outputSha256": "6cc539585f95e43d4ff3bed2267a58441237672ed633b1c85257c35ab58cb47a",
   "width": 1200,
   "height": 630,
   "renderer": "sharp 0.35.4"

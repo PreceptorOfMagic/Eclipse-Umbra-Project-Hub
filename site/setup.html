@@ -1,199 +1,42 @@
 <!doctype html>
 <html lang="en-AU">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#07070a">
-  <meta name="description" content="Set up the Eclipse client and two Umbra hosts for one Eclipse/Umbra couch co-op display.">
-  <meta property="og:type" content="website">
-  <meta property="og:title" content="Setup · Eclipse/Umbra">
-  <meta property="og:description" content="Prepare two Umbra hosts and one Eclipse client for a shared couch co-op display.">
-  <meta property="og:url" content="https://preceptorofmagic.github.io/setup.html">
-  <meta property="og:image" content="https://preceptorofmagic.github.io/assets/og-card.png">
-  <meta property="og:image:alt" content="Eclipse/Umbra — two PCs, one screen.">
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:image" content="https://preceptorofmagic.github.io/assets/og-card.png">
-  <meta name="twitter:image:alt" content="Eclipse/Umbra — two PCs, one screen.">
-  <title>Setup · Eclipse/Umbra</title>
-  <link rel="canonical" href="https://preceptorofmagic.github.io/setup.html">
-  <link rel="icon" href="assets/brand-mark.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="assets/styles.css?v=20261001">
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="theme-color" content="#08070b">
+  <meta name="description" content="Install Eclipse on LG webOS, Windows or Linux and Umbra on Windows for standard game streaming or two-PC co-op.">
+  <meta property="og:type" content="website"><meta property="og:title" content="Installation Guide · Eclipse/Umbra"><meta property="og:description" content="Install the client, install the host, pair, and play—alone or with two PCs on one screen.">
+  <meta property="og:url" content="https://preceptorofmagic.github.io/Eclipse-Umbra-Project-Hub/setup.html"><meta property="og:image" content="https://preceptorofmagic.github.io/Eclipse-Umbra-Project-Hub/assets/og-card.png"><meta property="og:image:alt" content="Eclipse/Umbra installation guide.">
+  <meta name="twitter:card" content="summary_large_image"><meta name="twitter:image" content="https://preceptorofmagic.github.io/Eclipse-Umbra-Project-Hub/assets/og-card.png"><meta name="twitter:image:alt" content="Eclipse/Umbra installation guide.">
+  <title>Installation Guide · Eclipse/Umbra</title><link rel="canonical" href="https://preceptorofmagic.github.io/Eclipse-Umbra-Project-Hub/setup.html"><link rel="icon" href="assets/brand-mark.svg" type="image/svg+xml"><link rel="stylesheet" href="assets/styles.css?v=20261001b">
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
-
-  <header class="site-header">
-    <div class="shell nav-row">
-      <a class="brand" href="./" aria-label="Eclipse/Umbra home">
-        <img src="assets/brand-mark.svg" alt="" width="36" height="36">
-        <span>ECLIPSE / UMBRA</span>
-      </a>
-      <nav class="main-nav" aria-label="Primary navigation">
-        <a href="./#coop">Co-op</a>
-        <a href="./#applications">Applications</a>
-        <a href="projects.html">Projects</a>
-        <a href="setup.html" aria-current="page">Setup</a>
-        <a href="media.html">Media</a>
-        <a href="./#status">Status</a>
-        <a href="credits.html">Credits</a>
-        <a class="button" href="support.html">Support</a>
-      </nav>
-    </div>
-  </header>
-
-  <div class="notice-bar">
-    <div class="shell">
-      <span class="status-dot" aria-hidden="true"></span>
-      <span><strong>Source-first setup.</strong> Packaged installers are not available yet; the guide documents the complete client-and-two-host shape and links the source build paths.</span>
-    </div>
-  </div>
-
+  <header class="site-header"><div class="shell nav-row"><a class="brand" href="./" aria-label="Eclipse/Umbra Project Hub home"><img src="assets/brand-mark.svg" alt="" width="36" height="36"><span>ECLIPSE / UMBRA</span></a><nav class="main-nav" aria-label="Primary navigation"><a href="./">Home</a><a href="setup.html" aria-current="page">Installation Guide</a><a href="eclipse.html">Eclipse</a><a href="umbra.html">Umbra</a><a href="development.html">Development</a><a href="credits.html">Acknowledgements</a></nav><span class="support-control" aria-label="Support this project"><script type="text/javascript" src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js" data-name="bmc-button" data-slug="PreceptorOfMagic" data-color="#BD5FFF" data-emoji="" data-font="Cookie" data-text="Buy me a coffee" data-outline-color="#000000" data-font-color="#ffffff" data-coffee-color="#FFDD00"></script></span></div></header>
   <main id="main">
-    <section class="page-hero">
-      <div class="shell">
-        <p class="eyebrow">Quick start</p>
-        <h1>Two hosts, one client, one shared display.</h1>
-        <p>Eclipse/Umbra does not add multiplayer to a single-player game. Each Windows PC runs its own game session through the Umbra host; the Eclipse client joins the two live pictures and routes each assigned input to the right PC.</p>
-        <div class="hero-actions">
-          <a class="button" href="#steps">Read the setup steps</a>
-          <a class="button-secondary" href="#troubleshooting">Troubleshoot a setup</a>
-        </div>
-      </div>
-    </section>
+    <section class="page-hero"><div class="shell"><p class="eyebrow">Installation Guide</p><h1>Client on the screen. Host on the gaming PC.</h1><p>Install Eclipse where you want to play and Umbra on every Windows PC you want to stream. The same pairing supports normal one-host sessions and the optional two-host co-op mode.</p><ul class="platform-pills"><li>Eclipse · LG webOS</li><li>Eclipse · Windows x64</li><li>Eclipse · Linux x86_64</li><li>Umbra · Windows x64</li></ul></div></section>
 
-    <section class="section" aria-labelledby="requirements-title">
-      <div class="shell">
-        <div class="section-head">
-          <div><p class="eyebrow">Before you begin</p><h2 id="requirements-title">What the co-op setup needs.</h2></div>
-          <p class="section-lede">Start with ordinary single-host streaming working on both PCs. Co-op should be the last layer you add, not the first thing you use to diagnose a host, encoder, firewall or controller problem.</p>
-        </div>
-        <div class="card-grid">
-          <article class="card">
-            <span class="card-number">01</span>
-            <h3>Two Windows gaming PCs</h3>
-            <p>Each PC needs the compatible Umbra host, its virtual-display driver and a supported hardware encoder path. The game must allow two independent sessions; accounts, licences and online/LAN support are game-specific.</p>
-          </article>
-          <article class="card">
-            <span class="card-number">02</span>
-            <h3>One supported Eclipse client</h3>
-            <p>Use the Eclipse client on the shared display. The project rig uses LG webOS; Windows preview builds are also exercised. The Linux path remains integration work rather than a consumer release.</p>
-          </article>
-          <article class="card">
-            <span class="card-number">03</span>
-            <h3>A reachable network and inputs</h3>
-            <p>The client must reach both hosts through their firewalls. Have the two controllers or other intended inputs connected before assigning them to a pane.</p>
-          </article>
-        </div>
-      </div>
-    </section>
+    <section class="section" id="downloads"><div class="shell"><div class="section-head"><div><p class="eyebrow">1 · Download</p><h2>Choose the client first.</h2></div><p class="section-lede">Release pages contain the current packages, checksums and version-specific notes. Only install files published by the project repositories.</p></div><div class="card-grid">
+      <article class="download-card"><span class="platform-icon">TV</span><h3>Eclipse for LG webOS</h3><p>For supported LG televisions using Developer Mode/manual installation or the release channel documented with the package.</p><a class="button" href="https://github.com/PreceptorOfMagic/Eclipse/releases">Eclipse downloads</a></article>
+      <article class="download-card"><span class="platform-icon">PC</span><h3>Eclipse for Windows</h3><p>Portable x64 client for a Windows computer connected to the shared display.</p><a class="button" href="https://github.com/PreceptorOfMagic/Eclipse/releases">Eclipse downloads</a></article>
+      <article class="download-card"><span class="platform-icon">LX</span><h3>Eclipse for Linux</h3><p>x86_64 desktop client. Follow the package notes for the supported distribution and hardware-decoder requirements.</p><a class="button" href="https://github.com/PreceptorOfMagic/Eclipse/releases">Eclipse downloads</a></article>
+    </div></div></section>
 
-    <section class="section" id="steps" aria-labelledby="steps-title">
-      <div class="shell">
-        <div class="section-head">
-          <div><p class="eyebrow">Setup sequence</p><h2 id="steps-title">Build it one verified layer at a time.</h2></div>
-          <p class="section-lede">The order matters: configure both Umbra hosts, install the Eclipse client, pair and test each host alone, then start the combined session.</p>
-        </div>
+    <section class="section"><div class="shell"><div class="section-head"><div><p class="eyebrow">2 · Install the host</p><h2>Put Umbra on each Windows gaming PC.</h2></div><p class="section-lede">One Umbra host is enough for standard streaming. Install the same compatible Umbra release on two PCs for co-op. The installer contains the supporting components needed by that build; do not install those pieces separately.</p></div><div class="callout"><div><h3>Umbra for Windows x64</h3><p>Run the signed or checksummed installer from the Umbra release, allow the requested firewall access, then open its local web interface to finish setup.</p></div><a class="button" href="https://github.com/PreceptorOfMagic/Umbra/releases">Umbra downloads</a></div></div></section>
 
-        <div class="prose">
-          <h2>1. Prepare the Umbra host on each PC</h2>
-          <ol>
-            <li>For private review, use Umbra's <a href="https://github.com/PreceptorOfMagic/umbra/blob/beta/vega-coop/docs/umbra-windows-build.md">Windows source-build guide</a> on both gaming PCs. When a reviewed installer exists, it will appear only on the <a href="https://github.com/PreceptorOfMagic/umbra/releases">Umbra Releases page</a>.</li>
-            <li>Open the host web interface, choose <strong>Applications</strong>, and create exactly one entry named <strong>Co-op Pane</strong>. Capitalisation, the space and the hyphen must match.</li>
-            <li>Enable <strong>Virtual display</strong>. Leave the command and preparation fields empty unless that PC intentionally needs a portable launch command.</li>
-            <li>In Display Device settings, set <strong>Resolution</strong> to <strong>Use resolution provided by the client (default)</strong> and <strong>Refresh rate</strong> to <strong>Use FPS value provided by the client (default)</strong> so each pane can request the correct geometry.</li>
-            <li>Save the entry and confirm <strong>Co-op Pane</strong> appears in a normal Moonlight-compatible application list. Repeat independently on the second PC.</li>
-          </ol>
-          <p>For <strong>Device configuration</strong>, choose <strong>Activate the display automatically</strong> (<code>ensure_active</code>) when games reliably choose the virtual display. <strong>Deactivate other displays and activate only the specified display</strong> (<code>ensure_only_display</code>) is more deterministic, but temporarily disables the host’s other displays during the session.</p>
+    <section class="section" id="standard-stream"><div class="shell"><div class="section-head"><div><p class="eyebrow">3 · Pair and stream</p><h2>Your first session is an ordinary one-host stream.</h2></div><p class="section-lede">Getting one host working first confirms the network, decoder, encoder, firewall and input path before adding co-op.</p></div><ol class="step-list">
+      <li><span>01</span><div><h3>Open Eclipse and add the host</h3><p>Keep the client and gaming PC on the same trusted network. Select the discovered Umbra PC or add its address, then begin pairing.</p></div></li>
+      <li><span>02</span><div><h3>Enter the pairing PIN in Umbra</h3><p>Open Umbra's local web interface on the gaming PC, approve the PIN, then return to Eclipse.</p></div></li>
+      <li><span>03</span><div><h3>Launch a game or the desktop</h3><p>Choose the application in Eclipse. Umbra prepares the display and encoder automatically; Eclipse negotiates the supported codec, resolution, frame rate, audio and controls.</p></div></li>
+      <li><span>04</span><div><h3>Tune only what you need</h3><p>The defaults target a working session. Use Eclipse settings when you want a different resolution, frame rate, bitrate, codec, HDR mode, audio layout or input behaviour.</p></div></li>
+    </ol></div></section>
 
-          <h2>2. Install the Eclipse client</h2>
-          <p>There is no reviewed public installer yet. Do not download packages offered elsewhere under these names. The current source paths are:</p>
-          <ul>
-            <li><a href="https://github.com/PreceptorOfMagic/umbra/blob/beta/vega-coop/docs/umbra-windows-build.md">Umbra Windows host source build</a> for each gaming PC.</li>
-            <li><a href="https://github.com/PreceptorOfMagic/eclipse/blob/main/docs/BUILD_WEBOS.md">LG webOS build and manual installation</a> for the tested TV path.</li>
-            <li><a href="https://github.com/PreceptorOfMagic/eclipse/blob/main/docs/windows-coop-setup.md#install-the-client">Windows preview requirements and source-build packaging</a>.</li>
-            <li>Linux remains release-branch integration work and is not presented as a finished consumer path.</li>
-          </ul>
-          <p>The Windows client requires Windows 10 version 1803 or newer and a physical GPU/driver with the required D3D11VA H.264 or HEVC decode profile. It fails closed instead of silently turning a hardware run into software decoding.</p>
+    <section class="section" id="coop-stream"><div class="shell"><div class="section-head"><div><p class="eyebrow">4 · Add couch co-op</p><h2>Pair a second host; Eclipse handles the co-op defaults.</h2></div><p class="section-lede">Co-op should not require copying addresses into a settings pane or manually matching encoder parameters. The first co-op launch creates the working configuration, and the dedicated co-op options appear automatically after co-op has been used.</p></div><ol class="step-list">
+      <li><span>01</span><div><h3>Install Umbra on the second PC</h3><p>Use a host release compatible with the Eclipse client, pair it in the same way as the first PC, and confirm that it can stream normally on its own.</p></div></li>
+      <li><span>02</span><div><h3>Choose Co-op in Eclipse</h3><p>Select two paired hosts, choose side-by-side or stacked, decide which host is Player 1, and assign each connected controller or supported keyboard/mouse input.</p></div></li>
+      <li><span>03</span><div><h3>Start both sessions</h3><p>Eclipse and Umbra negotiate the compatible co-op encoder path automatically—including the mixed-vendor path when the hosts use different supported GPU vendors.</p></div></li>
+      <li><span>04</span><div><h3>Adjust later if desired</h3><p>After the first co-op session, Eclipse exposes the separate co-op settings automatically. Their installed defaults are intended to work without manual preparation.</p></div></li>
+    </ol><div class="info-box"><strong>Game requirements still apply.</strong><p>Each PC runs its own copy or session of the game. Accounts, licences, online multiplayer, anti-cheat rules and save data remain the responsibility of the game and its platform.</p></div></div></section>
 
-          <h2>3. Pair and test each host separately</h2>
-          <ol>
-            <li>Allow the Umbra host through Windows Firewall and place the machines on networks that can reach one another.</li>
-            <li>Add the first host in Eclipse, enter the PIN in Umbra and wait for its application list to load.</li>
-            <li>Open one ordinary desktop or game entry as a single-host stream. Confirm live picture, audio and the intended controller, then disconnect cleanly.</li>
-            <li>Repeat the same pairing and ordinary-stream test with the second host. Fix a failed host before adding the co-op layer.</li>
-            <li>Finally, launch <strong>Co-op Pane</strong> alone on each host and verify that its virtual display is created and captured correctly.</li>
-          </ol>
-
-          <h2>4. Start the Eclipse/Umbra co-op session</h2>
-          <ol>
-            <li>In <strong>Settings → Co-op</strong>, choose whether the shared stereo output mixes both players or plays Player 1 or Player 2 only. Surround modes remain available for ordinary single-host sessions; co-op requests stereo from both hosts for its client-side mix.</li>
-            <li>From the Eclipse server screen, choose <strong>Co-op</strong>.</li>
-            <li>Select two different paired Umbra hosts. Do not select the same host twice.</li>
-            <li>Choose side-by-side or stacked panes and decide which host occupies Player 1, the primary position: left in side-by-side mode or top in stacked mode.</li>
-            <li>Review controller and—where enabled—keyboard and mouse ownership. Relative mouse movement and the gamepad virtual mouse target Player 1 in the current co-op build.</li>
-            <li>Start the session and confirm that both panes remain live and each player controls only the intended host.</li>
-          </ol>
-        </div>
-      </div>
-    </section>
-
-    <section class="section" id="troubleshooting" aria-labelledby="troubleshooting-title">
-      <div class="shell">
-        <div class="section-head">
-          <div><p class="eyebrow">Fast fault isolation</p><h2 id="troubleshooting-title">Fix the failing layer first.</h2></div>
-          <p class="section-lede">A combined session cannot repair a host that does not stream correctly on its own.</p>
-        </div>
-        <div class="project-grid">
-          <article class="feature-card">
-            <h3>A host is missing</h3>
-            <p>Confirm the Umbra service is running and allowed through Windows Firewall. If discovery is filtered by the network, use Eclipse’s manual-add control instead of editing preferences.</p>
-          </article>
-          <article class="feature-card">
-            <h3>Co-op Pane is missing</h3>
-            <p>Both hosts must expose exactly <strong>Co-op Pane</strong>. Similar names such as “Coop Pane” or “Co-op pane” do not match.</p>
-          </article>
-          <article class="feature-card">
-            <h3>A pane is black or wrong</h3>
-            <p>Open that host’s Co-op Pane as a regular stream. Verify that the virtual display exists, the game selected it and the host display policy is appropriate.</p>
-          </article>
-          <article class="feature-card">
-            <h3>Resolution or refresh is wrong</h3>
-            <p>Restore the host’s client-driven resolution and refresh settings to auto, then confirm its virtual-display driver supports the requested mode.</p>
-          </article>
-          <article class="feature-card">
-            <h3>Input reaches the wrong PC</h3>
-            <p>Return to the co-op picker and review assignment by paired-host identity. Do not rely on host order, IP address or a copied configuration file.</p>
-          </article>
-          <article class="feature-card">
-            <h3>Need the detailed guide?</h3>
-            <p>Use the source documentation for local-host limitations, decoder startup evidence and the complete troubleshooting sequence.</p>
-            <a class="text-link" href="https://github.com/PreceptorOfMagic/umbra/blob/beta/vega-coop/docs/umbra-windows-build.md">Open the Umbra build guide <span aria-hidden="true">→</span></a>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <section class="section" aria-labelledby="local-title">
-      <div class="shell prose">
-        <p class="eyebrow">Advanced layout</p>
-        <h2 id="local-title">The client PC can also supply one pane.</h2>
-        <p>A Windows PC running Eclipse can also be one of the two Umbra hosts, but this is a preview path with extra display-hook and input limitations. The local game reads its controller directly; keyboard/mouse focus for the local virtual display is not automated yet. Start with two ordinary remote hosts unless this arrangement solves a specific room constraint.</p>
-      </div>
-    </section>
+    <section class="section"><div class="shell"><div class="section-head"><div><p class="eyebrow">If something fails</p><h2>Share the diagnostic bundle with the exact setup.</h2></div><p class="section-lede">The logs are designed to make remote hardware reports useful.</p></div><div class="mode-grid"><article class="card"><h3>In Eclipse</h3><p>Open the Share/diagnostics area, refresh the bundle after reproducing the problem, and save it. The bundle records the client build, OS, CPU, memory, GPU and driver, display and media capabilities, controllers, network, host facts, settings, session events and performance totals.</p></article><article class="card"><h3>In GitHub</h3><p>Open an issue in the component that showed the problem. State whether a normal stream works, identify both hosts for co-op, list the steps and visible result, and attach the reviewed diagnostic bundle. Remove any addresses, account names or other personal details you do not want to publish.</p><div class="mini-actions"><a href="https://github.com/PreceptorOfMagic/Eclipse/issues/new/choose">Eclipse issues</a><a href="https://github.com/PreceptorOfMagic/Umbra/issues/new/choose">Umbra issues</a></div></article></div></div></section>
   </main>
-
-  <footer class="site-footer">
-    <div class="shell">
-      <div class="footer-grid">
-        <div class="footer-brand">
-          <a class="brand" href="./" aria-label="Eclipse/Umbra home"><img src="assets/brand-mark.svg" alt="" width="36" height="36"><span>ECLIPSE / UMBRA</span></a>
-          <p>An independent, free and open-source game-streaming project. Not affiliated with or endorsed by Moonlight, Sunshine, LG Electronics, NVIDIA, AMD, Amazon, DXC or the Eclipse Foundation.</p>
-        </div>
-        <div class="footer-links"><strong>Applications</strong><a href="https://github.com/PreceptorOfMagic/eclipse">Eclipse client source</a><a href="https://github.com/PreceptorOfMagic/umbra">Umbra host source</a><a href="https://github.com/PreceptorOfMagic/eclipse/issues">Eclipse issues</a><a href="https://github.com/PreceptorOfMagic/umbra/issues">Umbra issues</a></div>
-        <div class="footer-links"><strong>About</strong><a href="credits.html">Acknowledgements</a><a href="projects.html">Project map</a><a href="media.html">Media plan</a><a href="support.html">Support</a><a href="./#status">Release status</a><a href="https://github.com/PreceptorOfMagic/PreceptorOfMagic.github.io/blob/main/CONTRIBUTING.md">Contributing</a><a href="https://github.com/PreceptorOfMagic/PreceptorOfMagic.github.io/blob/main/LICENSE.txt">Repository licence text</a></div>
-      </div>
-      <p class="legal-line">Eclipse/Umbra is one project: Eclipse is its client application and Umbra is its host application. Independent and not affiliated with or endorsed by the upstream projects or named vendors.</p>
-    </div>
-  </footer>
-</body>
-</html>
+  <footer class="site-footer"><div class="shell"><div class="footer-top"><a class="brand" href="./"><img src="assets/brand-mark.svg" alt="" width="36" height="36"><span>ECLIPSE / UMBRA</span></a><nav class="footer-nav" aria-label="Footer navigation"><a href="./">Home</a><a href="setup.html">Installation Guide</a><a href="eclipse.html">Eclipse</a><a href="umbra.html">Umbra</a><a href="development.html">Development</a><a href="credits.html">Acknowledgements</a></nav></div><p class="legal-line">Eclipse/Umbra is an independent, free and open-source project. Eclipse is its client application and Umbra is its host application. Not affiliated with or endorsed by the upstream projects or named vendors.</p></div></footer>
+</body></html>
