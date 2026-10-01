@@ -15,6 +15,13 @@ const navContract = [
   ["Umbra", "umbra.html"], ["Development", "development.html"], ["Acknowledgements", "credits.html"],
 ];
 const baseUrl = "https://preceptorofmagic.github.io/Eclipse-Umbra-Project-Hub/";
+// The HTML dimensions reserve the SVG's intrinsic ratio. A responsive width
+// without automatic height leaves a 900px letterbox at narrower viewports.
+const stylesheet = fs.readFileSync(path.join(siteRoot, "assets", "styles.css"), "utf8");
+const heroImageRule = stylesheet.match(/\.hero-visual img\s*\{([^}]+)\}/)?.[1] ?? "";
+if (!/\bwidth\s*:\s*100%\s*;/.test(heroImageRule) || !/\bheight\s*:\s*auto\s*;/.test(heroImageRule)) {
+  errors.push("hero artwork must scale its width and height together");
+}
 const canonicals = new Map([
   ["index.html", baseUrl], ["setup.html", `${baseUrl}setup.html`], ["eclipse.html", `${baseUrl}eclipse.html`],
   ["umbra.html", `${baseUrl}umbra.html`], ["development.html", `${baseUrl}development.html`], ["credits.html", `${baseUrl}credits.html`],
