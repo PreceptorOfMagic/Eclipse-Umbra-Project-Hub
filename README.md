@@ -1,52 +1,78 @@
-<p align="center">
-  <a href="site/index.html"><img src="site/assets/og-card.png" alt="Eclipse/Umbra — two PCs, one screen" width="960"></a>
-</p>
+<p align="center"><img src="site/assets/og-card.png" alt="Eclipse/Umbra — two PCs, one screen, with ordinary game streaming too" width="960"></p>
 
-<p align="center"><strong>The website for Eclipse and Umbra: everyday game streaming plus two-PC couch co-op on one shared display.</strong></p>
+# Eclipse/Umbra Project Hub
 
-<p align="center">
-  <a href="site/index.html">Home</a> ·
-  <a href="site/setup.html">Installation Guide</a> ·
-  <a href="site/eclipse.html">Eclipse</a> ·
-  <a href="site/umbra.html">Umbra</a> ·
-  <a href="site/development.html">Development</a> ·
-  <a href="site/credits.html">Acknowledgements</a>
-</p>
+## Two PCs. One screen. Couch co-op, re-engineered.
 
-Canonical Pages URL after publication: `https://preceptorofmagic.github.io/Eclipse-Umbra-Project-Hub/`
+**Everyday game streaming, plus two independent PCs sharing one display.** Eclipse is the client on your TV or desktop; Umbra is the host on each Windows gaming PC. Use one host for ordinary streaming, or two for side-by-side or stacked co-op.
 
-## One project, two applications
+[Project Hub](https://github.com/PreceptorOfMagic/Eclipse-Umbra-Project-Hub) · [Installation Guide](https://github.com/PreceptorOfMagic/Eclipse-Umbra-Project-Hub/blob/main/docs/installation.md) · [Eclipse](https://github.com/PreceptorOfMagic/Eclipse) · [Umbra](https://github.com/PreceptorOfMagic/Umbra) · [Development](https://github.com/PreceptorOfMagic/Eclipse-Umbra-Project-Hub/blob/main/docs/development.md) · [Acknowledgements](https://github.com/PreceptorOfMagic/Eclipse-Umbra-Project-Hub/blob/main/ACKNOWLEDGEMENTS.md)
 
-**Eclipse** is the LG webOS, Windows and Linux client. **Umbra** is the Windows host. Together they provide conventional one-host game streaming and a coordinated two-host mode that presents independent live games side by side or stacked on one television or desktop display.
+[Open the project website](https://preceptorofmagic.github.io/Eclipse-Umbra-Project-Hub/) · [Eclipse source](https://github.com/PreceptorOfMagic/Eclipse) · [Umbra source](https://github.com/PreceptorOfMagic/Umbra)
 
-The repositories remain separate so their histories, licences, releases and issue scopes stay clear:
+## What Moonlight and Sunshine do
 
-| Repository | Responsibility |
-|---|---|
-| [Eclipse/Umbra Project Hub](https://github.com/PreceptorOfMagic/Eclipse-Umbra-Project-Hub) | Website, installation path, status, development overview and acknowledgements |
-| [Eclipse](https://github.com/PreceptorOfMagic/Eclipse) | Client source, client releases and client issues |
-| [Umbra](https://github.com/PreceptorOfMagic/Umbra) | Host source, host releases and host issues |
+Moonlight receives video/audio from a PC and sends your controls back. Sunshine captures and encodes the PC’s games or desktop. Games run on your own hardware, not in a hosted cloud service.
 
-## Website source
+Eclipse follows **Moonlight → Moonlight TV → Aurora**. Umbra follows **Sunshine → Apollo**. The normal experience remains: discover a host, pair with a PIN, choose a game or desktop, configure streaming quality and play using controllers, keyboard or mouse. Codec, HDR, resolution and frame-rate options depend on the hardware at both ends.
 
-- `site/` is the complete static GitHub Pages site.
-- `docs/launch/` contains private-to-public publishing, recording and community-post material.
-- `scripts/launch/` validates the site boundary, navigation, funding control, links and media contracts.
-- `.github/workflows/pages.yml` validates private pushes and deploys only after the repository is public.
+## What co-op means here
 
-Run the private-safe checks with:
+Two PCs each run their own game session. Eclipse combines their streams side by side or stacked on one screen, keeps player/controller assignments separate, and mixes or selects audio. The game still decides whether its sessions can join the same multiplayer world. You provide the PCs, games and any required accounts.
 
-```bash
-node scripts/launch/check_public_site.mjs
-node scripts/launch/check_funding.mjs
-node --test scripts/launch/check_media.test.mjs
-node scripts/launch/check_hub_boundary.mjs
-```
+Cross-vendor co-op needs a compatible stream structure. Umbra supplies the custom co-op encoder path and Eclipse coordinates the sessions and composition; this is why the work spans both applications rather than a client-only change. Anyone is welcome to adapt the functionality into Aurora, Apollo or other Moonlight/Sunshine forks.
 
-The stricter `node scripts/launch/check_launch_ready.mjs` remains a final-media and release-evidence gate; the website deliberately retains labelled media placeholders until the approved footage and images replace them.
+## System map
 
-## Publication boundary
+| On the gaming PCs | Across your network | On the shared display |
+|---|---|---|
+| Umbra captures and encodes one PC | One video/audio session + return input | Eclipse plays an ordinary stream |
+| Umbra on two PCs encodes compatible co-op streams | Two sessions, with separate input destinations | Eclipse presents both games in one layout |
 
-The hub excludes application source history, diagnostic logs, test captures, private photographs, raw recording masters, packages and IDE state. `check_hub_boundary.mjs` enforces that boundary. Changing the repository to public triggers the deployment workflow; it does not change the visibility of Eclipse or Umbra.
+## Choose your platform
 
-Eclipse/Umbra is an independent community project, not affiliated with or endorsed by Moonlight, Sunshine, LG Electronics, NVIDIA, AMD, Intel, Amazon, DXC or the Eclipse Foundation. Third-party names identify lineage or compatibility. The website source is provided under GPL-3.0-or-later unless a file states otherwise; see [LICENSE.txt](LICENSE.txt) and [ACKNOWLEDGEMENTS.md](ACKNOWLEDGEMENTS.md).
+| Install here | Component | Installation |
+|---|---|---|
+| LG webOS TV | Eclipse client | [Developer Mode and IPK](docs/installation.md#eclipse-webos) |
+| Windows x64 display PC | Eclipse client | [Portable ZIP](docs/installation.md#eclipse-windows) |
+| Linux x86_64 desktop | Eclipse client | [Portable archive](docs/installation.md#eclipse-linux) |
+| Windows x64 gaming PC (one or two) | Umbra host | [Bundled installer](docs/installation.md#umbra-windows) |
+
+Use a reachable home network, preferably wired for co-op. Install games on their respective hosts. Start by testing a normal stream from each PC; then choose Co-op in Eclipse. No manual Co-op Pane creation or separate device-bridge download is part of installation.
+
+<a name="status"></a>
+
+## Current status
+
+Test coverage as of October 2026—not a promise that all hardware combinations work.
+
+| Area | Exercised | Still needed |
+|---|---|---|
+| LG webOS | LG G5, webOS 26 / 11.2.0, firmware 43.21.77, UE300 wired Ethernet | Other models, SoCs and firmware versions |
+| Windows client | Windows 11 x64, Radeon RX Vega, D3D11VA; ordinary/co-op sessions and diagnostics | Windows 10, ARM, Intel and other driver/GPU combinations |
+| Linux client | Ubuntu 22.04/26.04, Fedora 44 and Arch environments under WSL; NVDEC standard/co-op | Bare-metal Linux and native AMD/Intel VAAPI; experimental WSL VAAPI was unstable |
+| Windows hosts | Windows 11, RTX 4070 / RTX 3070 / Radeon RX Vega | Other Windows versions, Intel hosts and newer AMD GPUs |
+| NVIDIA × NVIDIA | Primary RTX pair, including HEVC/HDR path | Wider generations, resolutions and driver coverage |
+| NVIDIA × AMD | Live custom GPU HEVC co-op | Fast-motion quality, high-bitrate stability and broader real-game coverage |
+| AMD × AMD / Intel co-op | No representative physical pair | Community testing; do not infer co-op support from standard streaming |
+
+Windows 4K presentation can be limited by GPU-to-CPU frame readback. [Development](docs/development.md#open-work) explains current issues. If your setup differs, try it and report successes or failures through GitHub or the project’s social thread. [Enable diagnostic logging and export a bundle](docs/installation.md#diagnostics) so reports include useful evidence.
+
+## Gameplay and setup media
+
+**Video placeholder — ordinary stream → co-op → both layouts.** Record 45–60 seconds using OBS on the desktop client and a locked-off camera on the TV. Show separate player control, hide accounts/PINs and export captioned MP4/WebM with a poster.
+
+**GIF/short-loop placeholder — independent controls.** Record 8–12 seconds with one player moving and the other still, then swap. Export a silent loop and optional GIF.
+
+**Photo placeholder — the whole couch setup.** Photograph the TV and controllers with both panes legible; match shutter to the display to avoid bands.
+
+## Where next?
+
+- [Install and pair](docs/installation.md) — platform downloads and exact steps.
+- [Eclipse repository](https://github.com/PreceptorOfMagic/Eclipse) / [Umbra repository](https://github.com/PreceptorOfMagic/Umbra) — source, release assets and component issues.
+- [Development](docs/development.md) — architecture, dependencies, milestones and open work.
+- [Acknowledgements](ACKNOWLEDGEMENTS.md) — Moonlight and Sunshine’s original creators, Aurora, Apollo and the wider stack.
+
+[![Buy me a coffee](https://img.buymeacoffee.com/button-api/?text=Buy%20me%20a%20coffee&emoji=&slug=PreceptorOfMagic&button_colour=BD5FFF&font_colour=ffffff&font_family=Cookie&outline_colour=000000&coffee_colour=FFDD00)](https://www.buymeacoffee.com/PreceptorOfMagic)
+
+[Eclipse/Umbra licence & notices](LICENSES.md) · [GPL-3.0](LICENSE.txt)

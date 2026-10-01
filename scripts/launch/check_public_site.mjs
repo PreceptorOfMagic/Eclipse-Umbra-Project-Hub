@@ -9,15 +9,16 @@ const scriptDirectory = path.dirname(fileURLToPath(import.meta.url));
 const repositoryRoot = path.resolve(scriptDirectory, "..", "..");
 const siteRoot = path.join(repositoryRoot, "site");
 const errors = [];
-const pages = ["index.html", "setup.html", "eclipse.html", "umbra.html", "development.html", "credits.html", "404.html"];
+const pages = ["index.html", "setup.html", "eclipse.html", "umbra.html", "development.html", "credits.html", "licence.html", "404.html"];
 const navContract = [
-  ["Home", "./"], ["Installation Guide", "setup.html"], ["Eclipse", "eclipse.html"],
+  ["Project Hub", "./"], ["Installation Guide", "setup.html"], ["Eclipse", "eclipse.html"],
   ["Umbra", "umbra.html"], ["Development", "development.html"], ["Acknowledgements", "credits.html"],
 ];
 const baseUrl = "https://preceptorofmagic.github.io/Eclipse-Umbra-Project-Hub/";
 const canonicals = new Map([
   ["index.html", baseUrl], ["setup.html", `${baseUrl}setup.html`], ["eclipse.html", `${baseUrl}eclipse.html`],
   ["umbra.html", `${baseUrl}umbra.html`], ["development.html", `${baseUrl}development.html`], ["credits.html", `${baseUrl}credits.html`],
+  ["licence.html", `${baseUrl}licence.html`],
 ]);
 
 function anchors(fragment) {
@@ -66,7 +67,8 @@ for (const name of htmlFiles) {
   const footerNav = html.match(/<nav\b[^>]*aria-label=["']Footer navigation["'][^>]*>([\s\S]*?)<\/nav>/i)?.[1] ?? "";
   checkContract(`site/${name}`, "primary navigation", anchors(headerNav));
   checkContract(`site/${name}`, "footer navigation", anchors(footerNav));
-  if (!/Eclipse is its client application and Umbra is its host application/i.test(html)) errors.push(`site/${name}: footer hierarchy statement is missing`);
+  if (!/href="licence.html"/.test(html)) errors.push(`site/${name}: licence link is missing`);
+  if (name !== "licence.html" && /not affiliated with or endorsed|third-party names identify lineage/i.test(html)) errors.push(`site/${name}: notices belong on the licence page`);
   for (const tag of html.matchAll(/<img\b[^>]*>/gi)) if (!/\balt=["'][^"']*["']/i.test(tag[0])) errors.push(`site/${name}: image lacks alt text`);
 
   if (name === "404.html") {

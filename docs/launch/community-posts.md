@@ -1,6 +1,6 @@
 # Community launch material
 
-The drafts below use stable project URLs now. They point demonstrations to the project walkthrough page, so the hosted-video provider can be added or changed once on that page without editing every post. Before posting, recheck the destination community's current rules and confirm the links work while signed out.
+The drafts below use stable project URLs now. They point demonstrations to the hub showcase section, so the hosted-video provider can be added or changed once on that page without editing every post. Before posting, recheck the destination community's current rules and confirm the links work while signed out.
 
 The naming hierarchy is fixed for drafting: **Eclipse/Umbra** is one project, **Eclipse** is its client application and **Umbra** is its host application. Keep **Moonlight**, **Sunshine**, **Moonlight TV**, **Aurora** and **Apollo** when describing factual lineage; they are not alternate names for the two applications.
 
@@ -10,13 +10,13 @@ The posts deliberately use project-owned routes rather than provider-specific vi
 
 | Purpose | Destination |
 |---|---|
-| Demonstration and accessible transcript | <https://preceptorofmagic.github.io/walkthrough.html> |
-| Project hub | <https://preceptorofmagic.github.io/> |
-| Setup guide | <https://preceptorofmagic.github.io/setup.html> |
-| Tested configurations and status | <https://preceptorofmagic.github.io/#status> |
-| Complete acknowledgements | <https://preceptorofmagic.github.io/credits.html> |
-| Eclipse client source | <https://github.com/PreceptorOfMagic/eclipse> |
-| Umbra host source | <https://github.com/PreceptorOfMagic/umbra> |
+| Demonstration | <https://preceptorofmagic.github.io/Eclipse-Umbra-Project-Hub/#showcase> |
+| Project hub | <https://preceptorofmagic.github.io/Eclipse-Umbra-Project-Hub/> |
+| Setup guide | <https://preceptorofmagic.github.io/Eclipse-Umbra-Project-Hub/setup.html> |
+| Tested configurations and status | <https://preceptorofmagic.github.io/Eclipse-Umbra-Project-Hub/#status> |
+| Complete acknowledgements | <https://preceptorofmagic.github.io/Eclipse-Umbra-Project-Hub/credits.html> |
+| Eclipse client source | <https://github.com/PreceptorOfMagic/Eclipse> |
+| Umbra host source | <https://github.com/PreceptorOfMagic/Umbra> |
 
 ## Reddit publication rules
 
@@ -38,17 +38,17 @@ Suggested body:
 
 > I maintain Eclipse/Umbra, a free and open-source experiment for a problem in our living room: two PCs can run the same online-only multiplayer game, but the game no longer offers a shared-screen mode.
 >
-> **Live demonstration:** https://preceptorofmagic.github.io/walkthrough.html
+> **Live demonstration:** https://preceptorofmagic.github.io/Eclipse-Umbra-Project-Hub/#showcase
 >
-> Eclipse is the client application. In co-op mode it opens independent sessions to two PCs running the Umbra host, then composes those live streams side by side or stacked on one TV. Each player keeps a separate game instance and input path. The clip shows simultaneous input on both panes; it is not prerecorded playback and neither pane is spectating the other desktop.
+> Eclipse is the client application. In co-op mode it opens independent sessions to two PCs running the Umbra host, then composes those live streams side by side or stacked on one TV. Each player keeps a separate game instance and input path. The clip shows both players controlling their own game sessions at the same time.
 >
 > The current engineering preview has two-host pairing and selection, horizontal and vertical layouts, either host as the primary pane, explicit controller ownership and optional keyboard/mouse ownership. Eclipse also retains ordinary one-host Moonlight-style streaming.
 >
-> Moonlight was created by Cameron Gutman, Diego Waxemberg, Aidan Campbell, Aaron Neyer, Michelle Bergeron and Andrew Hennessy. Sunshine was created by @loki-47-6F-64 and is now maintained by LizardByte and contributors. The direct client lineage then continues through Moonlight TV by Mariotaku and Aurora by GuiDev1994 to Eclipse; the host lineage continues through Apollo by @ClassicOldSong to Umbra. Full credits and licences: https://preceptorofmagic.github.io/credits.html
+> Moonlight was created by Cameron Gutman, Diego Waxemberg, Aidan Campbell, Aaron Neyer, Michelle Bergeron and Andrew Hennessy. Sunshine was created by @loki-47-6F-64 and is now maintained by LizardByte and contributors. The direct client lineage then continues through Moonlight TV by Mariotaku and Aurora by GuiDev1994 to Eclipse; the host lineage continues through Apollo by @ClassicOldSong to Umbra. Full credits and licences: https://preceptorofmagic.github.io/Eclipse-Umbra-Project-Hub/credits.html
 >
-> Source and setup: https://github.com/PreceptorOfMagic/eclipse · https://github.com/PreceptorOfMagic/umbra · https://preceptorofmagic.github.io/setup.html
+> Source and setup: https://github.com/PreceptorOfMagic/Eclipse · https://github.com/PreceptorOfMagic/Umbra · https://preceptorofmagic.github.io/Eclipse-Umbra-Project-Hub/setup.html
 >
-> This is not a broad compatibility promise yet. The tested systems and current work are listed at https://preceptorofmagic.github.io/#status. For people who already use Moonlight/Sunshine-style streaming: which part of choosing two hosts and assigning the two controllers would you most want made clearer before starting a session?
+> This is not a broad compatibility promise yet. The tested systems and current work are listed at https://preceptorofmagic.github.io/Eclipse-Umbra-Project-Hub/#status. For people who already use Moonlight/Sunshine-style streaming: which part of choosing two hosts and assigning the two controllers would you most want made clearer before starting a session?
 
 ## Draft B — `r/cloudygamer`
 
@@ -60,15 +60,15 @@ Suggested body:
 
 > I maintain Eclipse/Umbra, a free and open-source client/host project. I built its co-op mode so two people in the same room can play an online-only multiplayer game as though it had a shared-screen option.
 >
-> **Continuous live demo:** https://preceptorofmagic.github.io/walkthrough.html
+> **Continuous live demo:** https://preceptorofmagic.github.io/Eclipse-Umbra-Project-Hub/#showcase
 >
 > Each gaming PC runs its own game and the Umbra host. The Eclipse client at the TV receives both live sessions and composes them side by side or stacked. Inputs are assigned deliberately, so player 1 controls only the first host and player 2 only the second. The demonstration includes simultaneous movement on both PCs and the actual host/layout/input picker.
 >
-> The same client still supports normal one-host streaming. Co-op currently adds two-host selection, layout switching, primary-pane selection and independent controller ownership. It is a source-first preview: packaging, the public hardware matrix and mixed-vendor real-game acceptance are tracked at https://preceptorofmagic.github.io/#status.
+> The same client still supports normal one-host streaming. Co-op currently adds two-host selection, layout switching, primary-pane selection and independent controller ownership. It is a source-first preview: packaging, the public hardware matrix and mixed-vendor real-game acceptance are tracked at https://preceptorofmagic.github.io/Eclipse-Umbra-Project-Hub/#status.
 >
-> Moonlight’s founders are Cameron Gutman, Diego Waxemberg, Aidan Campbell, Aaron Neyer, Michelle Bergeron and Andrew Hennessy. Sunshine was created by @loki-47-6F-64 and is now maintained by LizardByte and contributors. Eclipse then descends through Moonlight TV by Mariotaku and Aurora by GuiDev1994; Umbra descends through Apollo by @ClassicOldSong. Full contributor, dependency and licence credits: https://preceptorofmagic.github.io/credits.html
+> Moonlight’s founders are Cameron Gutman, Diego Waxemberg, Aidan Campbell, Aaron Neyer, Michelle Bergeron and Andrew Hennessy. Sunshine was created by @loki-47-6F-64 and is now maintained by LizardByte and contributors. Eclipse then descends through Moonlight TV by Mariotaku and Aurora by GuiDev1994; Umbra descends through Apollo by @ClassicOldSong. Full contributor, dependency and licence credits: https://preceptorofmagic.github.io/Eclipse-Umbra-Project-Hub/credits.html
 >
-> Project hub, including source and setup links: https://preceptorofmagic.github.io/
+> Project hub, including source and setup links: https://preceptorofmagic.github.io/Eclipse-Umbra-Project-Hub/
 >
 > For people who stream games around the home: would the more useful default be equal panes, or one larger primary pane with the second player inset—and what screen size/viewing distance drives that answer?
 
@@ -123,6 +123,6 @@ The facts below are retained solely as an internal accuracy sheet from which the
 
 ## Shared credit block for permitted video descriptions
 
-> Built on Moonlight, founded by Cameron Gutman, Diego Waxemberg, Aidan Campbell, Aaron Neyer, Michelle Bergeron and Andrew Hennessy; Sunshine, created by @loki-47-6F-64 and now maintained by LizardByte and contributors; Moonlight TV by Mariotaku; Aurora by GuiDev1994; and Apollo by @ClassicOldSong. Full contributor, dependency and licence acknowledgements: https://preceptorofmagic.github.io/credits.html. No affiliation or endorsement is implied.
+> Built on Moonlight, founded by Cameron Gutman, Diego Waxemberg, Aidan Campbell, Aaron Neyer, Michelle Bergeron and Andrew Hennessy; Sunshine, created by @loki-47-6F-64 and now maintained by LizardByte and contributors; Moonlight TV by Mariotaku; Aurora by GuiDev1994; and Apollo by @ClassicOldSong. Full contributor, dependency and licence acknowledgements: https://preceptorofmagic.github.io/Eclipse-Umbra-Project-Hub/credits.html. No affiliation or endorsement is implied.
 
 Use the full acknowledgements page rather than turning the description into an incomplete dependency list.

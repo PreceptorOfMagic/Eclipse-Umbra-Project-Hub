@@ -33,6 +33,8 @@ jobs:
         run: node scripts/launch/check_funding.mjs
       - name: Test media contract
         run: node --test scripts/launch/check_media.test.mjs
+      - name: Test platform downloads
+        run: node --test scripts/launch/check_downloads.test.mjs
 
   deploy:
     needs: validate

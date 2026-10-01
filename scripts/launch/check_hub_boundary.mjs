@@ -15,6 +15,7 @@ const allowedRootFiles = new Set([
   "ACKNOWLEDGEMENTS.md",
   "CONTRIBUTING.md",
   "LICENSE.txt",
+  "LICENSES.md",
   "README.md",
   "SUPPORT.md",
 ]);
