@@ -13,9 +13,10 @@
   <a href="site/setup.html">Review setup</a> ·
   <a href="site/projects.html">Review project map</a> ·
   <a href="site/credits.html">Review acknowledgements</a> ·
-  <a href="site/support.html">Review support</a> ·
-  <a href="https://preceptorofmagic.github.io/">Live site after publication</a>
+  <a href="site/support.html">Review support</a>
 </p>
+
+Canonical Pages URL after publication: `https://preceptorofmagic.github.io/`
 
 > [!NOTE]
 > This repository contains the project website and launch documentation, not the client or host source histories. It remains private while the presentation and release material are reviewed.
