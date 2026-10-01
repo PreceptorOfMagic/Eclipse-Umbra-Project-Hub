@@ -15,12 +15,15 @@ const navContract = [
   ["Umbra", "umbra.html"], ["Development", "development.html"], ["Acknowledgements", "credits.html"],
 ];
 const baseUrl = "https://preceptorofmagic.github.io/Eclipse-Umbra-Project-Hub/";
-// The HTML dimensions reserve the SVG's intrinsic ratio. A responsive width
-// without automatic height leaves a 900px letterbox at narrower viewports.
+// The hero uses live labels so its text does not shrink with a diagram image.
 const stylesheet = fs.readFileSync(path.join(siteRoot, "assets", "styles.css"), "utf8");
-const heroImageRule = stylesheet.match(/\.hero-visual img\s*\{([^}]+)\}/)?.[1] ?? "";
-if (!/\bwidth\s*:\s*100%\s*;/.test(heroImageRule) || !/\bheight\s*:\s*auto\s*;/.test(heroImageRule)) {
-  errors.push("hero artwork must scale its width and height together");
+const homepage = fs.readFileSync(path.join(siteRoot, "index.html"), "utf8");
+const diagram = homepage.match(/<figure\b[^>]*class="[^"]*streaming-diagram[^"]*"[^>]*>([\s\S]*?)<\/figure>/)?.[1] ?? "";
+for (const label of ["Everyday streaming", "Two-host co-op", "Umbra", "Eclipse", "Gaming PC 1", "Gaming PC 2"]) {
+  if (!diagram.includes(label)) errors.push(`hero diagram is missing readable label: ${label}`);
+}
+if (/<img\b/.test(diagram) || !stylesheet.includes("@media(max-width:34rem){.diagram-flow")) {
+  errors.push("hero diagram must retain live labels and a narrow-screen layout");
 }
 const canonicals = new Map([
   ["index.html", baseUrl], ["setup.html", `${baseUrl}setup.html`], ["eclipse.html", `${baseUrl}eclipse.html`],

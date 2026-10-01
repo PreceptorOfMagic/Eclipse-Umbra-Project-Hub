@@ -17,7 +17,7 @@
   <title>Eclipse/Umbra Project Hub</title>
   <link rel="canonical" href="https://preceptorofmagic.github.io/Eclipse-Umbra-Project-Hub/">
   <link rel="icon" href="assets/brand-mark.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="assets/styles.css?v=20261001d">
+  <link rel="stylesheet" href="assets/styles.css?v=20261001e">
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
@@ -43,8 +43,37 @@
           <div class="hero-actions"><a class="button" href="setup.html">Install Eclipse/Umbra</a><a class="button-secondary" href="#how-it-works">See how it works</a></div>
           <ul class="platform-pills" aria-label="Supported platform targets"><li>Eclipse: LG webOS</li><li>Eclipse: Windows x64</li><li>Eclipse: Linux x86_64</li><li>Umbra: Windows x64</li></ul>
         </div>
-        <figure class="hero-visual">
-          <img src="assets/hero-art.svg" alt="A regular one-PC stream and a two-PC co-op stream both flowing through Eclipse to a shared display" width="1440" height="900">
+        <figure class="hero-visual streaming-diagram" aria-label="Ordinary streaming and two-host co-op">
+          <div class="diagram-mode">
+            <h2>Everyday streaming</h2>
+            <p class="diagram-summary">One PC. One game. Your screen.</p>
+            <div class="diagram-flow">
+              <div class="diagram-hosts">
+                <div class="diagram-host"><strong>Umbra</strong><span>Gaming PC</span></div>
+              </div>
+              <span class="diagram-arrow" aria-hidden="true">→</span>
+              <div class="diagram-output">
+                <div class="diagram-client"><strong>Eclipse</strong><span>Client · your display</span></div>
+                <div class="diagram-screen"><span>Your game</span></div>
+              </div>
+            </div>
+          </div>
+          <div class="diagram-mode diagram-mode-coop">
+            <h2>Two-host co-op</h2>
+            <p class="diagram-summary">Two PCs. Two players. One screen.</p>
+            <div class="diagram-flow">
+              <div class="diagram-hosts">
+                <div class="diagram-host"><strong>Umbra</strong><span>Gaming PC 1</span></div>
+                <div class="diagram-host diagram-host-second"><strong>Umbra</strong><span>Gaming PC 2</span></div>
+              </div>
+              <span class="diagram-arrow" aria-hidden="true">→</span>
+              <div class="diagram-output">
+                <div class="diagram-client"><strong>Eclipse</strong><span>Client · shared display</span></div>
+                <div class="diagram-screen diagram-screen-split"><span>Game 1</span><span>Game 2</span></div>
+              </div>
+            </div>
+            <p class="diagram-layouts">Side-by-side or stacked layouts</p>
+          </div>
           <figcaption>One client for ordinary streaming and two-host co-op.</figcaption>
         </figure>
       </div>
