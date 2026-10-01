@@ -1,0 +1,64 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 760" role="img" aria-labelledby="title desc">
+  <title id="title">Two computers streaming into one television</title>
+  <desc id="desc">A diagram with two host windows flowing into side-by-side panels on a large display.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0" stop-color="#120d20"/>
+      <stop offset="0.5" stop-color="#08080c"/>
+      <stop offset="1" stop-color="#11101b"/>
+    </linearGradient>
+    <linearGradient id="paneA" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0" stop-color="#7c3aed"/>
+      <stop offset="1" stop-color="#27134f"/>
+    </linearGradient>
+    <linearGradient id="paneB" x1="0" x2="1" y1="1" y2="0">
+      <stop offset="0" stop-color="#2e1065"/>
+      <stop offset="1" stop-color="#c084fc"/>
+    </linearGradient>
+    <filter id="glow" x="-60%" y="-60%" width="220%" height="220%">
+      <feGaussianBlur stdDeviation="24"/>
+    </filter>
+  </defs>
+  <rect width="1440" height="760" rx="40" fill="url(#bg)"/>
+  <circle cx="720" cy="380" r="150" fill="#7c3aed" opacity=".16" filter="url(#glow)"/>
+  <g fill="none" stroke="#a78bfa" stroke-linecap="round" stroke-width="4" opacity=".72">
+    <path d="M316 245C470 245 482 328 590 350"/>
+    <path d="M316 515C470 515 482 432 590 410"/>
+  </g>
+  <g transform="translate(92 166)">
+    <rect width="224" height="158" rx="18" fill="#15131d" stroke="#5b5270" stroke-width="3"/>
+    <rect x="18" y="34" width="188" height="101" rx="10" fill="url(#paneA)"/>
+    <circle cx="27" cy="19" r="5" fill="#c084fc"/>
+    <circle cx="44" cy="19" r="5" fill="#4c1d95"/>
+    <path d="M58 151h108" stroke="#5b5270" stroke-width="8"/>
+  </g>
+  <g transform="translate(92 436)">
+    <rect width="224" height="158" rx="18" fill="#15131d" stroke="#5b5270" stroke-width="3"/>
+    <rect x="18" y="34" width="188" height="101" rx="10" fill="url(#paneB)"/>
+    <circle cx="27" cy="19" r="5" fill="#c084fc"/>
+    <circle cx="44" cy="19" r="5" fill="#4c1d95"/>
+    <path d="M58 151h108" stroke="#5b5270" stroke-width="8"/>
+  </g>
+  <g transform="translate(590 174)">
+    <rect width="758" height="426" rx="27" fill="#050507" stroke="#80758f" stroke-width="5"/>
+    <clipPath id="screen"><rect x="21" y="21" width="716" height="384" rx="12"/></clipPath>
+    <g clip-path="url(#screen)">
+      <rect x="21" y="21" width="358" height="384" fill="url(#paneA)"/>
+      <rect x="379" y="21" width="358" height="384" fill="url(#paneB)"/>
+      <path d="M379 21v384" stroke="#fff" stroke-width="4"/>
+      <g fill="none" stroke="#fff" opacity=".45">
+        <circle cx="197" cy="214" r="70" stroke-width="2"/>
+        <path d="m154 236 43-70 43 70Z" stroke-width="5"/>
+        <rect x="488" y="142" width="140" height="140" rx="28" stroke-width="4"/>
+        <path d="m524 214 32 32 46-64" stroke-width="7"/>
+      </g>
+    </g>
+    <path d="M326 426h106l18 52H308l18-52Z" fill="#302a39"/>
+    <path d="M258 478h242" stroke="#80758f" stroke-linecap="round" stroke-width="14"/>
+  </g>
+  <g font-family="ui-sans-serif,system-ui,sans-serif" font-weight="700" fill="#f5f3ff">
+    <text x="112" y="144" font-size="24">HOST A</text>
+    <text x="112" y="414" font-size="24">HOST B</text>
+    <text x="640" y="142" font-size="24">ONE CO-OP SESSION</text>
+  </g>
+</svg>

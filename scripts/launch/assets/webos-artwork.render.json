@@ -1,0 +1,36 @@
+{
+  "renderer": "sharp 0.35.4",
+  "sources": [
+    {
+      "path": "site/assets/brand-mark.svg",
+      "sha256": "ed822614082f2ed0d1bc4703390c9b2238f8f4d614c19486e5c3cef14cd20ad8"
+    },
+    {
+      "path": "scripts/launch/assets/webos-splash.svg",
+      "sha256": "9beb6484720668f31488d079c74d1df8fc0168d1f94cddf08f9713a1e0e633f1"
+    }
+  ],
+  "outputs": [
+    {
+      "path": "deploy/webos/icon.png",
+      "source": "site/assets/brand-mark.svg",
+      "sha256": "4780419781f619f990e8ffda9fbc6cda8d6441cb53dbed8d48a951218a94c066",
+      "width": 80,
+      "height": 80
+    },
+    {
+      "path": "deploy/webos/icon_large.png",
+      "source": "site/assets/brand-mark.svg",
+      "sha256": "518617c6ab55a6b42509838a142337caf973ccef695f6801e70357d317cf6714",
+      "width": 130,
+      "height": 130
+    },
+    {
+      "path": "deploy/webos/splash.png",
+      "source": "scripts/launch/assets/webos-splash.svg",
+      "sha256": "fc62525bc25e1f0fc2a7c9272270e3a14b14db4abec7c4c833988645d6aef83e",
+      "width": 1920,
+      "height": 1080
+    }
+  ]
+}

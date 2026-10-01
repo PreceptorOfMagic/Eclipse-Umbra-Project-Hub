@@ -1,0 +1,8 @@
+scripts/launch/node_modules/
+.DS_Store
+Thumbs.db
+
+# Raw footage, masters and private capture records never belong in the public hub.
+raw-media/
+recording-masters/
+private-run-sheets/

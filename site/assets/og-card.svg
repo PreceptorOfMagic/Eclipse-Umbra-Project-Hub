@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" role="img" aria-labelledby="title desc">
+  <title id="title">Eclipse/Umbra co-op streaming</title>
+  <desc id="desc">Two PCs, one screen: couch co-op for games that never shipped it.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0" stop-color="#170c2c"/>
+      <stop offset=".5" stop-color="#07070a"/>
+      <stop offset="1" stop-color="#2e1065"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="0" x2="1">
+      <stop stop-color="#8b5cf6"/>
+      <stop offset="1" stop-color="#d8b4fe"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <circle cx="1040" cy="90" r="290" fill="#8b5cf6" opacity=".12"/>
+  <circle cx="1120" cy="620" r="360" fill="#c084fc" opacity=".08"/>
+  <g transform="translate(78 70)">
+    <rect width="64" height="64" rx="18" fill="#09090d" stroke="#8b5cf6" stroke-width="2"/>
+    <path d="M13 15h15v34H13c-2 0-4-2-4-4V19c0-2 2-4 4-4Z" fill="#7c3aed"/>
+    <path d="M36 15h15c2 0 4 2 4 4v26c0 2-2 4-4 4H36V15Z" fill="#c084fc"/>
+    <path d="M32 16v32" stroke="#fff" stroke-linecap="round" stroke-width="2.5"/>
+  </g>
+  <g font-family="ui-sans-serif,system-ui,-apple-system,sans-serif" fill="#fafafa">
+    <text x="165" y="112" font-size="34" font-weight="700">ECLIPSE / UMBRA</text>
+    <text x="78" y="255" font-size="74" font-weight="800">Two PCs. One screen.</text>
+    <text x="78" y="338" font-size="52" font-weight="650" fill="url(#accent)">Couch co-op, re-engineered.</text>
+    <text x="80" y="438" font-size="27" fill="#d4d4d8">Two live host sessions composed for one shared display.</text>
+    <text x="80" y="483" font-size="27" fill="#d4d4d8">GPL-licensed. Built on Moonlight, Sunshine, Moonlight TV, Aurora and Apollo.</text>
+    <text x="80" y="558" font-size="23" font-weight="700" fill="#a78bfa">ENGINEERING PREVIEW</text>
+  </g>
+</svg>

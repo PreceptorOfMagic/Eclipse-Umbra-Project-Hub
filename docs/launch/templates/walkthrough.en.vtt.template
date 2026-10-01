@@ -1,0 +1,16 @@
+WEBVTT
+
+NOTE
+Copy this file to site/media/coop-walkthrough.en.vtt, remove this NOTE block,
+replace every placeholder, and check the cues against the final hosted film.
+Use a speaker label only when the speaker is not visually obvious. Describe
+meaningful sounds in square brackets; do not caption decorative music by mood.
+
+00:00:00.000 --> 00:00:04.500
+{{OPENING NARRATION}}
+
+00:00:04.500 --> 00:00:07.000
+[{{MEANINGFUL SOUND}}]
+
+00:00:07.000 --> 00:00:11.000
+{{SPEAKER, IF NEEDED}}: {{SPOKEN WORDS}}

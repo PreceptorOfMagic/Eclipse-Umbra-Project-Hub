@@ -1,0 +1,59 @@
+name: Deploy project site
+
+# Private pushes and pull requests run the same structural checks as a release,
+# but only a public default-branch run can reach the deployment job. Changing the
+# repository to public triggers the first deployment attempt; Pages must already
+# be enabled, or be enabled once and this workflow rerun.
+on:
+  public:
+  push:
+    branches:
+      - main
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - name: Validate clean publication boundary
+        run: node scripts/launch/check_hub_boundary.mjs
+      - name: Validate public site
+        run: node scripts/launch/check_public_site.mjs
+      - name: Validate funding route and disclosures
+        run: node scripts/launch/check_funding.mjs
+      - name: Test media contract
+        run: node --test scripts/launch/check_media.test.mjs
+
+  deploy:
+    needs: validate
+    if: ${{ github.event.repository.private == false && github.event_name != 'pull_request' && (github.event_name == 'public' || github.ref == 'refs/heads/main') }}
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - name: Configure GitHub Pages
+        uses: actions/configure-pages@45bfe0192ca1faeb007ade9deae92b16b8254a0d # v6.0.0
+      - name: Upload static site
+        uses: actions/upload-pages-artifact@fc324d3547104276b827a68afc52ff2a11cc49c9 # v5.0.0
+        with:
+          path: ./site
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@368f82528645a54fb793d4d04e342629a3f51346 # v5.0.1

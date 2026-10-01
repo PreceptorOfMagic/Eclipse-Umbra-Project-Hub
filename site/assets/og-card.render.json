@@ -1,0 +1,9 @@
+{
+  "source": "site/assets/og-card.svg",
+  "sourceSha256": "cbfa99db62f636f1680a2021d4ee2ba95132191df44390474940108c18298ea8",
+  "output": "site/assets/og-card.png",
+  "outputSha256": "227ece0db3b27d398659cd134e48ad697f8b66a3f75cd11b20869cb1be16f03e",
+  "width": 1200,
+  "height": 630,
+  "renderer": "sharp 0.35.4"
+}
