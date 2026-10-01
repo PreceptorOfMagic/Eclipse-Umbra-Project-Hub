@@ -1,5 +1,5 @@
 <p align="center">
-  <a href="https://preceptorofmagic.github.io/">
+  <a href="site/index.html">
     <img src="site/assets/og-card.png" alt="Eclipse/Umbra — two PCs, one screen" width="960">
   </a>
 </p>
@@ -9,11 +9,12 @@
 </p>
 
 <p align="center">
-  <a href="https://preceptorofmagic.github.io/">Project hub</a> ·
-  <a href="https://preceptorofmagic.github.io/setup.html">Quick start</a> ·
-  <a href="https://preceptorofmagic.github.io/projects.html">Project map</a> ·
-  <a href="https://preceptorofmagic.github.io/credits.html">Acknowledgements</a> ·
-  <a href="https://preceptorofmagic.github.io/support.html">Support policy</a>
+  <a href="site/index.html">Review homepage</a> ·
+  <a href="site/setup.html">Review setup</a> ·
+  <a href="site/projects.html">Review project map</a> ·
+  <a href="site/credits.html">Review acknowledgements</a> ·
+  <a href="site/support.html">Review support</a> ·
+  <a href="https://preceptorofmagic.github.io/">Live site after publication</a>
 </p>
 
 > [!NOTE]
@@ -27,7 +28,7 @@ The repositories remain separate so their inherited histories, licences, release
 
 | Surface | Responsibility |
 |---|---|
-| [Project hub](https://preceptorofmagic.github.io/) | Consumer explanation, quick start, status, media, acknowledgements and support disclosures |
+| [Project hub source](site/index.html) | Consumer explanation, quick start, status, media, acknowledgements and support disclosures; the [canonical site](https://preceptorofmagic.github.io/) activates at publication |
 | [Eclipse](https://github.com/PreceptorOfMagic/eclipse) | Client source, client releases and client issues |
 | [Umbra](https://github.com/PreceptorOfMagic/umbra) | Host source, host releases and host issues |
 | [CTM-USBIP](https://github.com/PreceptorOfMagic/CTM-USBIP) | Optional advanced controller/device transport |
