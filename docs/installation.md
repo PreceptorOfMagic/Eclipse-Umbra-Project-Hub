@@ -20,7 +20,7 @@ Windows x64 host. Install once for ordinary streaming, twice for two-PC co-op. T
 
 LG webOS, Windows x64 or Linux x86_64 client. Install the package matching the device where you will view and control the stream.
 
-Download an attached file under **Assets**, not GitHub’s automatically generated **Source code (zip)** or **Source code (tar.gz)**. Those are developer archives, not installable apps. Public packages have not yet been published; a platform button will become a direct download when its package is attached to the latest stable release.
+Download an attached file under **Assets**, not GitHub’s automatically generated **Source code (zip)** or **Source code (tar.gz)**. Those are developer archives, not installable apps. Use the latest compatible stable release. If no package is attached for your platform, that download is not available.
 
 [Pairing](#pairing) · [First co-op session](#coop) · [Troubleshooting and logs](#diagnostics) · [Tested hardware](../README.md#status)
 
