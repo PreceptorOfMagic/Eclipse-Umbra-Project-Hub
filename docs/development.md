@@ -8,6 +8,14 @@ Eclipse and Umbra are separate application repositories with a shared protocol a
 
 [Eclipse source](https://github.com/PreceptorOfMagic/Eclipse) · [Umbra source](https://github.com/PreceptorOfMagic/Umbra)
 
+<a name="development-process"></a>
+
+## How this project is developed
+
+Claude and Codex are used to write and debug code and help with documentation for Eclipse/Umbra’s additions. PreceptorOfMagic leads the orchestration, high-level design and hands-on testing. This describes work on these forks, not how the upstream projects were developed.
+
+AI assistance does not establish that a change works: the [testing status](../README.md#status) distinguishes measured results from gaps that still need testing.
+
 <a name="architecture"></a>
 
 ## How the stream travels.

@@ -10,6 +10,8 @@
 
 [Open the project website](https://preceptorofmagic.github.io/Eclipse-Umbra-Project-Hub/) · [Eclipse source](https://github.com/PreceptorOfMagic/Eclipse) · [Umbra source](https://github.com/PreceptorOfMagic/Umbra)
 
+Eclipse/Umbra’s additions use AI-assisted coding, including Claude and Codex. [How the project is developed](docs/development.md#development-process).
+
 ## What Moonlight and Sunshine do
 
 Moonlight receives video/audio from a PC and sends your controls back. Sunshine captures and encodes the PC’s games or desktop. Games run on your own hardware, not in a hosted cloud service.

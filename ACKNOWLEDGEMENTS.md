@@ -52,7 +52,10 @@ moonlight-common-c's Reed–Solomon forward-error-correction implementation cred
 
 - [CTM-USBIP](https://github.com/CTM-Bridge/CTM-USBIP), by **Ciprian Teodor Misaila** and contributors, provides companion device transport in the wider three-box setup.
 - [SudoVDA](https://github.com/SudoMaker/SudoVDA), by **SudoMaker** and contributors, supplies virtual-display functionality while carrying inherited work and acknowledgements for **Roshkins, Baloukj, Anakngtokwa, Microsoft's Indirect Display Driver sample, AKATrevorJay's `edid-generator`, zjoasan, Bud, and the VirtualDrivers/MTT fork line**. SudoVDA describes SudoMaker's own changes as “MIT and CC0 or Public Domain” and directs readers to Microsoft and the inherited projects for their separate terms; it must not be flattened into a single MIT label.
-- Current fork integration and testing are maintained by **[@PreceptorOfMagic](https://github.com/PreceptorOfMagic)** with the people who report, test, review and contribute changes.
+
+### AI-assisted development
+
+Claude and Codex are used to write and debug code and help with documentation for these forks. **[@PreceptorOfMagic](https://github.com/PreceptorOfMagic)** leads orchestration, high-level design and hands-on testing, alongside community reports and contributions. This is separate from the upstream authorship credited above.
 
 ## Client source and runtime dependencies
 
