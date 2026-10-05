@@ -37,6 +37,8 @@ jobs:
         run: node --test scripts/launch/check_downloads.test.mjs
       - name: Test expandable guides
         run: node --test scripts/launch/check_disclosures.test.mjs
+      - name: Test recorded activity summaries
+        run: node --test scripts/launch/check_activity.test.mjs
 
   deploy:
     needs: validate

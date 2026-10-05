@@ -310,11 +310,53 @@ Development history · July–October 2026
 
 The useful history includes the dead ends. These are dated outcomes from project records, not fresh reproductions of every experiment. Credit is attached to documented contributions; where the record does not establish who first proposed an idea, the account does not invent an author.
 
+<a name="activity-method"></a>
+
+<details>
+<summary>About the numbers · how the activity panels are counted — A retained-log snapshot, with gaps and overlapping periods made explicit</summary>
+
+The panels below are a snapshot taken before 5 October 2026, 20:48:38 AEST (Brisbane time). They count available records from the Eclipse project workspace, including app development, testing, documentation and delegated agent work. They are not an exclusive allocation of effort to the adjacent milestones or individual features.
+
+### One message is one recorded prompt
+
+Human-submitted messages are counted once, including follow-up replies and messages with images. A message can contain several requests; several messages can belong to one AI turn. Tool results, automatic continuations, system/context messages, slash/shell commands and agent instructions are excluded.
+
+Claude prompts come from two independent records of the same activity: explicitly human-origin messages in the recovered transcripts, and the CLI prompt journal. Both miss messages (the journal misses most messages typed while the assistant was still working; transcripts before 17 August were not recovered as whole files), so for each Brisbane calendar day the panel uses whichever record holds more prompts, never their sum. Transcript messages are counted once per message identity: a message copied into a resumed session is the same message. Messages with no origin label, messages typed automatically by an account-switching tool, messages relayed between AI sessions, tool results and slash or shell commands are excluded. Codex counts use human-message metadata from root app sessions, excluding agent/command-line sessions. These are minimum recorded counts, not every prompt ever sent.
+
+### Tokens processed are not tokens written
+
+Totals include input, output, cache writes and cached context reads, counted once in the relevant provider’s accounting. Repeated context can dominate the total: these are not billions of unique words or generated code. This is not a billing total, a monetary cost estimate or a measure of human effort.
+
+- Claude: each response is counted once, using the usage recorded with its explicit API stop reason (or its only recorded snapshot). Responses whose copies disagree on model, counters, request or content, or whose accounting fields are incomplete, are excluded rather than repaired. Add uncached input, cache-write input, cache-read input and output. Nested thinking/cache breakdowns are already included.
+- Codex: count each explicit response-usage record once. Input already includes cached input, so total is input plus output; do not add cached or reasoning subcategories again. Cumulative turn/thread counters are not additional usage.
+
+### Gaps, models and overlap
+
+Claude token/model records begin on 27 June. Routine 30-day log cleanup had deleted every transcript older than early September. Whole files from 17 August onward were recovered from a 20 September system backup and checked against the backup's own filesystem metadata before use. Earlier activity survives only as individual transcript lines read from the deleted space of that backup and two later ones. Such lines can be spliced from two records at disk-block boundaries, so an earlier response is counted only when every recovered copy agrees exactly on model and every counter, and either at least two separate records of it survive or one copy lies entirely inside a single 4 KiB disk block, where no splice can occur. Other single surviving copies are left out. Token totals before 17 August are therefore well below the real figures—minimums, not estimates. Codex usage records begin on 8 September, when Codex use began. “Not retained” means unavailable, not zero. Model names are the literal identifiers in the records, not guesses based on today’s product names.
+
+Each panel prints its exact calendar window. The development threads overlap, so their figures must not be added together. A token recorded in September can appear in several relevant era windows; that does not mean the same response was counted twice within a window. Precise feature-by-feature figures would require explicit work tagging that these sessions do not have.
+
+Only aggregate statistics are published. Raw prompts, tool output, session identifiers and private transcript files remain private. [Inspect the aggregate snapshot](../site/assets/development-activity.json).
+
+</details>
+
 <a name="history-first-path"></a>
 
 <details>
 
 <summary>22–30 July · Finding the core path — Dual decoding, the half-stream proposal and the header-alignment breakthrough</summary>
+
+<!-- activity:history-first-path:start -->
+**Behind the build · 22–30 July 2026**
+
+- **Recorded user prompts:** 53 human messages (partial coverage).
+- **Tokens processed:** 412,175,826, including cached context and agent work.
+- **Recorded models:** `claude-opus-4-8`, `claude-opus-5`
+
+406,388,359 cached-input tokens; 5,787,467 other input/output tokens. Usage records span 2026-07-22 to 2026-07-30; coverage is incomplete.
+
+Project activity in this date window, not an exclusive total for these milestones. Windows overlap. [How these figures are counted](#activity-method).
+<!-- activity:history-first-path:end -->
 
 ### 22 July · Building on existing clients and hosts
 
@@ -344,6 +386,18 @@ Inserting a slice address shifted the header length and displaced entropy-coded 
 
 <summary>Late July–August · Learning to preserve time and references — Ghosting, role reversal, queues, holds and corrected measurements</summary>
 
+<!-- activity:history-timing:start -->
+**Behind the build · 25 July–31 August 2026**
+
+- **Recorded user prompts:** 286 human messages (partial coverage).
+- **Tokens processed:** 2,676,527,028, including cached context and agent work.
+- **Recorded models:** `claude-haiku-4-5-20251001`, `claude-opus-4-8`, `claude-opus-5`, `claude-sonnet-5`
+
+2,629,204,732 cached-input tokens; 47,322,296 other input/output tokens. Usage records span 2026-07-25 to 2026-08-31; coverage is incomplete.
+
+Project activity in this date window, not an exclusive total for these milestones. Windows overlap. [How these figures are counted](#activity-method).
+<!-- activity:history-timing:end -->
+
 ### Late July–early August · A still pane is not a reusable packet
 
 Predictive pictures exposed why arbitrary drops or repeats were unsafe. Reapplying residuals could corrupt a held pane, while omitting a reference picture broke later prediction. Sequence tracking, bounded buffering, bootstrap/keyframe handling and synthetic all-skip holds became core architecture rather than optional smoothing.
@@ -363,6 +417,18 @@ Some apparently successful tests had invalid inputs; a separate frame-extraction
 <details>
 
 <summary>Late August–16 September · The cross-vendor detour — Native HEVC mismatch, the abandoned AVC route and a shared encoder</summary>
+
+<!-- activity:history-cross-vendor:start -->
+**Behind the build · 18 August–16 September 2026**
+
+- **Recorded user prompts:** 491 human messages (partial coverage).
+- **Tokens processed:** 4,403,521,774, including cached context and agent work.
+- **Recorded models:** `claude-haiku-4-5-20251001`, `claude-opus-4-8`, `claude-opus-5`, `claude-sonnet-5`, `gpt-6-astra`
+
+4,318,050,662 cached-input tokens; 85,471,112 other input/output tokens. Usage records span 2026-08-18 to 2026-09-16; coverage is incomplete.
+
+Project activity in this date window, not an exclusive total for these milestones. Windows overlap. [How these figures are counted](#activity-method).
+<!-- activity:history-cross-vendor:end -->
 
 ### 30 August · Healthy counters, wrong picture
 
@@ -386,6 +452,18 @@ AI audits of vendor APIs and existing implementations did not produce a small na
 
 <summary>16–29 September · Correct bytes were only the start — Parallel CABAC, integration failures, quality work and rollbacks</summary>
 
+<!-- activity:history-gpu:start -->
+**Behind the build · 16–29 September 2026**
+
+- **Recorded user prompts:** 215 human messages (partial coverage).
+- **Tokens processed:** 4,410,273,647, including cached context and agent work.
+- **Recorded models:** `claude-opus-5`, `claude-opus-5-5`, `claude-sonnet-5`, `gpt-5.6-sol`, `gpt-6-astra`
+
+4,334,405,432 cached-input tokens; 75,868,215 other input/output tokens. Usage records span 2026-09-16 to 2026-09-28; coverage is incomplete.
+
+Project activity in this date window, not an exclusive total for these milestones. Windows overlap. [How these figures are counted](#activity-method).
+<!-- activity:history-gpu:end -->
+
 ### 16 September · An AI algorithmic contribution changes the GPU path
 
 A correct but largely serial GPU CABAC port took tens to hundreds of milliseconds in component tests. The AI-developed context-grouping and finite-state-scan approach changed the algorithm rather than merely tuning that serial port. Predicted-frame CABAC fixtures reached roughly 1–2 ms with exact reference bytes. This was meaningful component progress, not an end-to-end latency claim.
@@ -405,6 +483,18 @@ An extra quantisation attempt in one revision raised worst-case encode time and 
 <details>
 
 <summary>Late September–October · Making it usable and maintainable — Desktop clients, a firmware crash, automatic setup and the thin Apollo fork</summary>
+
+<!-- activity:history-product:start -->
+**Behind the build · 23 September–5 October 2026**
+
+- **Recorded user prompts:** 247 human messages (partial coverage).
+- **Tokens processed:** 5,011,694,573, including cached context and agent work.
+- **Recorded models:** `claude-opus-4-8`, `claude-opus-5`, `claude-opus-5-5`, `claude-sonnet-5`, `claude-sonnet-5-5`, `gpt-5.6-sol`, `gpt-6-astra`
+
+4,914,917,012 cached-input tokens; 96,777,561 other input/output tokens. Usage records span 2026-09-23 to 2026-10-05; coverage is incomplete.
+
+Project activity in this date window, not an exclusive total for these milestones. Windows overlap. [How these figures are counted](#activity-method).
+<!-- activity:history-product:end -->
 
 ### Late September · Desktop clients and session recovery
 

@@ -1,0 +1,173 @@
+{
+  "schemaVersion": 1,
+  "asOf": "2026-10-05T10:48:38.000Z",
+  "timezone": "Australia/Brisbane",
+  "scope": "Retained project activity in overlapping date windows; not per-feature allocation or complete billing history.",
+  "coverage": {
+    "claudeTokensFrom": "2026-06-27",
+    "claudeCompleteFrom": "2026-08-17",
+    "codexTokensFrom": "2026-09-08",
+    "claudePromptMethod": "per-day-max-of-transcript-and-journal",
+    "claudeRawRecoveryRule": "two-agreeing-copies-or-single-4KiB-block"
+  },
+  "windows": [
+    {
+      "id": "history-first-path",
+      "from": "2026-07-22",
+      "to": "2026-07-30",
+      "label": "22–30 July 2026",
+      "prompts": 53,
+      "promptSources": {
+        "claudeJournal": 53,
+        "claudeTranscripts": 0,
+        "codexTranscripts": 0
+      },
+      "excludedUnmarkedClaudeMessages": 0,
+      "requests": 1036,
+      "tokens": {
+        "uncachedInput": 2297,
+        "cacheWrite": 4727284,
+        "cacheRead": 406388359,
+        "output": 1057886,
+        "total": 412175826
+      },
+      "models": [
+        "claude-opus-4-8",
+        "claude-opus-5"
+      ],
+      "recordedUsageDates": {
+        "first": "2026-07-22",
+        "last": "2026-07-30"
+      }
+    },
+    {
+      "id": "history-timing",
+      "from": "2026-07-25",
+      "to": "2026-08-31",
+      "label": "25 July–31 August 2026",
+      "prompts": 286,
+      "promptSources": {
+        "claudeJournal": 103,
+        "claudeTranscripts": 183,
+        "codexTranscripts": 0
+      },
+      "excludedUnmarkedClaudeMessages": 69,
+      "requests": 8187,
+      "tokens": {
+        "uncachedInput": 17082,
+        "cacheWrite": 38862645,
+        "cacheRead": 2629204732,
+        "output": 8442569,
+        "total": 2676527028
+      },
+      "models": [
+        "claude-haiku-4-5-20251001",
+        "claude-opus-4-8",
+        "claude-opus-5",
+        "claude-sonnet-5"
+      ],
+      "recordedUsageDates": {
+        "first": "2026-07-25",
+        "last": "2026-08-31"
+      }
+    },
+    {
+      "id": "history-cross-vendor",
+      "from": "2026-08-18",
+      "to": "2026-09-16",
+      "label": "18 August–16 September 2026",
+      "prompts": 491,
+      "promptSources": {
+        "claudeJournal": 0,
+        "claudeTranscripts": 440,
+        "codexTranscripts": 51
+      },
+      "excludedUnmarkedClaudeMessages": 132,
+      "requests": 14214,
+      "tokens": {
+        "uncachedInput": 11647993,
+        "cacheWrite": 59679203,
+        "cacheRead": 4318050662,
+        "output": 14143916,
+        "total": 4403521774
+      },
+      "models": [
+        "claude-haiku-4-5-20251001",
+        "claude-opus-4-8",
+        "claude-opus-5",
+        "claude-sonnet-5",
+        "gpt-6-astra"
+      ],
+      "recordedUsageDates": {
+        "first": "2026-08-18",
+        "last": "2026-09-16"
+      }
+    },
+    {
+      "id": "history-gpu",
+      "from": "2026-09-16",
+      "to": "2026-09-29",
+      "label": "16–29 September 2026",
+      "prompts": 215,
+      "promptSources": {
+        "claudeJournal": 16,
+        "claudeTranscripts": 146,
+        "codexTranscripts": 53
+      },
+      "excludedUnmarkedClaudeMessages": 26,
+      "requests": 17607,
+      "tokens": {
+        "uncachedInput": 27242842,
+        "cacheWrite": 37003572,
+        "cacheRead": 4334405432,
+        "output": 11621801,
+        "total": 4410273647
+      },
+      "models": [
+        "claude-opus-5",
+        "claude-opus-5-5",
+        "claude-sonnet-5",
+        "gpt-5.6-sol",
+        "gpt-6-astra"
+      ],
+      "recordedUsageDates": {
+        "first": "2026-09-16",
+        "last": "2026-09-28"
+      }
+    },
+    {
+      "id": "history-product",
+      "from": "2026-09-23",
+      "to": "2026-10-05",
+      "label": "23 September–5 October 2026",
+      "prompts": 247,
+      "promptSources": {
+        "claudeJournal": 16,
+        "claudeTranscripts": 170,
+        "codexTranscripts": 61
+      },
+      "excludedUnmarkedClaudeMessages": 5,
+      "requests": 22485,
+      "tokens": {
+        "uncachedInput": 45543838,
+        "cacheWrite": 38484098,
+        "cacheRead": 4914917012,
+        "output": 12749625,
+        "total": 5011694573
+      },
+      "models": [
+        "claude-opus-4-8",
+        "claude-opus-5",
+        "claude-opus-5-5",
+        "claude-sonnet-5",
+        "claude-sonnet-5-5",
+        "gpt-5.6-sol",
+        "gpt-6-astra"
+      ],
+      "recordedUsageDates": {
+        "first": "2026-09-23",
+        "last": "2026-10-05"
+      }
+    }
+  ]
+}
