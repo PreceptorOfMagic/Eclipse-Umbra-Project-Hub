@@ -13,7 +13,7 @@ Aurora or Apollo.
 The naming rule is intentionally narrow:
 
 1. Replace user-facing **Aurora** branding with **Eclipse**.
-2. Replace user-facing **Apollo** branding with **Umbra**.
+2. Present the running host as **Umbra**, using its own identity layer rather than rewriting Apollo’s README, translations or resource cards. Label retained Apollo links as upstream resources.
 3. Keep inherited **Moonlight** and **Sunshine** names where the Aurora and Apollo
    projects kept them, including compatibility and long-standing component names.
 4. Keep factual references to the upstream Aurora and Apollo projects in lineage,
@@ -48,20 +48,24 @@ The naming rule is intentionally narrow:
 
 ## Current Umbra host audit
 
-The reviewed Umbra development tree at `/mnt/c/Users/camer/apollo-build` now has
-the first visible-name pass applied. These source changes are unbuilt and have not
-yet passed clean-install or upgrade testing, so application identity remains a
-release gate rather than an alternative branding plan.
+The October 3 thin-fork work supersedes the earlier direct-edit branding pass.
+Umbra is Apollo with the additions Eclipse needs for co-op and as little else
+changed as possible. Keep identity in Umbra-owned files so Apollo updates are
+easier to merge. See the [upstream sync guide](https://github.com/PreceptorOfMagic/Umbra/blob/umbra/thin/docs/umbra-upstream-sync.md).
 
-| Surface | Current state | Release action |
-|---|---|---|
-| CMake project/package metadata | The project, package description and homepage now identify **Umbra**. | Build and inspect Windows metadata, installer filename, installed-app entry and Start menu; measure the install-directory/upgrade effect. |
-| Windows service | The visible display name/description now say **Umbra Host Service**; the compatibility key remains `ApolloService`. | Test clean install, in-place upgrade, autostart, uninstall and rollback before accepting the retained key. |
-| System tray and discovery | The tooltip/menu and default advertised host name now say Umbra. | Exercise tray relaunch and client discovery against the final build. |
-| Browser UI and locales | Page title, navigation, controls, resource targets and all 20 locale files now pass the Umbra identity check. Shared Eclipse/Umbra source artwork has replaced the visible inherited artwork while compatibility filenames remain. | Build the web assets and inspect every principal page and icon state. Keep factual upstream links clearly labelled. |
-| Installer, Start menu and firewall | CMake now derives Umbra package/shortcut names; firewall rules use Umbra and remove the legacy Apollo/Aurora-labelled rules. | Verify install, upgrade and uninstall leave exactly the intended shortcuts and firewall rules. |
-| Companion audio/device labels | Host source now searches for `Eclipse Mic Bridge` first, then the legacy `Aurora Mic Bridge`, then the stock endpoint. Existing devices are deliberately not renamed yet. | After preserving an Eclipse-aware rollback build, perform the elevated in-place endpoint rename with GUID/readback/idempotency tests; keep the fallback through the migration window. |
-| Executable/protocol internals | `sunshine.exe` and Sunshine terminology are inherited throughout the host. | Retain them under the naming rule; do not surface them as a competing application brand. |
+| Surface | Current approach | Release action |
+| --- | --- | --- |
+| GitHub introduction | Umbra owns `.github/README.md`; the root README stays Apollo’s. | Do not replace the upstream root README with the Umbra landing copy. |
+| Browser text and colours | `umbra_identity.js`, `umbra.css` and `UmbraCard.vue` layer Umbra identity over the retained Apollo UI. | Test rendered pages and languages after upstream merges; do not edit Apollo’s translation files to rename the host. |
+| Host version panel | Shows the Umbra build, recorded Apollo release base and published-release comparison. | Check version metadata; a release notice does not establish that every newer upstream commit is included. |
+| Artwork | Shared Project Hub mark, rendered into host icons by `scripts/umbra-artwork/render.cjs`. | Change the master and rerender; check installer, tray states and web UI rather than editing outputs by hand. |
+| Installer and service identity | Visible product identity is Umbra; the Apollo install directory, registry identity and compatibility service key are retained. | Explain that Apollo and Umbra replace one another in place. Back up and test configuration/pairing preservation, upgrades and rollback. |
+| Upstream resources | Apollo’s own links and attribution stay clearly identified as Apollo’s. | Direct Umbra support requests to Umbra, not Apollo’s maintainers. |
+| Executable and protocol internals | Inherited Sunshine names and compatibility identifiers remain. | Retain them; a source filename containing Apollo is not by itself a visible identity defect. |
+
+Run `node scripts/umbra_check.mjs` against the selected Apollo base and justify any
+new upstream-file changes in `scripts/umbra-delta.txt`. Final release artifacts still
+need their own clean-install and upgrade checks; source identity is not enough.
 
 ## Acceptance checks
 

@@ -16,7 +16,7 @@ Eclipse/Umbra’s additions use AI-assisted coding, including Claude and Codex. 
 
 Moonlight receives video/audio from a PC and sends your controls back. Sunshine captures and encodes the PC’s games or desktop. Games run on your own hardware, not in a hosted cloud service.
 
-Eclipse follows **Moonlight → Moonlight TV → Aurora**. Umbra follows **Sunshine → Apollo**. The normal experience remains: discover a host, pair with a PIN, choose a game or desktop, configure streaming quality and play using controllers, keyboard or mouse. Codec, HDR, resolution and frame-rate options depend on the hardware at both ends.
+Eclipse follows **Moonlight → Moonlight TV → Aurora**. Umbra follows **Sunshine → Apollo**. It is Apollo with the additions Eclipse needs for co-op, keeping other changes to a minimum. Apollo supplies the everyday host foundation; Umbra keeps its changes separate where possible to make upstream updates easier to integrate. The normal experience remains: discover a host, pair with a PIN, choose a game or desktop, configure streaming quality and play using controllers, keyboard or mouse. Codec, HDR, resolution and frame-rate options depend on the hardware at both ends.
 
 ## What co-op means here
 

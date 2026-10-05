@@ -36,7 +36,7 @@ Open the latest release, expand Assets and choose the package described below. I
 
 1. Open the Umbra release, read its compatibility notes and expand **Assets**. Download the Windows x64 installer and matching checksum if supplied. Compare its SHA-256 hash with `Get-FileHash` in PowerShell before opening it.
 
-1. If you already run Sunshine or Apollo, stop that host service before starting Umbra so two hosts do not compete for the same network ports or display resources. Keep a backup of its configuration before migrating.
+1. Back up any existing host configuration and pairings. Umbra replaces Apollo in place, using the same Apollo installation folder and registry identity; installing Apollo again replaces Umbra. Do not expect them to run side by side. If Sunshine is installed separately, stop its service before starting Umbra to avoid competing for network ports or display resources.
 
 1. Run the installer and approve the Windows administrator prompt. Install the bundled virtual-display and controller/device components offered by the installer; there is no separate device-bridge installation step.
 
@@ -44,7 +44,7 @@ Open the latest release, expand Assets and choose the package described below. I
 
 1. Keep the client-driven display defaults. Pair Eclipse, approve its PIN in Umbra and test an ordinary Desktop or game session before adding another host.
 
-For co-op, install the same compatible Umbra release on the second Windows PC. Co-op-specific defaults are separate from ordinary streaming settings. The Co-op Pane is created automatically as part of first co-op use; you should not create application entries, copy host IDs or tune encoder settings by hand.
+For co-op, install the same compatible Umbra release on the second Windows PC. Co-op-specific defaults are separate from ordinary streaming settings. The Co-op Pane is built in and requested automatically by Eclipse, rather than created in the host’s editable Applications list. You should not create application entries, copy host IDs or tune encoder settings by hand.
 
 <a name="eclipse-webos"></a>
 
@@ -144,7 +144,7 @@ For remote access outside your home, establish a trusted private connection betw
 
 1. Launch the games on their respective PCs. Each game still has its own session, accounts and multiplayer requirements.
 
-The normal install flow uses working co-op defaults. Separate co-op options and the host’s Co-op Pane appear through first use; there is no manual application-entry preparation. If an older build asks for it, check the matching release notes instead of copying hidden settings from a development guide.
+The normal install flow uses working co-op defaults. Eclipse requests the built-in Co-op Pane when needed; it does not need to appear in Umbra’s editable Applications list. Disconnect pauses the co-op session so it can be resumed; Quit ends the session on both hosts. If an older build asks for manual setup, check the matching release notes instead of copying hidden settings from a development guide.
 
 If Eclipse is running on one of the gaming PCs, controls for that PC can behave differently: its local game reads its controller directly. Keyboard/mouse focus and virtual-display placement remain areas of active testing. A TV or separate client avoids that local-host focus complication.
 

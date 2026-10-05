@@ -46,7 +46,7 @@ moonlight-common-c's Reed–Solomon forward-error-correction implementation cred
 
 ### Apollo
 
-[Apollo](https://github.com/ClassicOldSong/Apollo) is developed by **[@ClassicOldSong](https://github.com/ClassicOldSong)** and contributors as a Sunshine-derived host with a virtual-display-oriented client workflow. It is the direct host foundation for Umbra.
+[Apollo](https://github.com/ClassicOldSong/Apollo) is developed by **[@ClassicOldSong](https://github.com/ClassicOldSong)** and contributors as a Sunshine-derived host with a virtual-display-oriented client workflow. It supplies Umbra’s everyday host functionality. Umbra is Apollo with the additions Eclipse needs for co-op and as little else changed as possible; its separate additions and branding are designed to make Apollo updates easier to integrate.
 
 ### Companion projects
 

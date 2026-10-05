@@ -63,9 +63,15 @@ The Linux portable builder is maintained with the Linux client work; its final r
 
 ### Umbra
 
-Use the repository’s current `beta/vega-coop` branch and recursive submodules.
+Use the `umbra/thin` integration branch and recursive submodules. Umbra is Apollo with the additions Eclipse needs for co-op, and as little else changed as possible. Keep new behaviour and branding in Umbra-owned files wherever possible, with small integration points in Apollo’s code.
 
-[Windows host build guide](https://github.com/PreceptorOfMagic/Umbra/blob/beta/vega-coop/docs/umbra-windows-build.md)
+Apollo’s root README, translations and resource cards are deliberately retained. Umbra’s GitHub introduction lives in `.github/README.md`; the host interface layers on `umbra_identity.js`, `umbra.css` and `UmbraCard.vue`. The shared logo is rendered from the Project Hub master.
+
+Run `node scripts/umbra_check.mjs` to check changes against `scripts/umbra-delta.txt`. Follow the [Apollo update checklist](https://github.com/PreceptorOfMagic/Umbra/blob/umbra/thin/docs/umbra-upstream-sync.md), then build and test ordinary streaming, co-op and in-place upgrades. This approach reduces merge conflicts; it does not mean every upstream update is already integrated.
+
+Versions use `<Apollo release>-umbra.<revision>`. The host’s release notice compares published releases, not all upstream commits; check Apollo’s source changes separately when integrating updates.
+
+[Windows host build guide](https://github.com/PreceptorOfMagic/Umbra/blob/umbra/thin/docs/umbra-windows-build.md)
 
 Keep source/build provenance with every package. Validate a clean installation, bundled components, host pairing, ordinary streaming and co-op together before publishing matching client/host releases.
 
@@ -116,7 +122,7 @@ Unified documentation and platform installation routes. Public application packa
 | Cross-vendor image quality | Fast motion and bitrate/quality trade-offs in the custom HEVC encoder. | Exact hosts, game/scene, release, visual fault and matching diagnostic bundle. |
 | Windows presentation | GPU-to-CPU readback can bottleneck 4K presentation; zero-copy work remains. | Decode vs presentation timing at multiple resolutions and GPU models. |
 | Native Linux | WSL test coverage is not bare-metal validation. Experimental WSL VAAPI showed instability. | NVIDIA/AMD/Intel native driver, compositor, decoder and session reports. |
-| Automatic co-op setup | The release installer must deliver working defaults and create the pane through first use, with separate co-op controls. | Clean-machine setup with no manual hidden settings, plus ordinary-stream regression checks. |
+| Automatic co-op setup | The built-in pane and session-scoped co-op defaults have been exercised in development builds; final packaged clean-install and upgrade coverage is still required. | Clean-machine setup with no manual hidden settings, plus ordinary-stream regression checks. |
 | Local-host desktop use | Keyboard/mouse focus and virtual-display lifecycle require wider testing. | Which PC runs Eclipse, controller ownership, monitor layout and reconnect behaviour. |
 | Hardware coverage | AMD × AMD, Intel host combinations, other webOS TVs/versions and Windows versions. | Results outside the [current matrix](../README.md#status), including failures. |
 

@@ -5,7 +5,7 @@
 The website repository retains its [existing GPL text](LICENSE.txt). Application licences remain in their own repositories:
 
 - **Eclipse:** [GPL-3.0-or-later and copyright record](https://github.com/PreceptorOfMagic/Eclipse/blob/main/COPYRIGHT), [full text](https://github.com/PreceptorOfMagic/Eclipse/blob/main/LICENSE.txt), [component notices](https://github.com/PreceptorOfMagic/Eclipse/blob/main/LICENSES.md).
-- **Umbra:** [GPL v3.0](https://github.com/PreceptorOfMagic/Umbra/blob/beta/vega-coop/LICENSE), [inherited NOTICE](https://github.com/PreceptorOfMagic/Umbra/blob/beta/vega-coop/NOTICE), [component notices](https://github.com/PreceptorOfMagic/Umbra/blob/beta/vega-coop/LICENSES.md).
+- **Umbra:** [GPL v3.0](https://github.com/PreceptorOfMagic/Umbra/blob/umbra/thin/LICENSE), [inherited NOTICE](https://github.com/PreceptorOfMagic/Umbra/blob/umbra/thin/NOTICE), [component notices](https://github.com/PreceptorOfMagic/Umbra/blob/umbra/thin/LICENSES.md).
 
 ## Project identity
 
