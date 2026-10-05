@@ -24,6 +24,19 @@ Two PCs each run their own game session. Eclipse combines their streams side by 
 
 Cross-vendor co-op needs a compatible stream structure. Umbra supplies the custom co-op encoder path and Eclipse coordinates the sessions and composition; this is why the work spans both applications rather than a client-only change. Anyone is welcome to adapt the functionality into Aurora, Apollo or other Moonlight/Sunshine forks.
 
+## Streaming features
+
+The [detailed feature catalogue](docs/features.md) separates the familiar Moonlight/Sunshine, Moonlight TV/Aurora and Apollo foundation from Eclipse/Umbra’s additions. It covers:
+
+- Two-host layouts, automatic pane-sized desktops and compatible encoder selection.
+- A shared bitrate budget, pause/resume and ending both host sessions.
+- Remembered controllers, pane-aware mouse/keyboard routing, Nintendo layouts and media-remote handling.
+- Stereo mixing, host-speaker restoration and experimental duplicate-audio reduction.
+- Windows local-host play, remote-monitor control, wired-TV routing and desktop usability.
+- Cross-platform diagnostic bundles, host evidence and crash/unclean-exit records.
+
+These describe development capabilities, not a guarantee that every feature is in an available package or verified on every platform. The catalogue carries the limitations; the [testing matrix](#status) records actual coverage.
+
 ## System map
 
 | On the gaming PCs | Across your network | On the shared display |

@@ -35,6 +35,8 @@ jobs:
         run: node --test scripts/launch/check_media.test.mjs
       - name: Test platform downloads
         run: node --test scripts/launch/check_downloads.test.mjs
+      - name: Test expandable guides
+        run: node --test scripts/launch/check_disclosures.test.mjs
 
   deploy:
     needs: validate

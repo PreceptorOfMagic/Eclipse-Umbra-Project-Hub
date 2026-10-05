@@ -5,8 +5,45 @@ evidence. It is not a substitute for release testing. A code path proves that a
 capability is implemented; it does not prove that every hardware, driver, codec,
 display or network combination works.
 
-Evidence was reviewed on 30 September 2026. Eclipse paths are relative to this
-repository. Umbra paths are relative to the Umbra source repository reviewed on
+## 5 October 2026 reconciliation
+
+The [feature catalogue](../features.md) and [expanded development guide](../development.md)
+were checked against Eclipse's current `feat/coop-seamless` source, the
+`diag/feed-accounting` integration work and Umbra's `umbra/thin` source, plus
+dated development/test records. No new device tests were performed for this
+documentation update. The application repositories remain private; source links
+may require access. Development-source presence is not release availability.
+
+This reconciliation takes precedence over the historical snapshot below:
+
+- Co-op setup now uses Umbra's built-in pane; older manual-app instructions are
+  obsolete. The default video budget is divided between hosts. Resume and Quit
+  are separate operations; Linux has recorded end-both-hosts verification.
+- Current input routing includes pane-aware mouse/keyboard ownership and explicit
+  device assignment. Do not infer a blanket primary-only keyboard rule from old
+  notes; relative/gamepad virtual-mouse routing is a separate path.
+- Newer features include remembered controllers, Nintendo mapping, remote-device
+  filtering, remote-monitor choices, host-speaker restoration and wired-TV
+  routing. Their platform/test boundaries appear alongside the catalogue entries.
+- Duplicate-audio suppression is experimental and can affect unrelated sound.
+  The newest passive-gate revision remains a component prototype, not a measured
+  live-mixer improvement. Local-host controller isolation is also incomplete.
+- Physical AMD/AMD host testing remains absent, despite automatic route-selection
+  code for that pair. Linux WSL/container coverage is not native-driver validation.
+- The development history incorporates corrected decoder findings, invalidated
+  measurements, the retired AVC path, encoder rollbacks and explicit human/AI
+  contributions. Component timings are not end-to-end latency.
+
+Current source owners include Eclipse's `src/app/ui/settings/panes/coop.pane.c`,
+`host.pane.c`, `input.pane.c`, `src/app/stream/input/`, `src/app/stream/audio/`,
+`src/app/stream/video/`, `src/app/stream/wired_nic.c`, `src/app/input/input_gamepad.c`
+and `docs/support-logs.md`; Umbra's `src/process.cpp`, `src/nvhttp.cpp`,
+`src/audio.cpp`, Windows audio backend and `cmake/packaging/windows.cmake`.
+
+## Historical implementation snapshot — 30 September 2026
+
+Eclipse paths below are relative to the Eclipse application repository, not this
+website repository. Umbra paths are relative to the Umbra source repository reviewed on
 branch `codex/mixed-beta-profile` at commit `ae235282`. That Umbra worktree was
 dirty and unpublished at review time, so its entries describe current development
 source rather than a released artifact.
