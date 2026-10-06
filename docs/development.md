@@ -150,15 +150,15 @@ Read: [input routing](https://github.com/PreceptorOfMagic/Eclipse/tree/feat/coop
 
 <details>
 
-<summary>6. Audio mixing, duplicate suppression and diagnostics — Independent audio clocks, unfinished experiments and evidence collection</summary>
+<summary>6. Audio mixing, duplicate suppression and diagnostics — Independent audio clocks, the passive gate and evidence collection</summary>
 
-### Mixing is the stable job; deduplication is a separate experiment
+### Mixing, then playing shared sounds once
 
-Two stereo sources reach the client independently. The mixer buffers their arrivals and produces either a combined output or the selected host’s sound. Extra buffering can smooth uneven delivery but adds latency. This is not the ordinary host’s 5.1/7.1 path.
+Mixing happens inside the first host’s own audio path: each 5 ms packet is decoded, the second host’s sound is added to it, and the result goes straight to the platform’s audio player, so the first host’s sound is never buffered for the mix. The second host’s sound is decoded in a helper process, passed over a local socket and held in a jitter buffer that aims for 40 ms (adjustable in the advanced setting). If that buffer grows past 120 ms it is trimmed back; if it runs dry, silence is mixed until it refills, so the first host’s sound never waits for the second. While the first host is silent, a timer keeps the mix running. A soft limiter turns down loud combined moments instead of clipping them; it changes gain only, never timing. This is not the ordinary host’s 5.1/7.1 path.
 
-Shared narration or music can arrive from both games with a delay between them. The optional duplicate suppressor tries to detect matching content and reduce the later copy. Tests exposed false reductions of unrelated sound and difficulty with several simultaneous delays. Correlation or a good offline score cannot establish that the listener’s own effects remain untouched.
+Shared narration, music or effects can arrive from both games with a delay between them. The first suppressor tracked a single delay; tests exposed false reductions of unrelated sound and trouble with several simultaneous delays.
 
-Subsequent work explored a passive gate, linked-channel decisions and a treble-sensitive envelope to avoid damaging consonants. The newest passive-gate revision was still a component prototype at this documentation review, not wired into the live mixer. It is a useful development direction, not a completed audio-quality claim.
+The passive gate replaced it as the default. It compares the two streams’ waveforms in six frequency bands per channel, finds where one is a copy of the other at several delays at once, and closes a gate on the later copy, balancing the two hosts’ levels so closing costs the same each time. Both streams are held back by one 5 ms block (240 samples at 48 kHz), so each block is decided before any of it plays. That makes the first host’s sound 5 ms later and the second host’s 45 ms instead of 40; the earlier single-delay filter held both for 10.7 ms. Video never waits for any of this. Sound and picture are fed to separate players: on webOS each is timestamped from the local clock at the moment it is handed over, and the desktop video path has no audio clock at all. The mixer and the gate run on the audio thread, not the video thread. On the TV the gate averages 0.3 ms per 5 ms block (6% of one core), with 99% of blocks done within 2.2 ms; the earlier filter averaged 0.22 ms but took about 3.1 ms on its slowest 1% of blocks. Codecs regenerate breathy sounds with fresh noise, so whispered or noise-only lines are reduced less, as are copies playing at slightly different speeds. The earlier single-delay filter remains available for comparison.
 
 ### Evidence across both ends
 
@@ -166,7 +166,7 @@ Diagnostic bundles combine build identity, OS/firmware, capabilities, settings a
 
 For timing work, distinguish capture/encode cadence, packet arrival, queue delay, decoder submissions and actual presentation. Match records by session and clock domain. A visually wrong pane can coexist with healthy decode counters, so a screen observation remains part of the verdict.
 
-Read: [mixer and experimental filters](https://github.com/PreceptorOfMagic/Eclipse/tree/feat/coop-seamless/src/app/stream/audio), [diagnostic bundle contents](https://github.com/PreceptorOfMagic/Eclipse/blob/feat/coop-seamless/docs/support-logs.md).
+Read: [mixer and duplicate-sound filters](https://github.com/PreceptorOfMagic/Eclipse/tree/feat/coop-seamless/src/app/stream/audio), [diagnostic bundle contents](https://github.com/PreceptorOfMagic/Eclipse/blob/feat/coop-seamless/docs/support-logs.md).
 
 </details>
 
@@ -188,7 +188,7 @@ Source links may require repository access while the application repositories re
 
 - `src/app/ui/`: LVGL launcher, settings, co-op selection and stream interface.
 
-- `src/app/stream/`: session workers and peer IPC; `video/` contains HEVC parsing, sequencing, concealment and submission; `audio/` contains mixing and experiments; `input/` owns host-directed input.
+- `src/app/stream/`: session workers and peer IPC; `video/` contains HEVC parsing, sequencing, concealment and submission; `audio/` contains mixing and the duplicate-sound filters; `input/` owns host-directed input.
 
 - `third_party/ss4s/` and platform modules: media backends, including webOS and desktop FFmpeg paths. Windows uses D3D11VA decode; Linux has NVDEC/VAAPI paths with different test coverage.
 
@@ -490,7 +490,7 @@ Every Windows stream had been silent. The SDL audio callback used a mixing call 
 
 ### 4–5 October · Duplicate audio
 
-When both PCs play the same sound, the mix doubles it. Echo-gate prototypes were tested offline. PreceptorOfMagic then designed a passive gate, which went through five revisions on 5 October covering “S” sounds, dropouts and speech classes. Optimisation brought it to about 8% of one TV CPU core with the same output. It passed a Windows gameplay test PreceptorOfMagic accepted. Making it the default and a live TV test remain open.
+When both PCs play the same sound, the mix doubles it. Echo-gate prototypes were tested offline. PreceptorOfMagic then designed a passive gate, which went through five revisions on 5 October covering “S” sounds, dropouts and speech classes. Optimisation brought it to about 8% of one TV CPU core with the same output. It passed a Windows gameplay test PreceptorOfMagic accepted. On 6 October it became the default for “Play shared sounds once”.
 
 </details>
 
@@ -514,7 +514,7 @@ The [feature catalogue](https://preceptorofmagic.github.io/Eclipse-Umbra-Project
 
 - **Local-host input:** focus, separate-display lifecycle and controllers already opened by other applications. Client routing is not complete device isolation.
 
-- **Audio:** duplicate suppression without damaging unrelated sound; live integration and listening tests for new filters; endpoint restoration across disconnect/crash/restart.
+- **Audio:** a live TV listening test of the passive gate, and its edge cases (noise-only lines, speed-shifted copies); endpoint restoration across disconnect/crash/restart.
 
 - **Automatic setup:** clean-install and in-place upgrade checks with no manual hidden settings. Verify required encoder payload, advertised capabilities, both orientations and ordinary-stream regressions.
 

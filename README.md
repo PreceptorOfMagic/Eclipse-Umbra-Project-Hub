@@ -31,7 +31,7 @@ The [detailed feature catalogue](docs/features.md) separates the familiar Moonli
 - Two-host layouts, automatic pane-sized desktops and compatible encoder selection.
 - A shared bitrate budget, pause/resume and ending both host sessions.
 - Remembered controllers, pane-aware mouse/keyboard routing, Nintendo layouts and media-remote handling.
-- Stereo mixing, host-speaker restoration and experimental duplicate-audio reduction.
+- Stereo mixing, host-speaker restoration and shared sounds played once.
 - Windows local-host play, remote-monitor control, wired-TV routing and desktop usability.
 - Cross-platform diagnostic bundles, host evidence and crash/unclean-exit records.
 
@@ -237,7 +237,7 @@ The built-in pane, capability-based encoder selection and divided default bitrat
 
 ### Early October · Smaller features, and experiments still in flight
 
-Remote-monitor choices, remembered input assignments, Nintendo mapping, remote-device filtering, wired-TV routing and richer logs made the app fit more real setups. Duplicate-audio work explored several filtering strategies; false suppression and the newest unwired passive-gate prototype remain visible development work. Public package publication, wider clean-install coverage and motion-quality improvements remain separate release tasks.
+Remote-monitor choices, remembered input assignments, Nintendo mapping, remote-device filtering, wired-TV routing and richer logs made the app fit more real setups. Duplicate-audio work explored several filtering strategies before settling on a passive gate, now the default way shared sounds are played once. Public package publication, wider clean-install coverage and motion-quality improvements remain separate release tasks.
 
 <!-- activity:history-product:start -->
 **Behind the build · 23 September–5 October 2026**

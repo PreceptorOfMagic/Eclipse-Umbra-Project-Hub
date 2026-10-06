@@ -106,7 +106,7 @@ Recognised TV/media remotes are excluded from webOS game-controller allocation. 
 
 <details>
 
-<summary>Two games, with sound you control — Stereo mixing, speaker restoration and experimental duplicate reduction</summary>
+<summary>Two games, with sound you control — Stereo mixing, speaker restoration and shared sounds played once</summary>
 
 #### Mix both PCs or listen to one
 
@@ -116,9 +116,9 @@ Co-op receives stereo audio from each host. Play the shared mix through the clie
 
 Umbra remembers the playback endpoint before switching to streaming audio and restores it after the session. Recovery also handles a display’s audio device returning late or being recreated by Windows under a different identity, reducing the chance of a PC being left on silent virtual speakers.
 
-#### Play shared sounds once  Experimental
+#### Play shared sounds once
 
-The optional duplicate-audio feature attempts to reduce delayed copies of shared narration or music from the second game. It is still being developed: it can affect sounds that are not duplicates and does not yet reliably separate every overlapping sound. A newer passive-gate design remains a prototype, not an established live-playback improvement.
+When both games play the same narration, music or effect, Eclipse’s passive gate recognises the second copy and turns it down, so you hear the sound once. Sounds only one game makes pass through. It is on by default and can be switched off in the co-op settings. To check each piece of sound before it plays, the gate holds both PCs’ sound back by 5 ms (one 240-sample block at 48 kHz). The picture is never delayed: sound and video go to separate players, and nothing times the video from the sound. The second PC’s sound already waits about 40 ms in Eclipse’s buffer to even out network timing, so 5 ms more is small beside it; for the first PC’s sound it is the only addition, under a third of a frame at 60 fps. Nothing extra is held back when the setting is off or when you listen to one PC only. Breathy or whispered lines and copies running at slightly different speeds are reduced less than ordinary speech and music.
 
 [How mixing and duplicate detection differ](https://preceptorofmagic.github.io/Eclipse-Umbra-Project-Hub/development.html#audio-routing)
 
