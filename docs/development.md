@@ -8,7 +8,7 @@ A contributor’s guide to the client, the thin Apollo host fork, and the experi
 
 [Eclipse source](https://github.com/PreceptorOfMagic/Eclipse) · [Umbra source](https://github.com/PreceptorOfMagic/Umbra)
 
-[Architecture](#architecture) · [Source map](#repositories) · [Builds](#build) · [Development history](#timeline) · [Open work](#open-work)
+[Architecture](#architecture) · [Source map](#repositories) · [Builds](#build) · [Detailed history](#detailed-history) · [Open work](#open-work)
 
 <a name="development-process"></a>
 
@@ -302,171 +302,195 @@ The installer intentionally replaces Apollo in place and retains its installatio
 
 </details>
 
-<a name="timeline"></a>
+<a name="detailed-history"></a>
 
-Development history · July–October 2026
+Detailed history · July–October 2026
 
-## The route was not a straight line.
+## Step by step, including the retractions.
 
-The useful history includes the dead ends. These are dated outcomes from project records, not fresh reproductions of every experiment. Credit is attached to documented contributions; where the record does not establish who first proposed an idea, the account does not invent an author.
+This goes a level below the [development history on the Project Hub](../README.md#timeline): the individual experiments, measurements, fixes and withdrawn conclusions in date order. Figures are the ones recorded at the time, on the project’s own hardware: an RTX 4070 host, an RTX 3070 host, a Radeon RX Vega host and an LG G5 television.
 
-<a name="history-first-path"></a>
+<a name="detail-first-path"></a>
 
 <details>
 
-<summary>22–30 July · Finding the core path — Dual decoding, the half-stream proposal and the header-alignment breakthrough</summary>
+<summary>22–30 July · Finding the core path — Groundwork, three spikes, exhausted display routes and the first spliced picture</summary>
 
-### 22 July · Building on existing clients and hosts
+### 22–25 July · Groundwork before co-op
 
-The Eclipse modification record begins with Aurora and Moonlight TV, rather than a new client from scratch. The goal was two independently running PCs on one TV while retaining normal streaming. Sunshine and Apollo provided the host foundation.
+The first changes were to ordinary streaming. Hosts are resolved at run time instead of being pinned to addresses that change after every power cycle. A woken Windows PC gets its sign-in PIN entered per host. Suspend and resume restore the physical monitor without tearing down the virtual display. Keyframe requests are throttled. Interrupted sessions record why they stopped. An Xbox controller and microphone transport was built for the optional device hub. Much of this later carried co-op launch.
 
-### 25–30 July · Two decoders were not a complete display solution
+### 25 July · The design is written down and probes are gated
 
-Early probes appeared to grant a second decoder, then suggested only one was usable. Further AI-led investigation corrected that conclusion: two decoders could survive together at a smaller combined workload. The unresolved obstacle was obtaining two usable native-app display/sink paths. The outcome was not “LG TVs physically have one decoder”; it was that this route did not yield the required composition/display solution.
+The split-screen design and its open questions were recorded before any co-op code shipped. Each experiment sat behind a gate, so a probe could not change normal streaming. The first gated probe asked whether the G5 would run two independent decode pipelines.
 
-### 28 July · PreceptorOfMagic proposes joining halves before decoding
+### 26 July · Three spikes in a day
 
-The pivotal suggestion was for each PC to send its own half-picture and for the client to join the two into one decodable picture. Both PCs would keep their direct connection to the TV, without relaying one through the other. AI implementation first proved compatible-slice splicing from full-size source streams; true pane-sized host desktops followed.
+Spike 1, two decode pipelines, failed. Spike 2, positioning split-screen video planes, passed. Spike 3, a second audio output, was refused in-process, and its result invalidated Spike 1’s conclusion. The decoder question was reopened rather than closed.
 
-### 28–30 July · Cropping is not a half-sized desktop
+### 28 July · Every TV-side display route is tried
 
-Early versions selected regions of full-resolution desktops and used blanking overlays. PreceptorOfMagic noticed the missing taskbar and pushed for Windows itself to see the pane-sized desktop. The implementation moved to half-height encoding, rewritten composite dimensions and relocated slice data, so the game and desktop could fit the visible pane.
+AI-led probing worked through the TV’s native Multi-View, exporting a second window through the webOS foreign-surface protocol, surface groups, a headless secondary session and a directly created second media pipeline. Multi-View worked, but placing this app in a pane was blocked by app privileges. The second pipeline loaded but never displayed; two days later it was found to be connected to no video sink at all.
 
-### 29 July · A misleading codec error turns out to be bit alignment
+### 28 July · One decoder, two PCs
 
-Inserting a slice address shifted the header length and displaced entropy-coded payload, producing apparent QP/decode errors. AI diagnosis and implementation repaired complete-header parsing and byte alignment before copying the original payload. Component decoding then validated the rewrite. That was a structural proof, not yet proof of sustained live co-op.
+The same day, PreceptorOfMagic’s proposal to join the halves before decoding was built. An in-app HEVC access-unit splicer was validated on real host output. A coordinator process accepted a second session’s pictures and held the latest pane. By the evening, slices from two PCs were spliced into one stream and decoding on the television.
 
-<!-- activity:history-first-path:start -->
-**Behind the build · 22–30 July 2026**
+### 29 July · Half height, and a header that moved every bit after it
 
-- **User prompts:** 53
-- **Tokens processed:** 412,175,826
-- **Models:** `claude-opus-4-8`, `claude-opus-5`
+Encoding each host at half height, instead of cropping a full desktop, needed the peer’s slice placed in the lower half. Writing the new slice address changed the header’s length and misaligned the payload behind it. Re-emitting the complete slice header made the composed stream decode cleanly. A ghosting detector was added because no existing metric could see ghosting, and pane drift was bounded by re-bootstrapping after accumulated concealment.
 
-These numbers are incomplete because some records from this period were deleted.
-<!-- activity:history-first-path:end -->
+### 30 July · Half-height composition goes live
+
+Two hosts were composed from half-height streams on the panel. Raising the pane queue to a depth of four took the fresh-pane yield from 7% to 88%. A keyframe livelock was broken by anchoring on the first accepted pane. The client stopped dropping about 29% of pictures mid-session—necessary, but not the cure for the stutter.
+
+Two other results closed doors. A vendor media-layer error ended the TV-side dual-display route. And the all-skip concealment slice, which had appeared broken, was correct: the test harness was at fault.
 
 </details>
 
-<a name="history-timing"></a>
+<a name="detail-timing"></a>
 
 <details>
 
-<summary>Late July–August · Learning to preserve time and references — Ghosting, role reversal, queues, holds and corrected measurements</summary>
+<summary>Late July–August · Learning to preserve time and references — Both split directions, bit-exact seams, holds, catch-up and a parameter register</summary>
 
-### Late July–early August · A still pane is not a reusable packet
+### 31 July · The vertical split finds a route
 
-Predictive pictures exposed why arbitrary drops or repeats were unsafe. Reapplying residuals could corrupt a held pane, while omitting a reference picture broke later prediction. Sequence tracking, bounded buffering, bootstrap/keyframe handling and synthetic all-skip holds became core architecture rather than optional smoothing.
+NVENC limits a picture to 64 slices and does not offer 64×64 coding blocks, so slicing every block row of a 2160-line picture was blocked. HEVC tile columns solved it: 8 slices instead of 128, full height and bit-exact. Constraining encoding to one slice per block row cost about 4.7 QP, a measured price. The vertical split became its own module that handles independent keyframes from each host.
 
-### 3–4 August · Swapping primary hosts changes the fault
+The same day, a “flashing” fault on both halves turned out to be a looping test file, proven by mirroring the panes.
 
-User observations during role swapping exposed a scheduling asymmetry: a slower or static primary did not drain a faster peer often enough. A deeper queue stored increasingly old content; high host floors produced more duplicates. The design direction changed to an independent composite picture count and extra catch-up pictures that advance the queued pane while safely holding the other. The initial design note was not itself an implementation result; current code supplies the bounded catch-up paths described above.
+### 1 August · Horizontal co-op works
 
-### Early August · AI conclusions needed retraction, not decoration
+Horizontal two-host composition reached 98.9% of pictures paired, with both PCs on the panel. NVENC’s constrained encoding fixed the horizontal seam bit-exactly for about 1.1% more bitrate. PreceptorOfMagic confirmed the vertical split working live. A one-megabyte stack array in the composition path, which had crashed every stream after one picture, was removed. And a left-over file-playback hook was found to have silently replaced two hours of live testing—the origin of the project’s rule to test live connections only.
 
-Some apparently successful tests had invalid inputs; a separate frame-extraction error made a correct hold look degraded. Fresh live capture and frame-accurate comparison reversed those findings. The improvement was methodological as well as technical: verify the actual input, the displayed picture and the effect of a setting instead of accepting healthy counters or a plausible explanation.
+### 2 August · The concealer becomes bit-exact
 
-<!-- activity:history-timing:start -->
-**Behind the build · 25 July–31 August 2026**
+Two wrong arithmetic-coder initialisation values were found in the synthetic hold picture. Fixing them took it from 22.4 dB to an exact match. The composite was paced at the slower host, the queue was deepened, and a broken reference chain is now held rather than shown.
 
-- **User prompts:** 286
-- **Tokens processed:** 2,676,527,028
-- **Models:** `claude-haiku-4-5-20251001`, `claude-opus-4-8`, `claude-opus-5`, `claude-sonnet-5`
+### 3–5 August · Role swapping changes the design
 
-These numbers are incomplete because some records from this period were deleted.
-<!-- activity:history-timing:end -->
+Swapping which PC was primary showed the peer’s picture quality was hostage to the primary’s frame rate, so the two were decoupled. Horizontal was rebuilt on the tile machinery, and catch-up pictures finally fired once a wrong re-addressing helper was replaced. A suspected concealer fault proved to be the test duplicating frames. By 5 August horizontal tiles worked end to end, with concealment, catch-up and no frame-rate cap.
+
+### 5–7 August · Co-op becomes something you can start
+
+Co-op moved under the server picker with its own session dialog. The second host’s audio is sent to the coordinator and mixed. Controllers can be routed to either PC; each belongs to a machine rather than a player slot; and every co-op setting sits in one place. A sign-in section stores each PC’s PIN or password. Either PC, or both, can be woken before the session.
+
+### 8–14 August · Launch reliability
+
+A locked PC still answers on the network, so “online” never proved it was usable. Wake and sign-in now confirm the second PC actually signed in. Co-op mode had stayed armed after a session, turning the next ordinary stream into a co-op pane; that was fixed. A two-week-old configuration backup had been silently reverting host settings on every restore.
+
+### 15 August · A stress harness, and what it caught
+
+A harness drove the two hosts at mismatched frame rates with computable test content. It showed the peer’s tile shredding because the catch-up budget was 6% short, and the tile path concealing forever without re-anchoring. NVENC intra refresh was reached and measured; it did not fix the peer decay.
+
+### 16 August · Retractions and a parameter register
+
+The peer-pane flicker turned out to be a timer acting on healthy holds, not damage. A reference-picture-set hypothesis was falsified when its instrumented fix fired and changed nothing. A tile artefact mechanism inferred from reading source was retracted. A register of every parameter in use was started, because a misread knob name had voided a test run.
 
 </details>
 
-<a name="history-cross-vendor"></a>
+<a name="detail-cross-vendor"></a>
 
 <details>
 
-<summary>Late August–16 September · The cross-vendor detour — Native HEVC mismatch, the abandoned AVC route and a shared encoder</summary>
+<summary>Late August–16 September · The cross-vendor detour — An AMD host, the block-size mismatch, the AVC route and the return to HEVC</summary>
 
-### 30 August · Healthy counters, wrong picture
+### 18–19 August · An AMD host joins, and the seam is measured
 
-The investigated NVIDIA HEVC output used 32×32 coding-tree blocks while the AMD native output used 64×64. Their pane data could not simply share one composite picture’s structures. This explained a grey peer pane despite apparently healthy receive/decode counters. The finding applied to those native outputs, not to all possible AMD/NVIDIA co-op.
+Co-op work with the Radeon RX Vega host began on 18 August. A software encoder with motion constraints fixed the seam in offline tests, but managed only about 50 frames per second at pane size on twelve CPU cores. Seam guard-band tests with eight kinds of content found that the band and the keyframe interval were two halves of one fix; neither worked alone.
 
-### Late August–15 September · AVC was explored, not casually dismissed
+### 30 August · The grey pane’s root cause
 
-AVC’s fixed macroblock geometry offered a way around the HEVC block-size mismatch. A small side-by-side proof worked, but target-size composition met the tested NVIDIA encoder’s slice-count ceiling. Other parameter-compatibility and presentation problems followed. Later live controls showed stale content even without AMD or synthetic holds, invalidating explanations that blamed those alone.
+A live run read both hosts’ stream headers. NVENC coded the pane in 32×32 blocks, 120 wide by 34 rows; AMF coded it in 64×64 blocks, 60 by 17. Pictures built on different block grids cannot share one composite. Moving the AMD host to a software HEVC encoder was blocked: the host’s software encoder offered H.264 only. The same day, a one-second flash on every stream was traced to a short keyframe interval left applied from an earlier test.
 
-The experimental co-op AVC route was retired on 16 September. The lesson was not that AVC can never express this layout, nor a universal decoder frame-rate limit. This implementation path did not meet the target constraints.
+### 30–31 August · The AVC route
 
-### 15–16 September · Keep the direct architecture; control both encoders
+H.264’s fixed 16×16 macroblocks sidestep the block-size mismatch. An AVC splice was proven offline, the television’s AVC limit was measured at exactly Level 5.2, and the splice module was ported to C and wired into the client after five review rounds. Half of an early cross-vendor pass was retracted because its peer comparison could not fail. On 31 August a mixed NVIDIA and AMD session passed a 15-minute stress test.
 
-AI audits of vendor APIs and existing implementations did not produce a small native compatibility fix. With the user’s direct-host/no-relay requirement intact, work returned to HEVC: keep the established native NVIDIA-pair route, and use a shared programmable encoder on both hosts for affected pairings. Host prediction and client composition stayed separate responsibilities. This solution builds on upstream codec work, including x265.
+### 1–3 September · Measuring before fixing
 
-<!-- activity:history-cross-vendor:start -->
-**Behind the build · 18 August–16 September 2026**
+“Guard of 32 rows is clean” was retracted: it was a sampling artefact, and a full-coverage run showed the AMD pane corrupt 48% of the time. A macroblock-rate threshold was withdrawn by its own falsification test. The Radeon host’s own framebuffer was clean, which put the fault in its capture or encode path. An eight-run batch showed that the guard band did not control the fault.
 
-- **User prompts:** 491
-- **Tokens processed:** 4,403,521,774
-- **Models:** `claude-haiku-4-5-20251001`, `claude-opus-4-8`, `claude-opus-5`, `claude-sonnet-5`, `gpt-6-astra`
+### 4–5 September · Holds, roles and the scheduled anchor
 
-These numbers are incomplete because some records from this period were deleted.
-<!-- activity:history-cross-vendor:end -->
+A bad frame-hold donor test was fixed, and composite bursts fell from 19.2% to 0.0%. The composite began synthesising its own picture parameters, so either host can be primary. The seam stopped being visible once the AMD host’s encoder scheduled its own periodic keyframe; client-forced keyframes had halved that host’s frame rate, while scheduled ones cost nothing. A supposed 60 fps ceiling was a stale virtual display, and a queue depth of 16 removed evictions at 120 fps.
+
+### 6–10 September · The last AVC faults
+
+The peer’s half was found to be emitted with an unspecified network unit type, which the decoder silently dropped. After the fix, that fault was gone across 15.5 minutes of live running. A separate failure, the beta app dying when it opened audio, cleared 48 AMD-related commits: the cause was the beta app identity, later traced to an exported-symbol collision in the TV’s media framework. A rate sweep put mixed AVC’s display limit at 115 fps.
+
+### 10–16 September · Back to HEVC
+
+A fresh check of NVIDIA’s and AMD’s current encoder interfaces found no supported way to match block sizes. Re-encoding the AMD pane on the RTX 4070 produced 32×32 blocks at about 650 fps, but needed an extra network hop. PreceptorOfMagic ruled that out—“Adding the extra hop is unacceptable”—and set the boundary for a custom encoder: adapt an existing one rather than build from scratch. The design settled on adapting x265, with PreceptorOfMagic’s pairing rule: NVIDIA pairs keep NVENC, and any pair containing AMD runs the adapted encoder on both hosts. The co-op AVC route was retired on 16 September.
 
 </details>
 
-<a name="history-gpu"></a>
+<a name="detail-gpu"></a>
 
 <details>
 
-<summary>16–29 September · Correct bytes were only the start — Parallel CABAC, integration failures, quality work and rollbacks</summary>
+<summary>16–29 September · Correct bytes were only the start — Serial and parallel CABAC, live integration, rate control and quality</summary>
 
-### 16 September · An AI algorithmic contribution changes the GPU path
+### 16 September · A correct port that was far too slow
 
-A correct but largely serial GPU CABAC port took tens to hundreds of milliseconds in component tests. The AI-developed context-grouping and finite-state-scan approach changed the algorithm rather than merely tuning that serial port. Predicted-frame CABAC fixtures reached roughly 1–2 ms with exact reference bytes. This was meaningful component progress, not an end-to-end latency claim.
+The first x265-derived GPU component ported arithmetic coding to OpenCL with each slice as one dependent chain. It produced the reference bytes exactly. But predicted pictures took 58–82 ms on the RTX 4070 and 225–336 ms on the Radeon RX Vega, and intra pictures 0.3–1.6 seconds. It failed the latency requirement.
 
-### 16–18 September · Integrating a real encoder exposes new failures
+### 16 September · Parallel CABAC
 
-Residual coding, transforms, quantisation, reconstruction, budgeting and live host capture were brought together. Tests then found capture-size mismatches, rough fine detail, stacked-layout failures, bitrate bursts and quantisation limits. PreceptorOfMagic rejected a special fixed frame-size ceiling; subsequent work returned budgeting to the requested bitrate and improved adaptive quantisation. Direction-setting and implementation both mattered.
+The AI-developed replacement groups bins by context, composes 32-bin transition functions for every possible incoming state, resolves them with parallel scans, and assembles carries with a generate–propagate scan. The output stays one slice and byte-identical. Predicted-picture CABAC fell to about 1–2 ms on NVIDIA. AMD intra pictures still took more than 5 ms, so this was component progress, not a whole-encoder latency result.
 
-### 17–29 September · Roll back a regression, keep the remaining problem visible
+### 16 September · From components to a live encoder
 
-An extra quantisation attempt in one revision raised worst-case encode time and produced visible hopping. Rolling it back removed that symptom. Later lowering the QP floor improved some light static, but motion-related QP jumps remained in both older and newer versions. Cross-vendor composition had become real; native-encoder quality and performance parity had not been established.
+Residual, transform, quantisation, reconstruction and coefficient syntax were connected on the GPU. Motion prediction was kept on the host encoder, separate from the client’s composition. The restricted encoder codes 32×32 blocks, one slice and one reference. It was built into the host as a device and selected automatically for NVIDIA + AMD and AMD + AMD pairs. Before rate control, two-host streams matched pixel for pixel through the unchanged compositor.
 
-<!-- activity:history-gpu:start -->
-**Behind the build · 16–29 September 2026**
+### 16 September · Rate control in one evening
 
-- **User prompts:** 215
-- **Tokens processed:** 4,410,273,647
-- **Models:** `claude-opus-5`, `claude-opus-5-5`, `claude-sonnet-5`, `gpt-5.6-sol`, `gpt-6-astra`
-<!-- activity:history-gpu:end -->
+The first moving stress produced oversized pictures and visible damage. Versions 6–8 added a per-host bitrate budget, spatial adaptive quantisation and a corrected retry limit; version 8 passed live in both layouts. Version 11 cut dense-texture error by about 47% against version 9, but a third encode attempt doubled the AMD host’s worst case to about 40 ms, which showed on the panel as hopping. Version 10 was restored, and PreceptorOfMagic confirmed the hopping was gone.
+
+### 19–22 September · Names, and the encoder on a desktop client
+
+The client was renamed Eclipse and the host fork Umbra, as a branding change only. The Windows build of Eclipse’s own interface replaced the earlier experiments. On it, requesting the GPU encoder made the AMD pane’s block grid match the NVIDIA pane exactly, showing a clean peer tile. The block-size limit applies to the native vendor encoders, not to every AMD and NVIDIA pairing.
+
+### 28 September · Static grain and motion blocks
+
+Raising detail in still pictures meant lowering the encoder’s minimum QP from 18 to 12, then to 8, which roughly halved the flat-area noise on the AMD host. Motion was a separate problem. During fast scrolling the QP jumped from 8–18 to about 35 in both the older and newer versions, so the floor change did not cause it. At a very high bitrate the blocks disappeared, but pictures reached 500–718 KB and the host froze briefly: each host paces at a fixed share of gigabit Ethernet, and two of them can exceed one client port.
 
 </details>
 
-<a name="history-product"></a>
+<a name="detail-product"></a>
 
 <details>
 
-<summary>Late September–October · Making it usable and maintainable — Desktop clients, a firmware crash, automatic setup and the thin Apollo fork</summary>
+<summary>Late September–October · Making it usable and maintainable — Desktop co-op, webOS 26, automatic setup, Umbra’s thin fork and co-op audio</summary>
 
-### Late September · Desktop clients and session recovery
+### 22–28 September · Desktop co-op, issue by issue
 
-Windows and Linux client work exercised mixed-vendor co-op beyond the TV. Packaging moved toward a portable Linux baseline and staged Windows dependencies. Local-host input/focus, resume, audio-endpoint restoration and shareable diagnostic bundles addressed everyday failures around the stream itself. WSL and container coverage remained distinct from native Linux driver validation.
+The Windows client gained co-op with the local PC as one of the hosts. Its own panel stays on the client and the game moves to a virtual display. Issues were logged and closed one at a time. Catch-up stops in front of a peer keyframe instead of taking and losing it. The vertical loading dialog releases on the first anchored composite. Mouse and keyboard are assigned like controllers, and keys follow the pointer’s pane. Measured end-to-end latency of the local-host pane was about 33 ms at the median, validated against a same-display control.
 
-### 26 September · A firmware update exposes a symbol collision
+### 26 September · A firmware update and one exported symbol
 
-On webOS 26, first-stream media-plugin scanning resolved a library call to the application’s exported `g_log` data symbol. AI-led diagnosis identified that collision; renaming the symbol and adding a post-link export guard addressed the specific crash. The new test lesson was to exercise first use after install/firmware changes, not only repeated launches. This did not close every unrelated stream-start fault.
+On webOS 26, every stream start failed. The first media-plugin scan for an app resolved a library logging call to Eclipse’s exported `g_log` data symbol. Renaming it fixed the crash. The build now fails after linking if the executable exports symbols, and a symbol-clash scan joined the checks to run after each firmware update.
 
-### Late September–3 October · Co-op becomes a coordinated launch
+### 28 September · Unpaired keyframes and pairing this PC
 
-The built-in pane, capability-based encoder selection and divided default bitrate replaced manual host edits. Resume and Quit gained two-host semantics. Umbra’s branding and changes were then isolated into a smaller Apollo delta, preserving upstream documentation, translations and maintained everyday functionality instead of duplicating them.
+In vertical co-op, an unpaired keyframe from this PC is now folded into an ordinary picture instead of being rejected. That keeps its pane whole across an encoder restart, and it was verified in all four layouts. A fresh install can pair the local PC for co-op, and a virtual adapter’s address can no longer replace a real one.
 
-### Early October · Smaller features, and experiments still in flight
+### 1–2 October · Co-op out of the box
 
-Remote-monitor choices, remembered input assignments, Nintendo mapping, remote-device filtering, wired-TV routing and richer logs made the app fit more real setups. Duplicate-audio work explored several filtering strategies; false suppression and the newest unwired passive-gate prototype remain visible development work. Public package publication, wider clean-install coverage and motion-quality improvements remain separate release tasks.
+Fresh webOS 26 installs could not create their settings folder, so settings now fall back to a writable developer location. Co-op now starts from a built-in hidden pane, with capability-based encoder selection and the bitrate divided between hosts by default, instead of manual host edits. Disconnect pauses both PCs and Quit ends both. The portable Linux build was exercised on Ubuntu 22.04 and 26.04, Fedora and Arch under WSL.
 
-<!-- activity:history-product:start -->
-**Behind the build · 23 September–5 October 2026**
+### 2–4 October · Umbra becomes a thin layer
 
-- **User prompts:** 247
-- **Tokens processed:** 5,011,694,573
-- **Models:** `claude-opus-4-8`, `claude-opus-5`, `claude-opus-5-5`, `claude-sonnet-5`, `claude-sonnet-5-5`, `gpt-5.6-sol`, `gpt-6-astra`
-<!-- activity:history-product:end -->
+Umbra’s identity was layered on Apollo, with Apollo’s own files, documentation and translations restored, leaving a small delta to maintain. Umbra restores the host’s default speakers after a session and restarts itself when a sleeping GPU loses its runtime, which had stopped a slept host from starting co-op. A host-monitor setting can switch the physical monitor off for a stream on request.
+
+### 3–4 October · Silent Windows audio and a frozen peer pane
+
+Every Windows stream had been silent. The SDL audio callback used a mixing call that only works for a legacy device number. After copying samples directly, both hosts’ tones were heard. A peer pane that froze after a game launch came from a stale held keyframe. A 90-second-old keyframe is no longer paired, and the fix was seen firing live.
+
+### 4–5 October · Duplicate audio
+
+When both PCs play the same sound, the mix doubles it. Echo-gate prototypes were tested offline. PreceptorOfMagic then designed a passive gate, which went through five revisions on 5 October covering “S” sounds, dropouts and speech classes. Optimisation brought it to about 8% of one TV CPU core with the same output. It passed a Windows gameplay test PreceptorOfMagic accepted. Making it the default and a live TV test remain open.
 
 </details>
 

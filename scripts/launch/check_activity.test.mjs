@@ -4,8 +4,8 @@ import fs from 'node:fs';
 import { renderActivity, renderActivityMarkdown } from './activity_summary.mjs';
 
 const snapshot = JSON.parse(fs.readFileSync(new URL('../../site/assets/development-activity.json', import.meta.url), 'utf8'));
-const html = fs.readFileSync(new URL('../../site/development.html', import.meta.url), 'utf8');
-const markdown = fs.readFileSync(new URL('../../docs/development.md', import.meta.url), 'utf8');
+const html = fs.readFileSync(new URL('../../site/index.html', import.meta.url), 'utf8');
+const markdown = fs.readFileSync(new URL('../../README.md', import.meta.url), 'utf8');
 
 test('snapshot is a fixed, aggregate-only record with an explicit scope', () => {
   assert.equal(snapshot.schemaVersion, 1);
@@ -65,5 +65,14 @@ test('the page carries the statistics only, without recovery notes', () => {
   for (const text of [html, markdown]) {
     assert.doesNotMatch(text, /activity-method|About the numbers|activity-breakdown|activity-scope/);
     assert.doesNotMatch(text, /recovered transcripts|prompt journal|log cleanup|disk block/i);
+  }
+});
+
+test('the development guide carries the detailed history without activity cards', () => {
+  for (const file of ['../../site/development.html', '../../docs/development.md']) {
+    const text = fs.readFileSync(new URL(file, import.meta.url), 'utf8');
+    assert.match(text, /detailed-history/);
+    for (const window of snapshot.windows) assert.match(text, new RegExp(`detail-${window.id.replace('history-', '')}`));
+    assert.doesNotMatch(text, /activity-card|<!-- activity:/);
   }
 });
