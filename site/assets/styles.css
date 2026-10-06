@@ -54,15 +54,13 @@
 @media(max-width:52rem){.disclosure-grid{grid-template-columns:1fr}.disclosure summary{padding-left:1rem}.disclosure-body{padding:1.1rem 1rem 1.3rem}}
 
 /* Retained development activity is aggregate metadata, not a live analytics widget. */
-.activity-card{margin:0 0 1.7rem;padding:1.2rem;border:1px solid var(--line-strong);border-radius:.8rem;background:rgba(167,139,250,.055)}
+.activity-card{margin:1.7rem 0 0;padding:1.2rem;border:1px solid var(--line-strong);border-radius:.8rem;background:rgba(167,139,250,.055)}
 .activity-card .activity-kicker{margin:0 0 .9rem;color:var(--accent-bright);font-size:.76rem;font-weight:850;letter-spacing:.045em}
 .activity-numbers{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin:0}
 .activity-numbers dt{color:var(--muted);font-size:.82rem}
 .activity-numbers dd{margin:.2rem 0 0;color:var(--ink);font-size:clamp(1.2rem,2vw,1.65rem);font-weight:850;font-variant-numeric:tabular-nums;line-height:1.3}
-.activity-numbers small{display:block;margin-top:.35rem;color:var(--muted);font-size:.75rem;font-weight:500;line-height:1.5}
-.activity-card .activity-models{margin:1.15rem 0 .65rem;font-size:.83rem;line-height:1.85}
+.activity-card .activity-models{margin:1.15rem 0 0;font-size:.83rem;line-height:1.85}
 .activity-models strong{color:var(--ink)}
 .activity-models code{white-space:nowrap;font-size:.95em}
-.activity-card .activity-breakdown,.activity-card .activity-scope{font-size:.77rem;line-height:1.65}
-.activity-card .activity-scope{margin-bottom:0;padding-top:.7rem;border-top:1px solid var(--line)}
+.activity-card .activity-note{margin:.9rem 0 0;padding-top:.7rem;border-top:1px solid var(--line);color:var(--muted);font-size:.77rem;line-height:1.65}
 @media(max-width:36rem){.activity-card{padding:1rem}.activity-numbers{grid-template-columns:1fr}.activity-models code{white-space:normal}}

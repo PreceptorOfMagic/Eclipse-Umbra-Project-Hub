@@ -20,13 +20,15 @@ test('snapshot is a fixed, aggregate-only record with an explicit scope', () => 
 
 for (const window of snapshot.windows) {
   test(`${window.id}: counts reconcile and missing tokens are not zero`, () => {
+    assert.equal(typeof window.recordsIncomplete, 'boolean');
     assert.equal(window.prompts, Object.values(window.promptSources).reduce((a, b) => a + b, 0));
     assert.ok(Number.isSafeInteger(window.prompts) && window.prompts >= 0);
     assert.ok(window.from <= window.to);
     if (window.tokens === null) {
       assert.equal(window.models.length, 0);
       assert.equal(window.recordedUsageDates, null);
-      assert.match(renderActivity(window), /Not retained/);
+      assert.equal(window.recordsIncomplete, true);
+      assert.match(renderActivity(window), /Not available/);
     } else {
       const { total, ...parts } = window.tokens;
       assert.equal(total, Object.values(parts).reduce((a, b) => a + b, 0));
@@ -47,12 +49,21 @@ for (const window of snapshot.windows) {
   });
 }
 
-test('both guides explain cache inclusion, overlaps and missing coverage', () => {
+for (const window of snapshot.windows) {
+  test(`${window.id}: card sits at the end of its section and flags deleted records only where true`, () => {
+    const end = `<!-- activity:${window.id}:end -->`;
+    assert.match(html.split(end)[1], /^\s*<\/div><\/details>/);
+    assert.match(markdown.split(end)[1], /^\s*<\/details>/);
+    assert.match(html.split(`id="${window.id}"`)[1].split(end)[0], /<h3>/);
+    for (const render of [renderActivity, renderActivityMarkdown]) {
+      assert.equal(/some records from this period were deleted/.test(render(window)), window.recordsIncomplete);
+    }
+  });
+}
+
+test('the page carries the statistics only, without recovery notes', () => {
   for (const text of [html, markdown]) {
-    assert.match(text, /activity-method/);
-    assert.match(text, /must not be added together/);
-    assert.match(text, /not billions of unique words/);
-    assert.match(text, /not a billing total/);
-    assert.match(text, /not retained/i);
+    assert.doesNotMatch(text, /activity-method|About the numbers|activity-breakdown|activity-scope/);
+    assert.doesNotMatch(text, /recovered transcripts|prompt journal|log cleanup|disk block/i);
   }
 });

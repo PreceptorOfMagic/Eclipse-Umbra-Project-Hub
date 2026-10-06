@@ -38,7 +38,8 @@
       "recordedUsageDates": {
         "first": "2026-07-22",
         "last": "2026-07-30"
-      }
+      },
+      "recordsIncomplete": true
     },
     {
       "id": "history-timing",
@@ -69,7 +70,8 @@
       "recordedUsageDates": {
         "first": "2026-07-25",
         "last": "2026-08-31"
-      }
+      },
+      "recordsIncomplete": true
     },
     {
       "id": "history-cross-vendor",
@@ -101,7 +103,8 @@
       "recordedUsageDates": {
         "first": "2026-08-18",
         "last": "2026-09-16"
-      }
+      },
+      "recordsIncomplete": true
     },
     {
       "id": "history-gpu",
@@ -133,7 +136,8 @@
       "recordedUsageDates": {
         "first": "2026-09-16",
         "last": "2026-09-28"
-      }
+      },
+      "recordsIncomplete": false
     },
     {
       "id": "history-product",
@@ -167,7 +171,8 @@
       "recordedUsageDates": {
         "first": "2026-09-23",
         "last": "2026-10-05"
-      }
+      },
+      "recordsIncomplete": false
     }
   ]
 }
