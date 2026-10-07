@@ -144,6 +144,19 @@
         <h3>29 July · Half height, and a header that moved every bit after it</h3><p>Encoding each host at half height, instead of cropping a full desktop, needed the peer’s slice placed in the lower half. Writing the new slice address changed the header’s length and misaligned the payload behind it. Re-emitting the complete slice header made the composed stream decode cleanly. A ghosting detector was added because no existing metric could see ghosting, and pane drift was bounded by re-bootstrapping after accumulated concealment.</p>
         <h3>30 July · Half-height composition goes live</h3><p>Two hosts were composed from half-height streams on the panel. Raising the pane queue to a depth of four took the fresh-pane yield from 7% to 88%. A keyframe livelock was broken by anchoring on the first accepted pane. The client stopped dropping about 29% of pictures mid-session—necessary, but not the cure for the stutter.</p>
         <p>Two other results closed doors. A vendor media-layer error ended the TV-side dual-display route. And the all-skip concealment slice, which had appeared broken, was correct: the test harness was at fault.</p>
+<!-- activity-detail:history-first-path:start -->
+<aside class="activity-card" aria-label="AI activity for 22–30 July 2026">
+  <p class="activity-kicker">Behind the build · 22–30 July 2026</p>
+  <dl class="activity-numbers"><div><dt>User prompts</dt><dd>53</dd></div><div><dt>Tokens processed</dt><dd>412,175,826</dd></div></dl>
+  <p class="activity-models"><strong>Models</strong><br><code>claude-opus-4-8</code> · <code>claude-opus-5</code></p>
+  <p class="activity-weeks-title">Week by week</p>
+  <ol class="activity-weeks">
+  <li><span class="activity-week">22–26 July †</span><span class="activity-week-n"><strong>32</strong> prompts</span><span class="activity-week-n"><strong>87,483,048</strong> tokens</span><span class="activity-week-models"><code>claude-opus-4-8</code> · <code>claude-opus-5</code></span></li>
+  <li><span class="activity-week">27–30 July †</span><span class="activity-week-n"><strong>21</strong> prompts</span><span class="activity-week-n"><strong>324,692,778</strong> tokens</span><span class="activity-week-models"><code>claude-opus-5</code></span></li>
+  </ol>
+  <p class="activity-note">Weeks marked † are incomplete because some records from this period were deleted.</p>
+</aside>
+<!-- activity-detail:history-first-path:end -->
       </div></details>
       <details class="disclosure" id="detail-timing"><summary><span class="disclosure-title">Late July–August · Learning to preserve time and references</span><span class="disclosure-hint">Both split directions, bit-exact seams, holds, catch-up and a parameter register</span></summary><div class="disclosure-body">
         <h3>31 July · The vertical split finds a route</h3><p>NVENC limits a picture to 64 slices and does not offer 64×64 coding blocks, so slicing every block row of a 2160-line picture was blocked. HEVC tile columns solved it: 8 slices instead of 128, full height and bit-exact. Constraining encoding to one slice per block row cost about 4.7 QP, a measured price. The vertical split became its own module that handles independent keyframes from each host.</p>
@@ -155,6 +168,24 @@
         <h3>8–14 August · Launch reliability</h3><p>A locked PC still answers on the network, so “online” never proved it was usable. Wake and sign-in now confirm the second PC actually signed in. Co-op mode had stayed armed after a session, turning the next ordinary stream into a co-op pane; that was fixed. A two-week-old configuration backup had been silently reverting host settings on every restore.</p>
         <h3>15 August · A stress harness, and what it caught</h3><p>A harness drove the two hosts at mismatched frame rates with computable test content. It showed the peer’s tile shredding because the catch-up budget was 6% short, and the tile path concealing forever without re-anchoring. NVENC intra refresh was reached and measured; it did not fix the peer decay.</p>
         <h3>16 August · Retractions and a parameter register</h3><p>The peer-pane flicker turned out to be a timer acting on healthy holds, not damage. A reference-picture-set hypothesis was falsified when its instrumented fix fired and changed nothing. A tile artefact mechanism inferred from reading source was retracted. A register of every parameter in use was started, because a misread knob name had voided a test run.</p>
+<!-- activity-detail:history-timing:start -->
+<aside class="activity-card" aria-label="AI activity for 25 July–31 August 2026">
+  <p class="activity-kicker">Behind the build · 25 July–31 August 2026</p>
+  <dl class="activity-numbers"><div><dt>User prompts</dt><dd>286</dd></div><div><dt>Tokens processed</dt><dd>2,676,527,028</dd></div></dl>
+  <p class="activity-models"><strong>Models</strong><br><code>claude-haiku-4-5-20251001</code> · <code>claude-opus-4-8</code> · <code>claude-opus-5</code> · <code>claude-sonnet-5</code></p>
+  <p class="activity-weeks-title">Week by week</p>
+  <ol class="activity-weeks">
+  <li><span class="activity-week">25–26 July †</span><span class="activity-week-n"><strong>5</strong> prompts</span><span class="activity-week-n"><strong>68,003,719</strong> tokens</span><span class="activity-week-models"><code>claude-opus-4-8</code> · <code>claude-opus-5</code></span></li>
+  <li><span class="activity-week">27 July–2 August †</span><span class="activity-week-n"><strong>36</strong> prompts</span><span class="activity-week-n"><strong>369,342,060</strong> tokens</span><span class="activity-week-models"><code>claude-opus-5</code></span></li>
+  <li><span class="activity-week">3–9 August †</span><span class="activity-week-n"><strong>33</strong> prompts</span><span class="activity-week-n"><strong>313,925,098</strong> tokens</span><span class="activity-week-models"><code>claude-opus-5</code></span></li>
+  <li><span class="activity-week">10–16 August †</span><span class="activity-week-n"><strong>29</strong> prompts</span><span class="activity-week-n"><strong>521,083,738</strong> tokens</span><span class="activity-week-models"><code>claude-opus-5</code></span></li>
+  <li><span class="activity-week">17–23 August †</span><span class="activity-week-n"><strong>130</strong> prompts</span><span class="activity-week-n"><strong>810,017,666</strong> tokens</span><span class="activity-week-models"><code>claude-haiku-4-5-20251001</code> · <code>claude-opus-5</code> · <code>claude-sonnet-5</code></span></li>
+  <li><span class="activity-week">24–30 August</span><span class="activity-week-n"><strong>31</strong> prompts</span><span class="activity-week-n"><strong>277,783,039</strong> tokens</span><span class="activity-week-models"><code>claude-opus-5</code> · <code>claude-sonnet-5</code></span></li>
+  <li><span class="activity-week">31 August</span><span class="activity-week-n"><strong>22</strong> prompts</span><span class="activity-week-n"><strong>316,371,708</strong> tokens</span><span class="activity-week-models"><code>claude-opus-5</code> · <code>claude-sonnet-5</code></span></li>
+  </ol>
+  <p class="activity-note">Weeks marked † are incomplete because some records from this period were deleted.</p>
+</aside>
+<!-- activity-detail:history-timing:end -->
       </div></details>
       <details class="disclosure" id="detail-cross-vendor"><summary><span class="disclosure-title">Late August–16 September · The cross-vendor detour</span><span class="disclosure-hint">An AMD host, the block-size mismatch, the AVC route and the return to HEVC</span></summary><div class="disclosure-body">
         <h3>18–19 August · An AMD host joins, and the seam is measured</h3><p>Co-op work with the Radeon RX Vega host began on 18 August. A software encoder with motion constraints fixed the seam in offline tests, but managed only about 50 frames per second at pane size on twelve CPU cores. Seam guard-band tests with eight kinds of content found that the band and the keyframe interval were two halves of one fix; neither worked alone.</p>
@@ -164,6 +195,22 @@
         <h3>4–5 September · Holds, roles and the scheduled anchor</h3><p>A bad frame-hold donor test was fixed, and composite bursts fell from 19.2% to 0.0%. The composite began synthesising its own picture parameters, so either host can be primary. The seam stopped being visible once the AMD host’s encoder scheduled its own periodic keyframe; client-forced keyframes had halved that host’s frame rate, while scheduled ones cost nothing. A supposed 60 fps ceiling was a stale virtual display, and a queue depth of 16 removed evictions at 120 fps.</p>
         <h3>6–10 September · The last AVC faults</h3><p>The peer’s half was found to be emitted with an unspecified network unit type, which the decoder silently dropped. After the fix, that fault was gone across 15.5 minutes of live running. A separate failure, the beta app dying when it opened audio, cleared 48 AMD-related commits: the cause was the beta app identity, later traced to an exported-symbol collision in the TV’s media framework. A rate sweep put mixed AVC’s display limit at 115 fps.</p>
         <h3>10–16 September · Back to HEVC</h3><p>A fresh check of NVIDIA’s and AMD’s current encoder interfaces found no supported way to match block sizes. Re-encoding the AMD pane on the RTX 4070 produced 32×32 blocks at about 650 fps, but needed an extra network hop. PreceptorOfMagic ruled that out—“Adding the extra hop is unacceptable”—and set the boundary for a custom encoder: adapt an existing one rather than build from scratch. The design settled on adapting x265, with PreceptorOfMagic’s pairing rule: NVIDIA pairs keep NVENC, and any pair containing AMD runs the adapted encoder on both hosts. The co-op AVC route was retired on 16 September.</p>
+<!-- activity-detail:history-cross-vendor:start -->
+<aside class="activity-card" aria-label="AI activity for 18 August–16 September 2026">
+  <p class="activity-kicker">Behind the build · 18 August–16 September 2026</p>
+  <dl class="activity-numbers"><div><dt>User prompts</dt><dd>491</dd></div><div><dt>Tokens processed</dt><dd>4,403,521,774</dd></div></dl>
+  <p class="activity-models"><strong>Models</strong><br><code>claude-haiku-4-5-20251001</code> · <code>claude-opus-4-8</code> · <code>claude-opus-5</code> · <code>claude-sonnet-5</code> · <code>gpt-6-astra</code></p>
+  <p class="activity-weeks-title">Week by week</p>
+  <ol class="activity-weeks">
+  <li><span class="activity-week">18–23 August †</span><span class="activity-week-n"><strong>129</strong> prompts</span><span class="activity-week-n"><strong>805,767,052</strong> tokens</span><span class="activity-week-models"><code>claude-haiku-4-5-20251001</code> · <code>claude-opus-5</code> · <code>claude-sonnet-5</code></span></li>
+  <li><span class="activity-week">24–30 August</span><span class="activity-week-n"><strong>31</strong> prompts</span><span class="activity-week-n"><strong>277,783,039</strong> tokens</span><span class="activity-week-models"><code>claude-opus-5</code> · <code>claude-sonnet-5</code></span></li>
+  <li><span class="activity-week">31 August–6 September †</span><span class="activity-week-n"><strong>156</strong> prompts</span><span class="activity-week-n"><strong>1,969,482,668</strong> tokens</span><span class="activity-week-models"><code>claude-opus-5</code> · <code>claude-sonnet-5</code></span></li>
+  <li><span class="activity-week">7–13 September</span><span class="activity-week-n"><strong>120</strong> prompts</span><span class="activity-week-n"><strong>1,002,038,583</strong> tokens</span><span class="activity-week-models"><code>claude-opus-4-8</code> · <code>claude-opus-5</code> · <code>claude-sonnet-5</code> · <code>gpt-6-astra</code></span></li>
+  <li><span class="activity-week">14–16 September</span><span class="activity-week-n"><strong>55</strong> prompts</span><span class="activity-week-n"><strong>348,450,432</strong> tokens</span><span class="activity-week-models"><code>claude-opus-5</code> · <code>claude-sonnet-5</code> · <code>gpt-6-astra</code></span></li>
+  </ol>
+  <p class="activity-note">Weeks marked † are incomplete because some records from this period were deleted.</p>
+</aside>
+<!-- activity-detail:history-cross-vendor:end -->
       </div></details>
       <details class="disclosure" id="detail-gpu"><summary><span class="disclosure-title">16–29 September · Correct bytes were only the start</span><span class="disclosure-hint">Serial and parallel CABAC, live integration, rate control and quality</span></summary><div class="disclosure-body">
         <h3>16 September · A correct port that was far too slow</h3><p>The first x265-derived GPU component ported arithmetic coding to OpenCL with each slice as one dependent chain. It produced the reference bytes exactly. But predicted pictures took 58–82 ms on the RTX 4070 and 225–336 ms on the Radeon RX Vega, and intra pictures 0.3–1.6 seconds. It failed the latency requirement.</p>
@@ -172,6 +219,19 @@
         <h3>16 September · Rate control in one evening</h3><p>The first moving stress produced oversized pictures and visible damage. Versions 6–8 added a per-host bitrate budget, spatial adaptive quantisation and a corrected retry limit; version 8 passed live in both layouts. Version 11 cut dense-texture error by about 47% against version 9, but a third encode attempt doubled the AMD host’s worst case to about 40 ms, which showed on the panel as hopping. Version 10 was restored, and PreceptorOfMagic confirmed the hopping was gone.</p>
         <h3>19–22 September · Names, and the encoder on a desktop client</h3><p>The client was renamed Eclipse and the host fork Umbra, as a branding change only. The Windows build of Eclipse’s own interface replaced the earlier experiments. On it, requesting the GPU encoder made the AMD pane’s block grid match the NVIDIA pane exactly, showing a clean peer tile. The block-size limit applies to the native vendor encoders, not to every AMD and NVIDIA pairing.</p>
         <h3>28 September · Static grain and motion blocks</h3><p>Raising detail in still pictures meant lowering the encoder’s minimum QP from 18 to 12, then to 8, which roughly halved the flat-area noise on the AMD host. Motion was a separate problem. During fast scrolling the QP jumped from 8–18 to about 35 in both the older and newer versions, so the floor change did not cause it. At a very high bitrate the blocks disappeared, but pictures reached 500–718 KB and the host froze briefly: each host paces at a fixed share of gigabit Ethernet, and two of them can exceed one client port.</p>
+<!-- activity-detail:history-gpu:start -->
+<aside class="activity-card" aria-label="AI activity for 16–29 September 2026">
+  <p class="activity-kicker">Behind the build · 16–29 September 2026</p>
+  <dl class="activity-numbers"><div><dt>User prompts</dt><dd>215</dd></div><div><dt>Tokens processed</dt><dd>4,410,273,647</dd></div></dl>
+  <p class="activity-models"><strong>Models</strong><br><code>claude-opus-5</code> · <code>claude-opus-5-5</code> · <code>claude-sonnet-5</code> · <code>gpt-5.6-sol</code> · <code>gpt-6-astra</code></p>
+  <p class="activity-weeks-title">Week by week</p>
+  <ol class="activity-weeks">
+  <li><span class="activity-week">16–20 September</span><span class="activity-week-n"><strong>108</strong> prompts</span><span class="activity-week-n"><strong>841,694,350</strong> tokens</span><span class="activity-week-models"><code>claude-opus-5</code> · <code>claude-sonnet-5</code> · <code>gpt-6-astra</code></span></li>
+  <li><span class="activity-week">21–27 September</span><span class="activity-week-n"><strong>99</strong> prompts</span><span class="activity-week-n"><strong>3,040,630,515</strong> tokens</span><span class="activity-week-models"><code>claude-opus-5</code> · <code>claude-opus-5-5</code> · <code>claude-sonnet-5</code> · <code>gpt-5.6-sol</code> · <code>gpt-6-astra</code></span></li>
+  <li><span class="activity-week">28–29 September</span><span class="activity-week-n"><strong>8</strong> prompts</span><span class="activity-week-n"><strong>527,948,782</strong> tokens</span><span class="activity-week-models"><code>claude-opus-5-5</code> · <code>claude-sonnet-5</code></span></li>
+  </ol>
+</aside>
+<!-- activity-detail:history-gpu:end -->
       </div></details>
       <details class="disclosure" id="detail-product"><summary><span class="disclosure-title">Late September–October · Making it usable and maintainable</span><span class="disclosure-hint">Desktop co-op, webOS 26, automatic setup, Umbra’s thin fork and co-op audio</span></summary><div class="disclosure-body">
         <h3>22–28 September · Desktop co-op, issue by issue</h3><p>The Windows client gained co-op with the local PC as one of the hosts. Its own panel stays on the client and the game moves to a virtual display. Issues were logged and closed one at a time. Catch-up stops in front of a peer keyframe instead of taking and losing it. The vertical loading dialog releases on the first anchored composite. Mouse and keyboard are assigned like controllers, and keys follow the pointer’s pane. Measured end-to-end latency of the local-host pane was about 33 ms at the median, validated against a same-display control.</p>
@@ -181,6 +241,19 @@
         <h3>2–4 October · Umbra becomes a thin layer</h3><p>Umbra’s identity was layered on Apollo, with Apollo’s own files, documentation and translations restored, leaving a small delta to maintain. Umbra restores the host’s default speakers after a session and restarts itself when a sleeping GPU loses its runtime, which had stopped a slept host from starting co-op. A host-monitor setting can switch the physical monitor off for a stream on request.</p>
         <h3>3–4 October · Silent Windows audio and a frozen peer pane</h3><p>Every Windows stream had been silent. The SDL audio callback used a mixing call that only works for a legacy device number. After copying samples directly, both hosts’ tones were heard. A peer pane that froze after a game launch came from a stale held keyframe. A 90-second-old keyframe is no longer paired, and the fix was seen firing live.</p>
         <h3>4–5 October · Duplicate audio</h3><p>When both PCs play the same sound, the mix doubles it. Echo-gate prototypes were tested offline. PreceptorOfMagic then designed a passive gate, which went through five revisions on 5 October covering “S” sounds, dropouts and speech classes. Optimisation brought it to about 8% of one TV CPU core with the same output. It passed a Windows gameplay test PreceptorOfMagic accepted. On 6 October it became the default for “Play shared sounds once”.</p>
+<!-- activity-detail:history-product:start -->
+<aside class="activity-card" aria-label="AI activity for 23 September–5 October 2026">
+  <p class="activity-kicker">Behind the build · 23 September–5 October 2026</p>
+  <dl class="activity-numbers"><div><dt>User prompts</dt><dd>247</dd></div><div><dt>Tokens processed</dt><dd>5,011,694,573</dd></div></dl>
+  <p class="activity-models"><strong>Models</strong><br><code>claude-opus-4-8</code> · <code>claude-opus-5</code> · <code>claude-opus-5-5</code> · <code>claude-sonnet-5</code> · <code>claude-sonnet-5-5</code> · <code>gpt-5.6-sol</code> · <code>gpt-6-astra</code></p>
+  <p class="activity-weeks-title">Week by week</p>
+  <ol class="activity-weeks">
+  <li><span class="activity-week">23–27 September</span><span class="activity-week-n"><strong>63</strong> prompts</span><span class="activity-week-n"><strong>2,524,520,564</strong> tokens</span><span class="activity-week-models"><code>claude-opus-5</code> · <code>claude-opus-5-5</code> · <code>claude-sonnet-5</code> · <code>gpt-5.6-sol</code> · <code>gpt-6-astra</code></span></li>
+  <li><span class="activity-week">28 September–4 October</span><span class="activity-week-n"><strong>169</strong> prompts</span><span class="activity-week-n"><strong>2,386,602,743</strong> tokens</span><span class="activity-week-models"><code>claude-opus-4-8</code> · <code>claude-opus-5-5</code> · <code>claude-sonnet-5</code> · <code>claude-sonnet-5-5</code> · <code>gpt-5.6-sol</code> · <code>gpt-6-astra</code></span></li>
+  <li><span class="activity-week">5 October</span><span class="activity-week-n"><strong>15</strong> prompts</span><span class="activity-week-n"><strong>100,571,266</strong> tokens</span><span class="activity-week-models"><code>claude-opus-5-5</code> · <code>gpt-6-astra</code></span></li>
+  </ol>
+</aside>
+<!-- activity-detail:history-product:end -->
       </div></details>
     </div></div></section>
 

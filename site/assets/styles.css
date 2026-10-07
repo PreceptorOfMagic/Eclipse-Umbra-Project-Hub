@@ -63,4 +63,13 @@
 .activity-models strong{color:var(--ink)}
 .activity-models code{white-space:nowrap;font-size:.95em}
 .activity-card .activity-note{margin:.9rem 0 0;padding-top:.7rem;border-top:1px solid var(--line);color:var(--muted);font-size:.77rem;line-height:1.65}
-@media(max-width:36rem){.activity-card{padding:1rem}.activity-numbers{grid-template-columns:1fr}.activity-models code{white-space:normal}}
+.activity-card .activity-weeks-title{margin:1.15rem 0 0;color:var(--ink);font-size:.83rem;font-weight:850}
+.activity-card .activity-weeks{list-style:none;margin:.45rem 0 0;padding:0;border-top:1px solid var(--line)}
+.activity-card .activity-weeks li{display:grid;grid-template-columns:minmax(0,1fr) 7rem 12.5rem;gap:.2rem 1.2rem;margin:0;padding:.55rem 0;border-bottom:1px solid var(--line);font-size:.83rem;line-height:1.6}
+.activity-week{color:var(--ink);font-weight:700}
+.activity-week-n{text-align:right;color:var(--muted);font-variant-numeric:tabular-nums;white-space:nowrap}
+.activity-week-n strong{color:var(--ink)}
+.activity-week-models{grid-column:1/-1;color:var(--muted);font-size:.95em}
+.activity-week-models code{white-space:nowrap}
+.activity-card .activity-weeks li:last-child{border-bottom:0}
+@media(max-width:36rem){.activity-card{padding:1rem}.activity-numbers{grid-template-columns:1fr}.activity-models code{white-space:normal}.activity-card .activity-weeks li{display:flex;flex-wrap:wrap;column-gap:1.2rem}.activity-week,.activity-week-models{flex-basis:100%}.activity-week-n{text-align:left}.activity-week-models code{white-space:normal}}

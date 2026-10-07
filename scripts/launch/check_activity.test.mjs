@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
-import { renderActivity, renderActivityMarkdown } from './activity_summary.mjs';
+import { renderActivity, renderActivityMarkdown, renderActivityDetail, renderActivityDetailMarkdown } from './activity_summary.mjs';
 
 const snapshot = JSON.parse(fs.readFileSync(new URL('../../site/assets/development-activity.json', import.meta.url), 'utf8'));
 const html = fs.readFileSync(new URL('../../site/index.html', import.meta.url), 'utf8');
@@ -68,11 +68,44 @@ test('the page carries the statistics only, without recovery notes', () => {
   }
 });
 
-test('the development guide carries the detailed history without activity cards', () => {
-  for (const file of ['../../site/development.html', '../../docs/development.md']) {
-    const text = fs.readFileSync(new URL(file, import.meta.url), 'utf8');
+const devHtml = fs.readFileSync(new URL('../../site/development.html', import.meta.url), 'utf8');
+const devMarkdown = fs.readFileSync(new URL('../../docs/development.md', import.meta.url), 'utf8');
+
+for (const window of snapshot.windows) {
+  test(`${window.id}: weeks cover the window exactly and add up to its totals`, () => {
+    assert.ok(window.weeks.length > 0);
+    assert.equal(window.weeks[0].from >= window.from, true);
+    assert.equal(window.weeks.at(-1).to <= window.to, true);
+    for (const [i, week] of window.weeks.entries()) {
+      assert.ok(week.from <= week.to);
+      if (i > 0) assert.ok(week.from > window.weeks[i - 1].to);
+      assert.ok(Number.isSafeInteger(week.prompts) && Number.isSafeInteger(week.tokens) && week.tokens >= 0);
+      assert.equal(typeof week.recordsIncomplete, 'boolean');
+      assert.ok(week.models.every(model => window.models.includes(model)));
+    }
+    assert.equal(window.weeks.reduce((a, w) => a + w.prompts, 0), window.prompts);
+    assert.equal(window.weeks.reduce((a, w) => a + w.tokens, 0), window.tokens.total);
+    assert.equal(window.weeks.some(w => w.recordsIncomplete), window.recordsIncomplete);
+    assert.deepEqual([...new Set(window.weeks.flatMap(w => w.models))].sort(), window.models);
+  });
+  test(`${window.id}: the detailed history carries the same totals, week by week, at the end of its era`, () => {
+    const start = `<!-- activity-detail:${window.id}:start -->`;
+    const end = `<!-- activity-detail:${window.id}:end -->`;
+    for (const [text, render, close] of [[devHtml, renderActivityDetail, /^\s*<\/div><\/details>/], [devMarkdown, renderActivityDetailMarkdown, /^\s*<\/details>/]]) {
+      assert.equal(text.split(start).length, 2);
+      assert.equal(text.split(start)[1].split(end)[0].trim(), render(window).trim());
+      assert.match(text.split(end)[1], close);
+      assert.equal(/some records from this period were deleted/.test(render(window)), window.recordsIncomplete);
+    }
+    assert.match(devHtml.split(`id="detail-${window.id.replace('history-', '')}"`)[1].split(end)[0], /<h3>/);
+    assert.match(renderActivityDetail(window), new RegExp(`<dd>${window.tokens.total.toLocaleString('en-AU')}</dd>`));
+  });
+}
+
+test('the detailed history carries the statistics only, without recovery notes', () => {
+  for (const text of [devHtml, devMarkdown]) {
     assert.match(text, /detailed-history/);
-    for (const window of snapshot.windows) assert.match(text, new RegExp(`detail-${window.id.replace('history-', '')}`));
-    assert.doesNotMatch(text, /activity-card|<!-- activity:/);
+    assert.doesNotMatch(text, /activity-method|About the numbers|activity-breakdown|activity-scope/);
+    assert.doesNotMatch(text, /recovered transcripts|prompt journal|log cleanup|disk block/i);
   }
 });

@@ -346,6 +346,22 @@ Two hosts were composed from half-height streams on the panel. Raising the pane 
 
 Two other results closed doors. A vendor media-layer error ended the TV-side dual-display route. And the all-skip concealment slice, which had appeared broken, was correct: the test harness was at fault.
 
+
+<!-- activity-detail:history-first-path:start -->
+**Behind the build · 22–30 July 2026**
+
+- **User prompts:** 53
+- **Tokens processed:** 412,175,826
+- **Models:** `claude-opus-4-8`, `claude-opus-5`
+
+| Week | User prompts | Tokens processed | Models |
+|---|---:|---:|---|
+| 22–26 July † | 32 | 87,483,048 | `claude-opus-4-8`, `claude-opus-5` |
+| 27–30 July † | 21 | 324,692,778 | `claude-opus-5` |
+
+Weeks marked † are incomplete because some records from this period were deleted.
+<!-- activity-detail:history-first-path:end -->
+
 </details>
 
 <a name="detail-timing"></a>
@@ -388,6 +404,27 @@ A harness drove the two hosts at mismatched frame rates with computable test con
 
 The peer-pane flicker turned out to be a timer acting on healthy holds, not damage. A reference-picture-set hypothesis was falsified when its instrumented fix fired and changed nothing. A tile artefact mechanism inferred from reading source was retracted. A register of every parameter in use was started, because a misread knob name had voided a test run.
 
+
+<!-- activity-detail:history-timing:start -->
+**Behind the build · 25 July–31 August 2026**
+
+- **User prompts:** 286
+- **Tokens processed:** 2,676,527,028
+- **Models:** `claude-haiku-4-5-20251001`, `claude-opus-4-8`, `claude-opus-5`, `claude-sonnet-5`
+
+| Week | User prompts | Tokens processed | Models |
+|---|---:|---:|---|
+| 25–26 July † | 5 | 68,003,719 | `claude-opus-4-8`, `claude-opus-5` |
+| 27 July–2 August † | 36 | 369,342,060 | `claude-opus-5` |
+| 3–9 August † | 33 | 313,925,098 | `claude-opus-5` |
+| 10–16 August † | 29 | 521,083,738 | `claude-opus-5` |
+| 17–23 August † | 130 | 810,017,666 | `claude-haiku-4-5-20251001`, `claude-opus-5`, `claude-sonnet-5` |
+| 24–30 August | 31 | 277,783,039 | `claude-opus-5`, `claude-sonnet-5` |
+| 31 August | 22 | 316,371,708 | `claude-opus-5`, `claude-sonnet-5` |
+
+Weeks marked † are incomplete because some records from this period were deleted.
+<!-- activity-detail:history-timing:end -->
+
 </details>
 
 <a name="detail-cross-vendor"></a>
@@ -424,6 +461,25 @@ The peer’s half was found to be emitted with an unspecified network unit type,
 
 A fresh check of NVIDIA’s and AMD’s current encoder interfaces found no supported way to match block sizes. Re-encoding the AMD pane on the RTX 4070 produced 32×32 blocks at about 650 fps, but needed an extra network hop. PreceptorOfMagic ruled that out—“Adding the extra hop is unacceptable”—and set the boundary for a custom encoder: adapt an existing one rather than build from scratch. The design settled on adapting x265, with PreceptorOfMagic’s pairing rule: NVIDIA pairs keep NVENC, and any pair containing AMD runs the adapted encoder on both hosts. The co-op AVC route was retired on 16 September.
 
+
+<!-- activity-detail:history-cross-vendor:start -->
+**Behind the build · 18 August–16 September 2026**
+
+- **User prompts:** 491
+- **Tokens processed:** 4,403,521,774
+- **Models:** `claude-haiku-4-5-20251001`, `claude-opus-4-8`, `claude-opus-5`, `claude-sonnet-5`, `gpt-6-astra`
+
+| Week | User prompts | Tokens processed | Models |
+|---|---:|---:|---|
+| 18–23 August † | 129 | 805,767,052 | `claude-haiku-4-5-20251001`, `claude-opus-5`, `claude-sonnet-5` |
+| 24–30 August | 31 | 277,783,039 | `claude-opus-5`, `claude-sonnet-5` |
+| 31 August–6 September † | 156 | 1,969,482,668 | `claude-opus-5`, `claude-sonnet-5` |
+| 7–13 September | 120 | 1,002,038,583 | `claude-opus-4-8`, `claude-opus-5`, `claude-sonnet-5`, `gpt-6-astra` |
+| 14–16 September | 55 | 348,450,432 | `claude-opus-5`, `claude-sonnet-5`, `gpt-6-astra` |
+
+Weeks marked † are incomplete because some records from this period were deleted.
+<!-- activity-detail:history-cross-vendor:end -->
+
 </details>
 
 <a name="detail-gpu"></a>
@@ -455,6 +511,21 @@ The client was renamed Eclipse and the host fork Umbra, as a branding change onl
 ### 28 September · Static grain and motion blocks
 
 Raising detail in still pictures meant lowering the encoder’s minimum QP from 18 to 12, then to 8, which roughly halved the flat-area noise on the AMD host. Motion was a separate problem. During fast scrolling the QP jumped from 8–18 to about 35 in both the older and newer versions, so the floor change did not cause it. At a very high bitrate the blocks disappeared, but pictures reached 500–718 KB and the host froze briefly: each host paces at a fixed share of gigabit Ethernet, and two of them can exceed one client port.
+
+
+<!-- activity-detail:history-gpu:start -->
+**Behind the build · 16–29 September 2026**
+
+- **User prompts:** 215
+- **Tokens processed:** 4,410,273,647
+- **Models:** `claude-opus-5`, `claude-opus-5-5`, `claude-sonnet-5`, `gpt-5.6-sol`, `gpt-6-astra`
+
+| Week | User prompts | Tokens processed | Models |
+|---|---:|---:|---|
+| 16–20 September | 108 | 841,694,350 | `claude-opus-5`, `claude-sonnet-5`, `gpt-6-astra` |
+| 21–27 September | 99 | 3,040,630,515 | `claude-opus-5`, `claude-opus-5-5`, `claude-sonnet-5`, `gpt-5.6-sol`, `gpt-6-astra` |
+| 28–29 September | 8 | 527,948,782 | `claude-opus-5-5`, `claude-sonnet-5` |
+<!-- activity-detail:history-gpu:end -->
 
 </details>
 
@@ -491,6 +562,21 @@ Every Windows stream had been silent. The SDL audio callback used a mixing call 
 ### 4–5 October · Duplicate audio
 
 When both PCs play the same sound, the mix doubles it. Echo-gate prototypes were tested offline. PreceptorOfMagic then designed a passive gate, which went through five revisions on 5 October covering “S” sounds, dropouts and speech classes. Optimisation brought it to about 8% of one TV CPU core with the same output. It passed a Windows gameplay test PreceptorOfMagic accepted. On 6 October it became the default for “Play shared sounds once”.
+
+
+<!-- activity-detail:history-product:start -->
+**Behind the build · 23 September–5 October 2026**
+
+- **User prompts:** 247
+- **Tokens processed:** 5,011,694,573
+- **Models:** `claude-opus-4-8`, `claude-opus-5`, `claude-opus-5-5`, `claude-sonnet-5`, `claude-sonnet-5-5`, `gpt-5.6-sol`, `gpt-6-astra`
+
+| Week | User prompts | Tokens processed | Models |
+|---|---:|---:|---|
+| 23–27 September | 63 | 2,524,520,564 | `claude-opus-5`, `claude-opus-5-5`, `claude-sonnet-5`, `gpt-5.6-sol`, `gpt-6-astra` |
+| 28 September–4 October | 169 | 2,386,602,743 | `claude-opus-4-8`, `claude-opus-5-5`, `claude-sonnet-5`, `claude-sonnet-5-5`, `gpt-5.6-sol`, `gpt-6-astra` |
+| 5 October | 15 | 100,571,266 | `claude-opus-5-5`, `gpt-6-astra` |
+<!-- activity-detail:history-product:end -->
 
 </details>
 

@@ -39,7 +39,30 @@
         "first": "2026-07-22",
         "last": "2026-07-30"
       },
-      "recordsIncomplete": true
+      "recordsIncomplete": true,
+      "weeks": [
+        {
+          "from": "2026-07-22",
+          "to": "2026-07-26",
+          "prompts": 32,
+          "models": [
+            "claude-opus-4-8",
+            "claude-opus-5"
+          ],
+          "recordsIncomplete": true,
+          "tokens": 87483048
+        },
+        {
+          "from": "2026-07-27",
+          "to": "2026-07-30",
+          "prompts": 21,
+          "models": [
+            "claude-opus-5"
+          ],
+          "recordsIncomplete": true,
+          "tokens": 324692778
+        }
+      ]
     },
     {
       "id": "history-timing",
@@ -71,7 +94,84 @@
         "first": "2026-07-25",
         "last": "2026-08-31"
       },
-      "recordsIncomplete": true
+      "recordsIncomplete": true,
+      "weeks": [
+        {
+          "from": "2026-07-25",
+          "to": "2026-07-26",
+          "prompts": 5,
+          "models": [
+            "claude-opus-4-8",
+            "claude-opus-5"
+          ],
+          "recordsIncomplete": true,
+          "tokens": 68003719
+        },
+        {
+          "from": "2026-07-27",
+          "to": "2026-08-02",
+          "prompts": 36,
+          "models": [
+            "claude-opus-5"
+          ],
+          "recordsIncomplete": true,
+          "tokens": 369342060
+        },
+        {
+          "from": "2026-08-03",
+          "to": "2026-08-09",
+          "prompts": 33,
+          "models": [
+            "claude-opus-5"
+          ],
+          "recordsIncomplete": true,
+          "tokens": 313925098
+        },
+        {
+          "from": "2026-08-10",
+          "to": "2026-08-16",
+          "prompts": 29,
+          "models": [
+            "claude-opus-5"
+          ],
+          "recordsIncomplete": true,
+          "tokens": 521083738
+        },
+        {
+          "from": "2026-08-17",
+          "to": "2026-08-23",
+          "prompts": 130,
+          "models": [
+            "claude-haiku-4-5-20251001",
+            "claude-opus-5",
+            "claude-sonnet-5"
+          ],
+          "recordsIncomplete": true,
+          "tokens": 810017666
+        },
+        {
+          "from": "2026-08-24",
+          "to": "2026-08-30",
+          "prompts": 31,
+          "models": [
+            "claude-opus-5",
+            "claude-sonnet-5"
+          ],
+          "recordsIncomplete": false,
+          "tokens": 277783039
+        },
+        {
+          "from": "2026-08-31",
+          "to": "2026-08-31",
+          "prompts": 22,
+          "models": [
+            "claude-opus-5",
+            "claude-sonnet-5"
+          ],
+          "recordsIncomplete": false,
+          "tokens": 316371708
+        }
+      ]
     },
     {
       "id": "history-cross-vendor",
@@ -104,7 +204,68 @@
         "first": "2026-08-18",
         "last": "2026-09-16"
       },
-      "recordsIncomplete": true
+      "recordsIncomplete": true,
+      "weeks": [
+        {
+          "from": "2026-08-18",
+          "to": "2026-08-23",
+          "prompts": 129,
+          "models": [
+            "claude-haiku-4-5-20251001",
+            "claude-opus-5",
+            "claude-sonnet-5"
+          ],
+          "recordsIncomplete": true,
+          "tokens": 805767052
+        },
+        {
+          "from": "2026-08-24",
+          "to": "2026-08-30",
+          "prompts": 31,
+          "models": [
+            "claude-opus-5",
+            "claude-sonnet-5"
+          ],
+          "recordsIncomplete": false,
+          "tokens": 277783039
+        },
+        {
+          "from": "2026-08-31",
+          "to": "2026-09-06",
+          "prompts": 156,
+          "models": [
+            "claude-opus-5",
+            "claude-sonnet-5"
+          ],
+          "recordsIncomplete": true,
+          "tokens": 1969482668
+        },
+        {
+          "from": "2026-09-07",
+          "to": "2026-09-13",
+          "prompts": 120,
+          "models": [
+            "claude-opus-4-8",
+            "claude-opus-5",
+            "claude-sonnet-5",
+            "gpt-6-astra"
+          ],
+          "recordsIncomplete": false,
+          "tokens": 1002038583
+        },
+        {
+          "from": "2026-09-14",
+          "to": "2026-09-16",
+          "prompts": 55,
+          "models": [
+            "claude-opus-5",
+            "claude-sonnet-5",
+            "gpt-6-astra"
+          ],
+          "recordsIncomplete": false,
+          "tokens": 348450432
+        }
+      ]
     },
     {
       "id": "history-gpu",
@@ -137,7 +298,46 @@
         "first": "2026-09-16",
         "last": "2026-09-28"
       },
-      "recordsIncomplete": false
+      "recordsIncomplete": false,
+      "weeks": [
+        {
+          "from": "2026-09-16",
+          "to": "2026-09-20",
+          "prompts": 108,
+          "models": [
+            "claude-opus-5",
+            "claude-sonnet-5",
+            "gpt-6-astra"
+          ],
+          "recordsIncomplete": false,
+          "tokens": 841694350
+        },
+        {
+          "from": "2026-09-21",
+          "to": "2026-09-27",
+          "prompts": 99,
+          "models": [
+            "claude-opus-5",
+            "claude-opus-5-5",
+            "claude-sonnet-5",
+            "gpt-5.6-sol",
+            "gpt-6-astra"
+          ],
+          "recordsIncomplete": false,
+          "tokens": 3040630515
+        },
+        {
+          "from": "2026-09-28",
+          "to": "2026-09-29",
+          "prompts": 8,
+          "models": [
+            "claude-opus-5-5",
+            "claude-sonnet-5"
+          ],
+          "recordsIncomplete": false,
+          "tokens": 527948782
+        }
+      ]
     },
     {
       "id": "history-product",
@@ -172,7 +372,49 @@
         "first": "2026-09-23",
         "last": "2026-10-05"
       },
-      "recordsIncomplete": false
+      "recordsIncomplete": false,
+      "weeks": [
+        {
+          "from": "2026-09-23",
+          "to": "2026-09-27",
+          "prompts": 63,
+          "models": [
+            "claude-opus-5",
+            "claude-opus-5-5",
+            "claude-sonnet-5",
+            "gpt-5.6-sol",
+            "gpt-6-astra"
+          ],
+          "recordsIncomplete": false,
+          "tokens": 2524520564
+        },
+        {
+          "from": "2026-09-28",
+          "to": "2026-10-04",
+          "prompts": 169,
+          "models": [
+            "claude-opus-4-8",
+            "claude-opus-5-5",
+            "claude-sonnet-5",
+            "claude-sonnet-5-5",
+            "gpt-5.6-sol",
+            "gpt-6-astra"
+          ],
+          "recordsIncomplete": false,
+          "tokens": 2386602743
+        },
+        {
+          "from": "2026-10-05",
+          "to": "2026-10-05",
+          "prompts": 15,
+          "models": [
+            "claude-opus-5-5",
+            "gpt-6-astra"
+          ],
+          "recordsIncomplete": false,
+          "tokens": 100571266
+        }
+      ]
     }
   ]
 }
