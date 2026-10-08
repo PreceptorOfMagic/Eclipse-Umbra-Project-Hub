@@ -82,4 +82,6 @@ Pair one Umbra host and launch a game or desktop. For co-op, verify each host al
 
 **One PC, then two.** Eclipse on Windows, recorded full screen: it streams one PC’s desktop, returns to the library, then opens co-op, picks a layout and starts a two-PC session. Eclipse offers to close the app still running on the first PC before co-op begins. Each half of the finished screen is a different PC, showing its own desktop. [Watch the clip on the website](https://preceptorofmagic.github.io/Eclipse-Umbra-Project-Hub/eclipse.html#preview).
 
+*Recorded by an AI assistant (Claude) while the developer was away, as a capability test: every click and key press was planned in advance and played back automatically on live hosts. Wallpapers: [“Moon Light”](https://steamcommunity.com/sharedfiles/filedetails/?id=1539918440) by Sir Crab and [“KIKI&JIJI”](https://steamcommunity.com/sharedfiles/filedetails/?id=2466412743) (art credited to Ayu) by 鬥丨Dou, from the Wallpaper Engine Steam Workshop.*
+
 [Eclipse/Umbra licence & notices](../LICENSES.md) · [GPL-3.0](../LICENSE.txt)

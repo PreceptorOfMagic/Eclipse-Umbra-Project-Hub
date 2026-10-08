@@ -36,6 +36,8 @@ Eclipse requests the built-in Co-op Pane from each Umbra host. Its virtual deskt
 
 Every band in a pane is drawn in one pass with the same step number, so a pane assembled from slices of different moments would show bands that disagree. Each pane’s bands agree throughout; the two panes differ because each PC draws from its own clock.
 
+*Recorded by an AI assistant (Claude) while the developer was away, as a capability test: every click and key press was planned in advance and played back automatically on live hosts.*
+
 Each connection retains Moonlight-compatible discovery, pairing, launch/control, video/audio transport and return input. The secondary connection has its own session process; its encoded access units reach the compositor through inter-process communication. An access unit is the encoded data needed for a picture, not a decoded pixel buffer.
 
 ### What Eclipse changes
@@ -137,6 +139,8 @@ Read: [GPU HEVC source and component tests](https://github.com/PreceptorOfMagic/
 Co-op negotiates host capabilities, selects a compatible encoding route, requests each built-in pane and divides the default video budget between hosts. A disconnect preserves the resumable applications. Quit is an explicit end-both-hosts operation; an orientation change on resume rebuilds pane geometry. Linux has recorded end-both-hosts verification; do not silently extend that test result to every packaged platform.
 
 [![Pointer routing between the two PCs’ halves (plays on the website)](../site/media/eclipse-coop-pointer-poster.webp)](https://preceptorofmagic.github.io/Eclipse-Umbra-Project-Hub/development.html#input-routing)
+
+*Recorded by an AI assistant (Claude) while the developer was away, as a capability test: every click and key press was planned in advance and played back automatically on live hosts. Wallpapers: [“Moon Light”](https://steamcommunity.com/sharedfiles/filedetails/?id=1539918440) by Sir Crab and [“KIKI&JIJI”](https://steamcommunity.com/sharedfiles/filedetails/?id=2466412743) (art credited to Ayu) by 鬥丨Dou, from the Wallpaper Engine Steam Workshop.*
 
 Controller assignments associate remembered devices with host destinations. Pane-aware absolute pointing maps the composite coordinate into the selected host’s desktop. Button ownership stays fixed through a drag, and keyboard key-up events return to the destination of their key-down to avoid leaving keys stuck on a different PC. Explicit per-device mouse/keyboard assignment offers an alternative to pane routing; relative and virtual-mouse behaviour needs separate testing.
 

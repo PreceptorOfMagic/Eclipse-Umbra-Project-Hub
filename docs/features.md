@@ -66,6 +66,8 @@ Disconnect preserves a resumable two-host session. Returning to co-op reconnects
 
 Disconnect from the stream overlay leaves both PCs’ sessions running: the Co-op Pane tile stays live, and choosing Resume streaming on it reconnects both. Quit game then ends both.
 
+*Recorded by an AI assistant (Claude) while the developer was away, as a capability test: every click and key press was planned in advance and played back automatically on live hosts. Wallpapers: [“Moon Light”](https://steamcommunity.com/sharedfiles/filedetails/?id=1539918440) by Sir Crab and [“KIKI&JIJI”](https://steamcommunity.com/sharedfiles/filedetails/?id=2466412743) (art credited to Ayu) by 鬥丨Dou, from the Wallpaper Engine Steam Workshop.*
+
 #### More useful launch failures
 
 A busy host is identified so you can resolve its existing session. If the client lacks launch permission, the message directs you to the host’s Clients settings rather than leaving you with an unexplained permission error.
@@ -93,6 +95,8 @@ Pane-aware pointer routing translates coordinates into the target desktop. A dra
 [![The pointer crossing from one PC’s half to the other’s (plays on the website)](../site/media/eclipse-coop-pointer-poster.webp)](https://preceptorofmagic.github.io/Eclipse-Umbra-Project-Hub/index.html#features-input)
 
 One mouse, two PCs: moving across the middle line hands the pointer to the other PC, whose own cursor appears at the matching edge.
+
+*Recorded by an AI assistant (Claude) while the developer was away, as a capability test: every click and key press was planned in advance and played back automatically on live hosts. Wallpapers: [“Moon Light”](https://steamcommunity.com/sharedfiles/filedetails/?id=1539918440) by Sir Crab and [“KIKI&JIJI”](https://steamcommunity.com/sharedfiles/filedetails/?id=2466412743) (art credited to Ayu) by 鬥丨Dou, from the Wallpaper Engine Steam Workshop.*
 
 #### Nintendo buttons, without remapping every pad
 

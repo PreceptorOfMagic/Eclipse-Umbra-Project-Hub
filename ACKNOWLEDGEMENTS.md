@@ -137,6 +137,10 @@ The experimental encoder code records provenance from [x265 commit `b81f650`](ht
 
 Supporting this project does not fund its upstreams. To support an upstream project, follow the funding links on that project’s own repository or maintainer profile. Support for Eclipse/Umbra is described in [SUPPORT.md](SUPPORT.md).
 
+## Media on this site
+
+The demonstration clips and screens were recorded by an AI assistant (Claude) as an unattended capability test while the developer was away. The host desktops in them show Wallpaper Engine wallpapers from the Steam Workshop: [“Moon Light”](https://steamcommunity.com/sharedfiles/filedetails/?id=1539918440) by Sir Crab and [“KIKI&JIJI”](https://steamcommunity.com/sharedfiles/filedetails/?id=2466412743) (art credited to Ayu) by 鬥丨Dou. They remain their creators’ work and appear only as each PC’s desktop background.
+
 ## Corrections
 
 If an attribution is incomplete, please open an issue with a primary source and the affected release. This inventory is engineering documentation, not legal advice.
