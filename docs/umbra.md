@@ -69,6 +69,8 @@ Use the installed host shortcut or tray action to open configuration, set up the
 
 ## At the host.
 
-**Image placeholder — Apollo foundation, Umbra additions.** Capture the host’s home page with the Umbra panel, recorded Apollo base and update notice visible. Add a separate Eclipse screenshot of an active co-op session if showing the Co-op Pane; the built-in pane is not listed in Umbra’s editable Applications page. Crop out account names, addresses and browser bookmarks.
+![Umbra web interface home page: the Umbra panel shows Version 0.4.6-umbra.3, built on Apollo v0.4.6, and the notice “Up to date: built on Apollo’s latest release (v0.4.6)”.](../site/media/umbra-host-home.webp)
+
+**Apollo foundation, Umbra additions.** Umbra’s home page on a host: the Umbra panel gives its version and the Apollo release it is built on, and says whether that is Apollo’s latest release.
 
 [Eclipse/Umbra licence & notices](../LICENSES.md) · [GPL-3.0](../LICENSE.txt)

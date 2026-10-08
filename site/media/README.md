@@ -13,12 +13,14 @@ projects stay outside Git; GitHub blocks files over 100 MiB and the hub's own bo
   pre-timed sequence played at a natural pace, and the capture starts and ends with the shot, so the delivery is
   the master re-encoded without edits.
 
+- `umbra-host-home.webp` — the Umbra page still (`umbra.html#preview`). 1920×726, cropped from a full-screen
+  capture of a host's Umbra home page: the Umbra panel with its version, the Apollo release it is built on and
+  the update notice.
+
 ## Planned
 
 - The homepage showcase video (`index.html#showcase`): a full-screen recording on the PC client of an ordinary
   Halo stream, then co-op with two separate Halo games in both layouts.
-- The Umbra page screenshot (`umbra.html`): the host home page with the Umbra panel, recorded Apollo base and
-  update notice visible.
 
 Videos are embedded on the website with native controls and no `autoplay`; `assets/loops.mjs` plays a loop only
 while it is on screen and never when the viewer prefers reduced motion. GitHub's Markdown pages cannot play a
