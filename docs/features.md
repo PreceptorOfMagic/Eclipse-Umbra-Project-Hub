@@ -64,7 +64,7 @@ Disconnect preserves a resumable two-host session. Returning to co-op reconnects
 
 [![Disconnect, resume, then Quit game ends both PCs (plays on the website)](../site/media/eclipse-coop-pause-poster.webp)](https://preceptorofmagic.github.io/Eclipse-Umbra-Project-Hub/index.html#features-session)
 
-Disconnect from the stream overlay leaves both PCs’ sessions running; starting co-op again resumes them. Quit game then ends both.
+Disconnect from the stream overlay leaves both PCs’ sessions running: the Co-op Pane tile stays live, and choosing Resume streaming on it reconnects both. Quit game then ends both.
 
 #### More useful launch failures
 
