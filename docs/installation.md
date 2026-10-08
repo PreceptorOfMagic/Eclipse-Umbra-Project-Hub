@@ -26,6 +26,10 @@ Download an attached file under **Assets**, not GitHub’s automatically generat
 
 ## 1. Umbra on Windows
 
+![Umbra host web interface showing the installed version, Apollo base and separate update-check results.](../site/media/umbra-host-home.webp)
+
+Umbra’s web interface after setup, showing its version and update checks. Captured on 8 October 2026. [View the full-size panel.](../site/media/umbra-host-home.webp)
+
 [Umbra Windows x64 releases](https://github.com/PreceptorOfMagic/Umbra/releases)
 
 Open the latest release, expand Assets and choose the package described below. If no release is listed, that package has not been published.
