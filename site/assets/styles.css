@@ -92,3 +92,5 @@
 .support-control .bmc-btn-text{min-width:0;flex-shrink:1;white-space:normal;line-height:1.1}
 
 .gameplay-showcase{display:grid;gap:2.5rem}.gameplay-showcase h3{margin:0 0 1rem}
+
+#downloads .card-figure .media-still{display:block;aspect-ratio:16/9;object-fit:contain;background:#000}
