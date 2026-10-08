@@ -83,7 +83,7 @@ Want the implementation details? The [Development guide](docs/development.md) co
 
 An ordinary game stream, then two independent games sharing one display.
 
-**Video placeholder — Standard streaming → co-op → both layouts.** Record 45–60 seconds: launch an ordinary stream, then show two games and isolated player controls in both co-op layouts. Use OBS on a desktop client and a locked-off camera on the TV; record at the actual display frame rate. Export MP4/WebM with captions and a poster frame.
+**Video placeholder — Standard streaming → co-op → both layouts.** Record 45–60 seconds full screen on the PC client: an ordinary Halo stream, then co-op with two separate Halo games and isolated player controls in both layouts. Record at the actual display frame rate. Export MP4/WebM with a poster frame.
 
 <a name="system-map"></a>
 
@@ -96,14 +96,6 @@ Two independently encoded streams cannot always be joined safely when the hosts 
 | Capture each game, choose a compatible hardware or custom co-op encoder, and send two independent sessions. | Negotiates the co-op contract, composes the panes, mixes or selects audio, and keeps input ownership separate. | Each player controls their own PC while both games appear on one television or desktop display. |
 
 The work was kept as a coordinated client-and-host project because broad co-op compatibility required changes on both sides. Anyone is welcome to adapt the functionality for Aurora, Apollo, or any other Moonlight/Sunshine fork.
-
-<a name="shorts"></a>
-
-## A closer look.
-
-**GIF / short loop placeholder — Two games. Two controllers.** Record 8–12 seconds with one player moving while the other is still, then swap. Capture the client with OBS; export a silent looping WebM/MP4 and optional GIF. Show the player labels without exposing host addresses.
-
-**Photo placeholder — The whole couch setup.** Photograph the TV and both players with their controllers, using a tripod and a shutter matched to the display to avoid bands. Keep both game panes legible; omit identifying room details and account names.
 
 <a name="status"></a>
 
