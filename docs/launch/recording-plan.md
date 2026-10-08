@@ -74,7 +74,7 @@ editing:
 | 63–75 s | Moonlight origin card naming Cameron Gutman, Diego Waxemberg, Aidan Campbell, Aaron Neyer, Michelle Bergeron and Andrew Hennessy | Put the original creators on screen at a readable size. |
 | 75–85 s | Sunshine origin card naming creator @loki-47-6F-64 and the current LizardByte maintainers | Give the host foundation its own readable acknowledgement. |
 | 85–95 s | Lineage card naming Moonlight TV by Mariotaku, Aurora by GuiDev1994 and Apollo by @ClassicOldSong | Distinguish the direct upstream lineage from the original foundations. |
-| 95–100 s | Source/status link and “engineering preview” label | Honest call to action; no funding appeal in the launch cut. |
+| 95–100 s | Source/status link | Honest call to action; no funding appeal in the launch cut. |
 
 The 6–8 second loop should be cut from the simultaneous-action shot, without UI chrome, camera movement, audio or text small enough to become unreadable.
 
@@ -131,5 +131,5 @@ The media is ready only when a viewer unfamiliar with the project can answer all
 
 1. What is new? Two live host streams become one couch co-op display.
 2. What runs where? The Umbra host runs on the gaming PCs; the Eclipse client runs at the shared display.
-3. Is it stable? Not yet—the current presentation says engineering preview and states the remaining release work plainly.
+3. What has been tested? The video points to the status table of tested hardware rather than promising every combination works.
 4. Who made the foundations? The video and description credit Moonlight, Sunshine, Moonlight TV, Aurora and Apollo with links.

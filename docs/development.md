@@ -1,6 +1,4 @@
-[Project Hub](../README.md) · [Installation Guide](installation.md) · [Eclipse](https://github.com/PreceptorOfMagic/Eclipse) · [Umbra](https://github.com/PreceptorOfMagic/Umbra) · [Development](development.md) · [Acknowledgements](../ACKNOWLEDGEMENTS.md)
-
-Development
+[Project Hub](../README.md) · [Installation Guide](installation.md) · [Eclipse](eclipse.md) · [Umbra](umbra.md) · [Development](development.md) · [Acknowledgements](../ACKNOWLEDGEMENTS.md)
 
 # Understand the whole connection.
 
@@ -16,11 +14,9 @@ A contributor’s guide to the client, the thin Apollo host fork, and the experi
 
 PreceptorOfMagic and AI coding tools, including Claude and Codex, develop Eclipse/Umbra’s additions together. PreceptorOfMagic sets goals, orchestrates the work, contributes high-level design and tests the results hands-on. The AI tools contribute implementation, research, instrumentation and diagnosis—including ideas that worked, experiments that failed and conclusions that needed correcting. This describes these forks, not the authorship of their upstream foundations.
 
-The history below separates implementation from recorded test results and abandoned hypotheses. A component benchmark is not end-to-end latency; a successful decode counter is not proof of a correct screen. See the [hardware and testing matrix](https://preceptorofmagic.github.io/Eclipse-Umbra-Project-Hub/#status) for the scope of current evidence.
+The history below separates implementation from recorded test results and abandoned hypotheses. A component benchmark is not end-to-end latency; a successful decode counter is not proof of a correct screen. See the [hardware and testing matrix](../README.md#status) for the scope of current evidence.
 
 <a name="architecture"></a>
-
-Architecture
 
 ## Two sessions. One decodable picture.
 
@@ -124,7 +120,7 @@ Integration had to add real capture, residual/reconstruction work and rate budge
 
 Both bit-depth builds and the required kernels must accompany a host package. Packaging can otherwise succeed without the custom encoder, leaving a host unsuitable for the intended mixed-vendor mode. Verify advertised capabilities against the actual installed files, then verify the selected path in a real session. Source conformance tests are necessary, not sufficient.
 
-Read: [GPU HEVC source and component tests](https://github.com/PreceptorOfMagic/Eclipse/tree/feat/coop-seamless/experimental/gpu-hevc), [host encoder packaging](https://github.com/PreceptorOfMagic/Umbra/blob/umbra/thin/cmake/packaging/windows.cmake). The encoder builds on upstream work, including x265; see [Acknowledgements](https://preceptorofmagic.github.io/Eclipse-Umbra-Project-Hub/credits.html).
+Read: [GPU HEVC source and component tests](https://github.com/PreceptorOfMagic/Eclipse/tree/feat/coop-seamless/experimental/gpu-hevc), [host encoder packaging](https://github.com/PreceptorOfMagic/Umbra/blob/umbra/thin/cmake/packaging/windows.cmake). The encoder builds on upstream work, including x265; see [Acknowledgements](../ACKNOWLEDGEMENTS.md).
 
 </details>
 
@@ -174,7 +170,7 @@ Read: [mixer and duplicate-sound filters](https://github.com/PreceptorOfMagic/Ec
 
 ## Know which tree owns the change.
 
-Source links may require repository access while the application repositories remain private. A development branch is not a release identifier; use the exact source commit recorded with a package.
+A development branch is not a release identifier; use the exact source commit recorded with a package.
 
 <a name="source-map"></a>
 
@@ -204,7 +200,7 @@ Source links may require repository access while the application repositories re
 
 [The hub repository](https://github.com/PreceptorOfMagic/Eclipse-Umbra-Project-Hub) owns `site/`, mirrored documentation and `scripts/launch/` validation. Application packages belong in their application repositories, not this website. The six-destination navigation, shared branding and release selectors are maintained together.
 
-Initialise recursive submodules at the chosen commit. Do not replace pinned dependencies with arbitrary latest versions. [Acknowledgements](https://preceptorofmagic.github.io/Eclipse-Umbra-Project-Hub/credits.html) records the wider stack and upstream creators.
+Initialise recursive submodules at the chosen commit. Do not replace pinned dependencies with arbitrary latest versions. [Acknowledgements](../ACKNOWLEDGEMENTS.md) records the wider stack and upstream creators.
 
 </details>
 
@@ -228,9 +224,9 @@ Build from Linux/WSL using the webOS wrapper. It bootstraps client dependencies,
 
 The media integration links into webOS’s native playback environment. A post-link symbol-export guard protects against application symbols interposing on system libraries—the cause of the webOS 26 first-stream crash. Packaging produces an IPK in `dist/`, retaining the inherited live app identifier; the beta variant has its own identity and build directory.
 
-A rebuild can overwrite the same versioned IPK filename, so preserve a known-good package first. Installation alone does not restart an already running app: close and relaunch it before evaluating new code. Test first stream after a fresh install or firmware update as well as later launches. Toolchain acquisition and dependency provenance still need release review; this is not a claim of a fully hermetic build.
+A rebuild can overwrite the same versioned IPK filename, so preserve a known-good package first. Installation alone does not restart an already running app: close and relaunch it before evaluating new code. Test first stream after a fresh install or firmware update as well as later launches.
 
-[Build wrapper](https://github.com/PreceptorOfMagic/Eclipse/blob/feat/coop-seamless/scripts/webos/build_for_lg.sh) · [Firmware/symbol-collision investigation](https://github.com/PreceptorOfMagic/Eclipse/blob/feat/coop-seamless/docs/webos26-media-load.md) · [User installation](https://preceptorofmagic.github.io/Eclipse-Umbra-Project-Hub/setup.html#eclipse-webos)
+[Build wrapper](https://github.com/PreceptorOfMagic/Eclipse/blob/feat/coop-seamless/scripts/webos/build_for_lg.sh) · [Firmware/symbol-collision investigation](https://github.com/PreceptorOfMagic/Eclipse/blob/feat/coop-seamless/docs/webos26-media-load.md) · [User installation](installation.md#eclipse-webos)
 
 </details>
 
@@ -250,7 +246,7 @@ The script configures/builds with CMake and Ninja, installs into staging, then f
 
 Preserve the whole extracted directory. Verify package provenance and dependencies on a clean Windows machine, then ordinary streaming, both co-op orientations, input, audio and reconnect/quit. Hardware decoding does not imply zero-copy display: the current readback/presentation path can bottleneck high-resolution output independently of the decoder.
 
-[Portable builder](https://github.com/PreceptorOfMagic/Eclipse/blob/feat/coop-seamless/scripts/windows/build_portable.ps1) · [User installation](https://preceptorofmagic.github.io/Eclipse-Umbra-Project-Hub/setup.html#eclipse-windows)
+[Portable builder](https://github.com/PreceptorOfMagic/Eclipse/blob/feat/coop-seamless/scripts/windows/build_portable.ps1) · [User installation](installation.md#eclipse-windows)
 
 </details>
 
@@ -272,7 +268,7 @@ The bundle deliberately does not carry glibc or a replacement GPU driver. Its la
 
 Distribution-container and WSL checks help find dependency problems. They do not verify every native display server, compositor or GPU driver. Recorded co-op coverage uses NVDEC under WSL; native AMD/Intel VAAPI needs independent validation, and the experimental WSL VAAPI path showed instability.
 
-[Portable builder](https://github.com/PreceptorOfMagic/Eclipse/blob/feat/coop-seamless/scripts/linux/build_portable.sh) · [Sysroot and dependency scripts](https://github.com/PreceptorOfMagic/Eclipse/tree/feat/coop-seamless/scripts/linux/portable) · [User installation](https://preceptorofmagic.github.io/Eclipse-Umbra-Project-Hub/setup.html#eclipse-linux)
+[Portable builder](https://github.com/PreceptorOfMagic/Eclipse/blob/feat/coop-seamless/scripts/linux/build_portable.sh) · [Sysroot and dependency scripts](https://github.com/PreceptorOfMagic/Eclipse/tree/feat/coop-seamless/scripts/linux/portable) · [User installation](installation.md#eclipse-linux)
 
 </details>
 
@@ -298,13 +294,11 @@ This checks the changed-file boundary against `scripts/umbra-delta.txt`. Follow 
 
 The installer intentionally replaces Apollo in place and retains its installation/configuration identity. Switching back replaces Umbra. Test config and pairing preservation, upgrade, rollback and uninstall; do not describe the two hosts as independent side-by-side installations.
 
-[Host build guide](https://github.com/PreceptorOfMagic/Umbra/blob/umbra/thin/docs/umbra-windows-build.md) · [Apollo update checklist](https://github.com/PreceptorOfMagic/Umbra/blob/umbra/thin/docs/umbra-upstream-sync.md) · [User installation](https://preceptorofmagic.github.io/Eclipse-Umbra-Project-Hub/setup.html#umbra-windows)
+[Host build guide](https://github.com/PreceptorOfMagic/Umbra/blob/umbra/thin/docs/umbra-windows-build.md) · [Apollo update checklist](https://github.com/PreceptorOfMagic/Umbra/blob/umbra/thin/docs/umbra-upstream-sync.md) · [User installation](installation.md#umbra-windows)
 
 </details>
 
 <a name="detailed-history"></a>
-
-Detailed history · July–October 2026
 
 ## Step by step, including the retractions.
 
@@ -584,13 +578,13 @@ When both PCs play the same sound, the mix doubles it. Echo-gate prototypes were
 
 ## Useful work starts with a reproducible gap.
 
-The [feature catalogue](https://preceptorofmagic.github.io/Eclipse-Umbra-Project-Hub/#features) explains the user-facing behaviour. These are engineering and release gaps, not hidden requirements for users to configure manually.
+The [feature catalogue](../README.md#features) explains the user-facing behaviour. These are engineering gaps, not hidden requirements for users to configure manually.
 
 <a name="contribute"></a>
 
 <details>
 
-<summary>Open issues, acceptance checks and contributing — Image quality, presentation, platform breadth, audio and release completeness</summary>
+<summary>Open issues, acceptance checks and contributing — Image quality, presentation, platform breadth and audio</summary>
 
 - **Custom encoder:** fast-motion quality, bitrate/quality trade-offs and worst-case encode time. Record scene, hardware, build and both visual and timing evidence.
 
@@ -603,8 +597,6 @@ The [feature catalogue](https://preceptorofmagic.github.io/Eclipse-Umbra-Project
 - **Audio:** a live TV listening test of the passive gate; whispers and other noise-only lines, which are caught at the start but not held; copies playing more than 0.25% slower; noise-only lines lowering the earlier copy slightly; endpoint restoration across disconnect/crash/restart.
 
 - **Automatic setup:** clean-install and in-place upgrade checks with no manual hidden settings. Verify required encoder payload, advertised capabilities, both orientations and ordinary-stream regressions.
-
-- **Release provenance:** matched client/host source, dependency notices, package contents, checksums and clean-machine tests. The website does not manufacture a downloadable release when no asset exists.
 
 ### A contribution that can be reviewed
 

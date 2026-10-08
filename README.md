@@ -4,86 +4,133 @@
 
 ## Two PCs. One screen. Couch co-op, re-engineered.
 
-**Everyday game streaming, plus two independent PCs sharing one display.** Eclipse is the client on your TV or desktop; Umbra is the host on each Windows gaming PC. Use one host for ordinary streaming, or two for side-by-side or stacked co-op.
+**Eclipse** is the client and **Umbra** is the Windows host. Use them for familiar one-PC remote game streaming—or combine two independent PCs into one side-by-side or stacked couch co-op view.
 
-[Project Hub](https://github.com/PreceptorOfMagic/Eclipse-Umbra-Project-Hub) · [Installation Guide](https://github.com/PreceptorOfMagic/Eclipse-Umbra-Project-Hub/blob/main/docs/installation.md) · [Eclipse](https://github.com/PreceptorOfMagic/Eclipse) · [Umbra](https://github.com/PreceptorOfMagic/Umbra) · [Development](https://github.com/PreceptorOfMagic/Eclipse-Umbra-Project-Hub/blob/main/docs/development.md) · [Acknowledgements](https://github.com/PreceptorOfMagic/Eclipse-Umbra-Project-Hub/blob/main/ACKNOWLEDGEMENTS.md)
+**Eclipse:** LG webOS · Windows x64 · Linux x86_64 &nbsp;|&nbsp; **Umbra:** Windows x64
 
-[Open the project website](https://preceptorofmagic.github.io/Eclipse-Umbra-Project-Hub/) · [Eclipse source](https://github.com/PreceptorOfMagic/Eclipse) · [Umbra source](https://github.com/PreceptorOfMagic/Umbra)
+[Install Eclipse/Umbra](docs/installation.md) · [See how it works](#how-it-works) · [Open the project website](https://preceptorofmagic.github.io/Eclipse-Umbra-Project-Hub/)
 
-Eclipse/Umbra’s additions use AI-assisted coding, including Claude and Codex. [How the project is developed](docs/development.md#development-process).
+[Project Hub](README.md) · [Installation Guide](docs/installation.md) · [Eclipse](docs/eclipse.md) · [Umbra](docs/umbra.md) · [Development](docs/development.md) · [Acknowledgements](ACKNOWLEDGEMENTS.md)
 
-## What Moonlight and Sunshine do
+**Built from Moonlight and Sunshine, through Moonlight TV, Aurora and Apollo.** [See the creators and open-source projects that made this possible.](ACKNOWLEDGEMENTS.md)
 
-Moonlight receives video/audio from a PC and sends your controls back. Sunshine captures and encodes the PC’s games or desktop. Games run on your own hardware, not in a hosted cloud service.
+Eclipse/Umbra’s additions use AI-assisted coding, including Claude and Codex. [How the project is developed.](docs/development.md#development-process)
 
-Eclipse follows **Moonlight → Moonlight TV → Aurora**. Umbra follows **Sunshine → Apollo**. It is Apollo with the additions Eclipse needs for co-op, keeping other changes to a minimum. Apollo supplies the everyday host foundation; Umbra keeps its changes separate where possible to make upstream updates easier to integrate. The normal experience remains: discover a host, pair with a PIN, choose a game or desktop, configure streaming quality and play using controllers, keyboard or mouse. Codec, HDR, resolution and frame-rate options depend on the hardware at both ends.
+<a name="streaming-basics"></a>
 
-## What co-op means here
+## Your games run on your PC. Play where you want.
 
-Two PCs each run their own game session. Eclipse combines their streams side by side or stacked on one screen, keeps player/controller assignments separate, and mixes or selects audio. The game still decides whether its sessions can join the same multiplayer world. You provide the PCs, games and any required accounts.
+### What Moonlight and Sunshine do
 
-Cross-vendor co-op needs a compatible stream structure. Umbra supplies the custom co-op encoder path and Eclipse coordinates the sessions and composition; this is why the work spans both applications rather than a client-only change. Anyone is welcome to adapt the functionality into Aurora, Apollo or other Moonlight/Sunshine forks.
+[Moonlight](https://moonlight-stream.org/) is a client: it receives video and audio and sends your controls back. [Sunshine](https://github.com/LizardByte/Sunshine) is a host: it captures and encodes a gaming PC’s output. Games still run on your own hardware; this is not a cloud-game subscription or a game library.
 
-## Streaming features
+Eclipse follows Moonlight → Moonlight TV → Aurora. Umbra follows Sunshine → Apollo: it is Apollo with the additions Eclipse needs for co-op, keeping other changes to a minimum. Apollo’s everyday host functionality remains the foundation. [How Umbra follows Apollo.](docs/umbra.md#apollo)
 
-The [detailed feature catalogue](docs/features.md) separates the familiar Moonlight/Sunshine, Moonlight TV/Aurora and Apollo foundation from Eclipse/Umbra’s additions. It covers:
+### What you need
 
-- Two-host layouts, automatic pane-sized desktops and compatible encoder selection.
-- A shared bitrate budget, pause/resume and ending both host sessions.
-- Remembered controllers, pane-aware mouse/keyboard routing, Nintendo layouts and media-remote handling.
-- Stereo mixing, host-speaker restoration and shared sounds played once.
-- Windows local-host play, remote-monitor control, wired-TV routing and desktop usability.
-- Cross-platform diagnostic bundles, host evidence and crash/unclean-exit records.
+- One Windows gaming PC running Umbra; two for two-host co-op.
+- Eclipse on an LG webOS TV, Windows x64 PC or Linux x86_64 desktop.
+- A reachable home network, ideally wired, plus controllers or keyboard/mouse.
+- Your games installed on each host and any accounts the games require.
 
-These describe development capabilities, not a guarantee that every feature is in an available package or verified on every platform. The catalogue carries the limitations; the [testing matrix](#status) records actual coverage.
+You do not need a second client for the second player. A separate device hub is optional, not part of the standard installation.
 
-## System map
+Two PCs do not turn one single-player game into a shared multiplayer world. Each PC runs an independent session; the game itself decides whether those sessions can play together online or over a LAN.
 
-| On the gaming PCs | Across your network | On the shared display |
+<a name="how-it-works"></a>
+
+## Start with one host. Add a second when the couch fills up.
+
+Co-op is the defining addition, not a replacement for standard game streaming. Eclipse and Umbra retain the normal host pairing, app launching, video, audio and input experience expected from their Moonlight/Sunshine lineage.
+
+### Standard streaming: one host → one client
+
+Pair Eclipse with Umbra, choose a game or desktop, and stream to the TV or desktop client. Configure resolution, frame rate, bitrate, codec, HDR, audio and input according to the capabilities of the client, host and network.
+
+- Remote game and desktop launch
+- H.264 and HEVC; AV1 on compatible webOS paths, HDR where supported
+- Gamepads, keyboard and mouse
+- Performance overlay and session diagnostics
+
+### Two-host co-op: what co-op means here
+
+Choose two paired Umbra PCs. Eclipse receives both live sessions, places them side by side or stacked, and routes each player's assigned controls to the correct host.
+
+- Two independently rendered games
+- Side-by-side or top-and-bottom layouts
+- Explicit Player 1 and input ownership
+- Automatic compatible encoder selection
+
+<a name="features"></a>
+
+## Familiar streaming. More ways to play together.
+
+The everyday capabilities come from Moonlight, Sunshine, Moonlight TV, Aurora and Apollo. Eclipse/Umbra builds on that work with coordinated two-host play, device routing and practical improvements. The [feature catalogue](docs/features.md) has the details:
+
+- [The streaming foundation we keep](docs/features.md#the-streaming-foundation-we-keep) — your PC remotely, picture and sound controls, and the controls you already have.
+- [Two independent PCs, one shared view](docs/features.md#features-coop) — both layouts, automatic desktops and compatible encoding.
+- [One co-op session to manage](docs/features.md#features-session) — a shared bandwidth budget, pause, resume and quit.
+- [Controls go to the right PC](docs/features.md#features-input) — remembered controllers, pane-aware pointing and Nintendo layouts.
+- [Two games, with sound you control](docs/features.md#features-audio) — stereo mixing, speaker restoration and shared sounds played once.
+- [Fit the setup you actually use](docs/features.md#features-devices) — local-host play, monitor control, wired TV networking and desktop usability.
+- [Reports that explain what went wrong](docs/features.md#features-diagnostics) — client and host evidence, crash records and shareable bundles.
+
+Want the implementation details? The [Development guide](docs/development.md) covers composition, reference-frame holds, buffering, build pipelines and the experiments that shaped them.
+
+<a name="showcase"></a>
+
+## See both modes in one continuous run.
+
+An ordinary game stream, then two independent games sharing one display.
+
+**Video placeholder — Standard streaming → co-op → both layouts.** Record 45–60 seconds: launch an ordinary stream, then show two games and isolated player controls in both co-op layouts. Use OBS on a desktop client and a locked-off camera on the TV; record at the actual display frame rate. Export MP4/WebM with captions and a poster frame.
+
+<a name="system-map"></a>
+
+## Cross-vendor co-op needs both ends of the connection.
+
+Two independently encoded streams cannot always be joined safely when the hosts use different GPU vendors. Eclipse and Umbra are developed together so the client can request a compatible co-op mode and the host can use the custom encoder path and stream contract it requires.
+
+| Gaming PCs → Umbra hosts | Shared display → Eclipse client | Players → one couch |
 |---|---|---|
-| Umbra captures and encodes one PC | One video/audio session + return input | Eclipse plays an ordinary stream |
-| Umbra on two PCs encodes compatible co-op streams | Two sessions, with separate input destinations | Eclipse presents both games in one layout |
+| Capture each game, choose a compatible hardware or custom co-op encoder, and send two independent sessions. | Negotiates the co-op contract, composes the panes, mixes or selects audio, and keeps input ownership separate. | Each player controls their own PC while both games appear on one television or desktop display. |
 
-## Choose your platform
+The work was kept as a coordinated client-and-host project because broad co-op compatibility required changes on both sides. Anyone is welcome to adapt the functionality for Aurora, Apollo, or any other Moonlight/Sunshine fork.
 
-| Install here | Component | Installation |
-|---|---|---|
-| LG webOS TV | Eclipse client | [Developer Mode and IPK](docs/installation.md#eclipse-webos) |
-| Windows x64 display PC | Eclipse client | [Portable ZIP](docs/installation.md#eclipse-windows) |
-| Linux x86_64 desktop | Eclipse client | [Portable archive](docs/installation.md#eclipse-linux) |
-| Windows x64 gaming PC (one or two) | Umbra host | [Bundled installer](docs/installation.md#umbra-windows) |
+<a name="shorts"></a>
 
-Use a reachable home network, preferably wired for co-op. Install games on their respective hosts. Start by testing a normal stream from each PC; then choose Co-op in Eclipse. No manual Co-op Pane creation or separate device-bridge download is part of installation.
+## A closer look.
+
+**GIF / short loop placeholder — Two games. Two controllers.** Record 8–12 seconds with one player moving while the other is still, then swap. Capture the client with OBS; export a silent looping WebM/MP4 and optional GIF. Show the player labels without exposing host addresses.
+
+**Photo placeholder — The whole couch setup.** Photograph the TV and both players with their controllers, using a tripod and a shutter matched to the display to avoid bands. Keep both game panes legible; omit identifying room details and account names.
 
 <a name="status"></a>
 
-## Current status
+## What has been tested—and what still needs your hardware.
 
-Test coverage as of October 2026—not a promise that all hardware combinations work.
+The table separates working targets from combinations that have actually been exercised. A supported code path is not the same as a promise that every TV, OS, GPU and driver combination has been verified.
 
-| Area | Exercised | Still needed |
-|---|---|---|
-| LG webOS | LG G5, webOS 26 / 11.2.0, firmware 43.21.77, UE300 wired Ethernet | Other models, SoCs and firmware versions |
-| Windows client | Windows 11 x64, Radeon RX Vega, D3D11VA; ordinary/co-op sessions and diagnostics | Windows 10, ARM, Intel and other driver/GPU combinations |
-| Linux client | Ubuntu 22.04/26.04, Fedora 44 and Arch environments under WSL; NVDEC standard/co-op | Bare-metal Linux and native AMD/Intel VAAPI; experimental WSL VAAPI was unstable |
-| Windows hosts | Windows 11, RTX 4070 / RTX 3070 / Radeon RX Vega | Other Windows versions, Intel hosts and newer AMD GPUs |
-| NVIDIA × NVIDIA | Primary RTX pair, including HEVC/HDR path | Wider generations, resolutions and driver coverage |
-| NVIDIA × AMD | Live custom GPU HEVC co-op | Fast-motion quality, high-bitrate stability and broader real-game coverage |
-| AMD × AMD / Intel co-op | No representative physical pair | Community testing; do not infer co-op support from standard streaming |
+Compatibility and test coverage as of October 2026:
 
-Windows 4K presentation can be limited by GPU-to-CPU frame readback. [Development](docs/development.md#open-work) explains current issues. If your setup differs, try it and report successes or failures through GitHub or the project’s social thread. [Enable diagnostic logging and export a bundle](docs/installation.md#diagnostics) so reports include useful evidence.
+| Area | Tested hardware / software | Result | Coverage gap |
+|---|---|---|---|
+| LG webOS client | LG G5, webOS 26 (11.2.0 / firmware 43.21.77), wired through a UE300 USB Ethernet adapter | **Tested.** Standard streaming and the two-host co-op path run on the project television. | Other LG models, SoCs, decoder combinations and earlier/later webOS releases need community testing. |
+| Windows client | Windows 11 x64 on the Radeon RX Vega test PC; D3D11VA hardware decode | **Tested.** Standard and co-op sessions, diagnostics and recovery have been exercised. | Windows 10, Windows on ARM, Intel-only clients, other GPU generations and broader decoder/driver combinations remain unverified. |
+| Linux client | x86_64 Ubuntu 22.04/26.04, Fedora 44 and Arch environments under WSL; NVIDIA NVDEC | **Tested.** Single-host/co-op streaming and diagnostics exercised under WSL; this is not native-Linux certification. | Bare-metal Linux and native AMD/Intel VAAPI remain unverified. Experimental WSL VAAPI tests showed crashes and visual faults. |
+| Umbra hosts | Windows 11 x64; NVIDIA RTX 4070, NVIDIA RTX 3070 and AMD Radeon RX Vega systems | **Tested.** Single-host streaming and host diagnostics work across the project systems. | Windows 10, Windows Server, Windows on ARM, Intel Arc/iGPU hosts and newer AMD generations need coverage. |
+| NVIDIA + NVIDIA co-op | RTX 4070 + RTX 3070, Windows 11; 10-bit HEVC/HDR path | **Measured.** Two-host co-op has been used and measured on the primary rig. | Other NVIDIA architectures, driver branches, resolutions and refresh rates need reports. |
+| NVIDIA + AMD co-op | RTX 4070 / RTX 3070 + Radeon RX Vega, Windows 11; custom GPU HEVC co-op path | **Measured.** Live mixed-vendor co-op has been demonstrated. | Fast-motion image quality and high-bitrate stability remain active work. Newer AMD encoders, HDR and longer sessions need coverage. |
+| AMD + AMD co-op | No second AMD host is available on the project rig | **Needs testing.** The code path exists but this pairing has not been run on two physical AMD hosts. | AMD × AMD is a priority community test, especially RDNA-era GPUs and HDR-capable hardware. |
+| Intel and mixed Intel co-op | No representative Intel host pair in the project rig | **Needs testing.** Standard host encoder support does not establish Intel co-op support. These co-op combinations are not verified. | Intel × Intel, Intel × NVIDIA and Intel × AMD reports are needed. |
 
-## Gameplay and setup media
+### Try it outside the tested matrix.
 
-**Video placeholder — ordinary stream → co-op → both layouts.** Record 45–60 seconds using OBS on the desktop client and a locked-off camera on the TV. Show separate player control, hide accounts/PINs and export captioned MP4/WebM with a poster.
+If something fails, open an Eclipse or Umbra issue—or reply in the project’s community thread—with the exact OS, GPU, driver, client and display. [Eclipse’s Share logs feature](docs/installation.md#diagnostics) packages system capabilities, settings, session events, performance totals, host logs and crash or unclean-exit records so a report can be investigated without guesswork. Review the bundle for personal information before attaching it.
 
-**GIF/short-loop placeholder — independent controls.** Record 8–12 seconds with one player moving and the other still, then swap. Export a silent loop and optional GIF.
-
-**Photo placeholder — the whole couch setup.** Photograph the TV and controllers with both panes legible; match shutter to the display to avoid bands.
+[Report an Eclipse issue](https://github.com/PreceptorOfMagic/Eclipse/issues/new/choose) · [Report an Umbra issue](https://github.com/PreceptorOfMagic/Umbra/issues/new/choose)
 
 <a name="timeline"></a>
-
-Development history · July–October 2026
 
 ## The route was not a straight line.
 
@@ -235,9 +282,9 @@ On webOS 26, first-stream media-plugin scanning resolved a library call to the a
 
 The built-in pane, capability-based encoder selection and divided default bitrate replaced manual host edits. Resume and Quit gained two-host semantics. Umbra’s branding and changes were then isolated into a smaller Apollo delta, preserving upstream documentation, translations and maintained everyday functionality instead of duplicating them.
 
-### Early October · Smaller features, and experiments still in flight
+### Early October · Smaller features and the passive audio gate
 
-Remote-monitor choices, remembered input assignments, Nintendo mapping, remote-device filtering, wired-TV routing and richer logs made the app fit more real setups. Duplicate-audio work explored several filtering strategies before settling on a passive gate, now the default way shared sounds are played once. Public package publication, wider clean-install coverage and motion-quality improvements remain separate release tasks.
+Remote-monitor choices, remembered input assignments, Nintendo mapping, remote-device filtering, wired-TV routing and richer logs made the app fit more real setups. Duplicate-audio work explored several filtering strategies before settling on a passive gate, now the default way shared sounds are played once.
 
 <!-- activity:history-product:start -->
 **Behind the build · 23 September–5 October 2026**
@@ -249,12 +296,35 @@ Remote-monitor choices, remembered input assignments, Nintendo mapping, remote-d
 
 </details>
 
-## Where next?
+## Eclipse and Umbra
 
-- [Install and pair](docs/installation.md) — platform downloads and exact steps.
-- [Eclipse repository](https://github.com/PreceptorOfMagic/Eclipse) / [Umbra repository](https://github.com/PreceptorOfMagic/Umbra) — source, release assets and component issues.
-- [Development](docs/development.md) — architecture, dependencies, milestones and open work.
-- [Acknowledgements](ACKNOWLEDGEMENTS.md) — Moonlight and Sunshine’s original creators, Aurora, Apollo and the wider stack.
+### Eclipse · client
+
+Install on the television or computer where you want to play. Pair it with one Umbra host for regular streaming or two for co-op. [Explore Eclipse →](docs/eclipse.md)
+
+### Umbra · host
+
+Install on each Windows gaming PC. Apollo supplies the everyday host experience; Umbra keeps other changes to a minimum while adding the encoder and session behaviour required by Eclipse co-op. [Explore Umbra →](docs/umbra.md)
+
+<a name="questions"></a>
+
+## Before you install.
+
+### Can I just stream one PC?
+
+Yes. Regular streaming is a first-class mode: pair, choose an app, play. Resolution, frame rate, bitrate, codec, audio and input remain configurable. Hardware capabilities determine available codecs, HDR and performance.
+
+### Do I need Umbra for co-op?
+
+Use matching Eclipse and Umbra releases on both hosts for the coordinated co-op mode. Regular Moonlight-compatible streaming does not imply that another host supports the custom co-op encoder contract.
+
+### Does it cost anything?
+
+The project is free and open source. You provide the gaming PCs, display, network and games.
+
+### What does a working result mean?
+
+The status table records the project’s actual rigs, not a guarantee across all hardware. At high resolutions Windows frame readback can limit presentation, and custom-encoder motion quality is still being improved. Start with a normal stream and report your exact setup.
 
 [![Buy me a coffee](https://img.buymeacoffee.com/button-api/?text=Buy%20me%20a%20coffee&emoji=&slug=PreceptorOfMagic&button_colour=BD5FFF&font_colour=ffffff&font_family=Cookie&outline_colour=000000&coffee_colour=FFDD00)](https://www.buymeacoffee.com/PreceptorOfMagic)
 

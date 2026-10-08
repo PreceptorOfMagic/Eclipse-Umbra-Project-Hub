@@ -206,7 +206,7 @@ This is a timing and fact scaffold. The final narration should be read naturally
 | 63–75 s | Text-only Moonlight origin card | Show Moonlight founders Cameron Gutman, Diego Waxemberg, Aidan Campbell, Aaron Neyer, Michelle Bergeron and Andrew Hennessy. Narration begins: “This exists because open-source creators shared the foundations first.” |
 | 75–85 s | Text-only Sunshine origin card | Show Sunshine creator @loki-47-6F-64 and the current LizardByte maintainers; continue the acknowledgement without a product claim. |
 | 85–95 s | Text-only lineage card | Show Moonlight TV by Mariotaku, Aurora by GuiDev1994 and Apollo by @ClassicOldSong. Link the complete acknowledgements in the video description. |
-| 95–100 s | Project mark, source/status URL and preview label | “Eclipse/Umbra is free, open source, and currently an engineering preview.” |
+| 95–100 s | Project mark and source/status URL | “Eclipse/Umbra is free and open source.” |
 
 Do not add a funding appeal to this cut. The source/status call to action and the credits are the only closing messages.
 
@@ -302,8 +302,8 @@ that implies an action or state change that did not occur may not.
       final page markup and the accepted pixels.
 - [ ] One unfamiliar viewer can explain that two independent live hosts are being combined at one client.
 - [ ] That viewer can identify Umbra as the host application and Eclipse as the client application.
-- [ ] That viewer notices the engineering-preview status and the upstream credits.
-- [ ] The public video description uses the verified URLs and credit block from [community-posts.md](community-posts.md).
+- [ ] That viewer notices the upstream credits.
+- [ ] The public video description uses the verified project URLs and credits the upstream projects named in [ACKNOWLEDGEMENTS.md](../../ACKNOWLEDGEMENTS.md).
 - [ ] The test harness and any auxiliary capture receiver are closed on both hosts after the final take or any aborted take.
 - [ ] No recording-only control or playback state remains armed.
 

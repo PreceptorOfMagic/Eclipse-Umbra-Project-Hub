@@ -25,9 +25,9 @@ Hosted walkthrough: {{FINAL HTTPS URL}}
 
 ## Public links
 
-- Eclipse source/status: https://github.com/PreceptorOfMagic/eclipse / https://preceptorofmagic.github.io/#status
-- Umbra source: https://github.com/PreceptorOfMagic/umbra
-- Complete acknowledgements: https://preceptorofmagic.github.io/credits.html
+- Eclipse source/status: https://github.com/PreceptorOfMagic/Eclipse / https://preceptorofmagic.github.io/Eclipse-Umbra-Project-Hub/#status
+- Umbra source: https://github.com/PreceptorOfMagic/Umbra
+- Complete acknowledgements: https://preceptorofmagic.github.io/Eclipse-Umbra-Project-Hub/credits.html
 - English captions: [`coop-walkthrough.en.vtt`](coop-walkthrough.en.vtt)
 
 ## Credits

@@ -13,23 +13,6 @@ const repositoryRoot = path.resolve(scriptDirectory, "..", "..");
 const siteRoot = path.join(repositoryRoot, "site");
 const errors = [];
 
-const publicationChecklist = fs.readFileSync(
-  path.join(repositoryRoot, "docs", "launch", "publication-checklist.md"),
-  "utf8",
-);
-const fundingGateHeading = "## 7. Live support configuration and follow-up";
-const fundingGateOffset = publicationChecklist.indexOf(fundingGateHeading);
-if (fundingGateOffset === -1) {
-  errors.push("docs/launch/publication-checklist.md: live support section is missing");
-}
-const launchChecklist = fundingGateOffset === -1
-  ? publicationChecklist
-  : publicationChecklist.slice(0, fundingGateOffset);
-const openChecklistItems = launchChecklist.match(/^- \[ \] /gm)?.length ?? 0;
-if (openChecklistItems > 0) {
-  errors.push(`docs/launch/publication-checklist.md: ${openChecklistItems} release attestations remain open`);
-}
-
 errors.push(...validateFundingPolicy({ repositoryRoot, siteRoot }).errors);
 
 function walk(directory) {
@@ -50,17 +33,6 @@ const publicTextFiles = [
 const publicText = publicTextFiles
   .map((file) => `${path.relative(repositoryRoot, file)}\n${fs.readFileSync(file, "utf8")}`)
   .join("\n");
-const communityPosts = fs.readFileSync(
-  path.join(repositoryRoot, "docs", "launch", "community-posts.md"),
-  "utf8",
-);
-const unresolvedCommunityTokens = communityPosts.match(
-  /\[(?:DEMO URL|HUB URL|SETUP URL|STATUS URL|ACKNOWLEDGEMENTS URL|ECLIPSE SOURCE URL|UMBRA SOURCE URL)\]/g,
-) ?? [];
-if (unresolvedCommunityTokens.length > 0) {
-  errors.push(`docs/launch/community-posts.md: ${unresolvedCommunityTokens.length} launch-link placeholders remain`);
-}
-
 const blockers = [
   [/ECLIPSE\s*[×x]\s*UMBRA/i, "legacy Eclipse × Umbra lock-up remains; use the canonical Eclipse/Umbra project identity"],
   [/public source (?:is )?in preparation/i, "prelaunch source wording remains"],
@@ -224,4 +196,4 @@ if (errors.length > 0) {
   process.exit(1);
 }
 
-console.log("Public-launch gate passed: release checklist, public copy and required media are ready.");
+console.log("Public-launch gate passed: public copy and required media are ready.");

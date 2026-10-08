@@ -1,10 +1,8 @@
-[Project Hub](../README.md) · [Installation Guide](installation.md) · [Eclipse](https://github.com/PreceptorOfMagic/Eclipse) · [Umbra](https://github.com/PreceptorOfMagic/Umbra) · [Development](development.md) · [Acknowledgements](../ACKNOWLEDGEMENTS.md)
+[Project Hub](../README.md) · [Installation Guide](installation.md) · [Eclipse](eclipse.md) · [Umbra](umbra.md) · [Development](development.md) · [Acknowledgements](../ACKNOWLEDGEMENTS.md)
 
 # Streaming features
 
 <a name="features"></a>
-
-Features · foundation and additions
 
 ## Familiar streaming. More ways to play together.
 
@@ -12,27 +10,21 @@ The everyday capabilities come from Moonlight, Sunshine, Moonlight TV, Aurora an
 
 ### The streaming foundation we keep
 
-Inherited foundation
-
-### Your PC, remotely
+#### Your PC, remotely
 
 Discover or add a host, pair with a PIN, browse its apps and launch a game or desktop. Video and audio come to Eclipse; your input goes back to the PC. Apollo supplies Umbra’s browser-based host configuration, app management, on-demand virtual displays and per-client permissions.
 
-Inherited foundation
-
-### Control picture and sound
+#### Control picture and sound
 
 Choose resolution, frame rate, bitrate, codec and audio options to suit your connection. H.264 and HEVC are available on current desktop paths; compatible webOS paths can expose AV1 and HDR. Availability is hardware-dependent, not a promise that every combination is tested. Ordinary streaming retains compatible stereo/surround options and stream statistics.
 
-Inherited foundation
-
-### Use the controls you have
+#### Use the controls you have
 
 Gamepads, keyboard, mouse, an on-screen keyboard and a gamepad-controlled virtual mouse remain part of the client experience. Rumble, gyro, touchpad and other controller features depend on the device and platform. Apollo’s host permissions, text-clipboard support and automation hooks are retained; individual client support still matters.
 
 ### What Eclipse/Umbra adds and improves
 
-This catalogue describes current development features, not a claim that every item is already in a downloadable release. The [hardware matrix](../README.md#status) records the testing limits; the [installation guide](https://preceptorofmagic.github.io/Eclipse-Umbra-Project-Hub/setup.html) checks available packages.
+The [hardware matrix](../README.md#status) records the testing limits; the [installation guide](installation.md) covers the packages for each platform.
 
 <a name="features-coop"></a>
 
@@ -52,7 +44,7 @@ Eclipse requests Umbra’s built-in Co-op Pane at the required size. Windows see
 
 Known NVIDIA pairs use the native HEVC route. For supported mixed NVIDIA/AMD pairings, both hosts use the custom GPU HEVC path so their encoded structures match. The AMD/AMD selection path also exists, but two physical AMD hosts have not been tested on the project rig. Required encoder components must be included on both hosts; Intel co-op remains unverified.
 
-[How compressed-frame composition works](https://preceptorofmagic.github.io/Eclipse-Umbra-Project-Hub/development.html#composition)
+[How compressed-frame composition works](development.md#composition)
 
 </details>
 
@@ -98,7 +90,7 @@ Detected Switch Pro/Joy-Con controllers can follow their printed A/B/X/Y labels 
 
 Recognised TV/media remotes are excluded from webOS game-controller allocation. On desktop platforms, remote-like devices are placed in higher slots so ordinary gamepads get the low player slots.
 
-[Input ownership and local-host limitations](https://preceptorofmagic.github.io/Eclipse-Umbra-Project-Hub/development.html#input-routing)
+[Input ownership and local-host limitations](development.md#input-routing)
 
 </details>
 
@@ -120,7 +112,7 @@ Umbra remembers the playback endpoint before switching to streaming audio and re
 
 When both games play the same narration, music or effect, Eclipse’s passive gate compares the two PCs’ sound in six frequency bands and mutes the later copy in each band where the two match, so you hear the sound once. It is on by default and can be switched off in the co-op settings. While a band is muted, anything else the later PC plays in that band is muted with it for that moment, and once the gate has heard enough shared sound it evens out the two PCs’ volumes, by up to 6 dB each. To compare each piece of sound before it plays, the gate holds both PCs’ sound back by 5 ms (240 samples at 48 kHz). Eclipse never makes the picture wait for the sound: on the TV, sound and picture are each time-stamped at the moment they are handed to the player, and on Windows and Linux the video path takes no timing from audio. Player 2’s sound (the PC chosen as Player 2 in the co-op dialog) already fills a 40 ms buffer before it plays, to even out network timing, so 5 ms more is small beside it; for Player 1 the 5 ms is the only delay the mix adds, under a third of a frame at 60 fps. Nothing extra is held back when the setting is off or when you listen to one PC only. In simulator tests built on recorded game audio, copies of ordinary speech were turned down about 23 dB, whispers and breaths only about 3–7 dB, and copies playing 0.5–2% slower about 1.5–4.7 dB.
 
-[How mixing and duplicate detection differ](https://preceptorofmagic.github.io/Eclipse-Umbra-Project-Hub/development.html#audio-routing)
+[How mixing and duplicate detection differ](development.md#audio-routing)
 
 </details>
 
@@ -164,8 +156,8 @@ Windows saves a local bundle. Linux can also provide a temporary network downloa
 
 Known secret fields are redacted, but device names and network addresses can remain. Review a bundle before posting it publicly. A TV app that cannot stay open cannot serve its download page.
 
-[Exact logging and export steps](https://preceptorofmagic.github.io/Eclipse-Umbra-Project-Hub/setup.html#diagnostics)
+[Exact logging and export steps](installation.md#diagnostics)
 
 </details>
 
-Want the implementation details? The [Development guide](https://preceptorofmagic.github.io/Eclipse-Umbra-Project-Hub/development.html) covers composition, reference-frame holds, buffering, build pipelines and the experiments that shaped them.
+Want the implementation details? The [Development guide](development.md) covers composition, reference-frame holds, buffering, build pipelines and the experiments that shaped them.

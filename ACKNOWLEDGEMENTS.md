@@ -1,10 +1,12 @@
+[Project Hub](README.md) · [Installation Guide](docs/installation.md) · [Eclipse](docs/eclipse.md) · [Umbra](docs/umbra.md) · [Development](docs/development.md) · [Acknowledgements](ACKNOWLEDGEMENTS.md)
+
 # Acknowledgements
 
-Eclipse/Umbra is only possible because generations of game-streaming developers published their work. Eclipse is the client application and Umbra is the host application; this page gives prominent credit to both lineages and records the major projects used by the wider system.
+## Credit is part of the architecture.
 
-It is also important to say what this page is **not**: acknowledgements do not replace licence texts, copyright notices, modification notices, corresponding source, relinkable material, NOTICE files or other obligations that must travel with a particular source or binary release.
+Eclipse and Umbra only exist because other people documented protocols, opened source, built clients and hosts, maintained libraries and solved the platform work first. Eclipse is the client application and Umbra is the host application; this record credits both lineages and the major projects used by the wider system.
 
-The client fork's derivative and GPL-3.0-or-later declaration is recorded separately in the Eclipse source repository's [COPYRIGHT](https://github.com/PreceptorOfMagic/Eclipse/blob/main/COPYRIGHT); file-level and component notices remain in force.
+This record does not replace the exact licences, notices and source references shipped with a particular release. The client fork's derivative and GPL-3.0-or-later declaration is recorded in the Eclipse source repository's [COPYRIGHT](https://github.com/PreceptorOfMagic/Eclipse/blob/main/COPYRIGHT); file-level and component notices remain in force.
 
 ## The lineage
 
@@ -18,7 +20,7 @@ Sunshine → Apollo → Umbra
 CTM-USBIP and SudoVDA provide companion host/device functionality.
 ```
 
-This is an independent community project. Eclipse/Umbra is not affiliated with or endorsed by the upstream projects, LG Electronics, Valve, NVIDIA, AMD, Amazon, DXC, the Eclipse Foundation or other named vendors.
+Eclipse/Umbra is an independent project; see [Licences and notices](LICENSES.md#notices).
 
 ## People and projects at the foundation
 
@@ -28,21 +30,21 @@ This is an independent community project. Eclipse/Umbra is not affiliated with o
 
 This client uses [moonlight-common-c](https://github.com/moonlight-stream/moonlight-common-c), the Moonlight community’s core protocol implementation, and descends through [Moonlight Embedded](https://github.com/moonlight-stream/moonlight-embedded), created by **Iwan Timmer** and contributors.
 
-The desktop video module also incorporates and adapts decoding and presentation work from [Moonlight Qt](https://github.com/moonlight-stream/moonlight-qt) at commit [`032529d`](https://github.com/moonlight-stream/moonlight-qt/commit/032529d782242e3833e0b3b147dbbf96e878e3ca). Moonlight Qt is GPL-3.0-or-later work maintained by the Moonlight Game Streaming Project and contributors; its copyright, licence, exact source reference and this fork's modification record must accompany desktop distributions.
+The desktop video module also incorporates and adapts decoding and presentation work from [Moonlight Qt](https://github.com/moonlight-stream/moonlight-qt) at commit [`032529d`](https://github.com/moonlight-stream/moonlight-qt/commit/032529d782242e3833e0b3b147dbbf96e878e3ca). Moonlight Qt is GPL-3.0-or-later work maintained by the Moonlight Game Streaming Project and contributors.
 
-moonlight-common-c's Reed–Solomon forward-error-correction implementation credits **Luigi Rizzo, Alain Knaff and Iwan Timmer**, with portions derived from work by **Phil Karn, Robert Morelos-Zaragoza and Hari Thirumoorthy**. Its BSD-style notice is already present in the webOS notice bundle; source distributions must retain it, and binary distributions must reproduce it in their documentation or other accompanying material.
+moonlight-common-c's Reed–Solomon forward-error-correction implementation credits **Luigi Rizzo, Alain Knaff and Iwan Timmer**, with portions derived from work by **Phil Karn, Robert Morelos-Zaragoza and Hari Thirumoorthy**. Its notice is BSD-style.
 
 ### Sunshine
 
-[Sunshine](https://github.com/LizardByte/Sunshine) was originally created by **[@loki-47-6F-64](https://github.com/loki-47-6F-64/sunshine)** and is now maintained and developed by **[LizardByte](https://github.com/LizardByte)** and contributors. Sunshine provides the open host foundation from which Apollo and the matching host fork descend.
+[Sunshine](https://github.com/LizardByte/Sunshine) was originally created by **[@loki-47-6F-64](https://github.com/loki-47-6F-64/sunshine)** and is now maintained and developed by **[LizardByte](https://github.com/LizardByte)** and contributors. Sunshine is the open host foundation beneath Apollo and Umbra.
 
 ### Moonlight TV
 
-[Moonlight TV](https://github.com/mariotaku/moonlight-tv) was created by **Mariotaku / Ningyuan Li** and contributors. Its LVGL large-screen client, webOS work and associated support libraries form the direct client foundation used by Aurora and this fork.
+[Moonlight TV](https://github.com/mariotaku/moonlight-tv) was created by **Mariotaku / Ningyuan Li** and contributors. Its LVGL large-screen client, webOS work and associated support libraries form the direct client foundation used by Aurora and Eclipse.
 
 ### Aurora
 
-[Aurora](https://github.com/GuiDev1994/aurora-tv) was created by **[@GuiDev1994](https://github.com/GuiDev1994)** and contributors as a Moonlight TV derivative. The Eclipse source repository retains Aurora-era compatibility names in parts of its source and packaging.
+[Aurora](https://github.com/GuiDev1994/aurora-tv) was created by **[@GuiDev1994](https://github.com/GuiDev1994)** and contributors as the direct Moonlight TV derivative from which Eclipse descends. The Eclipse source repository retains Aurora-era compatibility names in parts of its source and packaging.
 
 ### Apollo
 
@@ -50,8 +52,8 @@ moonlight-common-c's Reed–Solomon forward-error-correction implementation cred
 
 ### Companion projects
 
-- [CTM-USBIP](https://github.com/CTM-Bridge/CTM-USBIP), by **Ciprian Teodor Misaila** and contributors, provides companion device transport in the wider three-box setup.
-- [SudoVDA](https://github.com/SudoMaker/SudoVDA), by **SudoMaker** and contributors, supplies virtual-display functionality while carrying inherited work and acknowledgements for **Roshkins, Baloukj, Anakngtokwa, Microsoft's Indirect Display Driver sample, AKATrevorJay's `edid-generator`, zjoasan, Bud, and the VirtualDrivers/MTT fork line**. SudoVDA describes SudoMaker's own changes as “MIT and CC0 or Public Domain” and directs readers to Microsoft and the inherited projects for their separate terms; it must not be flattened into a single MIT label.
+- [CTM-USBIP](https://github.com/CTM-Bridge/CTM-USBIP), by **Ciprian Teodor Misaila** and contributors, created the device-transport foundation integrated into the relevant project installer.
+- [SudoVDA](https://github.com/SudoMaker/SudoVDA), by **SudoMaker** and contributors, supplies virtual-display functionality while carrying inherited work and acknowledgements for **Roshkins, Baloukj, Anakngtokwa, Microsoft's Indirect Display Driver sample, AKATrevorJay's `edid-generator`, zjoasan, Bud, and the VirtualDrivers/MTT fork line**. SudoVDA describes SudoMaker's own changes as “MIT and CC0 or Public Domain” and directs readers to Microsoft and the inherited projects for their separate terms. SudoVDA-derived interface headers are compiled into Umbra.
 
 ### AI-assisted development
 
@@ -59,14 +61,14 @@ Claude and Codex are used to write and debug code and help with documentation fo
 
 ## Client source and runtime dependencies
 
-The exact set varies by platform and build. Licence links below describe the upstream project; every release must use the licence and notices for the exact revision and configuration it distributes.
+The exact set varies by platform and build. Licence entries describe the upstream project; a release's own notices cover the exact revision and configuration it distributes.
 
 | Project | Role | Licence family / source |
 |---|---|---|
 | [moonlight-common-c](https://github.com/moonlight-stream/moonlight-common-c) | Core streaming protocol | GPL-3.0; [licence in the Eclipse tree](https://github.com/PreceptorOfMagic/Eclipse/blob/main/core/moonlight-common-c/LICENSE.txt) |
-| [ENet](https://github.com/lsalzman/enet), by **Lee Salzman**, and [Cameron Gutman's Moonlight fork](https://github.com/cgutman/enet) | Network transport dependency | MIT; Eclipse currently pins fork revision `115a10b`; [licence in the Eclipse tree](https://github.com/PreceptorOfMagic/Eclipse/blob/main/core/moonlight-common-c/enet/LICENSE) |
+| [ENet](https://github.com/lsalzman/enet), by **Lee Salzman**, and [Cameron Gutman's Moonlight fork](https://github.com/cgutman/enet) | Network transport dependency | MIT; Eclipse pins fork revision `115a10b`; [licence in the Eclipse tree](https://github.com/PreceptorOfMagic/Eclipse/blob/main/core/moonlight-common-c/enet/LICENSE) |
 | [SS4S](https://github.com/mariotaku/ss4s) | Streaming/media support | LGPL-3.0; [licence in the Eclipse tree](https://github.com/PreceptorOfMagic/Eclipse/blob/main/third_party/ss4s/LICENSE) |
-| [commons-c](https://github.com/mariotaku/commons-c) | Shared C utilities | Upstream project is MIT; two attributed copied snippets require separate source/licence resolution before release. Its optional CEC loader also contains [Pulse-Eight libCEC](https://github.com/Pulse-Eight/libcec)-derived material offered under GPL-2.0-or-later or separate commercial terms; that file notice must ship whenever the target is compiled. |
+| [commons-c](https://github.com/mariotaku/commons-c) | Shared C utilities | Upstream project is MIT. Its linked-list header attributes token-pasting macros to a Stack Overflow answer and `sortedinsert` to a GeeksforGeeks example. Its optional CEC loader contains [Pulse-Eight libCEC](https://github.com/Pulse-Eight/libcec)-derived material offered under GPL-2.0-or-later or separate commercial terms. |
 | [LVGL](https://github.com/lvgl/lvgl) / [Mariotaku fork](https://github.com/mariotaku/lvgl) | User interface | MIT |
 | [libmicrodns](https://github.com/videolabs/libmicrodns) | Local service discovery | LGPL-2.1-or-later, with a separate commercial option upstream; [copying file in the Eclipse tree](https://github.com/PreceptorOfMagic/Eclipse/blob/main/third_party/libmicrodns/COPYING) |
 | [SDL](https://github.com/libsdl-org/SDL) and [SDL_image](https://github.com/libsdl-org/SDL_image) | Window, input and image support | zlib |
@@ -83,84 +85,58 @@ The exact set varies by platform and build. Licence links below describe the ups
 | [FreeType](https://gitlab.freedesktop.org/freetype/freetype) | Font rendering | FreeType licence or GPL-2.0 |
 | [Fontconfig](https://gitlab.freedesktop.org/fontconfig/fontconfig) | Font discovery | MIT-style |
 | [inih](https://github.com/benhoyt/inih) | INI parsing | BSD-3-Clause |
-| [FFmpeg](https://github.com/FFmpeg/FFmpeg) | Media pipeline components | LGPL/GPL depending exact configuration |
+| [FFmpeg](https://github.com/FFmpeg/FFmpeg) | Media pipeline components | LGPL/GPL depending on the exact configuration |
 | [OpenSSL](https://github.com/openssl/openssl) | TLS in applicable desktop builds | Apache-2.0 for current versions |
 | [h264bitstream](https://github.com/aizvorski/h264bitstream) | Tracked experimental/dormant codec tooling | LGPL-2.1; [licence in the Eclipse tree](https://github.com/PreceptorOfMagic/Eclipse/blob/main/third_party/h264bitstream/LICENSE) |
 | [CMake](https://github.com/Kitware/CMake) | Copied build modules | BSD-3-Clause notices |
 | [Unity](https://github.com/ThrowTheSwitch/Unity), by Mike Karlesky, Mark VanderVoord, Greg Williams and contributors | Client unit-test framework; development only | MIT; [licence in the Eclipse tree](https://github.com/PreceptorOfMagic/Eclipse/blob/main/third_party/Unity/LICENSE.txt), pinned submodule revision `8ba01386008196a92ef4fdbdb0b00f2434c79563` |
 | [Sharp](https://github.com/lovell/sharp), by Lovell Fuller and contributors, with [libvips](https://github.com/libvips/libvips) and the colour-package contributors | Pinned launch-tool pipeline that renders the social card and webOS artwork; development only, not part of the static site or application runtime | Sharp Apache-2.0; the locked Linux libvips package declares LGPL-3.0-or-later; colour dependencies are MIT; exact versions are in `scripts/launch/package-lock.json` |
 
-Platform and build projects also include [libpbnjson](https://github.com/webosose/libpbnjson), [webOS OSE](https://github.com/webosose), [webos-userland](https://github.com/webosbrew/webos-userland) and [buildroot-nc4](https://github.com/openlgtv/buildroot-nc4). This table records the major source, linked, vendored and generated-asset inputs found in the current audit; it does **not** claim to exhaust every resource-build package, Python build requirement, system dependency or workstation utility. The release audit must also inspect `src/app/res/tools/package.json`, `scripts/webos/requirements.txt`, the active CMake dependency branches and the final runtime closure. Whether a notice belongs in a binary artifact depends on what that artifact actually redistributes.
+Platform and build projects also include [libpbnjson](https://github.com/webosose/libpbnjson), [webOS OSE](https://github.com/webosose), [webos-userland](https://github.com/webosbrew/webos-userland) and [buildroot-nc4](https://github.com/openlgtv/buildroot-nc4). This table records the major source, linked, vendored and generated-asset inputs; it is not an exhaustive list of build-time packages, system dependencies or workstation utilities.
 
 ## CTM-USBIP dependencies
 
 The companion project includes or interacts with:
 
-- [usbip-win2](https://github.com/vadimgrn/usbip-win2), by **Vadym Hrynchyshyn** — BSD-2-Clause; preserve the exact vendored licence in each CTM release.
-- [ENet](https://github.com/lsalzman/enet), by Lee Salzman — MIT; preserve the exact vendored licence in each CTM release.
+- [usbip-win2](https://github.com/vadimgrn/usbip-win2), by **Vadym Hrynchyshyn** — BSD-2-Clause.
+- [ENet](https://github.com/lsalzman/enet), by Lee Salzman — MIT.
 - [Opus](https://github.com/xiph/opus) — BSD-style redistribution terms plus the patent-licence references in its `COPYING` file.
-- [FFmpeg](https://github.com/FFmpeg/FFmpeg) — the currently vendored Windows DLLs identify `libavcodec` as **GPL-3.0-or-later** and record `--enable-gpl`, `--enable-version3`, `--enable-libx264` and `--enable-libx265` in their embedded configuration. They are not cleared for redistribution until their exact upstream build/source, complete notices, corresponding source and the enabled libraries' obligations are supplied with the CTM artifact.
-- [AMD Advanced Media Framework](https://github.com/GPUOpen-LibrariesAndSDKs/AMF) — MIT headers with separate codec-patent disclaimers; preserve the exact vendored licence in each CTM release.
-- [Virtual Display Driver](https://github.com/VirtualDrivers/Virtual-Display-Driver) — MIT; preserve the exact vendored licence in each CTM release.
-- The CTM installer also carries a self-contained .NET/WPF `CipriansBridge.exe`; its exact runtime inventory, notices and corresponding source must be inspected with the installer rather than inferred from the native-agent dependency list.
-
-If Microsoft WDK tools such as `devcon.exe` are redistributed, their separate Microsoft redistribution terms must be verified; an open-source acknowledgement does not supply that permission.
+- [FFmpeg](https://github.com/FFmpeg/FFmpeg) — the vendored Windows DLLs identify `libavcodec` as **GPL-3.0-or-later** and record `--enable-gpl`, `--enable-version3`, `--enable-libx264` and `--enable-libx265` in their embedded configuration.
+- [AMD Advanced Media Framework](https://github.com/GPUOpen-LibrariesAndSDKs/AMF) — MIT headers with separate codec-patent disclaimers.
+- [Virtual Display Driver](https://github.com/VirtualDrivers/Virtual-Display-Driver) — MIT.
+- The CTM installer also carries a self-contained .NET/WPF `CipriansBridge.exe`.
 
 ## Umbra and Apollo dependencies
 
-The host’s release-specific notice/SBOM must be generated from its exact dependency graph. Major projects include:
+Major projects include:
 
 - The ClassicOldSong fork of [moonlight-common-c](https://github.com/ClassicOldSong/moonlight-common-c) and its [ENet](https://github.com/lsalzman/enet) transport dependency. Umbra compiles/links these itself; they are not only Eclipse dependencies.
-- [libdisplaydevice](https://github.com/LizardByte/libdisplaydevice) — its checked-out `LICENSE` says AGPL-3.0 while its current CMake metadata says GPL-3.0. That upstream inconsistency must be resolved against the exact revision before release; if AGPL governs the linked/network service, its source-availability terms need explicit treatment.
-- [shared-web](https://github.com/LizardByte/shared-web) — the published `@lizardbyte/shared-web@2025.626.181239` metadata declares AGPL-3.0-only and dependencies including Bootstrap 5.3.7 and Font Awesome 6.7.2. Umbra currently ignores `package-lock.json` and runs `npm install`, so there is no immutable repository lock to support a “pinned in the package lock” claim; capture the actual resolved graph and inspect the final Vite bundle.
+- [libdisplaydevice](https://github.com/LizardByte/libdisplaydevice) — its `LICENSE` file states AGPL-3.0 and its CMake metadata states GPL-3.0.
+- [shared-web](https://github.com/LizardByte/shared-web) — the published `@lizardbyte/shared-web@2025.626.181239` metadata declares AGPL-3.0-only and dependencies including Bootstrap 5.3.7 and Font Awesome 6.7.2.
 - [inputtino](https://github.com/games-on-whales/inputtino) — MIT.
 - [Simple-Web-Server fork](https://github.com/ClassicOldSong/Simple-Web-Server) — MIT, by Ole Christian Eidheim and contributors.
-- [ViGEmClient](https://github.com/LizardByte/Virtual-Gamepad-Emulation-Client) — MIT, Copyright © 2017–2023 **Benjamin “Nefarius” Höglinger-Stelzer**, Nefarius Software Solutions e.U. and contributors; the checked-out client revision is `8d71f674`.
-- [ViGEmBus 1.21.442.0](https://github.com/nefarius/ViGEmBus/releases/tag/v1.21.442.0) — BSD-3-Clause, Nefarius Software Solutions. This is a separate signed driver installer and needs its own notice and artifact verification.
-- [qrcodejs](https://github.com/davidshimjs/qrcodejs) by David Shim — MIT. The bundled minified file matches upstream commit `04f46c6`, has no licence header and therefore needs an outer notice.
-- [nanors](https://github.com/sleepybishop/nanors), by **Joseph Calderon**, and [tray](https://github.com/LizardByte/tray), originally by **Serge Zaitsev** — permissive projects whose exact notices, including nanors' nested `sse2neon` material where shipped, must be preserved.
-- [TPCircularBuffer](https://github.com/michaeltyson/TPCircularBuffer), by **Michael Tyson / A Tasty Pixel**, using a technique by **Philip Howard** adapted by **Kurt Revis** — its podspec says MIT, while the redistributed C/H files carry zlib-style terms including an altered-source marking condition. Preserve those file notices and resolve the metadata inconsistency rather than labelling the component generically “MIT-family.”
+- [ViGEmClient](https://github.com/LizardByte/Virtual-Gamepad-Emulation-Client) — MIT, Copyright © 2017–2023 **Benjamin “Nefarius” Höglinger-Stelzer**, Nefarius Software Solutions e.U. and contributors; client revision `8d71f674`.
+- [ViGEmBus 1.21.442.0](https://github.com/nefarius/ViGEmBus/releases/tag/v1.21.442.0) — BSD-3-Clause, Nefarius Software Solutions. This is a separate signed driver installer.
+- [qrcodejs](https://github.com/davidshimjs/qrcodejs) by David Shim — MIT. The bundled minified file matches upstream commit `04f46c6`.
+- [nanors](https://github.com/sleepybishop/nanors), by **Joseph Calderon**, and [tray](https://github.com/LizardByte/tray), originally by **Serge Zaitsev** — permissive projects; nanors includes nested `sse2neon` material.
+- [TPCircularBuffer](https://github.com/michaeltyson/TPCircularBuffer), by **Michael Tyson / A Tasty Pixel**, using a technique by **Philip Howard** adapted by **Kurt Revis** — its podspec says MIT, while the redistributed C/H files carry zlib-style terms including an altered-source marking condition.
 - [Wayland protocols](https://gitlab.freedesktop.org/wayland/wayland-protocols) and [wlr protocols](https://gitlab.freedesktop.org/wlroots/wlr-protocols) — MIT-style, including per-file notices.
 - [nv-codec-headers](https://github.com/FFmpeg/nv-codec-headers) and [NVAPI SDK fork](https://github.com/LizardByte/nvapi-open-source-sdk) — NVIDIA notices.
-- Vue, Vue I18n, Bootstrap, Popper, Boost, nlohmann JSON, miniupnpc, MinHook, zlib, Opus, curl and OpenSSL — exact licences and notices must follow the shipped Windows link/runtime closure. The current generated static-curl link record also names libssh2, Brotli, zstd, libpsl, libunistring, libiconv and libidn2; their LGPL/GPL/permissive source and relinking implications must be assessed from the release artifact.
-- Font Awesome Free — mixed CC-BY-4.0, OFL-1.1 and MIT terms depending the redistributed asset. Bootstrap 5.3.7 and Font Awesome 6.7.2 are imported into the current web application.
-- FFmpeg, x264, x265, SVT-AV1, Intel VPL and AMD AMF — exact source and build configuration must match the released static media stack. The checked-out binary-distribution submodule is commit `cf5dffaf`; its commit points to [LizardByte build-deps recipe `6ad5cf8`](https://github.com/LizardByte/build-deps/tree/6ad5cf841f592f95be47fb401cde02ae621acd0f). That recipe pins FFmpeg `9373b442` (`n7.1.1-20`), x264 `ff620d0`/build 165, x265 `1d117be`/4.1, SVT-AV1 `08c18ba`/1.6.0, AMF `16f7d73` and nv-codec-headers `22441b5`; both the binary-dist and recipe commits belong in the reproducibility record.
-- Umbra statically links x265 4.1's `dynamicHDR10`/HDR10+ library, Copyright © 2013–2020 MulticoreWare, Inc., authored by **Bhavna Hariharan and Kavitha Sampath**, offered under GPL-2.0-or-later or separate commercial terms. No commercial licence has been evidenced for this build, so release compliance must proceed under the applicable GPL option. That archive includes [json11](https://github.com/dropbox/json11), Copyright © 2013 Dropbox, Inc., under the MIT License. Preserve both the dynamicHDR10 terms and json11's separate copyright and permission notice.
-- Platform-specific inherited source includes GLAD/Khronos material and NVIDIA NvFBC/`helper_math` notices. Build-only tools such as GoogleTest, Doxygen themes, Flatpak tooling, Vite/esbuild and Codecov must be separated from components actually redistributed in a binary.
-- Additional copied or adapted host sources that require exact file-level provenance include FrogTheFrog/Sunshine-derived Windows utility code, an Avahi example-derived Linux publisher, keylase/nvidia-patch-derived CUDA constants, a Stack Overflow-derived Linux input routine, `FindWayland.cmake` by Martin Gräßlin and Georges Basile Stavracas Neto, and `nocnokneo/cmake-git-versioning-example`. Preserve the applicable source links, authorship and licence/attribution terms in the generated host record.
-
-Apollo’s existing Valve/Steam trademark notice must remain intact. The
-SudoVDA/Microsoft indirect-display driver chain needs exact-artifact licence
-verification before redistribution; SudoVDA-derived interface headers are also
-compiled into the host, so omitting only the incomplete driver directory does
-not remove the source-provenance question.
+- Vue, Vue I18n, Bootstrap, Popper, Boost, nlohmann JSON, miniupnpc, MinHook, zlib, Opus, curl and OpenSSL — each under its own licence and notices. The static-curl link record also names libssh2, Brotli, zstd, libpsl, libunistring, libiconv and libidn2.
+- Font Awesome Free — mixed CC-BY-4.0, OFL-1.1 and MIT terms depending on the redistributed asset. Bootstrap 5.3.7 and Font Awesome 6.7.2 are imported into the web application.
+- FFmpeg, x264, x265, SVT-AV1, Intel VPL and AMD AMF — Umbra’s static media stack. The binary-distribution submodule is commit `cf5dffaf`; its commit points to [LizardByte build-deps recipe `6ad5cf8`](https://github.com/LizardByte/build-deps/tree/6ad5cf841f592f95be47fb401cde02ae621acd0f). That recipe pins FFmpeg `9373b442` (`n7.1.1-20`), x264 `ff620d0`/build 165, x265 `1d117be`/4.1, SVT-AV1 `08c18ba`/1.6.0, AMF `16f7d73` and nv-codec-headers `22441b5`.
+- Umbra statically links x265 4.1's `dynamicHDR10`/HDR10+ library, Copyright © 2013–2020 MulticoreWare, Inc., authored by **Bhavna Hariharan and Kavitha Sampath**, offered under GPL-2.0-or-later or separate commercial terms. That archive includes [json11](https://github.com/dropbox/json11), Copyright © 2013 Dropbox, Inc., under the MIT License.
+- Platform-specific inherited source includes GLAD/Khronos material and NVIDIA NvFBC/`helper_math` notices.
+- Additional copied or adapted host sources include FrogTheFrog/Sunshine-derived Windows utility code, an Avahi example-derived Linux publisher, keylase/nvidia-patch-derived CUDA constants, a Stack Overflow-derived Linux input routine, `FindWayland.cmake` by Martin Gräßlin and Georges Basile Stavracas Neto, and `nocnokneo/cmake-git-versioning-example`.
 
 ## Experimental GPU HEVC work
 
-The experimental encoder code records provenance from [x265 commit `b81f650`](https://bitbucket.org/multicoreware/x265_git/src/b81f650e21e8aacbe6a9ad04ce14aefc05b932c0/) and [Khronos OpenCL-Headers](https://github.com/KhronosGroup/OpenCL-Headers). A distributed combined work needs the applicable GPL-3.0 terms, x265 notices, exact corresponding source and build scripts. Codec copyright licences do not themselves grant every patent right that may apply in every jurisdiction.
-
-## Release-compliance work still open
-
-As of 1 October 2026, the following are launch blockers rather than completed credits work:
-
-- The webOS packaging rule now stages the project `LICENSE.txt`, `COPYRIGHT` and this acknowledgement file. Archive inspection of the explicitly `UNTESTED` 30 September 2026 build confirmed all three paths, and each copy matched the input used for that build; the canonical deploy IPK was then restored to its pre-build known state. A public release still needs the exact artifact-specific third-party notice bundle and an immutable corresponding-source reference/archive.
-- The CTM-USBIP installer needs its own GPL material plus FFmpeg, ENet, Opus, AMD AMF and other exact-artifact notices/source information.
-- Local Umbra packaging work has drafted a root GPL licence, Valve/Steam `NOTICE`, targeted third-party notices and source-manifest handling, but the current remote/default Umbra branches do not yet contain that bundle or its packaging references. Do not describe the notice/source manifest as shipped until the implementation is pushed and a generated NSIS/ZIP artifact byte-matches it.
-- The pending Umbra bundle must distinguish ViGEmClient/MIT from the separately installed ViGEmBus/BSD-3-Clause artifact, preserve qrcodejs's outer MIT notice and cover the complete Windows static-link/runtime closure described above; a targeted subset is not an SBOM, modification record or immutable corresponding-source delivery.
-- Umbra packaging expects `SudoVDA.dll`, but the tracked driver directory does not contain it while the INF requires it and identifies version 1.10.9.289. The current SudoVDA source HEAD predates that INF, has no standalone licence and describes mixed SudoMaker/Microsoft/VirtualDrivers provenance. No public release may claim a source/licence match until the exact binary, source and inherited terms are established.
-- Umbra's development source now identifies PreceptorOfMagic as the fork developer, derives package vendor/contact from that setting and labels the executable for Umbra contributors rather than SudoMaker/Apollo. Verify those values in the built installer and signed executable, and replace the maintainer handle with the exact legal publisher if signing/distribution requires one; factual SudoVDA and Apollo credit remains separate.
-- Umbra's GPL-3.0-only declaration must be reconciled with the checked-out `libdisplaydevice` AGPL/GPL inconsistency and any LGPL/GPL static-link or relinking obligations. Generate notices, an SBOM, exact source/build references and an installer-content scan from the final artifact.
-- The webOS and Windows packaging rules now stage Moonlight Qt, moonlight-common-c Reed–Solomon, Montserrat 7.200, Font Awesome Free 5.9.0 and Unscii-8 notices/provenance. No generated release artifact has yet verified those working-tree rules; clean artifact inspection and byte comparison remain mandatory. The generated Font Awesome sources include Brands glyphs, so the upstream trade-mark warning must remain unless a future regeneration proves those glyphs were removed.
-- Applying `patches/client-deps/ss4s.patch` to the pinned SS4S base materialises the Moonlight Qt-derived desktop module as an untracked submodule-worktree file; reverse-apply verification confirms that the tracked patch reproduces it. A release must publish that exact base plus patch as immutable Corresponding Source, and ship the upstream GPL material and dated modification record with the binary.
-- `third_party/commons/util/linked-list/linked_list.h` attributes token-pasting macros to a Stack Overflow answer and `sortedinsert` to a GeeksforGeeks example. The upstream commons-c MIT label does not establish permission for those separately sourced snippets; reimplement or document compatible source terms and attribution before release.
-- Every download needs release-specific corresponding-source URLs/archives and build material, not merely a link to a moving default branch.
-
-The Windows portable notice generator already pins downloaded inputs, verifies hashes, walks its runtime dependency closure and emits notices; it remains the model to extend, with a prominent exact-source reference added per release.
+The experimental encoder code records provenance from [x265 commit `b81f650`](https://bitbucket.org/multicoreware/x265_git/src/b81f650e21e8aacbe6a9ad04ce14aefc05b932c0/) and [Khronos OpenCL-Headers](https://github.com/KhronosGroup/OpenCL-Headers). Codec copyright licences do not themselves grant every patent right that may apply in every jurisdiction.
 
 ## Supporting upstream work
 
-Funding this fork must never be presented as funding its upstreams. To support an upstream project, follow the verified funding links on that project’s own repository or maintainer profile. This project's support policy and current status are documented separately in [SUPPORT.md](SUPPORT.md).
+Supporting this project does not fund its upstreams. To support an upstream project, follow the funding links on that project’s own repository or maintainer profile. Support for Eclipse/Umbra is described in [SUPPORT.md](SUPPORT.md).
 
 ## Corrections
 
-Attribution and dependency graphs change. If a name, role, licence or link here is incomplete, open an issue with the primary source and the affected release/artifact. Compliance questions should be checked against exact source and package contents; this inventory is engineering documentation, not legal advice.
+If an attribution is incomplete, please open an issue with a primary source and the affected release. This inventory is engineering documentation, not legal advice.
