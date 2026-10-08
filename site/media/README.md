@@ -8,14 +8,14 @@ Only reviewed delivery copies belong here. Masters, private capture notes and re
 |---|---|
 | `eclipse-coop-switch` MP4/WebM + poster | 42-second uncut Windows-client workflow: one live host, co-op configuration, then two hosts. Retains the real connection time. |
 | `eclipse-coop-pause` MP4/WebM + poster | 39-second corrected Disconnect → Co-op Pane → Resume streaming → Quit game sequence. Retains real disconnect time. |
-| `eclipse-coop-pointer` MP4/WebM + poster | Accepted 30-second pointer/menu demonstration across two live hosts, using the established Moon Light and KIKI&JIJI wallpapers. |
+| `eclipse-coop-pointer.mp4` + poster | 19-second uncut Codex retake: one menu per host, slow crossing and return; real host cursors enlarged for visibility. Keeps the established Moon Light and KIKI&JIJI wallpapers. The MP4 is smaller than the reviewed WebM candidate. |
 | `coop-test-pattern.mp4` + poster | 12-second technical illustration on Development. The MP4 preserves readable bands/counters and is smaller than the former WebM copy; the redundant WebM is retired. |
 | `umbra-host-home.webp` | Complete 1410×890 host panel captured 8 October 2026: Umbra 0.4.6-umbra.4, Apollo base status and the separate unavailable published-Umbra comparison are all visible. |
 | `eclipse-webos-app.webp` | Fresh 1920×1080 LG G5 / webOS 26 app-library capture for the TV platform card. |
 | `eclipse-webos-launcher.webp` | Fresh 1920×1080 webOS launcher capture, with Eclipse selected, for the installation guide. |
 | Other WebP stills | Host-monitor settings, Share logs location, disclosed virtual controller assignments, co-op dialog, ordinary/two-host streams, Windows/Linux windows and Umbra applications. |
 
-The existing workflow clips were recorded by Claude through planned inputs on live hosts, as disclosed alongside each player. Current clips are silent, 1920×1080 and 60 fps, with SDR Rec.709 primaries/matrix and sRGB transfer. Their delivery cadence does not certify the streaming renderer's unique-frame rate.
+The switch, pause/resume and test-pattern clips were recorded by Claude; the pointer retake was recorded by Codex. All use planned inputs on live hosts, as disclosed alongside each player. Current clips are silent, 1920×1080 and 60 fps, with SDR Rec.709 primaries/matrix and sRGB transfer. Their delivery cadence does not certify the streaming renderer's unique-frame rate.
 
 Videos use native controls, `preload="none"`, and static posters. They never autoplay, loop or automatically resume. Playback pauses when the player leaves view or the tab is hidden. GitHub Markdown uses linked static previews; the former animated README preview is retired.
 

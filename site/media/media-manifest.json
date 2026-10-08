@@ -63,29 +63,19 @@
     },
     {
       "name": "eclipse-coop-pointer-poster.webp",
-      "sha256": "0ff3b6c1b54565ad21e3f1f58891e4d62d076523ac96c5c50ddca454f035e4ab",
+      "sha256": "1d2d32875150370072d809719cd1b3757a3813830d9d52d6581a85696e983f63",
       "width": 1920,
       "height": 1080,
       "codec": "webp"
     },
     {
       "name": "eclipse-coop-pointer.mp4",
-      "sha256": "238ed9d75a1b33af928898018121f037cc5aef3ea4f7476238867b9b5855b769",
+      "sha256": "a5f982a2ad875538c1c7c80e6880ba7115d79a76d98036d744be381f9bd8ca88",
       "width": 1920,
       "height": 1080,
       "codec": "h264",
       "frameRate": 60.0,
-      "durationSeconds": 29.5,
-      "audio": false
-    },
-    {
-      "name": "eclipse-coop-pointer.webm",
-      "sha256": "6fa40677e3b7536ae1dddbf1589b869e2e04a21dc11db43d8e46369730620c78",
-      "width": 1920,
-      "height": 1080,
-      "codec": "vp9",
-      "frameRate": 60.0,
-      "durationSeconds": 29.5,
+      "durationSeconds": 18.766667,
       "audio": false
     },
     {

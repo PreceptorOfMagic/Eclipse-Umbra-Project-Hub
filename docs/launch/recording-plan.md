@@ -4,7 +4,7 @@ The website uses real Eclipse and Umbra captures. Existing workflow demonstratio
 
 ## Current footage
 
-Keep the one-host-to-co-op workflow and the corrected Disconnect → Resume → Quit demonstration. The pointer demonstration should be brief and readable: show a right-click menu on each real host, then cross back slowly. Preserve the original Moon Light and KIKI&JIJI wallpapers and their credits. Never add a simulated pointer or synthetic host response.
+Keep the one-host-to-co-op workflow and the corrected Disconnect → Resume → Quit demonstration. The 19-second pointer retake opens a right-click menu on each real host, then crosses back slowly, with the real system cursors enlarged for visibility. Preserve the original Moon Light and KIKI&JIJI wallpapers and their credits. Never add a simulated pointer or synthetic host response.
 
 Show the complete Umbra home panel, including both the Apollo base-version status and Umbra's published-release comparison. Use genuine LG webOS app and launcher screenshots for the platform and installation pages.
 
