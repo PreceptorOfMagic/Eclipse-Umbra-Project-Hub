@@ -87,4 +87,5 @@
 .media-note{max-width:80ch}
 @media(max-width:36rem){.activity-numbers dd{font-size:1.3rem}.feature-media{margin-block:1rem 1.75rem}}
 /* Keep the official button usable while its optional web font is loading. */
-.support-control .bmc-btn{width:max-content!important;flex-shrink:0}
+.support-control .bmc-btn{width:max-content!important;min-width:10.3rem!important;flex-shrink:0}
+@media(max-width:36rem){.nav-row{column-gap:.5rem}.support-control .bmc-btn{min-width:9.6rem!important;padding-inline:.55rem!important}}
