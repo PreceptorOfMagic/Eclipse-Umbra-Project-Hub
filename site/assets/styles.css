@@ -89,3 +89,4 @@
 /* Keep the official button usable while its optional web font is loading. */
 .support-control .bmc-btn{width:max-content!important;min-width:10.3rem!important;flex-shrink:0}
 @media(max-width:36rem){.nav-row{column-gap:.5rem}.support-control .bmc-btn{min-width:9.6rem!important;padding-inline:.55rem!important}}
+.support-control .bmc-btn-text{min-width:0;flex-shrink:1;white-space:normal;line-height:1.1}
