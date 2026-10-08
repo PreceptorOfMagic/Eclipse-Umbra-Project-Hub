@@ -113,7 +113,7 @@ for (const name of htmlFiles) {
   for (const [pattern, label] of [[/\b(?:engineering|source-first) preview\b/i,"preview copy"],[/prerecorded playback/i,"prerecorded-playback copy"],[/PreceptorOfMagic\.github\.io(?!\/Eclipse-Umbra-Project-Hub)/i,"old hub URL"],[/github\.com\/PreceptorOfMagic\/(?:eclipse|umbra)(?:[\/#"'])/,"lowercase repository URL"]]) {
     if (pattern.test(html)) errors.push(`site/${name}: contains ${label}`);
   }
-  if (name !== "credits.html" && /CTM-USBIP|CTM_USBIP|PreceptorOfMagic\/CTM-USBIP/i.test(html)) errors.push(`site/${name}: CTM must only appear on Acknowledgements`);
+  if (/CTM-USBIP|CTM_USBIP/i.test(html)) errors.push(`site/${name}: CTM-USBIP was removed from Eclipse/Umbra (2026-10-08) and must not be referenced`);
 }
 
 let localReferences = 0;

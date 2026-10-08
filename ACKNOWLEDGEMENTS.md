@@ -17,7 +17,7 @@ Moonlight
 
 Sunshine → Apollo → Umbra
 
-CTM-USBIP and SudoVDA provide companion host/device functionality.
+SudoVDA provides companion virtual-display functionality.
 ```
 
 Eclipse/Umbra is an independent project; see [Licences and notices](LICENSES.md#notices).
@@ -52,7 +52,6 @@ moonlight-common-c's Reed–Solomon forward-error-correction implementation cred
 
 ### Companion projects
 
-- [CTM-USBIP](https://github.com/CTM-Bridge/CTM-USBIP), by **Ciprian Teodor Misaila** and contributors, created the device-transport foundation integrated into the relevant project installer.
 - [SudoVDA](https://github.com/SudoMaker/SudoVDA), by **SudoMaker** and contributors, supplies virtual-display functionality while carrying inherited work and acknowledgements for **Roshkins, Baloukj, Anakngtokwa, Microsoft's Indirect Display Driver sample, AKATrevorJay's `edid-generator`, zjoasan, Bud, and the VirtualDrivers/MTT fork line**. SudoVDA describes SudoMaker's own changes as “MIT and CC0 or Public Domain” and directs readers to Microsoft and the inherited projects for their separate terms. SudoVDA-derived interface headers are compiled into Umbra.
 
 ### AI-assisted development
@@ -93,18 +92,6 @@ The exact set varies by platform and build. Licence entries describe the upstrea
 | [Sharp](https://github.com/lovell/sharp), by Lovell Fuller and contributors, with [libvips](https://github.com/libvips/libvips) and the colour-package contributors | Pinned launch-tool pipeline that renders the social card and webOS artwork; development only, not part of the static site or application runtime | Sharp Apache-2.0; the locked Linux libvips package declares LGPL-3.0-or-later; colour dependencies are MIT; exact versions are in `scripts/launch/package-lock.json` |
 
 Platform and build projects also include [libpbnjson](https://github.com/webosose/libpbnjson), [webOS OSE](https://github.com/webosose), [webos-userland](https://github.com/webosbrew/webos-userland) and [buildroot-nc4](https://github.com/openlgtv/buildroot-nc4). This table records the major source, linked, vendored and generated-asset inputs; it is not an exhaustive list of build-time packages, system dependencies or workstation utilities.
-
-## CTM-USBIP dependencies
-
-The companion project includes or interacts with:
-
-- [usbip-win2](https://github.com/vadimgrn/usbip-win2), by **Vadym Hrynchyshyn** — BSD-2-Clause.
-- [ENet](https://github.com/lsalzman/enet), by Lee Salzman — MIT.
-- [Opus](https://github.com/xiph/opus) — BSD-style redistribution terms plus the patent-licence references in its `COPYING` file.
-- [FFmpeg](https://github.com/FFmpeg/FFmpeg) — the vendored Windows DLLs identify `libavcodec` as **GPL-3.0-or-later** and record `--enable-gpl`, `--enable-version3`, `--enable-libx264` and `--enable-libx265` in their embedded configuration.
-- [AMD Advanced Media Framework](https://github.com/GPUOpen-LibrariesAndSDKs/AMF) — MIT headers with separate codec-patent disclaimers.
-- [Virtual Display Driver](https://github.com/VirtualDrivers/Virtual-Display-Driver) — MIT.
-- The CTM installer also carries a self-contained .NET/WPF `CipriansBridge.exe`.
 
 ## Umbra and Apollo dependencies
 
