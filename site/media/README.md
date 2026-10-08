@@ -33,5 +33,6 @@ projects stay outside Git; GitHub blocks files over 100 MiB and the hub's own bo
 - The LG webOS screens for the Eclipse page and the installation guide, when the TV is available.
 
 Videos are embedded on the website with native controls and no `autoplay`; `assets/loops.mjs` plays a loop only
-while it is on screen and never when the viewer prefers reduced motion. GitHub's Markdown pages cannot play a
+when at least 45% is visible and the tab is active. A visitor’s pause is preserved. Reduced-motion viewers
+start on the poster and can play using the native controls; videos use `preload="none"` until needed. GitHub's Markdown pages cannot play a
 video stored in the repository, so the Markdown mirror links the poster to the website instead.

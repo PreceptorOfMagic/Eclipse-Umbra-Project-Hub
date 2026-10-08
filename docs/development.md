@@ -136,7 +136,7 @@ Read: [GPU HEVC source and component tests](https://github.com/PreceptorOfMagic/
 
 <summary>5. Session lifecycle, input ownership and local-host play — The two host identities remain separate even when the screen is shared</summary>
 
-Co-op negotiates host capabilities, selects a compatible encoding route, requests each built-in pane and divides the default video budget between hosts. A disconnect preserves the resumable applications. Quit is an explicit end-both-hosts operation; an orientation change on resume rebuilds pane geometry. Linux has recorded end-both-hosts verification; do not silently extend that test result to every packaged platform.
+Co-op negotiates host capabilities, selects a compatible encoding route, requests each built-in pane and divides the default video budget between hosts. A disconnect preserves the resumable applications. Quit is an explicit end-both-hosts operation; an orientation change on resume rebuilds pane geometry. Resume and ending both host applications have been exercised on Windows and Linux. Coverage of other packaged platforms remains limited.
 
 [![Pointer routing between the two PCs’ halves (plays on the website)](../site/media/eclipse-coop-pointer-poster.webp)](https://preceptorofmagic.github.io/Eclipse-Umbra-Project-Hub/development.html#input-routing)
 
@@ -160,11 +160,23 @@ Read: [input routing](https://github.com/PreceptorOfMagic/Eclipse/tree/feat/coop
 
 ### Mixing, then playing shared sounds once
 
-Mixing happens inside Player 1’s audio path. Player 1 is chosen in the co-op dialog before launch (it opens on the default pair from settings, else the last session’s pair, else the selected PC) and stays fixed for the session: Eclipse’s main process streams from it, and Player 2 streams in a helper process. Each of Player 1’s audio packets is decoded, Player 2’s sound is added to it, and the result goes straight to the platform’s audio player, so Player 1’s sound is never buffered for the mix. Player 2’s sound is decoded in the helper process, passed over a local socket and held in a jitter buffer that fills to 40 ms before it plays (adjustable in the advanced co-op settings). If that buffer grows past 120 ms it is trimmed back to 40; if it runs dry, silence is mixed until it refills, so Player 1’s sound never waits for Player 2’s. If Player 1 sends no sound for 40 ms, a timer takes over feeding the mix so Player 2 is still heard, and hands back when Player 1’s sound returns. A soft limiter turns down loud combined moments instead of clipping them; it changes gain only, never timing. This is not the ordinary host’s 5.1/7.1 path.
+Mixing happens inside Player 1’s audio path. Player 1 is chosen in the co-op dialog before launch (it opens on the default pair from settings, else the last session’s pair, else the selected PC) and stays fixed for the session: Eclipse’s main process streams from it, and Player 2 streams in a helper process. Each of Player 1’s audio packets is decoded, Player 2’s sound is added to it, and the result goes to the platform’s audio player. The mixer does not wait for Player 2; the default gate adds the 5 ms delay described below.
+
+Player 2’s sound is decoded in the helper process, passed over a local socket and held in a jitter buffer that fills to 40 ms before it plays (adjustable in the advanced co-op settings). If that buffer grows past 120 ms it is trimmed back to 40; if it runs dry, silence is mixed until it refills, so Player 1’s sound never waits for Player 2’s.
+
+If Player 1 sends no sound for 40 ms, a timer takes over feeding the mix so Player 2 is still heard, and hands back when Player 1’s sound returns. A soft limiter turns down loud combined moments instead of clipping them; it changes gain only, never timing. This is not the ordinary host’s 5.1/7.1 path.
 
 Shared narration, music or effects can arrive from both games with a delay between them. The first suppressor found one delay and turned the later copy down. Real-game captures on 4 October showed several copies at different delays at the same time (+272 and +353 ms within one cutscene), so a filter tracking one delay dropped in and out, which PreceptorOfMagic heard.
 
-The passive gate replaced it as the default. It splits each stream into six frequency bands per channel, compares their waveforms at up to 16 delays at once, and mutes the later copy in each band and channel where the two match, closing slightly ahead when the earlier copy’s onset predicts a line. Anything else the later PC plays in a muted band is muted with it while the band is closed. After 20 clean matches it also balances the two PCs’ levels, meeting in the middle by up to 6 dB each, and that balance applies to all of their sound. Both streams are held back by one 5 ms block (240 samples at 48 kHz), so each block is decided before any of it plays: Player 1’s sound plays 5 ms later, and Player 2’s gets the same 5 ms on top of its buffer. The earlier single-delay filter held both for 10.7 ms (512 samples). Video never waits for any of this. The mixer and the gate run on the audio path, not the video thread. On webOS, Eclipse stamps each piece of sound and picture with the time since the stream opened, read when it is handed to the TV’s player, so holding sound back leaves the picture’s timestamps unchanged; the desktop video path has no reference to audio. In an offline benchmark on the TV using recorded captures, the gate used about 7.8% of one CPU core, against 6.4% for the earlier filter. Simulator tests on the same captures measured how far the later copy is turned down per line: ordinary speech about 23 dB, speech with “s” sounds about 14 dB, whispers, breaths and other noise-only lines about 3–7 dB, and copies playing 0.5–2% slower about 1.5–4.7 dB. Noise-only lines can also lower the earlier copy by up to 0.8 dB. The earlier single-delay filter can still be selected for comparison testing.
+The passive gate replaced it as the default. It splits each stream into six frequency bands per channel, compares their waveforms at up to 16 delays at once, and mutes the later copy in each band and channel where the two match, closing slightly ahead when the earlier copy’s onset predicts a line. Anything else the later PC plays in a muted band is muted with it while the band is closed. After 20 clean matches it also balances the two PCs’ levels, meeting in the middle by up to 6 dB each, and that balance applies to all of their sound.
+
+Both streams are held back by one 5 ms block (240 samples at 48 kHz), so each block is decided before any of it plays: Player 1’s sound plays 5 ms later, and Player 2’s gets the same 5 ms on top of its buffer. The earlier single-delay filter held both for 10.7 ms (512 samples).
+
+The gate adds no intentional video buffering. The mixer and the gate run on the audio path, not the video thread. On webOS, Eclipse stamps each piece of sound and picture with the time since the stream opened, read when it is handed to the TV’s player, so holding sound back leaves the picture’s timestamps unchanged; the desktop video path has no reference to audio.
+
+In an offline benchmark on the TV using recorded captures, the gate used about 7.8% of one CPU core, against 6.4% for the earlier filter.
+
+Simulator tests on the same captures measured how far the later copy is turned down per line: ordinary speech about 23 dB, speech with “s” sounds about 14 dB, whispers, breaths and other noise-only lines about 3–7 dB, and copies playing 0.5–2% slower about 1.5–4.7 dB. Noise-only lines can also lower the earlier copy by up to 0.8 dB. The earlier single-delay filter can still be selected for comparison testing.
 
 ### Evidence across both ends
 
@@ -172,7 +184,7 @@ Diagnostic bundles combine build identity, OS/firmware, capabilities, settings a
 
 For timing work, distinguish capture/encode cadence, packet arrival, queue delay, decoder submissions and actual presentation. Match records by session and clock domain. A visually wrong pane can coexist with healthy decode counters, so a screen observation remains part of the verdict.
 
-Read: [mixer and duplicate-sound filters](https://github.com/PreceptorOfMagic/Eclipse/tree/feat/coop-seamless/src/app/stream/audio), [diagnostic bundle contents](https://github.com/PreceptorOfMagic/Eclipse/blob/feat/coop-seamless/docs/support-logs.md).
+Read: [mixer and duplicate-sound filters](https://github.com/PreceptorOfMagic/Eclipse/tree/1a09b62d/src/app/stream/audio), [diagnostic bundle contents](https://github.com/PreceptorOfMagic/Eclipse/blob/feat/coop-seamless/docs/support-logs.md).
 
 </details>
 
@@ -447,7 +459,7 @@ A live run read both hosts’ stream headers. NVENC coded the pane in 32×32 blo
 
 ### 30–31 August · The AVC route
 
-H.264’s fixed 16×16 macroblocks sidestep the block-size mismatch. An AVC splice was proven offline, the television’s AVC limit was measured at exactly Level 5.2, and the splice module was ported to C and wired into the client after five review rounds. Half of an early cross-vendor pass was retracted because its peer comparison could not fail. On 31 August a mixed NVIDIA and AMD session passed a 15-minute stress test.
+H.264’s fixed 16×16 macroblocks sidestep the block-size mismatch. An AVC splice was proven offline, then ported to C and wired into the client after five review rounds. An initial rate sweep suggested a Level 5.2 ceiling, but later live tests disproved that interpretation. Half of an early cross-vendor pass was retracted because its peer comparison could not fail. On 31 August a mixed NVIDIA and AMD session passed a 15-minute stress test.
 
 ### 1–3 September · Measuring before fixing
 

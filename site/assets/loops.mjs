@@ -1,23 +1,51 @@
-// Muted demonstration loops: play only while on screen, and never when the viewer prefers reduced motion.
-// The <video> elements carry native controls and no autoplay attribute, so they work without this script.
-const loops = [...document.querySelectorAll("video[data-loop]")];
-const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
-const visible = new Set();
+// Native controls work without JavaScript, including when observation is unavailable.
+// Automatic playback is an enhancement; a visitor's pause always takes precedence.
+export function observeLoops(root, view) {
+  if (!view.IntersectionObserver) return;
+  const motion = view.matchMedia('(prefers-reduced-motion: reduce)');
+  const states = new Map([...root.querySelectorAll('video[data-loop]')].map(video => [video, {
+    visible: false, userPaused: false, automaticPausePending: false,
+  }]));
 
-const update = () => {
-  for (const video of loops) {
-    if (!reducedMotion.matches && visible.has(video)) video.play().catch(() => {});
-    else video.pause();
+  const stop = (video, state) => {
+    if (!video.paused) {
+      state.automaticPausePending = true;
+      video.pause();
+    }
+  };
+  const update = () => {
+    for (const [video, state] of states) {
+      if (root.hidden || !state.visible) stop(video, state);
+      else if (!motion.matches && !state.userPaused && video.paused && !state.automaticPausePending) {
+        video.play().catch(() => {}); // Browser autoplay policy may require a click.
+      }
+    }
+  };
+  for (const [video, state] of states) {
+    video.addEventListener('pause', () => {
+      if (state.automaticPausePending) {
+        state.automaticPausePending = false;
+        update(); // Media events are queued; visibility may already have changed again.
+      }
+      else state.userPaused = true;
+    });
+    video.addEventListener('play', () => {
+      state.userPaused = false;
+      if (root.hidden || !state.visible) stop(video, state);
+    });
   }
-};
+  const observer = new view.IntersectionObserver(entries => {
+    for (const entry of entries) {
+      states.get(entry.target).visible = entry.isIntersecting && entry.intersectionRatio >= 0.45;
+    }
+    update();
+  }, { threshold: [0, 0.45] });
+  for (const video of states.keys()) observer.observe(video);
+  root.addEventListener('visibilitychange', update);
+  motion.addEventListener('change', () => {
+    if (motion.matches) for (const [video, state] of states) stop(video, state);
+    else update();
+  });
+}
 
-const observer = new IntersectionObserver((entries) => {
-  for (const entry of entries) {
-    if (entry.isIntersecting) visible.add(entry.target);
-    else visible.delete(entry.target);
-  }
-  update();
-}, { threshold: 0.45 });
-
-loops.forEach((video) => observer.observe(video));
-reducedMotion.addEventListener("change", update);
+if (typeof document !== 'undefined') observeLoops(document, window);

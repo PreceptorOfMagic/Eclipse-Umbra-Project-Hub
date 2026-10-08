@@ -76,3 +76,15 @@
 .media-figure{margin:0}.media-figure .media-still{width:100%;height:auto;border:1px solid var(--line,rgba(255,255,255,.12));border-radius:1rem}.media-figure video{width:100%;height:auto;aspect-ratio:16/9;border:1px solid var(--line,rgba(255,255,255,.12));border-radius:1rem;background:#000}.media-figure figcaption{margin-top:.9rem;color:var(--muted,#b9b4c7);font-size:.95rem;max-width:60rem}.media-figure figcaption strong{color:var(--ink)}
 .card-figure{margin:0 0 1rem}.card-figure .media-still{width:100%;height:auto;border:1px solid var(--line);border-radius:.75rem}.feature-media{margin:1rem 0 1.4rem}.setup-figure{margin:0 0 1.5rem}
 .media-note{display:block;margin-top:.45rem;color:var(--muted);font-size:.8rem;line-height:1.5;max-width:60rem}
+
+/* Open feature guides give the demonstrations a full row, with readable text measures. */
+.disclosure-grid>.disclosure[open]{grid-column:1/-1}
+.disclosure-grid>.disclosure[open]>.disclosure-body{max-width:none}
+.disclosure-body p,.disclosure-body>ul{max-width:80ch}
+.feature-media,.setup-figure{max-width:48rem}
+.media-figure video{max-height:75vh;object-fit:contain}
+.media-figure figcaption{line-height:1.65}
+.media-note{max-width:80ch}
+@media(max-width:36rem){.activity-numbers dd{font-size:1.3rem}.feature-media{margin-block:1rem 1.75rem}}
+/* Keep the official button usable while its optional web font is loading. */
+.support-control .bmc-btn{width:max-content!important;flex-shrink:0}

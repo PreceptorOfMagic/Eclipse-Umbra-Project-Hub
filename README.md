@@ -182,7 +182,7 @@ Predictive pictures exposed why arbitrary drops or repeats were unsafe. Reapplyi
 
 ### 3–4 August · Swapping primary hosts changes the fault
 
-User observations during role swapping exposed a scheduling asymmetry: a slower or static primary did not drain a faster peer often enough. A deeper queue stored increasingly old content; high host floors produced more duplicates. The design direction changed to an independent composite picture count and extra catch-up pictures that advance the queued pane while safely holding the other. The initial design note was not itself an implementation result; current code supplies the bounded catch-up paths described above.
+User observations during role swapping exposed a scheduling asymmetry: a slower or static primary did not drain a faster peer often enough. A deeper queue stored increasingly old content; high host floors produced more duplicates. The design direction changed to an independent composite picture count and extra catch-up pictures that advance the queued pane while safely holding the other. The initial design note was not itself an implementation result; current code supplies bounded catch-up paths, explained in the Development guide.
 
 ### Early August · AI conclusions needed retraction, not decoration
 
