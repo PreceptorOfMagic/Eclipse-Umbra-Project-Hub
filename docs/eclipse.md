@@ -20,6 +20,10 @@ Download an attached file under **Assets**, not GitHub’s automatically generat
 
 ### LG webOS TV
 
+![Eclipse running on an LG webOS TV, showing a paired PC’s apps.](../site/media/eclipse-webos-app.webp)
+
+Eclipse on LG G5 / webOS 26.
+
 [LG webOS releases](https://github.com/PreceptorOfMagic/Eclipse/releases)
 
 Open the latest release, expand Assets and choose the package described below. If no release is listed, that package has not been published.

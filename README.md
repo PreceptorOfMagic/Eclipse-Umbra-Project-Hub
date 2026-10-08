@@ -16,7 +16,7 @@
 
 Eclipse/Umbra’s additions use AI-assisted coding, including Claude and Codex. [How the project is developed.](docs/development.md#development-process)
 
-<p align="center"><a href="https://preceptorofmagic.github.io/Eclipse-Umbra-Project-Hub/eclipse.html#preview"><img src="site/media/eclipse-coop-start.webp" alt="Eclipse starting a co-op session: two PCs, each with its own desktop, side by side on one screen" width="800"></a></p>
+<p align="center"><a href="https://preceptorofmagic.github.io/Eclipse-Umbra-Project-Hub/eclipse.html#preview"><img src="site/media/eclipse-two-host.webp" alt="Eclipse showing two PCs, each with its own desktop, side by side on one screen. Open the 42-second workflow demonstration." width="800"></a></p>
 
 <p align="center"><sub>Recorded by an AI assistant (Claude) while the developer was away, as a capability test: every click and key press was planned in advance and played back automatically on live hosts. Wallpapers: <a href="https://steamcommunity.com/sharedfiles/filedetails/?id=1539918440">“Moon Light”</a> by Sir Crab and <a href="https://steamcommunity.com/sharedfiles/filedetails/?id=2466412743">“KIKI&amp;JIJI”</a> (art credited to Ayu) by 鬥丨Dou, from the Wallpaper Engine Steam Workshop.</sub></p>
 

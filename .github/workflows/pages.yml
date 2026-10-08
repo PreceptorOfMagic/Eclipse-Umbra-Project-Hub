@@ -31,12 +31,18 @@ jobs:
         run: node scripts/launch/check_public_site.mjs
       - name: Validate funding button
         run: node scripts/launch/check_funding.mjs
-      - name: Test media contract
-        run: node --test scripts/launch/check_media.test.mjs
+      - name: Test publication budgets
+        run: node --test scripts/launch/check_publication_limits.test.mjs
+      - name: Install media inspection tools
+        run: sudo apt-get update -qq && sudo apt-get install -y ffmpeg
+      - name: Validate published media
+        run: node scripts/launch/check_published_media.mjs --decode
+      - name: Test media format utilities
+        run: node --test scripts/launch/check_media.test.mjs scripts/launch/check_published_media.test.mjs
       - name: Test platform downloads
         run: node --test scripts/launch/check_downloads.test.mjs
       - name: Test demonstration playback
-        run: node --test scripts/launch/check_loops.test.mjs
+        run: node --test scripts/launch/check_playback.test.mjs
       - name: Test expandable guides
         run: node --test scripts/launch/check_disclosures.test.mjs
       - name: Test recorded activity summaries

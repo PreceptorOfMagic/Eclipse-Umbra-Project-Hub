@@ -71,8 +71,8 @@ Use the installed host shortcut or tray action to open configuration, set up the
 
 ## At the host.
 
-![Umbra web interface home page: the Umbra panel shows Version 0.4.6-umbra.3, built on Apollo v0.4.6, and the notice “Up to date: built on Apollo’s latest release (v0.4.6)”.](../site/media/umbra-host-home.webp)
+![Complete Umbra home panel: version 0.4.6-umbra.4, Apollo v0.4.6 base, and both update-check results.](../site/media/umbra-host-home.webp)
 
-**Apollo foundation, Umbra additions.** Umbra’s home page on a host: the Umbra panel gives its version and the Apollo release it is built on, and says whether that is Apollo’s latest release.
+**Apollo foundation, Umbra additions.** The complete host panel, captured on 8 October 2026. Apollo-base status and the published Umbra release check appear separately; both results are shown.
 
 [Eclipse/Umbra licence & notices](../LICENSES.md) · [GPL-3.0](../LICENSE.txt)

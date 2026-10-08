@@ -1631,4 +1631,9 @@ function main() {
   console.log(`Launch-media check passed: ${deliveries.length} delivery files.`);
 }
 
-if (process.argv[1] && path.resolve(process.argv[1]) === scriptFile) main();
+// The old loop/walkthrough contract above is retained only for utility regression fixtures.
+// The command validates the current published collection, not that superseded recording plan.
+if (process.argv[1] && path.resolve(process.argv[1]) === scriptFile) {
+  const result = spawnSync(process.execPath, [path.join(scriptDirectory, "check_published_media.mjs"), ...process.argv.slice(2)], { stdio: "inherit" });
+  process.exitCode = result.status ?? 1;
+}

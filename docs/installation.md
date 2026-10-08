@@ -48,6 +48,10 @@ For co-op, install the same compatible Umbra release on the second Windows PC. C
 
 ## 2A. Eclipse on LG webOS
 
+![LG webOS home screen with Eclipse’s purple split-screen icon selected in the app row.](../site/media/eclipse-webos-launcher.webp)
+
+After installation, choose Eclipse’s purple split-screen icon in the TV’s app row. Shown on LG G5 / webOS 26.
+
 [LG webOS releases](https://github.com/PreceptorOfMagic/Eclipse/releases)
 
 Open the latest release, expand Assets and choose the package described below. If no release is listed, that package has not been published.

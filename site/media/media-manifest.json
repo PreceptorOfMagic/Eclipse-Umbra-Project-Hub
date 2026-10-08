@@ -1,0 +1,189 @@
+{
+  "schemaVersion": 2,
+  "reviewedOn": "2026-10-08",
+  "reviewScope": "Editorial and delivery-format review; not release or runtime certification. Capture descriptions and credits are in README.md and page captions.",
+  "deliveries": [
+    {
+      "name": "coop-test-pattern-poster.webp",
+      "sha256": "2fc655d6978755bc3f38b25f463de54d9ca45ac94d2b50bb8c51d2c01a597b96",
+      "width": 1920,
+      "height": 1080,
+      "codec": "webp"
+    },
+    {
+      "name": "coop-test-pattern.mp4",
+      "sha256": "104f2b9af4eed28ad09b8deb40a3f022c1d20934fae1e36d46372ef3d7fa9035",
+      "width": 1920,
+      "height": 1080,
+      "codec": "h264",
+      "frameRate": 60.0,
+      "durationSeconds": 11.566667,
+      "audio": false
+    },
+    {
+      "name": "eclipse-coop-controllers.webp",
+      "sha256": "964bbf2e292704f4866dc4211bac811ecc2f36e48275c3e82c0ce5fb24982a7a",
+      "width": 1600,
+      "height": 884,
+      "codec": "webp"
+    },
+    {
+      "name": "eclipse-coop-dialog.webp",
+      "sha256": "51dbbdee7417c62d86d5bcbf1f17b2b636236cbd02ac6f2b538589d0633a0ecf",
+      "width": 1600,
+      "height": 945,
+      "codec": "webp"
+    },
+    {
+      "name": "eclipse-coop-pause-poster.webp",
+      "sha256": "aa2797a13499de96510095e4b7a8615d6f0ebe808520a10e158de8ecd8e8065b",
+      "width": 1920,
+      "height": 1080,
+      "codec": "webp"
+    },
+    {
+      "name": "eclipse-coop-pause.mp4",
+      "sha256": "b224087317c8ad2b0cb9f2d92cac2943279af9d2dddad4657d41e5297ed313d4",
+      "width": 1920,
+      "height": 1080,
+      "codec": "h264",
+      "frameRate": 60.0,
+      "durationSeconds": 38.7,
+      "audio": false
+    },
+    {
+      "name": "eclipse-coop-pause.webm",
+      "sha256": "3c8caec9edd92502a9d18e7b4eac21a7cb8d1f036d30dc3142b60adc700813fc",
+      "width": 1920,
+      "height": 1080,
+      "codec": "vp9",
+      "frameRate": 60.0,
+      "durationSeconds": 38.7,
+      "audio": false
+    },
+    {
+      "name": "eclipse-coop-pointer-poster.webp",
+      "sha256": "0ff3b6c1b54565ad21e3f1f58891e4d62d076523ac96c5c50ddca454f035e4ab",
+      "width": 1920,
+      "height": 1080,
+      "codec": "webp"
+    },
+    {
+      "name": "eclipse-coop-pointer.mp4",
+      "sha256": "238ed9d75a1b33af928898018121f037cc5aef3ea4f7476238867b9b5855b769",
+      "width": 1920,
+      "height": 1080,
+      "codec": "h264",
+      "frameRate": 60.0,
+      "durationSeconds": 29.5,
+      "audio": false
+    },
+    {
+      "name": "eclipse-coop-pointer.webm",
+      "sha256": "6fa40677e3b7536ae1dddbf1589b869e2e04a21dc11db43d8e46369730620c78",
+      "width": 1920,
+      "height": 1080,
+      "codec": "vp9",
+      "frameRate": 60.0,
+      "durationSeconds": 29.5,
+      "audio": false
+    },
+    {
+      "name": "eclipse-coop-switch-poster.webp",
+      "sha256": "c8d001b19b486405cfa68f808d8ba967dc19a1c8f8070b7931e4dd3dc0206460",
+      "width": 1920,
+      "height": 1080,
+      "codec": "webp"
+    },
+    {
+      "name": "eclipse-coop-switch.mp4",
+      "sha256": "34266c1597d648c33820465f0724554f11a03133978b92eb623ec0a56aefe8ea",
+      "width": 1920,
+      "height": 1080,
+      "codec": "h264",
+      "frameRate": 60.0,
+      "durationSeconds": 42.266667,
+      "audio": false
+    },
+    {
+      "name": "eclipse-coop-switch.webm",
+      "sha256": "50a6b0d9253c16d1992b1e053d8d21b5ff967dd6342a17af85ee77622790b651",
+      "width": 1920,
+      "height": 1080,
+      "codec": "vp9",
+      "frameRate": 60.0,
+      "durationSeconds": 42.267,
+      "audio": false
+    },
+    {
+      "name": "eclipse-host-monitor.webp",
+      "sha256": "bfb817cdb0cd07d501d70488f445c39938f7bd90069570aa5794a07416260691",
+      "width": 1155,
+      "height": 998,
+      "codec": "webp"
+    },
+    {
+      "name": "eclipse-linux-window.webp",
+      "sha256": "77bbe34f0c2a3e6ff42e41cd6c2a03d166a8739feadca8adbace378fc308bf3e",
+      "width": 1295,
+      "height": 754,
+      "codec": "webp"
+    },
+    {
+      "name": "eclipse-share-logs.webp",
+      "sha256": "ed04243dbb62d52bda496c0507520b17e66ef01ef395d91485c90317c6277554",
+      "width": 1155,
+      "height": 998,
+      "codec": "webp"
+    },
+    {
+      "name": "eclipse-single-host.webp",
+      "sha256": "9f2a58470f4fcecbd5e3a2df25efb1968ce781d089592bc1e9f78450f6feaf83",
+      "width": 1920,
+      "height": 1080,
+      "codec": "webp"
+    },
+    {
+      "name": "eclipse-two-host.webp",
+      "sha256": "6e240716f541484f13d761ff8c8071f329e6ed9665a3a6b7f6002288385f8d60",
+      "width": 1920,
+      "height": 1080,
+      "codec": "webp"
+    },
+    {
+      "name": "eclipse-webos-app.webp",
+      "sha256": "e12fd2ae5119873b203cf907e81bd7f5da3453bc2c4fe3707327c84cbdf175c1",
+      "width": 1920,
+      "height": 1080,
+      "codec": "webp"
+    },
+    {
+      "name": "eclipse-webos-launcher.webp",
+      "sha256": "c592f788aad369e9dbe595ae26bcd21468378c302961d9f28316f21409135e93",
+      "width": 1920,
+      "height": 1080,
+      "codec": "webp"
+    },
+    {
+      "name": "eclipse-windows-window.webp",
+      "sha256": "7744480ee78aa1a877f8ef04f8479dd69119a06cd35028ea9e69d79ce242a999",
+      "width": 1600,
+      "height": 923,
+      "codec": "webp"
+    },
+    {
+      "name": "umbra-applications.webp",
+      "sha256": "1d900ecc3b0d9be0ae780207ffbb12dce348d4196d69b4c41516449aaa1b9a05",
+      "width": 1920,
+      "height": 938,
+      "codec": "webp"
+    },
+    {
+      "name": "umbra-host-home.webp",
+      "sha256": "c6d06c1b7321954986b7b0522addc89dd2b2f97b1605623b7e7eca51001fc9f2",
+      "width": 1410,
+      "height": 890,
+      "codec": "webp"
+    }
+  ]
+}

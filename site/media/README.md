@@ -1,38 +1,30 @@
 # Public media
 
-This directory holds only reviewed, web-ready delivery copies. Camera originals, capture masters and editing
-projects stay outside Git; GitHub blocks files over 100 MiB and the hub's own boundary check limits each file to
-12 MiB.
+Only reviewed delivery copies belong here. Masters, private capture notes and retired takes stay outside Git. [media-manifest.json](media-manifest.json) records the reviewed delivery hashes and measured formats; page captions carry recording and artwork credits.
 
 ## Delivered
 
-- `eclipse-coop-switch.webm` (VP9) and `eclipse-coop-switch.mp4` (H.264 High, fast start), with
-  `eclipse-coop-switch-poster.webp` — the Eclipse page clip (`eclipse.html#preview`). 1920×1080, 60 fps, about
-  42 seconds, silent, SDR Rec.709. One continuous full-screen capture of the Eclipse Windows client streaming
-  live from two Umbra hosts: a one-PC stream, then the co-op dialog and a two-PC session. Every input was a
-  pre-timed sequence played at a natural pace, and the capture starts and ends with the shot, so the delivery is
-  the master re-encoded without edits.
+| Media | Purpose and capture |
+|---|---|
+| `eclipse-coop-switch` MP4/WebM + poster | 42-second uncut Windows-client workflow: one live host, co-op configuration, then two hosts. Retains the real connection time. |
+| `eclipse-coop-pause` MP4/WebM + poster | 39-second corrected Disconnect → Co-op Pane → Resume streaming → Quit game sequence. Retains real disconnect time. |
+| `eclipse-coop-pointer` MP4/WebM + poster | Accepted 30-second pointer/menu demonstration across two live hosts, using the established Moon Light and KIKI&JIJI wallpapers. |
+| `coop-test-pattern.mp4` + poster | 12-second technical illustration on Development. The MP4 preserves readable bands/counters and is smaller than the former WebM copy; the redundant WebM is retired. |
+| `umbra-host-home.webp` | Complete 1410×890 host panel captured 8 October 2026: Umbra 0.4.6-umbra.4, Apollo base status and the separate unavailable published-Umbra comparison are all visible. |
+| `eclipse-webos-app.webp` | Fresh 1920×1080 LG G5 / webOS 26 app-library capture for the TV platform card. |
+| `eclipse-webos-launcher.webp` | Fresh 1920×1080 webOS launcher capture, with Eclipse selected, for the installation guide. |
+| Other WebP stills | Host-monitor settings, Share logs location, disclosed virtual controller assignments, co-op dialog, ordinary/two-host streams, Windows/Linux windows and Umbra applications. |
 
-- `umbra-host-home.webp` — the Umbra page still (`umbra.html#preview`). 1920×726, cropped from a full-screen
-  capture of a host's Umbra home page: the Umbra panel with its version, the Apollo release it is built on and
-  the update notice.
+The existing workflow clips were recorded by Claude through planned inputs on live hosts, as disclosed alongside each player. Current clips are silent, 1920×1080 and 60 fps, with SDR Rec.709 primaries/matrix and sRGB transfer. Their delivery cadence does not certify the streaming renderer's unique-frame rate.
 
-- Feature clips, each a VP9 WebM + H.264 MP4 (1920×1080, 60 fps, silent, Rec.709) with a WebP poster, recorded the
-  same way (live hosts, pre-timed input, no edits): `eclipse-coop-pause` (Disconnect, resume, Quit game; homepage),
-  `eclipse-coop-pointer` (the pointer crossing between the two PCs; homepage and Development), `coop-test-pattern`
-  (the deterministic test pattern on both hosts; Development).
-- Screens: `eclipse-host-monitor.webp`, `eclipse-share-logs.webp`, `eclipse-coop-controllers.webp` (two virtual
-  controllers emulated on the client PC), `eclipse-coop-dialog.webp`, `eclipse-single-host.webp`,
-  `eclipse-two-host.webp`, `eclipse-windows-window.webp`, `eclipse-linux-window.webp`, `umbra-applications.webp`.
-- `eclipse-coop-start.webp` — a 7-second animated preview for the GitHub README, which cannot play repository video.
+Videos use native controls, `preload="none"`, and static posters. They never autoplay, loop or automatically resume. Playback pauses when the player leaves view or the tab is hidden. GitHub Markdown uses linked static previews; the former animated README preview is retired.
 
-## Planned
+## Pending
 
-- The homepage showcase video (`index.html#showcase`): a full-screen recording on the PC client of an ordinary
-  Halo stream, then co-op with two separate Halo games in both layouts.
-- The LG webOS screens for the Eclipse page and the installation guide, when the TV is available.
+The user will record the Halo showcase after these updates. Use accepted frames from that recording for the showcase poster and ordinary/two-host gameplay stills. Keep existing diagrams and imagery until that footage is available. No independent-controller animation, couch photograph or narrated walkthrough is required.
 
-Videos are embedded on the website with native controls and no `autoplay`; `assets/loops.mjs` plays a loop only
-when at least 45% is visible and the tab is active. A visitor’s pause is preserved. Reduced-motion viewers
-start on the poster and can play using the native controls; videos use `preload="none"` until needed. GitHub's Markdown pages cannot play a
-video stored in the repository, so the Markdown mirror links the poster to the website instead.
+## Budget and validation
+
+Keep each file below 12 MiB by default. Only the two future `eclipse-halo-showcase.mp4` and `.webm` deliveries have a 40 MiB ceiling each. Choose formats by visible quality and actual size; do not store capture masters on Pages.
+
+Run `node scripts/launch/check_published_media.mjs --decode` from the repository root. The deployment workflow verifies the actual inventory, hashes, formats, references and full decoding. See [the delivery contract](../../docs/launch/media-spec.md).

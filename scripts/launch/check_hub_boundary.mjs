@@ -4,6 +4,7 @@ import fs from "node:fs";
 import path from "node:path";
 import process from "node:process";
 import { fileURLToPath } from "node:url";
+import { publicationLimit } from "./publication_limits.mjs";
 
 const scriptDirectory = path.dirname(fileURLToPath(import.meta.url));
 const repositoryRoot = path.resolve(scriptDirectory, "..", "..");
@@ -47,7 +48,6 @@ const forbiddenExtensions = new Set([
   ".wav",
   ".zip",
 ]);
-const maximumFileBytes = 12 * 1024 * 1024;
 const textExtensions = new Set([
   ".css",
   ".html",
@@ -110,8 +110,9 @@ for (const file of files) {
   const relative = path.relative(repositoryRoot, file);
   const stat = fs.statSync(file);
   totalBytes += stat.size;
+  const maximumFileBytes = publicationLimit(relative);
   if (stat.size > maximumFileBytes) {
-    errors.push(`${relative}: ${stat.size} bytes exceeds the 12 MiB clean-hub file limit`);
+    errors.push(`${relative}: ${stat.size} bytes exceeds the ${maximumFileBytes / 1024 / 1024} MiB clean-hub file limit`);
   }
 
   const extension = path.extname(file).toLowerCase();
