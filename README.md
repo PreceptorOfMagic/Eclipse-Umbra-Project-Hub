@@ -87,10 +87,10 @@ Want the implementation details? The [Development guide](docs/development.md) co
 
 Watch human-played Halo: Combat Evolved Anniversary on two Umbra hosts, streamed together by Eclipse on Windows:
 
-- [Vertical split — side by side, 1:10 with audio](https://preceptorofmagic.github.io/Eclipse-Umbra-Project-Hub/#halo-vertical): island arrival and beach combat, ending at a lull in the action.
+- [Vertical split — side by side, 1:10 with audio](https://preceptorofmagic.github.io/Eclipse-Umbra-Project-Hub/#halo-vertical): island arrival and beach combat, ending at a lull in the action. Slight audio glitches during the opening come from the co-op audio feature, which needs further tuning.
 - [Horizontal split — stacked, 1:25 with audio](https://preceptorofmagic.github.io/Eclipse-Umbra-Project-Hub/#halo-horizontal): a separate run, from island arrival to the cleared beach and checkpoint.
 
-Both are continuous excerpts recorded on 8 October 2026. PC1 runs Eclipse and streams PC2 and VEGA. The recordings contain some uneven frame pacing. Videos load only when you choose to play them.
+Both are continuous excerpts recorded on 8 October 2026. PC1 runs Eclipse and streams PC2 and VEGA. Videos load only when you choose to play them.
 
 <a name="system-map"></a>
 

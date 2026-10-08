@@ -13,7 +13,7 @@ Only reviewed delivery copies belong here. Masters, private capture notes and re
 | `umbra-host-home.webp` | Complete 1410×890 host panel captured 8 October 2026: Umbra 0.4.6-umbra.4, Apollo base status and the separate unavailable published-Umbra comparison are all visible. |
 | `eclipse-webos-app.webp` | Fresh 1920×1080 LG G5 / webOS 26 app-library capture for the TV platform card. |
 | `eclipse-webos-launcher.webp` | Fresh 1920×1080 webOS launcher capture, with Eclipse selected, for the installation guide. |
-| `eclipse-halo-vertical.mp4` + `eclipse-two-host.webp` | Approved 70.4-second side-by-side Halo excerpt, with audio. Starts at the island cutscene and ends before the death in the second vertical run. Poster/still: 45 seconds into the excerpt. |
+| `eclipse-halo-vertical.mp4` + `eclipse-two-host.webp` | Approved 70.4-second side-by-side Halo excerpt, with audio. Starts at the island cutscene and ends before the death in the second vertical run. Poster/still: 45 seconds into the excerpt. Opening audio glitches need further co-op audio tuning. |
 | `eclipse-halo-horizontal.mp4` + poster | Approved 85.4-second stacked Halo excerpt, with audio. Starts at the island cutscene and ends at the cleared-beach checkpoint. Poster: 54 seconds into the excerpt. |
 | Other WebP stills | Host-monitor settings, Share logs location, disclosed virtual controller assignments, co-op dialog, ordinary desktop stream, Windows/Linux windows and Umbra applications. |
 
@@ -23,7 +23,7 @@ Videos use native controls, `preload="none"`, and static posters. They never aut
 
 ## Halo gameplay
 
-Human-played Halo: Combat Evolved Anniversary, recorded on 8 October 2026. PC1 runs Eclipse on Windows and streams two live Umbra hosts, PC2 and VEGA. Codex operated capture and made the user-approved trims. Each delivery is a continuous excerpt with captured audio (AAC stereo); no interpolation or internal cuts were applied. Some uneven frame cadence is already present in the source recording. These are editorial examples, not performance certification. Halo is a Microsoft game.
+Human-played Halo: Combat Evolved Anniversary, recorded on 8 October 2026. PC1 runs Eclipse on Windows and streams two live Umbra hosts, PC2 and VEGA. Codex operated capture and made the user-approved trims. Each delivery is a continuous excerpt with captured audio (AAC stereo); no interpolation or internal cuts were applied. These are editorial examples, not performance certification. Halo is a Microsoft game.
 
 The vertical delivery uses the second run in the first capture (122.100–192.500 seconds); horizontal uses the second capture (47.800–133.200 seconds). Both were approved after review. All original recordings, full audio, masters and earlier edits remain outside this repository. Published MP4s are byte-for-byte copies of the approved review files. Posters come from the corresponding higher-quality edit masters.
 
