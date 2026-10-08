@@ -1,56 +1,25 @@
-# Public media drop zone
+# Public media
 
-This directory holds only reviewed, web-ready delivery copies. The required files are enforced by `scripts/launch/check_media.mjs`; camera originals and editing masters do not belong here.
+This directory holds only reviewed, web-ready delivery copies. Camera originals, capture masters and editing
+projects stay outside Git; GitHub blocks files over 100 MiB and the hub's own boundary check limits each file to
+12 MiB.
 
-Expected lightweight deliverables:
+## Delivered
 
-- `coop-hero-loop.webm`, `coop-hero-loop.mp4` and
-  `coop-hero-poster.webp` — 1920×1080 primary proof, 6–8 seconds.
-- `coop-independent-input-loop.webm`,
-  `coop-independent-input-loop.mp4` and
-  `coop-independent-input-poster.webp` — 1280×720, exactly eight seconds at
-  60 fps: host A only, host B only, then both.
-- `coop-layout-switch-loop.webm`, `coop-layout-switch-loop.mp4` and
-  `coop-layout-switch-poster.webp` — 1280×720, exactly ten seconds at 60 fps:
-  side by side, the visible real switch, then stacked.
-- `coop-setup-flow-loop.webm`, `coop-setup-flow-loop.mp4` and
-  `coop-setup-flow-poster.webp` — 1280×720, exactly ten seconds at 60 fps:
-  hosts, layout and separate controller assignment.
-- `single-host-loop.webm`, `single-host-loop.mp4` and
-  `single-host-poster.webp` — 1280×720, exactly six seconds at 60 fps of a
-  conventional live one-host stream.
-- `living-room-wide.webp` — exact 1920×1080 clean physical setup photograph.
-- `coop-picker.webp` — exact 1920×1080 host/layout/input setup screen.
-- `coop-walkthrough.en.vtt` — captions for the hosted walkthrough.
-- `coop-walkthrough-transcript.md` — accessible transcript and visual description for the hosted walkthrough.
-- `media-manifest.json` — public-safe build hashes, source lineage, review record and delivery SHA-256 values.
+- `eclipse-coop-switch.webm` (VP9) and `eclipse-coop-switch.mp4` (H.264 High, fast start), with
+  `eclipse-coop-switch-poster.webp` — the Eclipse page clip (`eclipse.html#preview`). 1920×1080, 60 fps, about
+  42 seconds, silent, SDR Rec.709. One continuous full-screen capture of the Eclipse Windows client streaming
+  live from two Umbra hosts: a one-PC stream, then the co-op dialog and a two-PC session. Every input was a
+  pre-timed sequence played at a natural pace, and the capture starts and ends with the shot, so the delivery is
+  the master re-encoded without edits.
 
-The external upload master is
-`eclipse-umbra-coop-walkthrough-1080p60.mp4`: target 100 seconds, with 90–105
-seconds accepted; 1920×1080 at 60 fps; H.264 High; `yuv420p`; SDR Rec.709
-limited range; and AAC at 48 kHz. Keep it outside Git, hash the exact uploaded
-file as `walkthrough-master-01`, and record the final public URL only after
-captions and signed-out playback have been reviewed.
+## Planned
 
-The hero, independent-input and layout-switch groups come from one continuous
-capture of the actual composed Eclipse output. The setup group comes from the
-real setup interface, and the single-host group comes from a conventional live
-session. Retain at least two clean seconds of pre-roll and post-roll outside
-every selected interval and record the final capture method and handles in the
-run sheet and manifest.
+- The homepage showcase video (`index.html#showcase`): a full-screen recording on the PC client of an ordinary
+  Halo stream, then co-op with two separate Halo games in both layouts.
+- The Umbra page screenshot (`umbra.html`): the host home page with the Umbra panel, recorded Apollo base and
+  update notice visible.
 
-Before replacing any planned site frame, review every loop seam at normal
-speed and frame by frame. Confirm that each loop's WebM and MP4 use identical
-accessible descriptions, captions, poster references and placements; review
-the five poster alt texts and both still alt texts/captions against the final
-pixels; and confirm that captions and the transcript match the hosted master.
-The exact launch markup and copy are staged in
-`docs/launch/templates/final-media-markup.md`.
-
-The reviewed Markdown remains the source record. Copy its final content into the
-shared-shell `site/walkthrough.html` page; the consumer link must not send people
-to raw Markdown.
-
-Keep camera originals, editing projects and full-quality masters outside Git. Do not use files from `scratchpad/`; they are diagnostic evidence rather than public assets. Follow `docs/launch/recording-plan.md` for the creative plan and complete `docs/launch/recording-run-sheet.md` during the real shoot so build identity, rights evidence, take selection and teardown remain auditable.
-
-Technical delivery requirements and the intended HTML integration are defined in `docs/launch/media-spec.md`. From the repository root, run `node scripts/launch/check_media.mjs` before treating this directory as ready.
+Videos are embedded on the website with native controls and no `autoplay`; `assets/loops.mjs` plays a loop only
+while it is on screen and never when the viewer prefers reduced motion. GitHub's Markdown pages cannot play a
+video stored in the repository, so the Markdown mirror links the poster to the website instead.

@@ -70,6 +70,8 @@ Pair one Umbra host and launch a game or desktop. For co-op, verify each host al
 
 ## At the client.
 
-**GIF / short loop placeholder — Launch a game, then switch to co-op.** Capture 10–15 seconds from the desktop client with OBS. Show one game launch and the co-op layout chooser; hide pairing PINs and host addresses. Export a muted WebM/MP4 with a still poster.
+[![Eclipse streams one PC, then starts a two-PC co-op session](../site/media/eclipse-coop-switch-poster.webp)](https://preceptorofmagic.github.io/Eclipse-Umbra-Project-Hub/eclipse.html#preview)
+
+**One PC, then two.** Eclipse on Windows, recorded full screen: it streams one PC’s desktop, returns to the library, then opens co-op, picks a layout and starts a two-PC session. Eclipse offers to close the app still running on the first PC before co-op begins. Each half of the finished screen is a different PC, showing its own desktop. [Watch the clip on the website](https://preceptorofmagic.github.io/Eclipse-Umbra-Project-Hub/eclipse.html#preview).
 
 [Eclipse/Umbra licence & notices](../LICENSES.md) · [GPL-3.0](../LICENSE.txt)
