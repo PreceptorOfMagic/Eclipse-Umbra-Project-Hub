@@ -16,6 +16,8 @@
 
 Eclipse/Umbra’s additions use AI-assisted coding, including Claude and Codex. [How the project is developed.](docs/development.md#development-process)
 
+<p align="center"><a href="https://preceptorofmagic.github.io/Eclipse-Umbra-Project-Hub/eclipse.html#preview"><img src="site/media/eclipse-coop-start.webp" alt="Eclipse starting a co-op session: two PCs, each with its own desktop, side by side on one screen" width="800"></a></p>
+
 <a name="streaming-basics"></a>
 
 ## Your games run on your PC. Play where you want.

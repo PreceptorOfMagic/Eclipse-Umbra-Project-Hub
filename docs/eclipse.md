@@ -30,6 +30,8 @@ Choose `com.aurora.gamestream_<version>_arm.ipk`. Enable LG Developer Mode, conn
 
 ### Windows x64
 
+
+![Eclipse running in a normal Windows window](../site/media/eclipse-windows-window.webp)
 [Windows x64 releases](https://github.com/PreceptorOfMagic/Eclipse/releases)
 
 Open the latest release, expand Assets and choose the package described below. If no release is listed, that package has not been published.
@@ -40,6 +42,8 @@ Choose `eclipse-windows-x64-unsigned.zip`, verify its checksum, extract everythi
 
 ### Linux x86_64
 
+
+![Eclipse running in a Linux desktop window](../site/media/eclipse-linux-window.webp)
 [Linux x86_64 releases](https://github.com/PreceptorOfMagic/Eclipse/releases)
 
 Open the latest release, expand Assets and choose the package described below. If no release is listed, that package has not been published.
@@ -52,10 +56,14 @@ Choose `eclipse-linux-x86_64.tar.gz`, extract and run `./eclipse`. Requires glib
 
 ### Everyday streaming
 
+
+![Eclipse on Windows streaming one PC’s desktop full screen](../site/media/eclipse-single-host.webp)
 Host discovery, PIN pairing, game/desktop launch, configurable resolution, frame rate and bitrate, gamepad/keyboard/mouse input, audio and performance diagnostics. H.264 and HEVC on desktop; additional AV1 and HDR paths depend on platform capabilities.
 
 ### Two-host co-op
 
+
+![Eclipse showing two PCs side by side, each half with its own desktop](../site/media/eclipse-two-host.webp)
 Side-by-side or stacked independent game sessions, player/controller assignments, audio mixing or selection and a compatible encoder mode negotiated with Umbra. [What co-op means, requirements and the system map →](../README.md#how-it-works)
 
 <a name="first-stream"></a>

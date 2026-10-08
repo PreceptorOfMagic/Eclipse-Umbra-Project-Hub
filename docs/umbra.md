@@ -46,6 +46,8 @@ Apollo resource links lead to Apollo’s own pages. For this fork, [report probl
 
 ### Everyday hosting, from Apollo
 
+
+![Umbra web interface Applications page listing Desktop, Steam Big Picture and a game](../site/media/umbra-applications.webp)
 - PIN pairing, game/desktop entries and a local web interface.
 - Per-client permissions and on-demand virtual displays.
 - Hardware encoder selection, resolution/refresh negotiation and supported HDR.

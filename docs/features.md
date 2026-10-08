@@ -60,7 +60,11 @@ By default, Eclipse divides the selected video bitrate between the two hosts ins
 
 #### Disconnect to pause; Quit to finish
 
-Disconnect preserves a resumable two-host session. Returning to co-op reconnects to those desktops; changing orientation on resume rebuilds the pane displays. Quit game is the separate action that ends both host applications. Resume has been exercised on Windows and Linux; the recorded end-both-hosts check was on Linux, with broader packaged-platform checks still needed.
+Disconnect preserves a resumable two-host session. Returning to co-op reconnects to those desktops; changing orientation on resume rebuilds the pane displays. Quit game is the separate action that ends both host applications. Resume has been exercised on Windows and Linux; the end-both-hosts check has been recorded on Linux and Windows, with broader packaged-platform checks still needed.
+
+[![Disconnect, resume, then Quit game ends both PCs (plays on the website)](../site/media/eclipse-coop-pause-poster.webp)](https://preceptorofmagic.github.io/Eclipse-Umbra-Project-Hub/index.html#features-session)
+
+Disconnect from the stream overlay leaves both PCs’ sessions running; starting co-op again resumes them. Quit game then ends both.
 
 #### More useful launch failures
 
@@ -78,9 +82,17 @@ A busy host is identified so you can resolve its existing session. If the client
 
 The co-op launch screen and Settings → Co-op let you place controllers under the PC they should control. Assignments are remembered, unclaimed controllers can be distributed, and previously seen disconnected pads remain manageable. Forgetting a controller clears its saved assignments. A controller physically attached to a host is not automatically movable through client forwarding.
 
+![Co-op session dialog listing an Xbox 360 Controller under VEGA and a PS4 Controller under the second PC](../site/media/eclipse-coop-controllers.webp)
+
+Shown with two virtual controllers emulated on the client PC.
+
 #### Mouse and keyboard routing
 
 Pane-aware pointer routing translates coordinates into the target desktop. A drag stays with the PC where the button was pressed, and a key release returns to the PC that received its press. You can instead choose “Assign mouse and keyboard like controllers” to pin devices to a PC for the session. Relative/gamepad virtual-mouse input is a separate path; it should not be assumed to follow hover. Windows routing has recorded tests; TV coverage is less complete.
+
+[![The pointer crossing from one PC’s half to the other’s (plays on the website)](../site/media/eclipse-coop-pointer-poster.webp)](https://preceptorofmagic.github.io/Eclipse-Umbra-Project-Hub/index.html#features-input)
+
+One mouse, two PCs: moving across the middle line hands the pointer to the other PC, whose own cursor appears at the matching edge.
 
 #### Nintendo buttons, without remapping every pad
 
@@ -130,6 +142,8 @@ Run a game on its own virtual display while Eclipse shows the combined view on a
 
 Settings → Host → Computer’s monitor while streaming offers ask at start, always off or always on. The launch prompt can start co-op with remote monitors off, without switching off the screen of the PC running Eclipse. Requires Umbra support; recorded verification is on Windows, with TV-side coverage still needed.
 
+![Eclipse Host Settings with the monitor choices open: Choose when starting a stream, Always off and Always on](../site/media/eclipse-host-monitor.webp)
+
 #### Prefer the TV’s wired adapter
 
 On webOS, the wired-network option identifies the active USB Ethernet adapter and asks a capable Umbra host to direct the session over that connection. Automatic mode uses the extension only when the host advertises it. Wi-Fi need not be disabled; this is not a guarantee for every adapter chipset.
@@ -149,6 +163,8 @@ Keyboard shortcuts cover fullscreen, capture and stream controls; Windows rememb
 #### Keep diagnostic logs, then Share logs
 
 Enable logging in Settings → About, reproduce the issue and export a report. It includes build identity, platform capabilities, session statistics, settings, second-host information and logs from a capable Umbra host, rather than asking you to find each file separately.
+
+![Eclipse About settings with the Keep diagnostic logs checkbox and the Share logs button](../site/media/eclipse-share-logs.webp)
 
 #### Export from the device you are using
 

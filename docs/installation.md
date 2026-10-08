@@ -70,6 +70,8 @@ Keep Developer Mode active and extend its session before it expires. LG removes 
 
 ## 2B. Eclipse on Windows
 
+
+![Eclipse on Windows after launch, with a paired PC’s apps](../site/media/eclipse-windows-window.webp)
 [Windows x64 releases](https://github.com/PreceptorOfMagic/Eclipse/releases)
 
 Open the latest release, expand Assets and choose the package described below. If no release is listed, that package has not been published.
@@ -90,6 +92,8 @@ Open the latest release, expand Assets and choose the package described below. I
 
 ## 2C. Eclipse on Linux
 
+
+![Eclipse on Linux, started with ./eclipse, with a paired PC’s apps](../site/media/eclipse-linux-window.webp)
 [Linux x86_64 releases](https://github.com/PreceptorOfMagic/Eclipse/releases)
 
 Open the latest release, expand Assets and choose the package described below. If no release is listed, that package has not been published.
@@ -134,6 +138,8 @@ For remote access outside your home, establish a trusted private connection betw
 
 ## 4. Add the second PC.
 
+
+![The co-op dialog: two PCs, a layout and which side is Player 1](../site/media/eclipse-coop-dialog.webp)
 1. Pair two distinct Umbra PCs and verify a normal stream from each one.
 
 1. In Eclipse choose **Co-op**, select the two hosts, choose side-by-side or stacked, and choose the primary/Player 1 side.

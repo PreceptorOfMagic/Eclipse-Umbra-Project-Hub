@@ -32,6 +32,10 @@ Each PC captures, encodes and sends its own pane directly to Eclipse. The client
 
 Eclipse requests the built-in Co-op Pane from each Umbra host. Its virtual desktop matches that host’s share of the chosen output: half-width for side-by-side, half-height for stacked. Windows and the game therefore see a usable desktop at that size. Coding dimensions still need alignment to the codec’s coding-tree grid; visible size and coded size need not be identical.
 
+[![Deterministic test pattern on both hosts in a live co-op session (plays on the website)](../site/media/coop-test-pattern-poster.webp)](https://preceptorofmagic.github.io/Eclipse-Umbra-Project-Hub/development.html#composition)
+
+Every band in a pane is drawn in one pass with the same step number, so a pane assembled from slices of different moments would show bands that disagree. Each pane’s bands agree throughout; the two panes differ because each PC draws from its own clock.
+
 Each connection retains Moonlight-compatible discovery, pairing, launch/control, video/audio transport and return input. The secondary connection has its own session process; its encoded access units reach the compositor through inter-process communication. An access unit is the encoded data needed for a picture, not a decoded pixel buffer.
 
 ### What Eclipse changes
@@ -131,6 +135,8 @@ Read: [GPU HEVC source and component tests](https://github.com/PreceptorOfMagic/
 <summary>5. Session lifecycle, input ownership and local-host play — The two host identities remain separate even when the screen is shared</summary>
 
 Co-op negotiates host capabilities, selects a compatible encoding route, requests each built-in pane and divides the default video budget between hosts. A disconnect preserves the resumable applications. Quit is an explicit end-both-hosts operation; an orientation change on resume rebuilds pane geometry. Linux has recorded end-both-hosts verification; do not silently extend that test result to every packaged platform.
+
+[![Pointer routing between the two PCs’ halves (plays on the website)](../site/media/eclipse-coop-pointer-poster.webp)](https://preceptorofmagic.github.io/Eclipse-Umbra-Project-Hub/development.html#input-routing)
 
 Controller assignments associate remembered devices with host destinations. Pane-aware absolute pointing maps the composite coordinate into the selected host’s desktop. Button ownership stays fixed through a drag, and keyboard key-up events return to the destination of their key-down to avoid leaving keys stuck on a different PC. Explicit per-device mouse/keyboard assignment offers an alternative to pane routing; relative and virtual-mouse behaviour needs separate testing.
 
