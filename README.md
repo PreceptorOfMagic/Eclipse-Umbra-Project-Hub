@@ -16,9 +16,9 @@
 
 Eclipse/Umbra’s additions use AI-assisted coding, including Claude and Codex. [How the project is developed.](docs/development.md#development-process)
 
-<p align="center"><a href="https://preceptorofmagic.github.io/Eclipse-Umbra-Project-Hub/eclipse.html#preview"><img src="site/media/eclipse-two-host.webp" alt="Eclipse showing two PCs, each with its own desktop, side by side on one screen. Open the 42-second workflow demonstration." width="800"></a></p>
+<p align="center"><a href="https://preceptorofmagic.github.io/Eclipse-Umbra-Project-Hub/#showcase"><img src="site/media/eclipse-two-host.webp" alt="Two Halo players streamed from separate PCs side by side in Eclipse. Watch both co-op layouts with audio." width="800"></a></p>
 
-<p align="center"><sub>Recorded by an AI assistant (Claude) while the developer was away, as a capability test: every click and key press was planned in advance and played back automatically on live hosts. Wallpapers: <a href="https://steamcommunity.com/sharedfiles/filedetails/?id=1539918440">“Moon Light”</a> by Sir Crab and <a href="https://steamcommunity.com/sharedfiles/filedetails/?id=2466412743">“KIKI&amp;JIJI”</a> (art credited to Ayu) by 鬥丨Dou, from the Wallpaper Engine Steam Workshop.</sub></p>
+<p align="center"><sub>Human-played Halo: Combat Evolved Anniversary on two Umbra hosts, streamed by Eclipse on Windows. Capture and trimming by Codex. Halo is a Microsoft game.</sub></p>
 
 <a name="streaming-basics"></a>
 
@@ -83,11 +83,14 @@ Want the implementation details? The [Development guide](docs/development.md) co
 
 <a name="showcase"></a>
 
-## See both modes in one continuous run.
+## Watch Halo co-op in both layouts.
 
-An ordinary game stream, then two independent games sharing one display.
+Watch human-played Halo: Combat Evolved Anniversary on two Umbra hosts, streamed together by Eclipse on Windows:
 
-**Video placeholder — Standard streaming → co-op → both layouts.** Record 45–60 seconds full screen on the PC client: an ordinary Halo stream, then co-op with two separate Halo games and isolated player controls in both layouts. Record at the actual display frame rate. Export MP4/WebM with a poster frame.
+- [Vertical split — side by side, 1:10 with audio](https://preceptorofmagic.github.io/Eclipse-Umbra-Project-Hub/#halo-vertical): island arrival and beach combat, ending at a lull in the action.
+- [Horizontal split — stacked, 1:25 with audio](https://preceptorofmagic.github.io/Eclipse-Umbra-Project-Hub/#halo-horizontal): a separate run, from island arrival to the cleared beach and checkpoint.
+
+Both are continuous excerpts recorded on 8 October 2026. PC1 runs Eclipse and streams PC2 and VEGA. The recordings contain some uneven frame pacing. Videos load only when you choose to play them.
 
 <a name="system-map"></a>
 

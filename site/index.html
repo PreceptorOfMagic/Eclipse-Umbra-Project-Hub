@@ -17,7 +17,7 @@
   <title>Eclipse/Umbra Project Hub</title>
   <link rel="canonical" href="https://preceptorofmagic.github.io/Eclipse-Umbra-Project-Hub/">
   <link rel="icon" href="assets/brand-mark.svg?v=20261001j" type="image/svg+xml">
-  <link rel="stylesheet" href="assets/styles.css?v=20261008g">
+  <link rel="stylesheet" href="assets/styles.css?v=halo1-20261008g">
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
@@ -41,7 +41,7 @@
           <h1>Two PCs. One screen. <span>Couch co-op, re-engineered.</span></h1>
           <p class="hero-copy"><strong>Eclipse</strong> is the client and <strong>Umbra</strong> is the Windows host. Use them for familiar one-PC remote game streaming—or combine two independent PCs into one side-by-side or stacked couch co-op view.</p>
           <div class="hero-actions"><a class="button" href="setup.html">Install Eclipse/Umbra</a><a class="button-secondary" href="#how-it-works">See how it works</a></div>
-          <nav class="section-jumps" aria-label="On this page"><a href="#features">Features &amp; demos</a><a href="#status">Tested hardware</a><a href="#timeline">Development history</a></nav>
+          <nav class="section-jumps" aria-label="On this page"><a href="#showcase">Watch gameplay</a><a href="#features">Features &amp; demos</a><a href="#status">Tested hardware</a><a href="#timeline">Development history</a></nav>
           <ul class="platform-pills" aria-label="Supported platform targets"><li>Eclipse: LG webOS</li><li>Eclipse: Windows x64</li><li>Eclipse: Linux x86_64</li><li>Umbra: Windows x64</li></ul>
         </div>
         <figure class="hero-visual hero-illustrations">
@@ -125,11 +125,26 @@
 
     <section id="showcase" class="section media-section" aria-labelledby="video-title">
       <div class="shell">
-        <div class="section-head"><div><p class="eyebrow">Gameplay showcase</p><h2 id="video-title">See both modes in one continuous run.</h2></div><p class="section-lede">An ordinary game stream, then two independent games sharing one display.</p></div>
-        <div class="showcase-placeholder showcase-placeholder-wide" role="img" aria-label="Video placeholder showing a planned transition from a normal one-host stream to a two-host couch co-op stream">
-          <div class="placeholder-grid placeholder-three" aria-hidden="true"><span>ONE-PC STREAM</span><span>CO-OP · PLAYER 1</span><span>CO-OP · PLAYER 2</span></div>
-          <div class="placeholder-copy"><span class="media-type">Video placeholder</span><strong>Standard streaming → co-op → both layouts</strong><small>Record 45–60 seconds full screen on the PC client: an ordinary Halo stream, then co-op with two separate Halo games and isolated player controls in both layouts. Record at the actual display frame rate. Export MP4/WebM with a poster frame.</small></div>
+        <div class="section-head"><div><p class="eyebrow">Gameplay showcase</p><h2 id="video-title">Watch Halo co-op in both layouts.</h2></div><p class="section-lede">Halo: Combat Evolved Anniversary on two Umbra hosts, streamed together by Eclipse on Windows. Choose a layout and press play.</p></div>
+        <div class="gameplay-showcase">
+          <figure class="media-figure" id="halo-vertical">
+            <h3>Vertical split · Side by side</h3>
+            <video data-demo controls playsinline preload="none" width="1920" height="1080" poster="media/eclipse-two-host.webp?v=halo1" aria-label="Halo co-op with two PCs side by side" aria-describedby="cap-halo-vertical">
+              <source src="media/eclipse-halo-vertical.mp4" type="video/mp4">
+              <a href="media/eclipse-halo-vertical.mp4">Watch the vertical Halo clip (MP4)</a>.
+            </video>
+            <figcaption id="cap-halo-vertical"><strong>1 minute 10 seconds · With audio · 30 MiB.</strong> The Silent Cartographer: the island arrival and beach fight, with each player’s PC in its own half of the screen. A continuous excerpt, ending at a lull in the action.</figcaption>
+          </figure>
+          <figure class="media-figure" id="halo-horizontal">
+            <h3>Horizontal split · Stacked</h3>
+            <video data-demo controls playsinline preload="none" width="1920" height="1080" poster="media/eclipse-halo-horizontal-poster.webp" aria-label="Halo co-op with two PCs stacked top and bottom" aria-describedby="cap-halo-horizontal">
+              <source src="media/eclipse-halo-horizontal.mp4" type="video/mp4">
+              <a href="media/eclipse-halo-horizontal.mp4">Watch the horizontal Halo clip (MP4)</a>.
+            </video>
+            <figcaption id="cap-halo-horizontal"><strong>1 minute 25 seconds · With audio · 35 MiB.</strong> A separate run of the same encounter, with one PC above the other. A continuous excerpt from the island arrival to the cleared beach and checkpoint.</figcaption>
+          </figure>
         </div>
+        <p class="media-note">Human-played gameplay, recorded on 8 October 2026. Eclipse runs on PC1, streaming PC2 and VEGA. Capture and trimming by Codex; game audio retained. Some uneven frame pacing is present in the recording. Halo: Combat Evolved Anniversary is a Microsoft game.</p>
       </div>
     </section>
 
@@ -236,6 +251,6 @@
   <footer class="site-footer"><div class="shell"><div class="footer-top"><a class="brand" href="./"><img src="assets/brand-mark.svg?v=20261001j" alt="" width="36" height="36"><span>ECLIPSE / UMBRA</span></a><nav class="footer-nav" aria-label="Footer navigation"><a href="./">Project Hub</a><a href="setup.html">Installation Guide</a><a href="eclipse.html">Eclipse</a><a href="umbra.html">Umbra</a><a href="development.html">Development</a><a href="credits.html">Acknowledgements</a></nav></div><p class="legal-line"><a href="licence.html">Eclipse/Umbra licence &amp; notices</a> · <a href="licence.html#gpl">GPL-3.0</a></p></div></footer>
   <script type="module" src="assets/downloads.mjs"></script>
   <script type="module" src="assets/disclosures.mjs"></script>
-  <script type="module" src="assets/playback.mjs?v=20261008a"></script>
+  <script type="module" src="assets/playback.mjs?v=20261008halo"></script>
 </body>
 </html>

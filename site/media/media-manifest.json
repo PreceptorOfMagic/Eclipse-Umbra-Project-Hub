@@ -106,6 +106,33 @@
       "audio": false
     },
     {
+      "name": "eclipse-halo-horizontal-poster.webp",
+      "sha256": "fe2941dc60ba5d507553a904a7beee43913f4ffb9be30eccb2454805775208c6",
+      "width": 1920,
+      "height": 1080,
+      "codec": "webp"
+    },
+    {
+      "name": "eclipse-halo-horizontal.mp4",
+      "sha256": "17c53f8ca1dee376dd718dcb3b62214604bc7540d37f010bbc1817cbac834981",
+      "width": 1920,
+      "height": 1080,
+      "codec": "h264",
+      "frameRate": 60.0,
+      "durationSeconds": 85.4,
+      "audio": true
+    },
+    {
+      "name": "eclipse-halo-vertical.mp4",
+      "sha256": "467db3cbb42a503ca2c354f72a4ee3e6569fa10ba4af046e3dfcb2d96cc8da8d",
+      "width": 1920,
+      "height": 1080,
+      "codec": "h264",
+      "frameRate": 60.0,
+      "durationSeconds": 70.4,
+      "audio": true
+    },
+    {
       "name": "eclipse-host-monitor.webp",
       "sha256": "bfb817cdb0cd07d501d70488f445c39938f7bd90069570aa5794a07416260691",
       "width": 1155,
@@ -135,7 +162,7 @@
     },
     {
       "name": "eclipse-two-host.webp",
-      "sha256": "6e240716f541484f13d761ff8c8071f329e6ed9665a3a6b7f6002288385f8d60",
+      "sha256": "9a37ab49b01f0898af272d61e5dc6e0802f672636f7641ee4dd49ab45a97b802",
       "width": 1920,
       "height": 1080,
       "codec": "webp"

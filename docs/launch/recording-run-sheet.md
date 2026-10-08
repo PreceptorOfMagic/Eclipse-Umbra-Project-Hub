@@ -22,4 +22,4 @@ End the session using Quit game, verify hosts are free, stop owned capture proce
 
 Export delivery copies under the [media contract](media-spec.md), review the exported files, update their manifest hashes, and run the checks there. Check desktop and mobile page layouts and native playback before publishing.
 
-For the forthcoming Halo take, record one-host play and two independent games in co-op before selecting replacement stills. Leave the showcase pending until that recording is reviewed.
+The Halo shoot is complete: both co-op layouts and their trims were approved on 8 October 2026. See the [recording plan](recording-plan.md) and [delivery inventory](../../site/media/README.md) for the published selections. Keep all original recordings and audio outside Git.

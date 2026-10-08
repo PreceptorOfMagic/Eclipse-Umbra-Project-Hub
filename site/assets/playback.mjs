@@ -2,6 +2,9 @@
 export function observePlayback(root, view) {
   const videos = [...root.querySelectorAll('video[data-demo]')];
   const pause = video => { if (!video.paused) video.pause(); };
+  root.addEventListener('play', event => {
+    if (videos.includes(event.target)) videos.filter(video => video !== event.target).forEach(pause);
+  }, true);
   root.addEventListener('visibilitychange', () => {
     if (root.hidden) videos.forEach(pause);
   });

@@ -67,7 +67,9 @@ Host discovery, PIN pairing, game/desktop launch, configurable resolution, frame
 ### Two-host co-op
 
 
-![Eclipse showing two PCs side by side, each half with its own desktop](../site/media/eclipse-two-host.webp)
+![Two Halo players streamed from separate PCs side by side in Eclipse](../site/media/eclipse-two-host.webp)
+[Watch both Halo co-op layouts with audio](https://preceptorofmagic.github.io/Eclipse-Umbra-Project-Hub/#showcase).
+
 Side-by-side or stacked independent game sessions, player/controller assignments, audio mixing or selection and a compatible encoder mode negotiated with Umbra. [What co-op means, requirements and the system map →](../README.md#how-it-works)
 
 <a name="first-stream"></a>

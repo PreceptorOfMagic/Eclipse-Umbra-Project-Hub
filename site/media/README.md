@@ -13,18 +13,24 @@ Only reviewed delivery copies belong here. Masters, private capture notes and re
 | `umbra-host-home.webp` | Complete 1410×890 host panel captured 8 October 2026: Umbra 0.4.6-umbra.4, Apollo base status and the separate unavailable published-Umbra comparison are all visible. |
 | `eclipse-webos-app.webp` | Fresh 1920×1080 LG G5 / webOS 26 app-library capture for the TV platform card. |
 | `eclipse-webos-launcher.webp` | Fresh 1920×1080 webOS launcher capture, with Eclipse selected, for the installation guide. |
-| Other WebP stills | Host-monitor settings, Share logs location, disclosed virtual controller assignments, co-op dialog, ordinary/two-host streams, Windows/Linux windows and Umbra applications. |
+| `eclipse-halo-vertical.mp4` + `eclipse-two-host.webp` | Approved 70.4-second side-by-side Halo excerpt, with audio. Starts at the island cutscene and ends before the death in the second vertical run. Poster/still: 45 seconds into the excerpt. |
+| `eclipse-halo-horizontal.mp4` + poster | Approved 85.4-second stacked Halo excerpt, with audio. Starts at the island cutscene and ends at the cleared-beach checkpoint. Poster: 54 seconds into the excerpt. |
+| Other WebP stills | Host-monitor settings, Share logs location, disclosed virtual controller assignments, co-op dialog, ordinary desktop stream, Windows/Linux windows and Umbra applications. |
 
-The switch, pause/resume and test-pattern clips were recorded by Claude; the pointer retake was recorded by Codex. All use planned inputs on live hosts, as disclosed alongside each player. Current clips are silent, 1920×1080 and 60 fps, with SDR Rec.709 primaries/matrix and sRGB transfer. Their delivery cadence does not certify the streaming renderer's unique-frame rate.
+The switch, pause/resume and test-pattern clips were recorded by Claude; the pointer retake was recorded by Codex. All use planned inputs on live hosts, as disclosed alongside each player. These interface demonstrations are silent. All clips are 1920×1080 and 60 fps, with SDR Rec.709 primaries/matrix and sRGB transfer. Their delivery cadence does not certify the streaming renderer's unique-frame rate.
 
-Videos use native controls, `preload="none"`, and static posters. They never autoplay, loop or automatically resume. Playback pauses when the player leaves view or the tab is hidden. GitHub Markdown uses linked static previews; the former animated README preview is retired.
+Videos use native controls, `preload="none"`, and static posters. They never autoplay, loop or automatically resume. Starting another player pauses the previous one. Playback pauses when the player leaves view or the tab is hidden. GitHub Markdown uses linked static previews; the former animated README preview is retired.
 
-## Pending
+## Halo gameplay
 
-The user will record the Halo showcase after these updates. Use accepted frames from that recording for the showcase poster and ordinary/two-host gameplay stills. Keep existing diagrams and imagery until that footage is available. No independent-controller animation, couch photograph or narrated walkthrough is required.
+Human-played Halo: Combat Evolved Anniversary, recorded on 8 October 2026. PC1 runs Eclipse on Windows and streams two live Umbra hosts, PC2 and VEGA. Codex operated capture and made the user-approved trims. Each delivery is a continuous excerpt with captured audio (AAC stereo); no interpolation or internal cuts were applied. Some uneven frame cadence is already present in the source recording. These are editorial examples, not performance certification. Halo is a Microsoft game.
+
+The vertical delivery uses the second run in the first capture (122.100–192.500 seconds); horizontal uses the second capture (47.800–133.200 seconds). Both were approved after review. All original recordings, full audio, masters and earlier edits remain outside this repository. Published MP4s are byte-for-byte copies of the approved review files. Posters come from the corresponding higher-quality edit masters.
+
+The two-host still and linked README preview now show real Halo gameplay. The ordinary one-host desktop still remains accurate: no ordinary one-host Halo footage was recorded. The branded social image and explanatory hero diagrams remain. No additional animation, couch photograph or narrated walkthrough is required.
 
 ## Budget and validation
 
-Keep each file below 12 MiB by default. Only the two future `eclipse-halo-showcase.mp4` and `.webm` deliveries have a 40 MiB ceiling each. Choose formats by visible quality and actual size; do not store capture masters on Pages.
+Keep each file below 12 MiB by default. Only `eclipse-halo-vertical.mp4` and `eclipse-halo-horizontal.mp4` have a 40 MiB ceiling each. Choose formats by visible quality and actual size; do not store capture masters on Pages.
 
 Run `node scripts/launch/check_published_media.mjs --decode` from the repository root. The deployment workflow verifies the actual inventory, hashes, formats, references and full decoding. See [the delivery contract](../../docs/launch/media-spec.md).

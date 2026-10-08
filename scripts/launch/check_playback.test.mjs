@@ -49,3 +49,22 @@ test('every delivered HTML demonstration uses native, non-looping, opt-in playba
   }
   assert.ok(count >= 4);
 });
+
+test('starting one demonstration pauses other players, including without viewport observation', () => {
+  const s = setup(false);
+  s.video.paused = false;
+  s.events.play({ target: {} }); // Unrelated media must not interrupt it.
+  assert.equal(s.video.pauses, 0);
+  s.events.play({ target: s.video });
+  assert.equal(s.video.pauses, 0);
+  const first = { paused: false, pause() { this.paused = true; } };
+  const second = { paused: false, pause() { this.paused = true; } };
+  let onPlay;
+  observePlayback({ querySelectorAll: () => [first, second],
+    addEventListener(name, handler, capture) {
+      if (name === 'play') { onPlay = handler; assert.equal(capture, true); }
+    } }, {});
+  onPlay({ target: second });
+  assert.equal(first.paused, true);
+  assert.equal(second.paused, false);
+});
