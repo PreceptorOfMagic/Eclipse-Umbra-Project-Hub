@@ -10,4 +10,4 @@ database_name = "hub-count"
 database_id = "ac33c5ed-9316-4446-94bd-d281feb703fb"
 
 [triggers]
-crons = ["17 3 * * *"]
+crons = ["7 * * * *"]

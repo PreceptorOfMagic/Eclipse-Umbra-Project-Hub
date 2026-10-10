@@ -2,18 +2,19 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import { DatabaseSync } from 'node:sqlite';
-import { handle, prune, ORIGIN, duration } from '../../analytics/worker.mjs';
-import { startCounting, pageName, referrerHost } from '../../site/assets/count.mjs';
+import { handle, prune, pollGitHub, ORIGIN, duration } from '../../analytics/worker.mjs';
+import { startCounting, pageName, referrerHost, releaseFile } from '../../site/assets/count.mjs';
 
 // The D1 calls the worker uses, on a real SQLite database.
 function d1() {
   const sql = new DatabaseSync(':memory:');
   sql.exec(readFileSync(new URL('../../analytics/schema.sql', import.meta.url), 'utf8'));
-  const prepare = (q) => ({ bind: (...a) => ({
+  const bound = (q, a) => ({
     run: async () => sql.prepare(q).run(...a),
     first: async () => sql.prepare(q).get(...a) ?? null,
     all: async () => ({ results: sql.prepare(q).all(...a) }),
-  }) });
+  });
+  const prepare = (q) => ({ ...bound(q, []), bind: (...a) => bound(q, a) });
   return { prepare, sql };
 }
 const UA = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/140.0 Safari/537.36';
@@ -73,7 +74,7 @@ test('one visitor is one unique per day, and cannot be linked to the next day', 
 });
 
 test('stats need the password and report views, uniques, time and referrers', async () => {
-  const DB = d1(), env = { DB, STATS_PASSWORD: 'correct horse' };
+  const DB = d1(), env = { DB, STATS_PASSWORD: 'correct horse', FETCH: github({}) };
   await handle(post('/v', { id: id(1), p: 'index.html', r: 'news.ycombinator.com' }), env, T0);
   await handle(post('/l', { id: id(1), ms: 30000 }), env, T0);
   await handle(post('/v', { id: id(2), p: 'setup.html' }), env, T0);
@@ -113,7 +114,7 @@ function fakeWindow({ gpc = false, dnt = null, hidden = false } = {}) {
     location: { pathname: '/Eclipse-Umbra-Project-Hub/setup.html', hostname: 'preceptorofmagic.github.io' },
     addEventListener: (e, f) => { listeners['w:' + e] = f; },
   };
-  return { win, sent, fire: (k) => listeners[k](), tick: (ms) => { t += ms; }, doc };
+  return { win, sent, fire: (k, arg) => listeners[k](arg), tick: (ms) => { t += ms; }, doc };
 }
 
 test('page script sends the view, then only visible time', () => {
@@ -136,4 +137,59 @@ test('page script does nothing without an endpoint or when asked not to track', 
   assert.equal(pageName('/Eclipse-Umbra-Project-Hub/'), 'index.html');
   assert.equal(referrerHost('https://preceptorofmagic.github.io/x', 'preceptorofmagic.github.io'), '');
   assert.equal(referrerHost('', 'x'), '');
+});
+
+const IPK = 'https://github.com/PreceptorOfMagic/Eclipse/releases/download/eclipse-v1.3.4/com.aurora.gamestream_1.3.4_arm.ipk';
+test('page script reports clicks on release files only', () => {
+  const w = fakeWindow();
+  startCounting(w.win, 'https://count.example');
+  const link = (href) => ({ target: { closest: () => ({ href }) } });
+  w.fire('d:click', link(IPK));
+  w.fire('d:click', link('https://github.com/PreceptorOfMagic/Eclipse/releases/latest'));
+  w.fire('d:click', link('https://github.com/someone/Eclipse/releases/download/v1/x.ipk'));
+  w.fire('d:click', { target: { closest: () => null } });
+  assert.deepEqual(w.sent.slice(1), [['https://count.example/d', { p: 'setup.html', repo: 'Eclipse', f: 'com.aurora.gamestream_1.3.4_arm.ipk' }]]);
+  assert.equal(releaseFile('https://github.com/PreceptorOfMagic/Umbra/releases/download/umbra-v0.5.0/Umbra-windows-x64.exe').f, 'Umbra-windows-x64.exe');
+});
+
+test('download clicks are stored without a visitor code; bad ones are refused', async () => {
+  const DB = d1(), env = { DB };
+  assert.equal((await handle(post('/d', { p: 'setup.html', repo: 'Eclipse', f: 'eclipse-linux-x86_64.tar.gz' }), env, T0)).status, 204);
+  for (const bad of [{ p: 'x.html', repo: 'Eclipse', f: 'a' }, { p: 'setup.html', repo: 'Other', f: 'a' }, { p: 'setup.html', repo: 'Eclipse', f: '<b>' }])
+    assert.equal((await handle(post('/d', bad), env, T0)).status, 400);
+  await handle(post('/d', { p: 'setup.html', repo: 'Eclipse', f: 'a' }, { ua: 'curl/8' }), env, T0);
+  assert.deepEqual(DB.sql.prepare('SELECT * FROM clicks').all().map((r) => ({ ...r })),
+    [{ day: '2026-10-11', ts: T0.getTime(), page: 'setup.html', repo: 'Eclipse', file: 'eclipse-linux-x86_64.tar.gz' }]);
+});
+
+function github(counts, { status = 200 } = {}) {
+  return async (url) => {
+    const repo = url.match(/PreceptorOfMagic\/(\w+)\//)[1];
+    const rel = (tag, draft, assets) => ({ tag_name: tag, draft, assets: assets.map(([id, name]) => ({ id, name, download_count: counts[id] ?? 0 })) });
+    const body = repo === 'Eclipse'
+      ? [rel('eclipse-v1.3.4', false, [[1, 'eclipse-linux-x86_64.tar.gz'], [2, 'eclipse-linux-x86_64.tar.gz.sha256']]), rel('eclipse-v1.3.5', true, [[9, 'draft.ipk']])]
+      : [rel('umbra-v0.5.0', false, [[3, 'Umbra-windows-x64.exe']])];
+    return { ok: status === 200, status, json: async () => body };
+  };
+}
+
+test('hourly GitHub reading records only increases after the first reading', async () => {
+  const DB = d1(), env = { DB, STATS_PASSWORD: 'pw', FETCH: github({ 1: 5, 3: 4 }) };
+  assert.equal(await pollGitHub(env, github({ 1: 3, 3: 4, 9: 50 }), T0), 'ok');
+  assert.equal(DB.sql.prepare('SELECT COUNT(*) AS n FROM downloads').get().n, 0, 'starting totals are not downloads');
+  assert.equal(DB.sql.prepare('SELECT COUNT(*) AS n FROM assets WHERE asset_id = 9').get().n, 0, 'drafts skipped');
+  await pollGitHub(env, github({ 1: 5, 3: 4 }), later(3600000));
+  await pollGitHub(env, github({ 1: 5, 3: 4 }), later(7200000));
+  assert.deepEqual(DB.sql.prepare('SELECT repo, file, n, since, ts FROM downloads').all().map((r) => ({ ...r })),
+    [{ repo: 'Eclipse', file: 'eclipse-linux-x86_64.tar.gz', n: 2, since: T0.getTime(), ts: later(3600000).getTime() }]);
+  assert.match(await pollGitHub(env, github({}, { status: 403 }), later(3 * 3600000)), /Eclipse: GitHub 403/);
+  await handle(post('/d', { p: 'setup.html', repo: 'Eclipse', f: 'eclipse-linux-x86_64.tar.gz' }), env, later(3500000));
+  const html = await (await handle(new Request('https://count.example/stats', { headers: auth('pw') }), env, later(3 * 3600000 + 60000))).text();
+  assert.match(html, /<td>eclipse-linux-x86_64.tar.gz<\/td><td>eclipse-v1.3.4<\/td><td>5<\/td><td>3<\/td><td>2<\/td><td>1<\/td><td>2026-10-11 11:00 UTC<\/td>/);
+  assert.ok(!html.includes('<td>eclipse-linux-x86_64.tar.gz.sha256</td>'), 'checksums left out');
+  assert.match(html, /<td>between 2026-10-11 10:00 UTC and 2026-10-11 11:00 UTC<\/td><td>GitHub count<\/td><td>Eclipse<\/td><td>eclipse-linux-x86_64.tar.gz<\/td><td>2<\/td>/);
+  assert.match(html, /<td>Hub button on setup.html<\/td>/);
+  assert.match(html, /Eclipse: GitHub 403/);
+  await prune(DB, new Date('2028-01-01T00:00:00Z'));
+  assert.equal(DB.sql.prepare('SELECT (SELECT COUNT(*) FROM clicks) + (SELECT COUNT(*) FROM downloads) AS n').get().n, 0);
 });

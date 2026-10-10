@@ -1,5 +1,5 @@
 // Anonymous visit counter: no cookies, no browser storage. Sends the page name, the referring site's host name and
-// how long the page was visible. Skipped when the browser asks not to be tracked. Receiver: analytics/worker.mjs.
+// how long the page was visible, and which release file a download link points to when one is clicked. Skipped when the browser asks not to be tracked. Receiver: analytics/worker.mjs.
 export const ENDPOINT = 'https://hub-count.preceptorofmagic.workers.dev';
 
 export function pageName(pathname) {
@@ -12,6 +12,12 @@ export function referrerHost(referrer, ownHost) {
     const host = new URL(referrer).hostname.toLowerCase();
     return host === ownHost ? '' : host;
   } catch { return ''; }
+}
+
+const RELEASE_FILE = /^https:\/\/github\.com\/PreceptorOfMagic\/(Eclipse|Umbra)\/releases\/download\/[^/]+\/([^/?#]+)$/;
+export function releaseFile(href) {
+  const m = RELEASE_FILE.exec(href || '');
+  return m ? { repo: m[1], f: decodeURIComponent(m[2]) } : null;
 }
 
 export function startCounting(win = globalThis, endpoint = ENDPOINT) {
@@ -31,6 +37,11 @@ export function startCounting(win = globalThis, endpoint = ENDPOINT) {
     else if (since === null) since = win.performance.now();
   });
   win.addEventListener('pagehide', flush);
+  doc.addEventListener('click', (e) => {
+    const a = e.target && e.target.closest ? e.target.closest('a[href]') : null;
+    const file = a && releaseFile(a.href);
+    if (file) send('/d', { p: pageName(win.location.pathname), ...file });
+  }, true);
   return id;
 }
 
