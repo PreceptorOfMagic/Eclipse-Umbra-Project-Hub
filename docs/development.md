@@ -52,7 +52,7 @@ Both panes must satisfy a shared codec contract: compatible coding blocks, param
 
 That coordinated requirement is why this work spans the Aurora-derived client and Apollo-derived host. Adapting it into Aurora, Apollo or another Moonlight/Sunshine fork is welcome.
 
-Read: [HEVC parsing and rewriting](https://github.com/PreceptorOfMagic/Eclipse/blob/feat/coop-seamless/src/app/stream/video/coop_poc.c), [composition and decoder submission](https://github.com/PreceptorOfMagic/Eclipse/blob/feat/coop-seamless/src/app/stream/video/session_video.c), [pair-aware stream selection](https://github.com/PreceptorOfMagic/Eclipse/blob/feat/coop-seamless/src/app/stream/video/coop_stream_mode.c).
+Read: [HEVC parsing and rewriting](https://github.com/PreceptorOfMagic/Eclipse/blob/main/src/app/stream/video/coop_poc.c), [composition and decoder submission](https://github.com/PreceptorOfMagic/Eclipse/blob/main/src/app/stream/video/session_video.c), [pair-aware stream selection](https://github.com/PreceptorOfMagic/Eclipse/blob/main/src/app/stream/video/coop_stream_mode.c).
 
 </details>
 
@@ -78,7 +78,7 @@ The secondary receiver maintains a bounded queue. The sequencer judges queued un
 
 An IDR resets picture-reference history for the composite, not merely one independent video surface. Other random-access pictures also need explicit handling. Bootstrap and recovery must establish valid panes and aligned history; a keyframe request alone does not prove that a usable replacement picture has arrived.
 
-Read: [sequencer](https://github.com/PreceptorOfMagic/Eclipse/blob/feat/coop-seamless/src/app/stream/video/coop_seq.c), [synthetic hold slices](https://github.com/PreceptorOfMagic/Eclipse/blob/feat/coop-seamless/src/app/stream/video/coop_conceal.c), [peer queue and coordination](https://github.com/PreceptorOfMagic/Eclipse/blob/feat/coop-seamless/src/app/stream/video/coop_coord.c).
+Read: [sequencer](https://github.com/PreceptorOfMagic/Eclipse/blob/main/src/app/stream/video/coop_seq.c), [synthetic hold slices](https://github.com/PreceptorOfMagic/Eclipse/blob/main/src/app/stream/video/coop_conceal.c), [peer queue and coordination](https://github.com/PreceptorOfMagic/Eclipse/blob/main/src/app/stream/video/coop_coord.c).
 
 </details>
 
@@ -104,7 +104,7 @@ A host frame-rate floor asks for continued encoded output even when desktop capt
 
 Do not copy an old floor number into a new test. Horizontal and vertical test controls have differed, and an accepted configuration value has previously failed to affect the encoder. For any tuning change, record the requested setting, its application evidence and the measurement expected to move: host encode cadence, queue age/depth, composite submissions or displayed motion. These are different rates.
 
-Read: [normal and catch-up feed paths](https://github.com/PreceptorOfMagic/Eclipse/blob/feat/coop-seamless/src/app/stream/video/session_video.c). The [August rate-decoupling note](https://github.com/PreceptorOfMagic/Eclipse/blob/feat/coop-seamless/docs/coop-rate-decoupling.md) explains the turning point, but is a historical design proposal, not today’s implementation inventory.
+Read: [normal and catch-up feed paths](https://github.com/PreceptorOfMagic/Eclipse/blob/main/src/app/stream/video/session_video.c). The August rate-decoupling note (kept in the project’s development records) explains the turning point, but is a historical design proposal, not today’s implementation inventory.
 
 </details>
 
@@ -126,7 +126,7 @@ Integration had to add real capture, residual/reconstruction work and rate budge
 
 Both bit-depth builds and the required kernels must accompany a host package. Packaging can otherwise succeed without the custom encoder, leaving a host unsuitable for the intended mixed-vendor mode. Verify advertised capabilities against the actual installed files, then verify the selected path in a real session. Source conformance tests are necessary, not sufficient.
 
-Read: [GPU HEVC source and component tests](https://github.com/PreceptorOfMagic/Eclipse/tree/feat/coop-seamless/experimental/gpu-hevc), [host encoder packaging](https://github.com/PreceptorOfMagic/Umbra/blob/umbra/thin/cmake/packaging/windows.cmake). The encoder builds on upstream work, including x265; see [Acknowledgements](../ACKNOWLEDGEMENTS.md).
+Read: [GPU HEVC source and component tests](https://github.com/PreceptorOfMagic/Eclipse/tree/main/experimental/gpu-hevc), [host encoder packaging](https://github.com/PreceptorOfMagic/Umbra/blob/umbra/thin/cmake/packaging/windows.cmake). The encoder builds on upstream work, including x265; see [Acknowledgements](../ACKNOWLEDGEMENTS.md).
 
 </details>
 
@@ -148,7 +148,7 @@ When the Windows client is also a host, focus and injected input can loop back i
 
 Monitor-off requests deliberately exclude the PC displaying Eclipse. Speaker restoration tracks the pre-stream playback endpoint and handles delayed/recreated endpoints. These are session-lifecycle behaviours that need disconnect, quit, crash, restart and upgrade coverage—not just a successful first launch.
 
-Read: [input routing](https://github.com/PreceptorOfMagic/Eclipse/tree/feat/coop-seamless/src/app/stream/input), [co-op assignments and settings](https://github.com/PreceptorOfMagic/Eclipse/blob/feat/coop-seamless/src/app/ui/settings/panes/coop.pane.c), [host application lifecycle](https://github.com/PreceptorOfMagic/Umbra/blob/umbra/thin/src/process.cpp).
+Read: [input routing](https://github.com/PreceptorOfMagic/Eclipse/tree/main/src/app/stream/input), [co-op assignments and settings](https://github.com/PreceptorOfMagic/Eclipse/blob/main/src/app/ui/settings/panes/coop.pane.c), [host application lifecycle](https://github.com/PreceptorOfMagic/Umbra/blob/umbra/thin/src/process.cpp).
 
 </details>
 
@@ -184,7 +184,7 @@ Diagnostic bundles combine build identity, OS/firmware, capabilities, settings a
 
 For timing work, distinguish capture/encode cadence, packet arrival, queue delay, decoder submissions and actual presentation. Match records by session and clock domain. A visually wrong pane can coexist with healthy decode counters, so a screen observation remains part of the verdict.
 
-Read: [mixer and duplicate-sound filters](https://github.com/PreceptorOfMagic/Eclipse/tree/1a09b62d/src/app/stream/audio), [diagnostic bundle contents](https://github.com/PreceptorOfMagic/Eclipse/blob/feat/coop-seamless/docs/support-logs.md).
+Read: [mixer and duplicate-sound filters](https://github.com/PreceptorOfMagic/Eclipse/tree/main/src/app/stream/audio), [diagnostic bundle contents](https://github.com/PreceptorOfMagic/Eclipse/blob/main/docs/support-logs.md).
 
 </details>
 
@@ -202,7 +202,7 @@ A development branch is not a release identifier; use the exact source commit re
 
 ### Eclipse
 
-[diag/feed-accounting](https://github.com/PreceptorOfMagic/Eclipse/tree/diag/feed-accounting) carries client integration work. [feat/coop-seamless](https://github.com/PreceptorOfMagic/Eclipse/tree/feat/coop-seamless) contains newer co-op/device/audio work. These branch names describe the reviewed development state, not a permanent release policy. Check divergence and working-tree changes before building; do not assume the default branch or a GitHub source ZIP contains every desktop feature.
+The public [main](https://github.com/PreceptorOfMagic/Eclipse/tree/main) branch holds each release, and the `eclipse-v*` tags mark the exact commit every package was built from. Day-to-day development happens privately and lands in `main` with each release, so build from a release tag to match the published packages.
 
 - `src/app/ui/`: LVGL launcher, settings, co-op selection and stream interface.
 
@@ -248,7 +248,7 @@ The media integration links into webOS’s native playback environment. A post-l
 
 A rebuild can overwrite the same versioned IPK filename, so preserve a known-good package first. Installation alone does not restart an already running app: close and relaunch it before evaluating new code. Test first stream after a fresh install or firmware update as well as later launches.
 
-[Build wrapper](https://github.com/PreceptorOfMagic/Eclipse/blob/feat/coop-seamless/scripts/webos/build_for_lg.sh) · [Firmware/symbol-collision investigation](https://github.com/PreceptorOfMagic/Eclipse/blob/feat/coop-seamless/docs/webos26-media-load.md) · [User installation](installation.md#eclipse-webos)
+[Build wrapper](https://github.com/PreceptorOfMagic/Eclipse/blob/main/scripts/webos/build_for_lg.sh) · [Firmware/symbol-collision investigation](https://github.com/PreceptorOfMagic/Eclipse/blob/main/docs/webos26-media-load.md) · [User installation](installation.md#eclipse-webos)
 
 </details>
 
@@ -268,7 +268,7 @@ The script configures/builds with CMake and Ninja, installs into staging, then f
 
 Preserve the whole extracted directory. Verify package provenance and dependencies on a clean Windows machine, then ordinary streaming, both co-op orientations, input, audio and reconnect/quit. Hardware decoding does not imply zero-copy display: the current readback/presentation path can bottleneck high-resolution output independently of the decoder.
 
-[Portable builder](https://github.com/PreceptorOfMagic/Eclipse/blob/feat/coop-seamless/scripts/windows/build_portable.ps1) · [User installation](installation.md#eclipse-windows)
+[Portable builder](https://github.com/PreceptorOfMagic/Eclipse/blob/main/scripts/windows/build_portable.ps1) · [User installation](installation.md#eclipse-windows)
 
 </details>
 
@@ -290,7 +290,7 @@ The bundle deliberately does not carry glibc or a replacement GPU driver. Its la
 
 Distribution-container and WSL checks help find dependency problems. They do not verify every native display server, compositor or GPU driver. Recorded co-op coverage uses NVDEC under WSL; native AMD/Intel VAAPI needs independent validation, and the experimental WSL VAAPI path showed instability.
 
-[Portable builder](https://github.com/PreceptorOfMagic/Eclipse/blob/feat/coop-seamless/scripts/linux/build_portable.sh) · [Sysroot and dependency scripts](https://github.com/PreceptorOfMagic/Eclipse/tree/feat/coop-seamless/scripts/linux/portable) · [User installation](installation.md#eclipse-linux)
+[Portable builder](https://github.com/PreceptorOfMagic/Eclipse/blob/main/scripts/linux/build_portable.sh) · [Sysroot and dependency scripts](https://github.com/PreceptorOfMagic/Eclipse/tree/main/scripts/linux/portable) · [User installation](installation.md#eclipse-linux)
 
 </details>
 
