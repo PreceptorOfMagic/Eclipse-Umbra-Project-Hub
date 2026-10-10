@@ -10,7 +10,9 @@ for (const [platform, name, repo] of [
   ['webos', 'com.aurora.gamestream_1.0.8_arm.ipk', 'Eclipse'],
   ['windows', 'eclipse-windows-x64-unsigned.zip', 'Eclipse'],
   ['linux', 'eclipse-linux-x86_64.tar.gz', 'Eclipse'],
+  ['windows-setup', 'eclipse-windows-x64-setup-unsigned.exe', 'Eclipse'],
   ['umbra-windows', 'Umbra-windows-x64.exe', 'Umbra'],
+  ['umbra-linux', 'Umbra-0.5.0-ubuntu24.04-amd64.deb', 'Umbra'],
 ]) test(`${platform}: choose only its package`, () => {
   const file = asset(name, repo);
   assert.equal(selectAsset(platform, release(asset('source.zip'), asset('checksums.sha256'), file)), file);
@@ -18,6 +20,11 @@ for (const [platform, name, repo] of [
 test('reject beta app, ARM, debug and unsupported names', () => {
   assert.equal(selectAsset('webos', release(asset('com.aurora.gamestream.beta_1.0.8_arm.ipk'))), null);
   assert.equal(selectAsset('windows', release(asset('eclipse-windows-arm64.zip'), asset('eclipse-windows-x64-debug.zip'))), null);
+});
+test('Ubuntu 24.04 button never picks the 22.04 package', () => {
+  const a24 = asset('Umbra-0.5.0-ubuntu24.04-amd64.deb', 'Umbra'), a22 = asset('Umbra-0.5.0-ubuntu22.04-amd64.deb', 'Umbra');
+  assert.equal(selectAsset('umbra-linux', release(a22, a24, asset('Umbra-windows-x64.exe', 'Umbra'))), a24);
+  assert.equal(selectAsset('umbra-linux', release(a22)), null);
 });
 test('do not guess when multiple matching files exist', () => {
   assert.equal(selectAsset('windows', release(asset('eclipse-windows-x64.zip'), asset('eclipse-windows-x64-unsigned.zip'))), null);

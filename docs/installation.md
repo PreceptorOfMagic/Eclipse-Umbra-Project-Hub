@@ -4,7 +4,7 @@
 
 Install Umbra on each gaming PC, then Eclipse on the display device. Start with one working stream before adding the second host.
 
-[Umbra · Windows](#umbra-windows) · [Eclipse · LG webOS](#eclipse-webos) · [Eclipse · Windows](#eclipse-windows) · [Eclipse · Linux](#eclipse-linux)
+[Umbra · Windows](#umbra-windows) · [Umbra · Linux](#umbra-linux) · [Eclipse · LG webOS](#eclipse-webos) · [Eclipse · Windows](#eclipse-windows) · [Eclipse · Linux](#eclipse-linux)
 
 <a name="before-you-start"></a>
 
@@ -12,7 +12,7 @@ Install Umbra on each gaming PC, then Eclipse on the display device. Start with 
 
 ### Gaming PC → Umbra
 
-Windows x64 host. Install once for ordinary streaming, twice for two-PC co-op. The game runs here.
+Windows x64 or Ubuntu Linux (22.04 or 24.04) host. Install once for ordinary streaming, twice for two-PC co-op. The game runs here.
 
 ### Screen device → Eclipse
 
@@ -24,7 +24,7 @@ Download an attached file under **Assets**, not GitHub’s automatically generat
 
 <a name="umbra-windows"></a>
 
-## 1. Umbra on Windows
+## 1A. Umbra on Windows
 
 ![Umbra host web interface showing the installed version, Apollo base and separate update-check results.](../site/media/umbra-host-home.webp)
 
@@ -34,19 +34,45 @@ Umbra’s web interface after setup, showing its version and update checks. Capt
 
 Open the latest release, expand Assets and choose the package described below. If no release is listed, that package has not been published.
 
-**Package:** the Windows x64 installer `.exe` attached to an Umbra release, not an Eclipse client ZIP. You need a Windows gaming PC, a supported GPU and current driver, administrator access for installation, and the games you intend to run already installed. Windows 11 x64 is the tested host OS.
+**Package:** the Windows x64 installer `Umbra-windows-x64.exe` attached to an Umbra release, not an Eclipse client ZIP. You need a Windows gaming PC, a supported GPU and current driver, administrator access for installation, and the games you intend to run already installed. Windows 11 x64 is the tested host OS.
 
 1. Open the Umbra release, read its compatibility notes and expand **Assets**. Download the Windows x64 installer and matching checksum if supplied. Compare its SHA-256 hash with `Get-FileHash` in PowerShell before opening it.
 
-1. Back up any existing host configuration and pairings. Umbra replaces Apollo in place, using the same Apollo installation folder and registry identity; installing Apollo again replaces Umbra. Do not expect them to run side by side. If Sunshine is installed separately, stop its service before starting Umbra to avoid competing for network ports or display resources.
+1. Back up any existing host configuration and pairings. Umbra replaces Apollo in place, using the same Apollo installation folder and registry identity; installing Apollo again replaces Umbra. Do not expect them to run side by side. If Sunshine is installed separately, stop its service before starting Umbra to avoid competing for network ports or display resources. When upgrading from Apollo or an older Umbra, if setup stops making progress for more than a minute, end `reg.exe` in Task Manager (Details tab) and setup continues.
 
-1. Run the installer and approve the Windows administrator prompt. Install the bundled virtual-display and controller/device components offered by the installer; there is no separate device-bridge installation step.
+1. Run the installer and approve the Windows administrator prompt. The installer is unsigned for now, so Windows SmartScreen may warn; check the checksum first, then choose **More info → Run anyway**. Install the bundled virtual-display and controller/device components offered by the installer; there is no separate device-bridge installation step.
 
 1. Allow host access on your trusted private network when Windows asks. Open the host’s web interface using its installed shortcut or tray action, create the local administrator login and review the available game/desktop entries.
 
 1. Keep the client-driven display defaults. Pair Eclipse, approve its PIN in Umbra and test an ordinary Desktop or game session before adding another host.
 
 For co-op, install the same compatible Umbra release on the second Windows PC. Co-op-specific defaults are separate from ordinary streaming settings. The Co-op Pane is built in and requested automatically by Eclipse, rather than created in the host’s editable Applications list. You should not create application entries, copy host IDs or tune encoder settings by hand.
+
+<a name="umbra-linux"></a>
+
+## 1B. Umbra on Linux
+
+[Umbra Ubuntu releases](https://github.com/PreceptorOfMagic/Umbra/releases)
+
+Open the latest release, expand Assets and choose the package described below. If no release is listed, that package has not been published.
+
+**Package:** the Ubuntu `.deb` for your version: `Umbra-<version>-ubuntu24.04-amd64.deb` for Ubuntu 24.04 or `Umbra-<version>-ubuntu22.04-amd64.deb` for Ubuntu 22.04. They are two separate builds, not one universal Linux package. You need an x86_64 Ubuntu desktop with a graphical session, a supported GPU and current driver, `sudo` access for installation, and the games you intend to run already installed. The packages have passed install, upgrade and removal checks; live testing on a Linux host so far covers one earlier Ubuntu 24.04 build.
+
+1. Open the Umbra release, read its compatibility notes and expand **Assets**. Download the `.deb` for your Ubuntu version and its matching checksum. Compare `sha256sum` of the downloaded file with that checksum.
+
+1. Install it with `apt` from the download folder, so its dependencies are installed too:
+
+```sh
+sudo apt install ./Umbra-<version>-ubuntu24.04-amd64.deb
+```
+
+1. Installation gives the host permission to capture the screen and to create virtual controllers. Start the host for your user with `systemctl --user start sunshine` (the service keeps its upstream name), and run `systemctl --user enable sunshine` to start it whenever you sign in. You can also start **Umbra** from the applications menu.
+
+1. Open `https://localhost:47990` in a browser on that PC, create the local administrator login and review the available game/desktop entries. If a firewall is enabled, allow the host on your trusted private network.
+
+1. Keep the client-driven display defaults. Pair Eclipse, approve its PIN in Umbra and test an ordinary Desktop or game session before adding another host.
+
+Two-PC co-op has been tested with Windows hosts, and the GPU HEVC encoder that lets an NVIDIA PC and an AMD PC share one co-op picture is part of the Windows package. Start with Linux as an ordinary streaming host. To remove Umbra, run `sudo apt remove umbra`.
 
 <a name="eclipse-webos"></a>
 
@@ -70,7 +96,7 @@ Open the latest release, expand Assets and choose the package described below. I
 
 1. Download Eclipse’s `.ipk` asset to the computer. In Dev Manager, select the TV, open **Apps**, choose **Install** and select that file.
 
-1. Launch Eclipse from the TV’s app list, then [pair an Umbra PC](#pairing). After an update, close and reopen Eclipse.
+1. Launch Eclipse from the TV’s app list, then [pair an Umbra PC](#pairing). To update, install the newer `.ipk` the same way; settings and pairings are kept. After an update, close and reopen Eclipse.
 
 Keep Developer Mode active and extend its session before it expires. LG removes development-installed apps when Developer Mode is disabled. This installation method does not require rooting your TV.
 
@@ -84,17 +110,17 @@ Keep Developer Mode active and extend its session before it expires. LG removes 
 
 Open the latest release, expand Assets and choose the package described below. If no release is listed, that package has not been published.
 
-**Package:** `eclipse-windows-x64-unsigned.zip` and its adjacent `.sha256` file. Windows 11 x64 is tested; the source minimum is Windows 10 version 1803, which has not received the same physical testing. An up-to-date GPU driver with compatible D3D11VA hardware decoding is required. Windows ARM is not a tested target.
+**Package:** the installer `eclipse-windows-x64-setup-unsigned.exe`, or the portable `eclipse-windows-x64-unsigned.zip`, each with its adjacent `.sha256` file. Windows 11 x64 is tested; the source minimum is Windows 10 version 1803, which has not received the same physical testing. An up-to-date GPU driver with compatible D3D11VA hardware decoding is required. Windows ARM is not a tested target.
 
-1. Download both files from the same Eclipse release. In PowerShell run `Get-FileHash ./eclipse-windows-x64-unsigned.zip -Algorithm SHA256` and compare the hash with the downloaded checksum.
+1. Download the installer and its checksum from the same Eclipse release. In PowerShell run `Get-FileHash ./eclipse-windows-x64-setup-unsigned.exe -Algorithm SHA256` and compare the hash with the downloaded checksum.
 
-1. Right-click the ZIP and choose **Extract All** to a folder you intend to keep. Do not run the app from inside the ZIP or move its executable away from the supplied DLLs, data and notices.
+1. Run the installer as your normal Windows user. It installs Eclipse for your user only, without administrator access, and adds Start menu entries and an Apps & features uninstaller. Installing a newer version over an older one keeps your settings and pairings.
 
-1. Open the extracted folder and run `moonlight-tv.exe` as your normal Windows user. The inherited executable name is expected. Eclipse does not require administrator access, a compiler or MSYS2.
+1. The current build is unsigned, so Windows may show a SmartScreen warning. Check the repository, release and checksum before deciding whether to run it; do not disable Windows security globally.
 
-1. The current portable build is unsigned, so Windows may show a SmartScreen warning. Check the repository, release and checksum before deciding whether to run it; do not disable Windows security globally.
+1. For portable use instead, right-click the ZIP and choose **Extract All** to a folder you intend to keep, then run `moonlight-tv.exe` from it. The inherited executable name is expected. Do not run the app from inside the ZIP or move its executable away from the supplied DLLs, data and notices.
 
-1. [Pair your host](#pairing). To update, close Eclipse and extract the new release into a new folder, keeping the previous version available until the new one works.
+1. [Pair your host](#pairing). To remove Eclipse, use **Apps & features**; the uninstaller lets you keep your settings.
 
 <a name="eclipse-linux"></a>
 
@@ -110,17 +136,17 @@ Open the latest release, expand Assets and choose the package described below. I
 
 1. Download the portable archive and, when supplied, its matching SHA-256 file from the same release. Compare `sha256sum eclipse-linux-x86_64.tar.gz` with that checksum.
 
-1. Extract and launch from a terminal:
+1. Extract and install from a terminal:
 
 ```sh
 tar -xzf eclipse-linux-x86_64.tar.gz
 cd eclipse-linux-x86_64
-./eclipse
+./install.sh
 ```
 
-1. Keep the extracted directory together. Use the `eclipse` launcher, which configures the bundled runtime, instead of invoking its internal executable.
+1. `install.sh` installs Eclipse for your user, without a password, and adds it to the applications menu; the downloaded folder can then be deleted. Installing a newer version the same way keeps your settings and pairings.
 
-1. Optionally run `./install-desktop-entry.sh` from that folder to add a launcher for your user. Then [pair the host](#pairing).
+1. For portable use instead, run `./eclipse` from the extracted folder and keep the folder together; `./install-desktop-entry.sh` adds that copy to the menu. Then [pair the host](#pairing). To remove an installed copy, run `~/.local/share/eclipse/app/uninstall.sh` (add `--keep-settings` to keep your settings and pairings).
 
 1. If hardware decoding fails, update the relevant NVIDIA or Mesa/VAAPI driver and include the exact driver and desktop session in a report. Native AMD/Intel VAAPI still needs validation; the WSL VAAPI test path has known instability.
 
@@ -134,7 +160,7 @@ Use the portable archive instructions for Ubuntu, Fedora and Arch-style systems 
 
 1. Open Eclipse. Select the discovered PC, or add the host’s local address if discovery does not find it.
 
-1. Request pairing in Eclipse, then enter its displayed PIN in Umbra’s pairing page on that PC. Review client permissions, particularly for later paired devices.
+1. Request pairing in Eclipse, then enter its displayed PIN in Umbra’s pairing page on that PC. The first device paired with a PC gets full permissions. For any later device, allow **Launch Apps** and **Controller Input** under **PIN → Device Management**, or starting a game is refused with “403 Permission denied”.
 
 1. Choose a game or desktop from that host’s app list. Confirm picture, audio and controls in a normal one-PC session.
 
@@ -152,11 +178,13 @@ For remote access outside your home, establish a trusted private connection betw
 
 1. In Eclipse choose **Co-op**, select the two hosts, choose side-by-side or stacked, and choose the primary/Player 1 side.
 
-1. Assign each controller to its player and select the desired audio behaviour. Start the session; the client and hosts negotiate compatible stream and encoder settings.
+1. Assign each controller to its player and select the desired audio behaviour. Start the session; the client and hosts negotiate compatible stream and encoder settings. The first time, Eclipse asks once which graphics card make each PC has.
 
 1. Launch the games on their respective PCs. Each game still has its own session, accounts and multiplayer requirements.
 
 The normal install flow uses working co-op defaults. Eclipse requests the built-in Co-op Pane when needed; it does not need to appear in Umbra’s editable Applications list. Disconnect pauses the co-op session so it can be resumed; Quit ends the session on both hosts. If an older build asks for manual setup, check the matching release notes instead of copying hidden settings from a development guide.
+
+**Settings → Co-op → Play shared sounds once** (Accurate by default) plays a sound both games make, such as narration or music, only once. Some games choose their music at random on each PC, so the two PCs play different tracks the filter cannot merge; if music sounds doubled or messy, turn the game’s music off on one PC.
 
 If Eclipse is running on one of the gaming PCs, controls for that PC can behave differently: its local game reads its controller directly. Keyboard/mouse focus and virtual-display placement remain areas of active testing. A TV or separate client avoids that local-host focus complication.
 

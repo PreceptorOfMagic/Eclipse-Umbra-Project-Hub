@@ -3,8 +3,10 @@
 export const platforms = Object.freeze({
   webos: { repo: 'Eclipse', label: 'LG webOS', match: /^com\.aurora\.gamestream_[\w.+-]+_arm\.ipk$/i },
   windows: { repo: 'Eclipse', label: 'Windows x64', match: /^eclipse-windows-x64(?:-unsigned)?\.zip$/i },
+  'windows-setup': { repo: 'Eclipse', label: 'Windows x64 installer', match: /^eclipse-windows-x64-setup(?:-unsigned)?\.exe$/i },
   linux: { repo: 'Eclipse', label: 'Linux x86_64', match: /^eclipse-linux-x86_64\.tar\.gz$/i },
   'umbra-windows': { repo: 'Umbra', label: 'Umbra Windows x64', match: /^(?:umbra(?:-windows-x64)?|apollo)\.exe$/i },
+  'umbra-linux': { repo: 'Umbra', label: 'Umbra Ubuntu 24.04', match: /^umbra-[\w.+-]+-ubuntu24\.04-amd64\.deb$/i },
 });
 
 export function selectAsset(platform, release) {
