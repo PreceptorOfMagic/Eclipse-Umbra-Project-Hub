@@ -26,7 +26,7 @@ Download an attached file under **Assets**, not GitHub’s automatically generat
 
 Open the latest release, expand Assets and choose the package described below. If no release is listed, that package has not been published.
 
-Choose `com.aurora.gamestream_<version>_arm.ipk`. Enable LG Developer Mode, connect webOS Dev Manager and install the IPK. Tested on LG G5 / webOS 26. [Full LG TV installation →](installation.md#eclipse-webos)
+Choose `com.aurora.gamestream_<version>_arm.ipk`. Enable LG Developer Mode, connect webOS Dev Manager and install the IPK; updates keep settings and pairings. Tested on LG G5 / webOS 26. [Full LG TV installation →](installation.md#eclipse-webos)
 
 <a name="windows"></a>
 
@@ -38,7 +38,7 @@ Choose `com.aurora.gamestream_<version>_arm.ipk`. Enable LG Developer Mode, conn
 
 Open the latest release, expand Assets and choose the package described below. If no release is listed, that package has not been published.
 
-Choose `eclipse-windows-x64-unsigned.zip`, verify its checksum, extract everything and launch `moonlight-tv.exe`. Tested on Windows 11; hardware decoding required. [Full Windows installation →](installation.md#eclipse-windows)
+Choose the installer `eclipse-windows-x64-setup-unsigned.exe` (or the portable `eclipse-windows-x64-unsigned.zip`), verify its checksum and run it; the installer needs no administrator access. Tested on Windows 11; hardware decoding required. [Full Windows installation →](installation.md#eclipse-windows)
 
 <a name="linux"></a>
 
@@ -50,7 +50,7 @@ Choose `eclipse-windows-x64-unsigned.zip`, verify its checksum, extract everythi
 
 Open the latest release, expand Assets and choose the package described below. If no release is listed, that package has not been published.
 
-Choose `eclipse-linux-x86_64.tar.gz`, extract and run `./eclipse`. Requires glibc 2.35+ and GPU drivers. Native-Linux coverage remains limited. [Full Linux installation →](installation.md#eclipse-linux)
+Choose `eclipse-linux-x86_64.tar.gz`, extract and run `./install.sh` (or `./eclipse` to run it in place). Requires glibc 2.35+ and GPU drivers. Native-Linux coverage remains limited. [Full Linux installation →](installation.md#eclipse-linux)
 
 <a name="features"></a>
 

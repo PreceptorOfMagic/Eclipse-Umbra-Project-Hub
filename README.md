@@ -76,7 +76,7 @@ The everyday capabilities come from Moonlight, Sunshine, Moonlight TV, Aurora an
 - [One co-op session to manage](docs/features.md#features-session) — a shared bandwidth budget, pause, resume and quit.
 - [Controls go to the right PC](docs/features.md#features-input) — remembered controllers, pane-aware pointing and Nintendo layouts.
 - [Two games, with sound you control](docs/features.md#features-audio) — stereo mixing, speaker restoration and shared sounds played once.
-- [Fit the setup you actually use](docs/features.md#features-devices) — local-host play, monitor control, wired TV networking and desktop usability.
+- [Fit the setup you actually use](docs/features.md#features-devices) — local-host play, monitor control, wired TV networking, desktop usability and clean installs.
 - [Reports that explain what went wrong](docs/features.md#features-diagnostics) — client and host evidence, crash records and shareable bundles.
 
 Want the implementation details? The [Development guide](docs/development.md) covers composition, reference-frame holds, buffering, build pipelines and the experiments that shaped them.
@@ -117,7 +117,7 @@ Compatibility and test coverage as of October 2026:
 | LG webOS client | LG G5, webOS 26 (11.2.0 / firmware 43.21.77), wired through a UE300 USB Ethernet adapter | **Tested.** Standard streaming and the two-host co-op path run on the project television. | Other LG models, SoCs, decoder combinations and earlier/later webOS releases need community testing. |
 | Windows client | Windows 11 x64 on the Radeon RX Vega test PC; D3D11VA hardware decode | **Tested.** Standard and co-op sessions, diagnostics and recovery have been exercised. | Windows 10, Windows on ARM, Intel-only clients, other GPU generations and broader decoder/driver combinations remain unverified. |
 | Linux client | x86_64 Ubuntu 22.04/26.04, Fedora 44 and Arch environments under WSL; NVIDIA NVDEC | **Tested.** Single-host/co-op streaming and diagnostics exercised under WSL; this is not native-Linux certification. | Bare-metal Linux and native AMD/Intel VAAPI remain unverified. Experimental WSL VAAPI tests showed crashes and visual faults. |
-| Umbra hosts | Windows 11 x64; NVIDIA RTX 4070, NVIDIA RTX 3070 and AMD Radeon RX Vega systems | **Tested.** Single-host streaming and host diagnostics work across the project systems. | Windows 10, Windows Server, Windows on ARM, Intel Arc/iGPU hosts and newer AMD generations need coverage. |
+| Umbra hosts | Windows 11 x64; NVIDIA RTX 4070, NVIDIA RTX 3070 and AMD Radeon RX Vega systems; Ubuntu 22.04/24.04 packages | **Tested.** Single-host streaming and host diagnostics work across the project systems. The Ubuntu packages pass install, upgrade and removal checks; Linux hosting has had one live test. | Windows 10, Windows Server, Windows on ARM, Intel Arc/iGPU hosts and newer AMD generations need coverage. Linux hosts need live testing, including co-op. |
 | NVIDIA + NVIDIA co-op | RTX 4070 + RTX 3070, Windows 11; 10-bit HEVC/HDR path | **Measured.** Two-host co-op has been used and measured on the primary rig. | Other NVIDIA architectures, driver branches, resolutions and refresh rates need reports. |
 | NVIDIA + AMD co-op | RTX 4070 / RTX 3070 + Radeon RX Vega, Windows 11; custom GPU HEVC co-op path | **Measured.** Live mixed-vendor co-op has been demonstrated. | Fast-motion image quality and high-bitrate stability remain active work. Newer AMD encoders, HDR and longer sessions need coverage. |
 | AMD + AMD co-op | No second AMD host is available on the project rig | **Needs testing.** The code path exists but this pairing has not been run on two physical AMD hosts. | AMD × AMD is a priority community test, especially RDNA-era GPUs and HDR-capable hardware. |
@@ -267,7 +267,7 @@ An extra quantisation attempt in one revision raised worst-case encode time and 
 
 <details>
 
-<summary>Late September–October · Making it usable and maintainable — Desktop clients, a firmware crash, automatic setup and the thin Apollo fork</summary>
+<summary>Late September–October · Making it usable and maintainable — Desktop clients, a firmware crash, automatic setup, the thin Apollo fork and the first public release</summary>
 
 ### Late September · Desktop clients and session recovery
 
@@ -284,6 +284,14 @@ The built-in pane, capability-based encoder selection and divided default bitrat
 ### Early October · Smaller features and the passive audio gate
 
 Remote-monitor choices, remembered input assignments, Nintendo mapping, remote-device filtering, wired-TV routing and richer logs made the app fit more real setups. Duplicate-audio work explored several filtering strategies before settling on a passive gate, now the default way shared sounds are played once.
+
+### 6–10 October · Keeping the second PC’s sound in step
+
+Player 2’s sound had been drifting behind; batching its audio messages fixed the backlog, and a receiver that discarded the start of each stream was corrected. The shared-sound filter gained Accurate, Fast and Off choices.
+
+### 10 October · First releases, and the first public one
+
+Eclipse and Umbra were packaged for the first time. Same-day updates kept settings and co-op working after an LG TV restarts, following an audit of every place the TV app keeps files. Scoring the shared-sound filter against Halo’s own sound files led to guards that keep sounds only one PC played. Eclipse 1.3.4 became the first public release.
 
 <!-- activity:history-product:start -->
 **Behind the build · 23 September–5 October 2026**
@@ -303,7 +311,7 @@ Install on the television or computer where you want to play. Pair it with one U
 
 ### Umbra · host
 
-Install on each Windows gaming PC. Apollo supplies the everyday host experience; Umbra keeps other changes to a minimum while adding the encoder and session behaviour required by Eclipse co-op. [Explore Umbra →](docs/umbra.md)
+Install on each Windows or Ubuntu gaming PC. Apollo supplies the everyday host experience; Umbra keeps other changes to a minimum while adding the encoder and session behaviour required by Eclipse co-op. [Explore Umbra →](docs/umbra.md)
 
 <a name="questions"></a>
 

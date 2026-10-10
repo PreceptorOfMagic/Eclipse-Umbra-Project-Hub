@@ -42,7 +42,7 @@ Eclipse requests Umbra’s built-in Co-op Pane at the required size. Windows see
 
 #### Pair-aware encoder selection
 
-Known NVIDIA pairs use the native HEVC route. For supported mixed NVIDIA/AMD pairings, both hosts use the custom GPU HEVC path so their encoded structures match. The AMD/AMD selection path also exists, but two physical AMD hosts have not been tested on the project rig. Required encoder components must be included on both hosts; Intel co-op remains unverified.
+Known NVIDIA pairs use the native HEVC route. For supported mixed NVIDIA/AMD pairings, both hosts use the custom GPU HEVC path so their encoded structures match. The AMD/AMD selection path also exists, but two physical AMD hosts have not been tested on the project rig. Required encoder components must be included on both hosts; Intel co-op remains unverified. The first co-op launch asks once which graphics card make each PC has, because Umbra does not report it yet.
 
 [How compressed-frame composition works](development.md#composition)
 
@@ -126,11 +126,11 @@ Umbra remembers the playback endpoint before switching to streaming audio and re
 
 #### Play shared sounds once
 
-When both games play the same narration, music or effect, Eclipse’s passive gate compares the two PCs’ sound in six frequency bands and mutes the later copy where they match. This reduces matching duplicate sounds; effectiveness varies with the material. The gate is on by default and can be switched off in the co-op settings.
+When both games play the same narration, music or effect, Eclipse’s passive gate compares the two PCs’ sound in six frequency bands and mutes the later copy where they match. This reduces matching duplicate sounds; effectiveness varies with the material. **Settings → Co-op → Play shared sounds once** offers Accurate (the default), Fast and Off. Since Eclipse 1.3.4 the gate keeps sounds only one PC played: a band reopens as soon as the later PC plays something the other PC did not, a much quieter copy cannot remove a louder sound, and a sound is no longer removed because of a copy that was itself removed.
 
-**Audio delay.** The gate holds both streams for 5 ms (240 samples at 48 kHz). Player 2 already fills a 40 ms buffer to smooth network timing; the gate adds 5 ms to that path and 5 ms to Player 1. It adds no intentional video buffering. Turning it off or listening to one PC bypasses the gate’s extra delay.
+**Audio delay.** Accurate holds both streams for its look-ahead plus 5 ms (45 ms by default; a slider sets the look-ahead from 0 to 100 ms), so it can hear each copy start before removing it. Fast holds them for 5 ms (240 samples at 48 kHz) and predicts when a copy is coming. Player 2 already fills a 40 ms buffer to smooth network timing. The gate adds no intentional video buffering. Where Eclipse feeds the speakers itself (Windows, and Linux with PulseAudio), Accurate currently runs as Fast. Off, or listening to one PC, bypasses the gate’s extra delay.
 
-**Tradeoffs.** Muting a frequency band also mutes any other sound the later PC plays in that band at that moment. After enough shared sound, the gate balances the PCs’ volumes by up to 6 dB each. Simulator tests on recorded game audio measured about 23 dB reduction for ordinary speech, 3–7 dB for whispers and breaths, and 1.5–4.7 dB for copies playing 0.5–2% slower. These are component measurements, not a guarantee of complete duplicate removal.
+**Tradeoffs.** While a band is closed on a copy, other sound the later PC plays in that band can be muted with it. After enough shared sound, the gate balances the PCs’ volumes by up to 6 dB each. Some games pick their music at random on each PC, so the two PCs play different tracks that cannot be merged; turn the game’s music off on one PC if it sounds doubled. Simulator tests on recorded game audio measured about 23 dB reduction for ordinary speech, 3–7 dB for whispers and breaths, and 1.5–4.7 dB for copies playing 0.5–2% slower. Scored against Halo: Combat Evolved’s own sound files over 76 minutes of recorded co-op, 1.3.4 cut 3% of sounds only one PC played (7% before) and removed one copy of 68% of shared sounds (63% before). These are measurements, not a guarantee of complete duplicate removal.
 
 [How mixing and duplicate detection differ](development.md#audio-routing)
 
@@ -140,7 +140,7 @@ When both games play the same narration, music or effect, Eclipse’s passive ga
 
 <details>
 
-<summary>Fit the setup you actually use — Local-host play, monitor control, wired TV networking and desktop usability</summary>
+<summary>Fit the setup you actually use — Local-host play, monitor control, wired TV networking, desktop usability and clean installs</summary>
 
 #### A Windows PC can be a host and the client
 
@@ -159,6 +159,10 @@ On webOS, the wired-network option identifies the active USB Ethernet adapter an
 #### A more usable desktop client
 
 Keyboard shortcuts cover fullscreen, capture and stream controls; Windows remembers window position, size and maximisation. Settings can scroll instead of compressing their text into an unreadable panel.
+
+#### Install, update and remove cleanly
+
+Eclipse has a per-user Windows installer that needs no administrator access, with an Apps & features uninstaller that can keep your settings, and per-user install and uninstall scripts on Linux. Umbra has a Windows installer and Ubuntu 22.04/24.04 packages; its uninstaller stops only its own service and processes and lets you keep your settings and shared drivers. Installing a newer version over an older one keeps settings and pairings, and on webOS 26 settings, pairings and co-op keep working after the TV restarts.
 
 </details>
 

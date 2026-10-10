@@ -160,7 +160,7 @@ Read: [input routing](https://github.com/PreceptorOfMagic/Eclipse/tree/main/src/
 
 ### Mixing, then playing shared sounds once
 
-Mixing happens inside Player 1’s audio path. Player 1 is chosen in the co-op dialog before launch (it opens on the default pair from settings, else the last session’s pair, else the selected PC) and stays fixed for the session: Eclipse’s main process streams from it, and Player 2 streams in a helper process. Each of Player 1’s audio packets is decoded, Player 2’s sound is added to it, and the result goes to the platform’s audio player. The mixer does not wait for Player 2; the default gate adds the 5 ms delay described below.
+Mixing happens inside Player 1’s audio path. Player 1 is chosen in the co-op dialog before launch (it opens on the default pair from settings, else the last session’s pair, else the selected PC) and stays fixed for the session: Eclipse’s main process streams from it, and Player 2 streams in a helper process. Each of Player 1’s audio packets is decoded, Player 2’s sound is added to it, and the result goes to the platform’s audio player. The mixer does not wait for Player 2; the gate adds the delay described below.
 
 Player 2’s sound is decoded in the helper process, passed over a local socket and held in a jitter buffer that fills to 40 ms before it plays (adjustable in the advanced co-op settings). If that buffer grows past 120 ms it is trimmed back to 40; if it runs dry, silence is mixed until it refills, so Player 1’s sound never waits for Player 2’s.
 
@@ -168,9 +168,9 @@ If Player 1 sends no sound for 40 ms, a timer takes over feeding the mix so Play
 
 Shared narration, music or effects can arrive from both games with a delay between them. The first suppressor found one delay and turned the later copy down. Real-game captures on 4 October showed several copies at different delays at the same time (+272 and +353 ms within one cutscene), so a filter tracking one delay dropped in and out, which PreceptorOfMagic heard.
 
-The passive gate replaced it as the default. It splits each stream into six frequency bands per channel, compares their waveforms at up to 16 delays at once, and mutes the later copy in each band and channel where the two match, closing slightly ahead when the earlier copy’s onset predicts a line. Anything else the later PC plays in a muted band is muted with it while the band is closed. After 20 clean matches it also balances the two PCs’ levels, meeting in the middle by up to 6 dB each, and that balance applies to all of their sound.
+The passive gate replaced it as the default. It splits each stream into six frequency bands per channel, compares their waveforms at up to 16 delays at once, and mutes the later copy in each band and channel where the two match; Fast mode also closes slightly ahead when the earlier copy’s onset predicts a line. Other sound the later PC plays in a muted band can be muted with it while the band is closed. Since 1.3.4, a band held closed reopens as soon as the later PC plays sound the other PC did not play at that delay, a copy much quieter than the sound it would remove is ignored, and a sound is not removed because of a copy that was itself removed. After 20 clean matches it also balances the two PCs’ levels, meeting in the middle by up to 6 dB each, and that balance applies to all of their sound.
 
-Both streams are held back by one 5 ms block (240 samples at 48 kHz), so each block is decided before any of it plays: Player 1’s sound plays 5 ms later, and Player 2’s gets the same 5 ms on top of its buffer. The earlier single-delay filter held both for 10.7 ms (512 samples).
+Accurate, the default, decides each block with its look-ahead (40 ms by default, adjustable from 0 to 100 ms) of the copy’s future in view and makes no predictions, so both streams play the look-ahead plus 5 ms later. Fast holds both streams back by one 5 ms block (240 samples at 48 kHz): Player 1’s sound plays 5 ms later, and Player 2’s gets the same 5 ms on top of its buffer. Where Eclipse feeds the speakers itself (Windows, and Linux with PulseAudio), Accurate currently runs as Fast. The earlier single-delay filter held both for 10.7 ms (512 samples).
 
 The gate adds no intentional video buffering. The mixer and the gate run on the audio path, not the video thread. On webOS, Eclipse stamps each piece of sound and picture with the time since the stream opened, read when it is handed to the TV’s player, so holding sound back leaves the picture’s timestamps unchanged; the desktop video path has no reference to audio.
 
@@ -549,7 +549,7 @@ Raising detail in still pictures meant lowering the encoder’s minimum QP from 
 
 <details>
 
-<summary>Late September–October · Making it usable and maintainable — Desktop co-op, webOS 26, automatic setup, Umbra’s thin fork and co-op audio</summary>
+<summary>Late September–October · Making it usable and maintainable — Desktop co-op, webOS 26, automatic setup, Umbra’s thin fork, co-op audio and the first releases</summary>
 
 ### 22–28 September · Desktop co-op, issue by issue
 
@@ -579,6 +579,18 @@ Every Windows stream had been silent. The SDL audio callback used a mixing call 
 
 When both PCs play the same sound, the mix doubles it. Echo-gate prototypes were tested offline. PreceptorOfMagic then designed a passive gate, which went through five revisions on 5 October covering “S” sounds, dropouts and speech classes. Optimisation brought it to about 8% of one TV CPU core with the same output. It passed a Windows gameplay test PreceptorOfMagic accepted. On 6 October it became the default for “Play shared sounds once”.
 
+
+### 6–10 October · The second PC’s audio falls behind
+
+In a long live session, Player 2’s sound sat behind a standing backlog that reached about 195 ms. Its audio link carried one packet per message and one message per mix call, so it could only ever keep pace; sending the waiting packets together kept its queue near 20 ms when both hosts replayed recorded game audio live. A receiver that discarded the first half-second of every stream was fixed. The shared-sound filter gained Accurate, Fast and Off choices, with a look-ahead slider for Accurate.
+
+### 10 October · Packages, and a TV that opens its folders at every boot
+
+Eclipse 1.3.0 and Umbra 0.5.0 were the first packaged releases, with installers, checksums and source archives. Testing them on real machines caught a release build that had compiled out mixed-GPU co-op and an uninstaller that could hang. Later that day, 1.3.1 stopped re-asking the graphics-card question. On the TV, every webOS 26 boot makes the Developer Mode app folders writable by other apps. Eclipse then refused its own settings folder as unsafe and started empty (fixed in 1.3.2, which also stopped querying the project’s Raspberry Pi controller hub), and refused the private folder its co-op connections use, so co-op failed after a restart (fixed in 1.3.3). Because this was the second folder fault, every place the TV app keeps files was audited against a restart.
+
+### 10 October · Scoring the filter against the game’s own sounds
+
+PreceptorOfMagic heard the gate cut gunfire and reloads during a long Halo session. Halo: Combat Evolved’s own sound files were extracted from the installed game and matched in recordings of each PC’s sound, so every removal could be judged against what both PCs actually played. Three guards cut the share of one-PC sounds removed from 7% to 3% while keeping duplicate removal, and PreceptorOfMagic preferred the result in A/B listening. The same analysis showed Halo picking its music loops at random on each PC: nearly half of the loop changes differed between the two PCs. Eclipse 1.3.4 shipped the change as the first public release.
 
 <!-- activity-detail:history-product:start -->
 **Behind the build · 23 September–5 October 2026**

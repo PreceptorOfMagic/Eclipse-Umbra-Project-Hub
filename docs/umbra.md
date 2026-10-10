@@ -4,7 +4,7 @@
 
 ## The gaming-PC app.
 
-Stream your games and desktop from a Windows PC. Umbra is Apollo with the additions Eclipse needs for co-op, and as little else changed as possible.
+Stream your games and desktop from a Windows or Ubuntu Linux PC. Umbra is Apollo with the additions Eclipse needs for co-op, and as little else changed as possible.
 
 Umbra’s additions use AI-assisted coding. [About the development process.](development.md#development-process)
 
@@ -22,9 +22,19 @@ Choose the Windows x64 installer `.exe` in the latest release’s Assets. Instal
 
 **Already using Apollo?** Umbra and Apollo replace one another; they are not side-by-side installations. Umbra deliberately keeps the Apollo installation folder and registry identity for in-place upgrades. Back up your host configuration and pairings before switching. Installing Apollo again replaces Umbra and removes access to Umbra-specific co-op features.
 
-Windows 11 x64 with NVIDIA RTX 4070 / RTX 3070 and AMD Radeon RX Vega is the current physical test base. Linux/macOS host packages are not an Umbra release target here, even though the upstream Sunshine family supports more platforms.
+Windows 11 x64 with NVIDIA RTX 4070 / RTX 3070 and AMD Radeon RX Vega is the current physical test base. Ubuntu 22.04 and 24.04 packages are also published (below); Linux hosting has had install, upgrade and removal checks and one live test. macOS is not a release target.
 
 Download an attached file under **Assets**, not GitHub’s automatically generated **Source code (zip)** or **Source code (tar.gz)**. Those are developer archives, not installable apps. Use the latest compatible stable release. If no package is attached for your platform, that download is not available. [Exact Windows host installation →](installation.md#umbra-windows)
+
+<a name="linux"></a>
+
+## Umbra for Ubuntu Linux
+
+[Umbra Ubuntu releases](https://github.com/PreceptorOfMagic/Umbra/releases)
+
+Open the latest release, expand Assets and choose the package described below. If no release is listed, that package has not been published.
+
+Choose the `.deb` for your Ubuntu version in the latest release’s Assets (`Umbra-<version>-ubuntu24.04-amd64.deb` or `Umbra-<version>-ubuntu22.04-amd64.deb`) and install it with `sudo apt install` so its dependencies are installed too. Two-PC co-op has been tested with Windows hosts; start with Linux as an ordinary streaming host. [Exact Linux host installation →](installation.md#umbra-linux)
 
 <a name="apollo"></a>
 
