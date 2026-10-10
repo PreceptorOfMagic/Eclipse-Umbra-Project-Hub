@@ -335,4 +335,4 @@ The status table records the project’s actual rigs, not a guarantee across all
 
 [![Buy me a coffee](https://img.buymeacoffee.com/button-api/?text=Buy%20me%20a%20coffee&emoji=&slug=PreceptorOfMagic&button_colour=BD5FFF&font_colour=ffffff&font_family=Cookie&outline_colour=000000&coffee_colour=FFDD00)](https://www.buymeacoffee.com/PreceptorOfMagic)
 
-[Eclipse/Umbra licence & notices](LICENSES.md) · [GPL-3.0](LICENSE.txt) · Code signing policy: [Eclipse](https://github.com/PreceptorOfMagic/Eclipse/blob/main/CODE_SIGNING_POLICY.md) · [Umbra](https://github.com/PreceptorOfMagic/Umbra/blob/release/umbra-0.5/CODE_SIGNING_POLICY.md)
+[Eclipse/Umbra licence & notices](LICENSES.md) · [GPL-3.0](LICENSE.txt) · Code signing policy: [Eclipse](https://github.com/PreceptorOfMagic/Eclipse/blob/main/CODE_SIGNING_POLICY.md) · [Umbra](https://github.com/PreceptorOfMagic/Umbra/blob/release/umbra-0.5/CODE_SIGNING_POLICY.md) · Visits are counted without cookies: [what is counted](analytics/README.md)

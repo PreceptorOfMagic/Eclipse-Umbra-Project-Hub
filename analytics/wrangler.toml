@@ -1,0 +1,13 @@
+name = "hub-count"
+main = "worker.mjs"
+compatibility_date = "2026-09-01"
+workers_dev = true
+preview_urls = false
+
+[[d1_databases]]
+binding = "DB"
+database_name = "hub-count"
+database_id = "ac33c5ed-9316-4446-94bd-d281feb703fb"
+
+[triggers]
+crons = ["17 3 * * *"]

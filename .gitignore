@@ -6,3 +6,6 @@ Thumbs.db
 raw-media/
 recording-masters/
 private-run-sheets/
+
+# Wrangler local cache (Cloudflare account details)
+.wrangler/
