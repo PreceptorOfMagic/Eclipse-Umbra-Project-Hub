@@ -47,6 +47,7 @@ export async function handle(req, env, now) {
     if (url.pathname === '/v') return view(req, env.DB, body, now);
     return leave(env.DB, body, now);
   }
+  if (req.method === 'POST' && url.pathname === '/counts') return receiveCounts(req, env, now);
   if (req.method === 'GET' && url.pathname === '/stats') return stats(req, env, url, now);
   return new Response('Not found', { status: 404 });
 }
@@ -82,42 +83,79 @@ async function click(req, db, body, now) {
   return empty(204);
 }
 
-// Reads every release file's download count; records increases since the last reading. A file's first reading is
-// its starting total and is not recorded as a download. Drafts are invisible without a token and are skipped.
-export async function pollGitHub(env, fetcher, now) {
-  const db = env.DB;
-  const headers = { 'User-Agent': 'hub-count', Accept: 'application/vnd.github+json' };
-  if (env.GITHUB_TOKEN) headers.Authorization = `Bearer ${env.GITHUB_TOKEN}`;
-  const last = await db.prepare("SELECT value FROM meta WHERE key = 'github_poll'").first();
-  const since = last ? JSON.parse(last.value).ts : null;
-  let note = 'ok', files = 0;
-  try {
-    for (const repo of REPOS) {
-      const res = await fetcher(`https://api.github.com/repos/PreceptorOfMagic/${repo}/releases?per_page=100`, { headers });
-      if (!res.ok) throw new Error(`${repo}: GitHub ${res.status}`);
-      for (const rel of await res.json()) {
-        if (rel.draft) continue;
-        for (const a of rel.assets || []) {
-          if (typeof a.download_count !== 'number' || !FILE.test(a.name)) continue;
-          files++;
-          const old = await db.prepare('SELECT count FROM assets WHERE asset_id = ?').bind(a.id).first();
-          if (old && a.download_count > old.count) {
+// Release download counts arrive two ways: this worker reads GitHub every hour (GitHub may rate-limit Cloudflare's
+// shared addresses), and an hourly GitHub Actions job in the Hub repository sends them to /counts. Both go through
+// recordReleases. A file's first reading is its starting total and is not recorded as a download; after that, each
+// increase is recorded once, with the window since the previous successful reading. Drafts are skipped.
+export async function recordReleases(db, byRepo, now) {
+  const prev = await meta(db, 'last_reading');
+  const since = prev ? prev.ts : null;
+  let files = 0;
+  for (const { repo, releases } of byRepo) {
+    for (const rel of releases) {
+      if (rel.draft || typeof rel.tag_name !== 'string') continue;
+      for (const a of rel.assets || []) {
+        if (!Number.isInteger(a.id) || !Number.isInteger(a.download_count) || !FILE.test(a.name)) continue;
+        files++;
+        const old = await db.prepare('SELECT count FROM assets WHERE asset_id = ?').bind(a.id).first();
+        if (!old) {
+          await db.prepare('INSERT OR IGNORE INTO assets (asset_id, repo, tag, file, count, first_count) VALUES (?, ?, ?, ?, ?, ?)')
+            .bind(a.id, repo, rel.tag_name, a.name, a.download_count, a.download_count).run();
+        } else if (a.download_count !== old.count) {
+          const res = await db.prepare('UPDATE assets SET count = ?, tag = ?, file = ? WHERE asset_id = ? AND count = ?')
+            .bind(a.download_count, rel.tag_name, a.name, a.id, old.count).run();
+          if (res.meta.changes === 1 && a.download_count > old.count) {
             await db.prepare('INSERT INTO downloads (day, ts, since, repo, tag, file, n) VALUES (?, ?, ?, ?, ?, ?, ?)')
               .bind(dayOf(now), now.getTime(), since, repo, rel.tag_name, a.name, a.download_count - old.count).run();
-          }
-          if (!old || a.download_count !== old.count) {
-            await db.prepare(`INSERT INTO assets (asset_id, repo, tag, file, count, first_count) VALUES (?, ?, ?, ?, ?, ?)
-              ON CONFLICT (asset_id) DO UPDATE SET count = excluded.count, tag = excluded.tag, file = excluded.file`)
-              .bind(a.id, repo, rel.tag_name, a.name, a.download_count, a.download_count).run();
           }
         }
       }
     }
+  }
+  await setMeta(db, 'last_reading', { ts: now.getTime() });
+  return files;
+}
+
+export async function pollGitHub(env, fetcher, now) {
+  const headers = { 'User-Agent': 'hub-count', Accept: 'application/vnd.github+json' };
+  if (env.GITHUB_TOKEN) headers.Authorization = `Bearer ${env.GITHUB_TOKEN}`;
+  let note = 'ok', files = 0;
+  try {
+    const byRepo = [];
+    for (const repo of REPOS) {
+      const res = await fetcher(`https://api.github.com/repos/PreceptorOfMagic/${repo}/releases?per_page=100`, { headers });
+      if (!res.ok) {
+        const limited = res.headers && res.headers.get && res.headers.get('x-ratelimit-remaining') === '0';
+        throw new Error(`${repo}: GitHub ${res.status}${limited ? ' (rate limited)' : ''}`);
+      }
+      byRepo.push({ repo, releases: await res.json() });
+    }
+    files = await recordReleases(env.DB, byRepo, now);
   } catch (e) { note = String(e.message || e).slice(0, 200); }
-  await db.prepare("INSERT INTO meta (key, value) VALUES ('github_poll', ?) ON CONFLICT (key) DO UPDATE SET value = excluded.value")
-    .bind(JSON.stringify({ ts: now.getTime(), note, files })).run();
+  await setMeta(env.DB, 'github_poll', { ts: now.getTime(), note, files });
   return note;
 }
+
+async function receiveCounts(req, env, now) {
+  if (!(await sameSecret(((req.headers.get('Authorization') || '').match(/^Bearer (.+)$/) || [])[1], env.COUNTS_TOKEN)))
+    return new Response('Unauthorised', { status: 401 });
+  const text = await req.text();
+  if (text.length > 65536) return new Response('Too large', { status: 413 });
+  let body;
+  try { body = JSON.parse(text); } catch { return new Response('Bad JSON', { status: 400 }); }
+  if (!Array.isArray(body) || !body.every((r) => r && REPOS.includes(r.repo) && Array.isArray(r.releases)))
+    return new Response('Bad shape', { status: 400 });
+  const files = await recordReleases(env.DB, body, now);
+  await setMeta(env.DB, 'github_push', { ts: now.getTime(), note: 'ok', files });
+  return new Response(`recorded ${files} files\n`, { status: 200 });
+}
+
+async function meta(db, key) {
+  const row = await db.prepare('SELECT value FROM meta WHERE key = ?').bind(key).first();
+  return row ? JSON.parse(row.value) : null;
+}
+const setMeta = (db, key, value) => db.prepare('INSERT INTO meta (key, value) VALUES (?, ?) ON CONFLICT (key) DO UPDATE SET value = excluded.value')
+  .bind(key, JSON.stringify(value)).run();
 
 async function daySalt(db, day) {
   const row = await db.prepare('SELECT salt FROM salts WHERE day = ?').bind(day).first();
@@ -138,12 +176,16 @@ const hex = (bytes) => [...bytes].map((b) => b.toString(16).padStart(2, '0')).jo
 async function sha256(s) { return hex(new Uint8Array(await crypto.subtle.digest('SHA-256', new TextEncoder().encode(s)))); }
 
 async function authorised(req, env) {
-  const want = env.STATS_PASSWORD;
   const got = (req.headers.get('Authorization') || '').match(/^Basic (.+)$/);
-  if (!want || !got) return false;
+  if (!got) return false;
   let pass;
   try { pass = atob(got[1]).split(':').slice(1).join(':'); } catch { return false; }
-  const [a, b] = await Promise.all([sha256(pass), sha256(want)]);   // equal-length compare
+  return sameSecret(pass, env.STATS_PASSWORD);
+}
+
+async function sameSecret(got, want) {
+  if (!want || typeof got !== 'string') return false;
+  const [a, b] = await Promise.all([sha256(got), sha256(want)]);   // equal-length compare
   let diff = 0;
   for (let i = 0; i < a.length; i++) diff |= a.charCodeAt(i) ^ b.charCodeAt(i);
   return diff === 0;
@@ -162,8 +204,8 @@ export async function stats(req, env, url, now) {
   const days = [7, 30, 90, 365].includes(Number(url.searchParams.get('days'))) ? Number(url.searchParams.get('days')) : 30;
   const from = dayOf(new Date(now.getTime() - (days - 1) * DAY_MS));
   const db = env.DB;
-  const polled = await db.prepare("SELECT value FROM meta WHERE key = 'github_poll'").first();
-  if (!polled || now.getTime() - JSON.parse(polled.value).ts > 65 * 60000) await pollGitHub(env, env.FETCH || fetch, now);
+  const reading = await meta(db, 'last_reading');
+  if (url.searchParams.get('refresh') === '1' || !reading || now.getTime() - reading.ts > 65 * 60000) await pollGitHub(env, env.FETCH || fetch, now);
   const q = (sql) => db.prepare(sql).bind(from).all().then((r) => r.results);
   const [total] = await q(`SELECT COUNT(*) AS views, COUNT(DISTINCT day || visitor) AS visitors,
     AVG(NULLIF(ms, 0)) AS avg_ms FROM views WHERE day >= ?`);
@@ -182,8 +224,8 @@ export async function stats(req, env, url, now) {
     FROM assets a WHERE a.file NOT LIKE '%.sha256' AND a.file != 'SHA256SUMS' ORDER BY a.repo, a.count DESC`);
   const recent = await q(`SELECT ts, since, 'GitHub count' AS how, repo, file, n FROM downloads WHERE day >= ?1
     UNION ALL SELECT ts, NULL, 'Hub button on ' || page, repo, file, 1 FROM clicks WHERE day >= ?1 ORDER BY ts DESC LIMIT 60`);
-  const poll = await db.prepare("SELECT value FROM meta WHERE key = 'github_poll'").first();
-  const pollInfo = poll ? JSON.parse(poll.value) : null;
+  const [lastReading, poll, push] = await Promise.all(['last_reading', 'github_poll', 'github_push'].map((k) => meta(db, k)));
+  const status = (m) => m ? `${when(m.ts)}: ${esc(m.note)}, ${m.files} files` : 'not yet';
   const when = (ms) => ms ? new Date(ms).toISOString().slice(0, 16).replace('T', ' ') + ' UTC' : '–';
   const table = (head, rows) => `<table><tr>${head.map((h) => `<th>${h}</th>`).join('')}</tr>${rows.map((r) =>
     `<tr>${r.map((c) => `<td>${esc(c)}</td>`).join('')}</tr>`).join('')}</table>`;
@@ -198,8 +240,9 @@ th:first-child,td:first-child{text-align:left}.big{display:flex;gap:2rem;flex-wr
 <div><b>${duration(total.avg_ms)}</b>average time on a page</div><div><b>${duration(site.avg_ms)}</b>average time on the site per visitor per day</div></div>
 <h2>Pages</h2>${table(['Page', 'Views', 'Daily unique visitors', 'Average time'], byPage.map((r) => [r.page, r.views, r.visitors, duration(r.avg_ms)]))}
 <h2>Days</h2>${table(['Day', 'Views', 'Unique visitors', 'Average time on a page'], byDay.map((r) => [r.day, r.views, r.visitors, duration(r.avg_ms)]))}
-<h2>Downloads</h2><p>GitHub counts every download of a release file, wherever the link was found, and is read once an hour
-(last read ${pollInfo ? `${when(pollInfo.ts)}: ${esc(pollInfo.note)}, ${pollInfo.files} files` : 'not yet'}). “Before counting” is GitHub’s total when
+<h2>Downloads</h2><p>GitHub counts every download of a release file, wherever the link was found, and is read every hour.
+Last successful reading: ${lastReading ? when(lastReading.ts) : 'none yet'}. By GitHub Actions: ${status(push)}. By this counter: ${status(poll)}.
+<a href="?days=${days}&amp;refresh=1">Read now</a>. “Before counting” is GitHub’s total when
 the counter first saw the file, including the project’s own test downloads. Checksum files are left out of this table.</p>
 ${files.length ? table(['File', 'Release', 'All-time (GitHub)', 'Before counting', 'In this period', 'Clicked on the Hub', 'Last seen'],
     files.map((r) => [r.file, r.tag, r.count, r.first_count, r.period || 0, r.clicks, when(r.last)])) : '<p>No GitHub reading yet.</p>'}

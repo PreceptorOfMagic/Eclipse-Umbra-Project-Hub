@@ -1,0 +1,35 @@
+name: Send download counts
+
+# Reads the public download count of every Eclipse and Umbra release file and sends them to the Hub's visit counter
+# (analytics/worker.mjs, POST /counts). The counter also reads GitHub itself, but GitHub can rate-limit Cloudflare's
+# shared addresses; this job reads with the workflow's own token instead. Nothing about visitors is involved.
+on:
+  schedule:
+    - cron: "37 * * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: download-counts
+  cancel-in-progress: true
+
+jobs:
+  send:
+    if: github.repository == 'PreceptorOfMagic/Eclipse-Umbra-Project-Hub'
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Read release download counts and send them
+        env:
+          GH_TOKEN: ${{ github.token }}
+          COUNTS_TOKEN: ${{ secrets.HUB_COUNTS_TOKEN }}
+        run: |
+          set -euo pipefail
+          for repo in Eclipse Umbra; do
+            gh api "repos/PreceptorOfMagic/$repo/releases?per_page=100" \
+              --jq "{repo: \"$repo\", releases: [.[] | select(.draft | not) | {tag_name, assets: [.assets[] | {id, name, download_count}]}]}"
+          done | jq -s -c . > counts.json
+          curl -fsS --max-time 30 -X POST https://hub-count.preceptorofmagic.workers.dev/counts \
+            -H "Authorization: Bearer $COUNTS_TOKEN" -H "Content-Type: application/json" --data-binary @counts.json

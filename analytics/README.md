@@ -17,7 +17,8 @@ referring site's host name, the UTC date and time, the visible time, and a visit
 visitors per day. The code is a hash of that day's random secret, your IP address and your browser's user-agent. The
 IP address is never stored, and each day's secret is deleted when the day ends, so codes cannot be linked across days
 or turned back into an address. Bots are not counted. Download clicks are stored with their time and page only, with no visitor code. Once an hour
-the counter also reads the public download counts GitHub shows for each release file, so downloads from anywhere are
+the counter, and a GitHub Actions job in this repository (`.github/workflows/download-counts.yml`), read the public
+download counts GitHub shows for each release file, so downloads from anywhere are
 counted to the nearest hour; that reading involves no visitor data at all. Views, clicks and download readings are
 deleted after 13 months.
 
@@ -29,6 +30,7 @@ With [Wrangler](https://developers.cloudflare.com/workers/wrangler/) logged in t
 wrangler d1 create hub-count                          # once; put the database_id in wrangler.toml
 wrangler d1 execute hub-count --remote --file schema.sql
 wrangler secret put STATS_PASSWORD                    # password for the stats page
+wrangler secret put COUNTS_TOKEN                      # same value as the repository's HUB_COUNTS_TOKEN secret
 wrangler deploy
 ```
 

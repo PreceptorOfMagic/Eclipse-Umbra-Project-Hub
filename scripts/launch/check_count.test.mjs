@@ -10,7 +10,7 @@ function d1() {
   const sql = new DatabaseSync(':memory:');
   sql.exec(readFileSync(new URL('../../analytics/schema.sql', import.meta.url), 'utf8'));
   const bound = (q, a) => ({
-    run: async () => sql.prepare(q).run(...a),
+    run: async () => ({ meta: { changes: Number(sql.prepare(q).run(...a).changes) } }),
     first: async () => sql.prepare(q).get(...a) ?? null,
     all: async () => ({ results: sql.prepare(q).all(...a) }),
   });
@@ -169,12 +169,13 @@ function github(counts, { status = 200 } = {}) {
     const body = repo === 'Eclipse'
       ? [rel('eclipse-v1.3.4', false, [[1, 'eclipse-linux-x86_64.tar.gz'], [2, 'eclipse-linux-x86_64.tar.gz.sha256']]), rel('eclipse-v1.3.5', true, [[9, 'draft.ipk']])]
       : [rel('umbra-v0.5.0', false, [[3, 'Umbra-windows-x64.exe']])];
-    return { ok: status === 200, status, json: async () => body };
+    return { ok: status === 200, status, json: async () => body,
+      headers: { get: (h) => (status === 403 && h === 'x-ratelimit-remaining' ? '0' : null) } };
   };
 }
 
 test('hourly GitHub reading records only increases after the first reading', async () => {
-  const DB = d1(), env = { DB, STATS_PASSWORD: 'pw', FETCH: github({ 1: 5, 3: 4 }) };
+  const DB = d1(), env = { DB, STATS_PASSWORD: 'pw', FETCH: github({ 1: 5, 3: 4 }), COUNTS_TOKEN: 'k' };
   assert.equal(await pollGitHub(env, github({ 1: 3, 3: 4, 9: 50 }), T0), 'ok');
   assert.equal(DB.sql.prepare('SELECT COUNT(*) AS n FROM downloads').get().n, 0, 'starting totals are not downloads');
   assert.equal(DB.sql.prepare('SELECT COUNT(*) AS n FROM assets WHERE asset_id = 9').get().n, 0, 'drafts skipped');
@@ -182,14 +183,25 @@ test('hourly GitHub reading records only increases after the first reading', asy
   await pollGitHub(env, github({ 1: 5, 3: 4 }), later(7200000));
   assert.deepEqual(DB.sql.prepare('SELECT repo, file, n, since, ts FROM downloads').all().map((r) => ({ ...r })),
     [{ repo: 'Eclipse', file: 'eclipse-linux-x86_64.tar.gz', n: 2, since: T0.getTime(), ts: later(3600000).getTime() }]);
-  assert.match(await pollGitHub(env, github({}, { status: 403 }), later(3 * 3600000)), /Eclipse: GitHub 403/);
+  assert.match(await pollGitHub(env, github({}, { status: 403 }), later(3 * 3600000)), /Eclipse: GitHub 403 \(rate limited\)/);
+  // GitHub Actions sends the next reading; the window starts at the last SUCCESSFUL reading, not the failed one
+  const push = (body, key = 'k') => handle(new Request('https://count.example/counts', { method: 'POST', body: JSON.stringify(body),
+    headers: { Authorization: `Bearer ${key}` } }), env, later(3 * 3600000 + 30000));
+  const rel = (n) => [{ repo: 'Eclipse', releases: [{ tag_name: 'eclipse-v1.3.4', assets: [{ id: 1, name: 'eclipse-linux-x86_64.tar.gz', download_count: n }] }] }];
+  assert.equal((await push(rel(6), 'wrong')).status, 401);
+  assert.equal((await push({ nope: 1 })).status, 400);
+  assert.equal((await push(rel(6))).status, 200);
+  assert.equal((await push(rel(6))).status, 200, 'same reading twice records nothing new');
+  assert.deepEqual(DB.sql.prepare('SELECT n, since FROM downloads ORDER BY ts').all().map((r) => [r.n, r.since]),
+    [[2, T0.getTime()], [1, later(7200000).getTime()]]);
   await handle(post('/d', { p: 'setup.html', repo: 'Eclipse', f: 'eclipse-linux-x86_64.tar.gz' }), env, later(3500000));
   const html = await (await handle(new Request('https://count.example/stats', { headers: auth('pw') }), env, later(3 * 3600000 + 60000))).text();
-  assert.match(html, /<td>eclipse-linux-x86_64.tar.gz<\/td><td>eclipse-v1.3.4<\/td><td>5<\/td><td>3<\/td><td>2<\/td><td>1<\/td><td>2026-10-11 11:00 UTC<\/td>/);
+  assert.match(html, /<td>eclipse-linux-x86_64.tar.gz<\/td><td>eclipse-v1.3.4<\/td><td>6<\/td><td>3<\/td><td>3<\/td><td>1<\/td><td>2026-10-11 13:00 UTC<\/td>/);
   assert.ok(!html.includes('<td>eclipse-linux-x86_64.tar.gz.sha256</td>'), 'checksums left out');
   assert.match(html, /<td>between 2026-10-11 10:00 UTC and 2026-10-11 11:00 UTC<\/td><td>GitHub count<\/td><td>Eclipse<\/td><td>eclipse-linux-x86_64.tar.gz<\/td><td>2<\/td>/);
   assert.match(html, /<td>Hub button on setup.html<\/td>/);
-  assert.match(html, /Eclipse: GitHub 403/);
+  assert.match(html, /By this counter: 2026-10-11 13:00 UTC: Eclipse: GitHub 403 \(rate limited\)/);
+  assert.match(html, /By GitHub Actions: 2026-10-11 13:00 UTC: ok, 1 files/);
   await prune(DB, new Date('2028-01-01T00:00:00Z'));
   assert.equal(DB.sql.prepare('SELECT (SELECT COUNT(*) FROM clicks) + (SELECT COUNT(*) FROM downloads) AS n').get().n, 0);
 });
