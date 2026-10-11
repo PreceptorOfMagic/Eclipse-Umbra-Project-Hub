@@ -211,10 +211,10 @@ export async function stats(req, env, url, now) {
     AVG(NULLIF(ms, 0)) AS avg_ms FROM views WHERE day >= ?`);
   const [site] = await q(`SELECT AVG(t) AS avg_ms FROM (SELECT SUM(ms) AS t FROM views WHERE day >= ? AND ms > 0
     GROUP BY day, visitor)`);
-  const byDay = await q(`SELECT day, COUNT(*) AS views, COUNT(DISTINCT visitor) AS visitors, AVG(NULLIF(ms, 0)) AS avg_ms
-    FROM views WHERE day >= ? GROUP BY day ORDER BY day DESC`);
+  const byDay = await q(`SELECT day, COUNT(*) AS views, COUNT(DISTINCT visitor) AS visitors, AVG(NULLIF(ms, 0)) AS avg_ms,
+    MIN(NULLIF(ms, 0)) AS min_ms, MAX(NULLIF(ms, 0)) AS max_ms FROM views WHERE day >= ? GROUP BY day ORDER BY day DESC`);
   const byPage = await q(`SELECT page, COUNT(*) AS views, COUNT(DISTINCT day || visitor) AS visitors,
-    AVG(NULLIF(ms, 0)) AS avg_ms FROM views WHERE day >= ? GROUP BY page ORDER BY views DESC`);
+    AVG(NULLIF(ms, 0)) AS avg_ms, MIN(NULLIF(ms, 0)) AS min_ms, MAX(NULLIF(ms, 0)) AS max_ms FROM views WHERE day >= ? GROUP BY page ORDER BY views DESC`);
   const byRef = await q(`SELECT ref, COUNT(*) AS views FROM views WHERE day >= ? AND ref != '' GROUP BY ref
     ORDER BY views DESC LIMIT 25`);
   // Only increases after a file's first reading are shown; its starting total (first_count) predates counting.
@@ -240,8 +240,10 @@ th:first-child,td:first-child{text-align:left}.big{display:flex;gap:2rem;flex-wr
 <h1>Hub visits</h1><p>${tabs} (UTC days, from ${from})</p>
 <div class="big"><div><b>${total.views}</b>page views</div><div><b>${total.visitors}</b>daily unique visitors</div>
 <div><b>${duration(total.avg_ms)}</b>average time on a page</div><div><b>${duration(site.avg_ms)}</b>average time on the site per visitor per day</div></div>
-<h2>Pages</h2>${table(['Page', 'Views', 'Daily unique visitors', 'Average time'], byPage.map((r) => [r.page, r.views, r.visitors, duration(r.avg_ms)]))}
-<h2>Days</h2>${table(['Day', 'Views', 'Unique visitors', 'Average time on a page'], byDay.map((r) => [r.day, r.views, r.visitors, duration(r.avg_ms)]))}
+<h2>Pages</h2>${table(['Page', 'Views', 'Daily unique visitors', 'Average time', 'Shortest time', 'Longest time'],
+  byPage.map((r) => [r.page, r.views, r.visitors, duration(r.avg_ms), duration(r.min_ms), duration(r.max_ms)]))}
+<h2>Days</h2>${table(['Day', 'Views', 'Unique visitors', 'Average time on a page', 'Shortest time on a page', 'Longest time on a page'],
+  byDay.map((r) => [r.day, r.views, r.visitors, duration(r.avg_ms), duration(r.min_ms), duration(r.max_ms)]))}
 <h2>Downloads</h2><p>Counted from the counter’s first reading of GitHub; earlier downloads, including the project’s own
 test downloads, are not shown. <b>Hub button clicks</b>: someone clicked this file’s download button on the Hub, recorded the
 moment it happened. <b>Downloads from anywhere</b>: GitHub’s own count for the file, which also covers its release page and
@@ -254,7 +256,7 @@ ${files.length ? table(['File', 'Release', 'Hub button clicks', 'Downloads from 
 two readings.</p>${recent.length ? table(['When', 'Counted by', 'Project', 'File', 'Downloads'],
     recent.map((r) => [r.since ? `between ${when(r.since)} and ${when(r.ts)}` : when(r.ts), r.how, r.repo, r.file, r.n])) : '<p>None in this period.</p>'}
 <h2>Referring sites</h2>${byRef.length ? table(['Site', 'Views'], byRef.map((r) => [r.ref, r.views])) : '<p>None yet.</p>'}
-<p>A visitor is counted once per UTC day; the same person on two days counts twice, by design. Times are how long the page was visible; views where the visitor left before the time was sent show no time.</p>`;
+<p>A visitor is counted once per UTC day; the same person on two days counts twice, by design. Times are how long the page was visible; views where the visitor left before the time was sent show no time and are left out of the average, shortest and longest. A page left open longer than an hour counts as one hour.</p>`;
   return new Response(html, { headers: { 'Content-Type': 'text/html; charset=utf-8', 'Cache-Control': 'no-store',
     'X-Robots-Tag': 'noindex' } });
 }

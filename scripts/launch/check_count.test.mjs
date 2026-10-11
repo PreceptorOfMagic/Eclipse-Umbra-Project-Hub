@@ -89,7 +89,8 @@ test('stats need the password and report views, uniques, time and referrers', as
   assert.match(html, /<b>2<\/b>daily unique visitors/);
   assert.match(html, /<b>1 min 00 s<\/b>average time on a page/);
   assert.match(html, /<b>2 min 00 s<\/b>average time on the site per visitor per day/);
-  assert.match(html, /<td>index.html<\/td><td>2<\/td><td>2<\/td>/);
+  assert.match(html, /<td>index.html<\/td><td>2<\/td><td>2<\/td><td>30 s<\/td><td>30 s<\/td><td>30 s<\/td>/, 'untimed view left out');
+  assert.match(html, /<td>2026-10-11<\/td><td>3<\/td><td>2<\/td><td>1 min 00 s<\/td><td>30 s<\/td><td>1 min 30 s<\/td>/, 'shortest and longest per day');
   assert.match(html, /<td>news.ycombinator.com<\/td><td>1<\/td>/);
 });
 
