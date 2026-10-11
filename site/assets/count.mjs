@@ -14,7 +14,7 @@ export function referrerHost(referrer, ownHost) {
   } catch { return ''; }
 }
 
-const RELEASE_FILE = /^https:\/\/github\.com\/PreceptorOfMagic\/(Eclipse|Umbra)\/releases\/download\/[^/]+\/([^/?#]+)$/;
+const RELEASE_FILE = /^https:\/\/github\.com\/PreceptorOfMagic\/(Eclipse|Umbra|Umbra-Vibepollo)\/releases\/download\/[^/]+\/([^/?#]+)$/;
 export function releaseFile(href) {
   const m = RELEASE_FILE.exec(href || '');
   return m ? { repo: m[1], f: decodeURIComponent(m[2]) } : null;

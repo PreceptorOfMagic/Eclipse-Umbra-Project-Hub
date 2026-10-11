@@ -19,7 +19,7 @@ const HOST = /^[a-z0-9.-]{1,100}$/;
 const MAX_MS = 3600000;          // a page left open longer than an hour counts as one hour
 const KEEP_DAYS = 396;           // 13 months
 const DAY_MS = 86400000;
-export const REPOS = ['Eclipse', 'Umbra'];
+export const REPOS = ['Eclipse', 'Umbra', 'Umbra-Vibepollo'];
 const FILE = /^[A-Za-z0-9._+-]{1,120}$/;
 
 export default {

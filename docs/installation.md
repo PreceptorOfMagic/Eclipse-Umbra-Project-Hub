@@ -54,9 +54,11 @@ For co-op, install the same compatible Umbra release on the second Windows PC. C
 
 ## Umbra (Vibepollo) on Windows
 
-[Umbra (Vibepollo) releases](https://github.com/PreceptorOfMagic/Umbra-Vibepollo/releases/latest)
+[Umbra (Vibepollo) Windows x64 releases](https://github.com/PreceptorOfMagic/Umbra-Vibepollo/releases)
 
-**Package:** the Windows x64 installer `.exe` attached to the latest Umbra (Vibepollo) release. It is built on [Vibepollo](https://github.com/Nonary/Vibepollo) instead of Apollo and carries the same additions for Eclipse; [compare the two versions](umbra.md#editions).
+Open the latest release, expand Assets and choose the package described below. If no release is listed, that package has not been published.
+
+**Package:** the Windows x64 installer `Umbra-Vibepollo-windows-x64.exe` attached to the latest Umbra (Vibepollo) release. It is built on [Vibepollo](https://github.com/Nonary/Vibepollo) instead of Apollo and carries the same additions for Eclipse; [compare the two versions](umbra.md#editions).
 
 1. Download the installer and compare its SHA-256 hash with `Get-FileHash` in PowerShell before opening it. It is unsigned for now, so Windows SmartScreen may warn; check the hash, then choose **More info → Run anyway**.
 

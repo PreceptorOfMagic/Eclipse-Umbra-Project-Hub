@@ -164,11 +164,11 @@ test('download clicks are stored without a visitor code; bad ones are refused', 
 
 function github(counts, { status = 200 } = {}) {
   return async (url) => {
-    const repo = url.match(/PreceptorOfMagic\/(\w+)\//)[1];
+    const repo = url.match(/PreceptorOfMagic\/([\w-]+)\//)[1];
     const rel = (tag, draft, assets) => ({ tag_name: tag, draft, assets: assets.map(([id, name]) => ({ id, name, download_count: counts[id] ?? 0 })) });
     const body = repo === 'Eclipse'
       ? [rel('eclipse-v1.3.4', false, [[1, 'eclipse-linux-x86_64.tar.gz'], [2, 'eclipse-linux-x86_64.tar.gz.sha256']]), rel('eclipse-v1.3.5', true, [[9, 'draft.ipk']])]
-      : [rel('umbra-v0.5.0', false, [[3, 'Umbra-windows-x64.exe']])];
+      : repo === 'Umbra' ? [rel('umbra-v0.5.0', false, [[3, 'Umbra-windows-x64.exe']])] : [];
     return { ok: status === 200, status, json: async () => body,
       headers: { get: (h) => (status === 403 && h === 'x-ratelimit-remaining' ? '0' : null) } };
   };

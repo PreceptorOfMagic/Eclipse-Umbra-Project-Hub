@@ -1,6 +1,6 @@
 name: Send download counts
 
-# Reads the public download count of every Eclipse and Umbra release file and sends them to the Hub's visit counter
+# Reads the public download count of every Eclipse, Umbra and Umbra (Vibepollo) release file and sends them to the Hub's visit counter
 # (analytics/worker.mjs, POST /counts). The counter also reads GitHub itself, but GitHub can rate-limit Cloudflare's
 # shared addresses; this job reads with the workflow's own token instead. Nothing about visitors is involved.
 on:
@@ -27,7 +27,7 @@ jobs:
           COUNTS_TOKEN: ${{ secrets.HUB_COUNTS_TOKEN }}
         run: |
           set -euo pipefail
-          for repo in Eclipse Umbra; do
+          for repo in Eclipse Umbra Umbra-Vibepollo; do
             gh api "repos/PreceptorOfMagic/$repo/releases?per_page=100" \
               --jq "{repo: \"$repo\", releases: [.[] | select(.draft | not) | {tag_name, assets: [.assets[] | {id, name, download_count}]}]}"
           done | jq -s -c . > counts.json

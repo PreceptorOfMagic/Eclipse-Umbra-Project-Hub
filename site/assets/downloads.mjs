@@ -7,6 +7,7 @@ export const platforms = Object.freeze({
   linux: { repo: 'Eclipse', label: 'Linux x86_64', match: /^eclipse-linux-x86_64\.tar\.gz$/i },
   'umbra-windows': { repo: 'Umbra', label: 'Umbra Windows x64', match: /^(?:umbra(?:-windows-x64)?|apollo)\.exe$/i },
   'umbra-linux': { repo: 'Umbra', label: 'Umbra Ubuntu 24.04', match: /^umbra-[\w.+-]+-ubuntu24\.04-amd64\.deb$/i },
+  'umbra-vibepollo-windows': { repo: 'Umbra-Vibepollo', label: 'Umbra (Vibepollo) Windows x64', match: /^umbra-vibepollo-windows-x64\.exe$/i },
 });
 
 export function selectAsset(platform, release) {

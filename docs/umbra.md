@@ -54,7 +54,13 @@ Umbra (Vibepollo) keeps everything Vibepollo adds over Apollo as Vibepollo ships
 
 It follows Vibepollo’s releases the way Umbra follows Apollo’s, with the additions kept apart so Vibepollo updates can be merged in. It is an independent fork; [report problems with it to Umbra (Vibepollo)](https://github.com/PreceptorOfMagic/Umbra-Vibepollo/issues/new), not to Vibepollo.
 
-[Umbra (Vibepollo) releases](https://github.com/PreceptorOfMagic/Umbra-Vibepollo/releases) · [Install Umbra (Vibepollo)](installation.md#umbra-vibepollo) · [Umbra (Vibepollo) repository](https://github.com/PreceptorOfMagic/Umbra-Vibepollo)
+[Umbra (Vibepollo) Windows x64 releases](https://github.com/PreceptorOfMagic/Umbra-Vibepollo/releases)
+
+Open the latest release, expand Assets and choose the package described below. If no release is listed, that package has not been published.
+
+Choose the Windows x64 installer `Umbra-Vibepollo-windows-x64.exe` in the latest release’s Assets.
+
+[Install Umbra (Vibepollo)](installation.md#umbra-vibepollo) · [Umbra (Vibepollo) repository](https://github.com/PreceptorOfMagic/Umbra-Vibepollo)
 
 <a name="apollo"></a>
 
