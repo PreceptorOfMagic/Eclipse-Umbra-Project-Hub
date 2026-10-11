@@ -38,9 +38,9 @@ Choose the `.deb` for your Ubuntu version in the latest release’s Assets (`Umb
 
 <a name="editions"></a>
 
-## Two editions of Umbra.
+## Umbra.
 
-Both carry the same additions for Eclipse. They differ in the host they are built on. Choose the one built on the host you would otherwise use.
+Umbra comes in two versions: Umbra, built on Apollo, and Umbra (Vibepollo), built on Vibepollo. Both carry the same additions for Eclipse; they differ only in the host they are built on. Choose the one built on the host you would otherwise use.
 
 | | Umbra | Umbra (Vibepollo) |
 |---|---|---|
@@ -48,7 +48,7 @@ Both carry the same additions for Eclipse. They differ in the host they are buil
 | Platforms | Windows x64, Ubuntu 22.04 / 24.04 | Windows x64 |
 | Installer | Windows installer `.exe` | Vibepollo’s setup, with its MSI package |
 | Replaces in place | Apollo | Vibepollo, Apollo or Umbra, keeping configuration and pairings |
-| Status | Released; the tested edition | Experimental: installed on the project’s test PCs and being live-tested; no release published yet |
+| Status | Released; the tested version | Experimental: installed on the project’s test PCs and being live-tested; no release published yet |
 
 Umbra (Vibepollo) keeps everything Vibepollo adds over Apollo as Vibepollo ships it, including its own virtual display and virtual gamepad drivers, and Vibepollo’s RTX HDR support, which uses NVIDIA’s TrueHDR runtime under NVIDIA’s own licence terms. Until code signing is set up, its virtual gamepad driver is signed with Umbra’s own certificate, which the installer adds to the PC’s trusted certificates.
 
