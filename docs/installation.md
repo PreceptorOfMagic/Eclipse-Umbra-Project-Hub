@@ -34,6 +34,8 @@ Umbra’s web interface after setup, showing its version and update checks. Capt
 
 Open the latest release, expand Assets and choose the package described below. If no release is listed, that package has not been published.
 
+**Using Vibepollo?** An experimental [Umbra (Vibepollo)](umbra.md#editions) edition is built on Vibepollo instead of Apollo. It installs with Vibepollo’s setup and replaces Vibepollo in place. These steps describe the Apollo-based Umbra.
+
 **Package:** the Windows x64 installer `Umbra-windows-x64.exe` attached to an Umbra release, not an Eclipse client ZIP. You need a Windows gaming PC, a supported GPU and current driver, administrator access for installation, and the games you intend to run already installed. Windows 11 x64 is the tested host OS.
 
 1. Open the Umbra release, read its compatibility notes and expand **Assets**. Download the Windows x64 installer and matching checksum if supplied. Compare its SHA-256 hash with `Get-FileHash` in PowerShell before opening it.

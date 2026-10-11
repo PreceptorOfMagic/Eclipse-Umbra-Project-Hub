@@ -8,7 +8,7 @@ Stream your games and desktop from a Windows or Ubuntu Linux PC. Umbra is Apollo
 
 Umbra’s additions use AI-assisted coding. [About the development process.](development.md#development-process)
 
-[Choose your download](#windows) · [Explore the Project Hub](../README.md) · [Umbra repository](https://github.com/PreceptorOfMagic/Umbra)
+[Choose your download](#windows) · [Explore the Project Hub](../README.md) · [Umbra repository](https://github.com/PreceptorOfMagic/Umbra) · [Using Vibepollo? See Umbra (Vibepollo)](#editions)
 
 <a name="windows"></a>
 
@@ -35,6 +35,26 @@ Download an attached file under **Assets**, not GitHub’s automatically generat
 Open the latest release, expand Assets and choose the package described below. If no release is listed, that package has not been published.
 
 Choose the `.deb` for your Ubuntu version in the latest release’s Assets (`Umbra-<version>-ubuntu24.04-amd64.deb` or `Umbra-<version>-ubuntu22.04-amd64.deb`) and install it with `sudo apt install` so its dependencies are installed too. Two-PC co-op has been tested with Windows hosts; start with Linux as an ordinary streaming host. [Exact Linux host installation →](installation.md#umbra-linux)
+
+<a name="editions"></a>
+
+## Two editions of Umbra.
+
+Both carry the same additions for Eclipse. They differ in the host they are built on. Choose the one built on the host you would otherwise use.
+
+| | Umbra | Umbra (Vibepollo) |
+|---|---|---|
+| Built on | [Apollo](https://github.com/ClassicOldSong/Apollo) (ClassicOldSong) | [Vibepollo](https://github.com/Nonary/Vibepollo) (Nonary), itself built on Apollo |
+| Platforms | Windows x64, Ubuntu 22.04 / 24.04 | Windows x64 |
+| Installer | Windows installer `.exe` | Vibepollo’s setup, with its MSI package |
+| Replaces in place | Apollo | Vibepollo, Apollo or Umbra, keeping configuration and pairings |
+| Status | Released; the tested edition | Experimental: installed on the project’s test PCs and being live-tested; no release published yet |
+
+Umbra (Vibepollo) keeps everything Vibepollo adds over Apollo as Vibepollo ships it, including its own virtual display and virtual gamepad drivers, and Vibepollo’s RTX HDR support, which uses NVIDIA’s TrueHDR runtime under NVIDIA’s own licence terms. Until code signing is set up, its virtual gamepad driver is signed with Umbra’s own certificate, which the installer adds to the PC’s trusted certificates.
+
+It follows Vibepollo’s releases the way Umbra follows Apollo’s, with the additions kept apart so Vibepollo updates can be merged in. It is an independent fork; [report problems with it to Umbra (Vibepollo)](https://github.com/PreceptorOfMagic/Umbra-Vibepollo/issues/new), not to Vibepollo.
+
+[Umbra (Vibepollo) releases](https://github.com/PreceptorOfMagic/Umbra-Vibepollo/releases) · [Umbra (Vibepollo) repository](https://github.com/PreceptorOfMagic/Umbra-Vibepollo)
 
 <a name="apollo"></a>
 

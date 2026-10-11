@@ -30,4 +30,4 @@ The Project Hub repository retains its existing [GPL text](LICENSE.txt).
 
 Eclipse/Umbra is an independent project. Eclipse is the client application and Umbra is the host application. It is not affiliated with or endorsed by Moonlight, Sunshine, LG Electronics, NVIDIA, AMD, Intel, Amazon, DXC or the Eclipse Foundation. Third-party names identify lineage or compatibility; their names and marks remain the property of their respective owners.
 
-Eclipse is derived from Aurora and Moonlight TV. Umbra is derived from Apollo and Sunshine. Original authorship and component-specific terms remain in force. Read the [Acknowledgements](ACKNOWLEDGEMENTS.md) for the creators and wider open-source stack.
+Eclipse is derived from Aurora and Moonlight TV. Umbra is derived from Apollo and Sunshine; its Umbra (Vibepollo) edition is derived from Vibepollo, Apollo and Sunshine. Original authorship and component-specific terms remain in force. Read the [Acknowledgements](ACKNOWLEDGEMENTS.md) for the creators and wider open-source stack.
