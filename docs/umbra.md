@@ -4,7 +4,7 @@
 
 ## The gaming-PC app.
 
-Stream your games and desktop from a Windows or Ubuntu Linux PC. Umbra is Apollo with the additions Eclipse needs for co-op, and as little else changed as possible.
+Stream your games and desktop from a Windows or Ubuntu Linux PC. Umbra is Apollo with the additions Eclipse needs for co-op, and as little else changed as possible. Co-op currently needs Windows hosts; co-op on Linux hosts is in progress.
 
 Umbra’s additions use AI-assisted coding. [About the development process.](development.md#development-process)
 
@@ -34,7 +34,7 @@ Download an attached file under **Assets**, not GitHub’s automatically generat
 
 Open the latest release, expand Assets and choose the package described below. If no release is listed, that package has not been published.
 
-Choose the `.deb` for your Ubuntu version in the latest release’s Assets (`Umbra-<version>-ubuntu24.04-amd64.deb` or `Umbra-<version>-ubuntu22.04-amd64.deb`) and install it with `sudo apt install` so its dependencies are installed too. Two-PC co-op has been tested with Windows hosts; start with Linux as an ordinary streaming host. [Exact Linux host installation →](installation.md#umbra-linux)
+Choose the `.deb` for your Ubuntu version in the latest release’s Assets (`Umbra-<version>-ubuntu24.04-amd64.deb` or `Umbra-<version>-ubuntu22.04-amd64.deb`) and install it with `sudo apt install` so its dependencies are installed too. Linux hosts do not support two-PC co-op yet; it is in progress. Use Linux as an ordinary streaming host. [Exact Linux host installation →](installation.md#umbra-linux)
 
 <a name="editions"></a>
 

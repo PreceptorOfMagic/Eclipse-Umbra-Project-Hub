@@ -136,7 +136,7 @@ Read: [GPU HEVC source and component tests](https://github.com/PreceptorOfMagic/
 
 <summary>5. Session lifecycle, input ownership and local-host play — The two host identities remain separate even when the screen is shared</summary>
 
-Co-op negotiates host capabilities, selects a compatible encoding route, requests each built-in pane and divides the default video budget between hosts. A disconnect preserves the resumable applications. Quit is an explicit end-both-hosts operation; an orientation change on resume rebuilds pane geometry. Resume and ending both host applications have been exercised on Windows and Linux. Coverage of other packaged platforms remains limited.
+Co-op negotiates host capabilities, selects a compatible encoding route, requests each built-in pane and divides the default video budget between hosts. A disconnect preserves the resumable applications. Quit is an explicit end-both-hosts operation; an orientation change on resume rebuilds pane geometry. Resume and ending both host applications have been exercised from the Windows and Linux clients, with Windows hosts. Coverage of other packaged platforms remains limited.
 
 [![Pointer routing between the two PCs’ halves (plays on the website)](../site/media/eclipse-coop-pointer-poster.webp)](https://preceptorofmagic.github.io/Eclipse-Umbra-Project-Hub/development.html#input-routing)
 

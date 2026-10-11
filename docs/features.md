@@ -60,7 +60,7 @@ By default, Eclipse divides the selected video bitrate between the two hosts ins
 
 #### Disconnect to pause; Quit to finish
 
-Disconnect preserves a resumable two-host session. Returning to co-op reconnects to those desktops; changing orientation on resume rebuilds the pane displays. Quit game is the separate action that ends both host applications. Resume has been exercised on Windows and Linux; the end-both-hosts check has been recorded on Linux and Windows, with broader packaged-platform checks still needed.
+Disconnect preserves a resumable two-host session. Returning to co-op reconnects to those desktops; changing orientation on resume rebuilds the pane displays. Quit game is the separate action that ends both host applications. Resume has been exercised from the Windows and Linux clients; the end-both-hosts check has been recorded from the Linux and Windows clients, with broader packaged-platform checks still needed.
 
 [![Disconnect, resume, then Quit game ends both PCs (plays on the website)](../site/media/eclipse-coop-pause-poster.webp)](https://preceptorofmagic.github.io/Eclipse-Umbra-Project-Hub/index.html#features-session)
 

@@ -12,7 +12,7 @@ Install Umbra on each gaming PC, then Eclipse on the display device. Start with 
 
 ### Gaming PC → Umbra
 
-Windows x64 or Ubuntu Linux (22.04 or 24.04) host. Install once for ordinary streaming, twice for two-PC co-op. The game runs here. Already using Vibepollo? [Umbra (Vibepollo)](#umbra-vibepollo) keeps your settings.
+Windows x64 or Ubuntu Linux (22.04 or 24.04) host. Install once for ordinary streaming. Two-PC co-op currently needs two Windows hosts; co-op on Linux hosts is in progress. The game runs here. Already using Vibepollo? [Umbra (Vibepollo)](#umbra-vibepollo) keeps your settings.
 
 ### Screen device → Eclipse
 
@@ -94,7 +94,7 @@ sudo apt install ./Umbra-<version>-ubuntu24.04-amd64.deb
 
 1. Keep the client-driven display defaults. Pair Eclipse, approve its PIN in Umbra and test an ordinary Desktop or game session before adding another host.
 
-Two-PC co-op has been tested with Windows hosts, and the GPU HEVC encoder that lets an NVIDIA PC and an AMD PC share one co-op picture is part of the Windows package. Start with Linux as an ordinary streaming host. To remove Umbra, run `sudo apt remove umbra`.
+Linux hosts do not support two-PC co-op yet; it is in progress. Co-op needs a virtual display created on each host for its pane, which Umbra currently provides only on Windows, and the GPU HEVC encoder that lets an NVIDIA PC and an AMD PC share one co-op picture is part of the Windows package. Use Linux as an ordinary streaming host. To remove Umbra, run `sudo apt remove umbra`.
 
 <a name="eclipse-webos"></a>
 
