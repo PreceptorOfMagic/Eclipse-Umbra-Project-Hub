@@ -217,11 +217,13 @@ export async function stats(req, env, url, now) {
     AVG(NULLIF(ms, 0)) AS avg_ms FROM views WHERE day >= ? GROUP BY page ORDER BY views DESC`);
   const byRef = await q(`SELECT ref, COUNT(*) AS views FROM views WHERE day >= ? AND ref != '' GROUP BY ref
     ORDER BY views DESC LIMIT 25`);
-  const files = await q(`SELECT a.repo, a.tag, a.file, a.count, a.first_count,
-    (SELECT SUM(n) FROM downloads d WHERE d.repo = a.repo AND d.file = a.file AND d.tag = a.tag AND d.day >= ?1) AS period,
+  // Only increases after a file's first reading are shown; its starting total (first_count) predates counting.
+  const files = await q(`SELECT a.repo, a.tag, a.file,
+    (SELECT COALESCE(SUM(n), 0) FROM downloads d WHERE d.repo = a.repo AND d.file = a.file AND d.tag = a.tag AND d.day >= ?1) AS period,
     (SELECT COUNT(*) FROM clicks c WHERE c.repo = a.repo AND c.file = a.file AND c.day >= ?1) AS clicks,
-    (SELECT MAX(ts) FROM downloads d WHERE d.repo = a.repo AND d.file = a.file AND d.tag = a.tag) AS last
-    FROM assets a WHERE a.file NOT LIKE '%.sha256' AND a.file != 'SHA256SUMS' ORDER BY a.repo, a.count DESC`);
+    MAX(COALESCE((SELECT MAX(ts) FROM downloads d WHERE d.repo = a.repo AND d.file = a.file AND d.tag = a.tag), 0),
+      COALESCE((SELECT MAX(ts) FROM clicks c WHERE c.repo = a.repo AND c.file = a.file), 0)) AS last
+    FROM assets a WHERE a.file NOT LIKE '%.sha256' AND a.file != 'SHA256SUMS' ORDER BY a.repo, period DESC, clicks DESC, a.file`);
   const recent = await q(`SELECT ts, since, 'GitHub count' AS how, repo, file, n FROM downloads WHERE day >= ?1
     UNION ALL SELECT ts, NULL, 'Hub button on ' || page, repo, file, 1 FROM clicks WHERE day >= ?1 ORDER BY ts DESC LIMIT 60`);
   const [lastReading, poll, push] = await Promise.all(['last_reading', 'github_poll', 'github_push'].map((k) => meta(db, k)));
@@ -240,14 +242,16 @@ th:first-child,td:first-child{text-align:left}.big{display:flex;gap:2rem;flex-wr
 <div><b>${duration(total.avg_ms)}</b>average time on a page</div><div><b>${duration(site.avg_ms)}</b>average time on the site per visitor per day</div></div>
 <h2>Pages</h2>${table(['Page', 'Views', 'Daily unique visitors', 'Average time'], byPage.map((r) => [r.page, r.views, r.visitors, duration(r.avg_ms)]))}
 <h2>Days</h2>${table(['Day', 'Views', 'Unique visitors', 'Average time on a page'], byDay.map((r) => [r.day, r.views, r.visitors, duration(r.avg_ms)]))}
-<h2>Downloads</h2><p>GitHub counts every download of a release file, wherever the link was found, and is read every hour.
-Last successful reading: ${lastReading ? when(lastReading.ts) : 'none yet'}. By GitHub Actions: ${status(push)}. By this counter: ${status(poll)}.
-<a href="?days=${days}&amp;refresh=1">Read now</a>. “Before counting” is GitHub’s total when
-the counter first saw the file, including the project’s own test downloads. Checksum files are left out of this table.</p>
-${files.length ? table(['File', 'Release', 'All-time (GitHub)', 'Before counting', 'In this period', 'Clicked on the Hub', 'Last seen'],
-    files.map((r) => [r.file, r.tag, r.count, r.first_count, r.period || 0, r.clicks, when(r.last)])) : '<p>No GitHub reading yet.</p>'}
+<h2>Downloads</h2><p>Counted from the counter’s first reading of GitHub; earlier downloads, including the project’s own
+test downloads, are not shown. <b>Hub button clicks</b>: someone clicked this file’s download button on the Hub, recorded the
+moment it happened. <b>Downloads from anywhere</b>: GitHub’s own count for the file, which also covers its release page and
+links shared elsewhere (and so includes most Hub clicks), read every hour. Checksum files are left out.</p>
+${files.length ? table(['File', 'Release', 'Hub button clicks', 'Downloads from anywhere', 'Most recent'],
+    files.map((r) => [r.file, r.tag, r.clicks, r.period, when(r.last)])) : '<p>No GitHub reading yet.</p>'}
+<p><small>GitHub last read ${lastReading ? when(lastReading.ts) : 'never'} · by this counter: ${status(poll)} · by GitHub Actions: ${status(push)} ·
+<a href="?days=${days}&amp;refresh=1">Read now</a></small></p>
 <h3>Recent downloads</h3><p>A Hub button click has its exact time. A GitHub count can only say a download happened between
-two readings.</p>${recent.length ? table(['Time', 'Seen by', 'Project', 'File', 'Downloads'],
+two readings.</p>${recent.length ? table(['When', 'Counted by', 'Project', 'File', 'Downloads'],
     recent.map((r) => [r.since ? `between ${when(r.since)} and ${when(r.ts)}` : when(r.ts), r.how, r.repo, r.file, r.n])) : '<p>None in this period.</p>'}
 <h2>Referring sites</h2>${byRef.length ? table(['Site', 'Views'], byRef.map((r) => [r.ref, r.views])) : '<p>None yet.</p>'}
 <p>A visitor is counted once per UTC day; the same person on two days counts twice, by design. Times are how long the page was visible; views where the visitor left before the time was sent show no time.</p>`;

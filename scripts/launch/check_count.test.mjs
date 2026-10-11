@@ -196,12 +196,13 @@ test('hourly GitHub reading records only increases after the first reading', asy
     [[2, T0.getTime()], [1, later(7200000).getTime()]]);
   await handle(post('/d', { p: 'setup.html', repo: 'Eclipse', f: 'eclipse-linux-x86_64.tar.gz' }), env, later(3500000));
   const html = await (await handle(new Request('https://count.example/stats', { headers: auth('pw') }), env, later(3 * 3600000 + 60000))).text();
-  assert.match(html, /<td>eclipse-linux-x86_64.tar.gz<\/td><td>eclipse-v1.3.4<\/td><td>6<\/td><td>3<\/td><td>3<\/td><td>1<\/td><td>2026-10-11 13:00 UTC<\/td>/);
+  assert.match(html, /<td>eclipse-linux-x86_64.tar.gz<\/td><td>eclipse-v1.3.4<\/td><td>1<\/td><td>3<\/td><td>2026-10-11 13:00 UTC<\/td>/);
+  assert.ok(!html.includes('Before counting') && !html.includes('All-time'), 'pre-counting totals are not shown');
   assert.ok(!html.includes('<td>eclipse-linux-x86_64.tar.gz.sha256</td>'), 'checksums left out');
   assert.match(html, /<td>between 2026-10-11 10:00 UTC and 2026-10-11 11:00 UTC<\/td><td>GitHub count<\/td><td>Eclipse<\/td><td>eclipse-linux-x86_64.tar.gz<\/td><td>2<\/td>/);
   assert.match(html, /<td>Hub button on setup.html<\/td>/);
-  assert.match(html, /By this counter: 2026-10-11 13:00 UTC: Eclipse: GitHub 403 \(rate limited\)/);
-  assert.match(html, /By GitHub Actions: 2026-10-11 13:00 UTC: ok, 1 files/);
+  assert.match(html, /by this counter: 2026-10-11 13:00 UTC: Eclipse: GitHub 403 \(rate limited\)/);
+  assert.match(html, /by GitHub Actions: 2026-10-11 13:00 UTC: ok, 1 files/);
   await prune(DB, new Date('2028-01-01T00:00:00Z'));
   assert.equal(DB.sql.prepare('SELECT (SELECT COUNT(*) FROM clicks) + (SELECT COUNT(*) FROM downloads) AS n').get().n, 0);
 });
