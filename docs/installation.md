@@ -4,7 +4,7 @@
 
 Install Umbra on each gaming PC, then Eclipse on the display device. Start with one working stream before adding the second host.
 
-[Umbra · Windows](#umbra-windows) · [Umbra · Linux](#umbra-linux) · [Eclipse · LG webOS](#eclipse-webos) · [Eclipse · Windows](#eclipse-windows) · [Eclipse · Linux](#eclipse-linux)
+[Umbra · Windows](#umbra-windows) · [Umbra (Vibepollo) · Windows](#umbra-vibepollo) · [Umbra · Linux](#umbra-linux) · [Eclipse · LG webOS](#eclipse-webos) · [Eclipse · Windows](#eclipse-windows) · [Eclipse · Linux](#eclipse-linux)
 
 <a name="before-you-start"></a>
 
@@ -12,7 +12,7 @@ Install Umbra on each gaming PC, then Eclipse on the display device. Start with 
 
 ### Gaming PC → Umbra
 
-Windows x64 or Ubuntu Linux (22.04 or 24.04) host. Install once for ordinary streaming, twice for two-PC co-op. The game runs here.
+Windows x64 or Ubuntu Linux (22.04 or 24.04) host. Install once for ordinary streaming, twice for two-PC co-op. The game runs here. Already using Vibepollo? [Umbra (Vibepollo)](#umbra-vibepollo) keeps your settings.
 
 ### Screen device → Eclipse
 
