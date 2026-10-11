@@ -34,7 +34,7 @@ Umbra’s web interface after setup, showing its version and update checks. Capt
 
 Open the latest release, expand Assets and choose the package described below. If no release is listed, that package has not been published.
 
-**Using Vibepollo?** An experimental [Umbra (Vibepollo)](umbra.md#editions) version is built on Vibepollo instead of Apollo. It installs with Vibepollo’s setup and replaces Vibepollo in place. These steps describe the Apollo-based Umbra.
+**Using Vibepollo?** Install [Umbra (Vibepollo)](#umbra-vibepollo) instead; it keeps your Vibepollo settings. These steps describe the Apollo-based Umbra.
 
 **Package:** the Windows x64 installer `Umbra-windows-x64.exe` attached to an Umbra release, not an Eclipse client ZIP. You need a Windows gaming PC, a supported GPU and current driver, administrator access for installation, and the games you intend to run already installed. Windows 11 x64 is the tested host OS.
 
@@ -49,6 +49,24 @@ Open the latest release, expand Assets and choose the package described below. I
 1. Keep the client-driven display defaults. Pair Eclipse, approve its PIN in Umbra and test an ordinary Desktop or game session before adding another host.
 
 For co-op, install the same compatible Umbra release on the second Windows PC. Co-op-specific defaults are separate from ordinary streaming settings. The Co-op Pane is built in and requested automatically by Eclipse, rather than created in the host’s editable Applications list. You should not create application entries, copy host IDs or tune encoder settings by hand.
+
+<a name="umbra-vibepollo"></a>
+
+## Umbra (Vibepollo) on Windows
+
+[Umbra (Vibepollo) releases](https://github.com/PreceptorOfMagic/Umbra-Vibepollo/releases/latest)
+
+**Package:** the Windows x64 installer `.exe` attached to the latest Umbra (Vibepollo) release. It is built on [Vibepollo](https://github.com/Nonary/Vibepollo) instead of Apollo and carries the same additions for Eclipse; [compare the two versions](umbra.md#editions).
+
+1. Download the installer and compare its SHA-256 hash with `Get-FileHash` in PowerShell before opening it. It is unsigned for now, so Windows SmartScreen may warn; check the hash, then choose **More info → Run anyway**.
+
+1. **Installing over Vibepollo keeps your settings.** Umbra (Vibepollo) upgrades a Vibepollo installation in place, the same way Vibepollo upgrades itself: your configuration, applications and paired devices stay. The installer shows **Switch to Umbra (Vibepollo)**. Installing over Apollo or the Apollo-based Umbra also keeps settings and pairings; the installer removes the old program first. Back up your host configuration before switching anyway.
+
+1. Keep the bundled virtual-display and virtual gamepad drivers selected. Until code signing is set up, the gamepad driver is signed with Umbra’s own certificate, which the installer adds to the PC’s trusted certificates.
+
+1. Open the host’s web interface from the Start menu or tray, sign in, pair Eclipse and test an ordinary Desktop stream before co-op. For co-op, install a compatible Umbra on the second PC as well.
+
+1. **Switching back to Vibepollo:** run Vibepollo’s own installer. It replaces Umbra (Vibepollo) in place and keeps the same settings, without the Umbra additions Eclipse uses for co-op.
 
 <a name="umbra-linux"></a>
 

@@ -311,7 +311,7 @@ Install on the television or computer where you want to play. Pair it with one U
 
 ### Umbra · host
 
-Install on each Windows or Ubuntu gaming PC. Apollo supplies the everyday host experience; Umbra keeps other changes to a minimum while adding the encoder and session behaviour required by Eclipse co-op. An experimental [Umbra (Vibepollo)](docs/umbra.md#editions) version carries the same additions on Vibepollo. [Explore Umbra →](docs/umbra.md)
+Install on each Windows or Ubuntu gaming PC. Apollo supplies the everyday host experience; Umbra keeps other changes to a minimum while adding the encoder and session behaviour required by Eclipse co-op. A newer [Umbra (Vibepollo)](docs/umbra.md#editions) version carries the same additions on Vibepollo. [Explore Umbra →](docs/umbra.md)
 
 <a name="questions"></a>
 

@@ -48,13 +48,13 @@ Umbra comes in two versions: Umbra, built on Apollo, and Umbra (Vibepollo), buil
 | Platforms | Windows x64, Ubuntu 22.04 / 24.04 | Windows x64 |
 | Installer | Windows installer `.exe` | Vibepollo’s setup, with its MSI package |
 | Replaces in place | Apollo | Vibepollo, Apollo or Umbra, keeping configuration and pairings |
-| Status | Released; the tested version | Experimental: installed on the project’s test PCs and being live-tested; no release published yet |
+| Status | Released; the tested version | First release, 2.0.0-umbra.1: installed and checked on the project’s test PCs; live streaming and co-op testing in progress |
 
 Umbra (Vibepollo) keeps everything Vibepollo adds over Apollo as Vibepollo ships it, including its own virtual display and virtual gamepad drivers, and Vibepollo’s RTX HDR support, which uses NVIDIA’s TrueHDR runtime under NVIDIA’s own licence terms. Until code signing is set up, its virtual gamepad driver is signed with Umbra’s own certificate, which the installer adds to the PC’s trusted certificates.
 
 It follows Vibepollo’s releases the way Umbra follows Apollo’s, with the additions kept apart so Vibepollo updates can be merged in. It is an independent fork; [report problems with it to Umbra (Vibepollo)](https://github.com/PreceptorOfMagic/Umbra-Vibepollo/issues/new), not to Vibepollo.
 
-[Umbra (Vibepollo) releases](https://github.com/PreceptorOfMagic/Umbra-Vibepollo/releases) · [Umbra (Vibepollo) repository](https://github.com/PreceptorOfMagic/Umbra-Vibepollo)
+[Umbra (Vibepollo) releases](https://github.com/PreceptorOfMagic/Umbra-Vibepollo/releases) · [Install Umbra (Vibepollo)](installation.md#umbra-vibepollo) · [Umbra (Vibepollo) repository](https://github.com/PreceptorOfMagic/Umbra-Vibepollo)
 
 <a name="apollo"></a>
 
