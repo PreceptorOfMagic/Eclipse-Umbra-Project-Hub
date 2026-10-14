@@ -245,7 +245,7 @@ Open the latest release, expand Assets and choose the package described below. I
 
 1. On the remote, Back goes back; holding it during a stream opens the stream menu, and a tap sends Escape to the PC. Holding OK is a right click. Red, Info, Guide or the SHIELD remote's Menu key open the stream menu; Blue opens the on-screen keyboard; Channel +/− are Page Up/Down. Game controllers, keyboards and mice work as on the other platforms.
 
-Eclipse switches the TV to the stream's refresh rate while streaming. If it does not change on your device, turn on its frame-rate matching option (SHIELD: **Settings → Device Preferences → Display & Sound → Advanced settings → Match content frame rate**). The audio output device is chosen by Android, not in Eclipse. [Full Android guide, remote keys and building](https://github.com/PreceptorOfMagic/Eclipse/blob/main/docs/BUILD_ANDROID.md).
+Eclipse switches the TV to the stream's refresh rate while streaming. If it does not change on your device, turn on its frame-rate matching option (SHIELD: **Settings → Device Preferences → Display & Sound → Advanced settings → Match content frame rate**). Choose where the sound goes (HDMI, a soundbar, Bluetooth headphones) under **Settings → Audio**, as on a PC. [Full Android guide, remote keys and building](https://github.com/PreceptorOfMagic/Eclipse/blob/main/docs/BUILD_ANDROID.md).
 
 <a name="pairing"></a>
 
