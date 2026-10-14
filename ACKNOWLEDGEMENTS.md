@@ -123,7 +123,7 @@ Major projects include:
 
 ## Umbra on Linux
 
-Umbra 0.5.1 for Linux is a Flatpak, and its optional HDR extras patch the desktop’s own compositor. Its exact third-party sources are in the release’s `Umbra-0.5.1-linux-flatpak-sources.tar.gz`, and the HDR extras’ source packages are published beside them.
+Umbra for Linux is a Flatpak, and its optional HDR extras patch the desktop’s own compositor. Each release’s exact third-party sources are in its `Umbra-<version>-linux-flatpak-sources.tar.gz`, and the HDR extras’ source packages are published beside them.
 
 - [KWin](https://invent.kde.org/plasma/kwin), by **the KDE community**, and [Mutter](https://gitlab.gnome.org/GNOME/mutter), by **the GNOME project** — the compositors that create Umbra’s per-stream virtual displays on KDE Plasma and GNOME. The HDR extras are patches to KWin and Mutter, and the release redistributes patched builds of the `kwin` and `mutter` packages of Ubuntu, Fedora, openSUSE Tumbleweed, Arch Linux and CachyOS, maintained by those distributions’ packagers (Ubuntu’s by the Kubuntu and Ubuntu developers from the Debian Qt/KDE and Debian GNOME maintainers’ packaging; CachyOS’s Mutter by the CachyOS team). KWin is mainly GPL-2.0-or-later, with per-file LGPL, MIT and BSD notices; Mutter is GPL-2.0-or-later.
 - KDE output and screencast protocols — `kde-output-device-v2` and `kde-output-management-v2` (MIT-CMU) and `zkde-screencast-unstable-v1` (LGPL-2.1-or-later), by **Sebastian Kügler, Méven Car, Xaver Hugl and Aleix Pol Gonzalez**, with earlier output-protocol text by Kristian Høgsberg, Intel and Collabora. Vendored in Umbra’s `third-party/kde-output-protocols`.

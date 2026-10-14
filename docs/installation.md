@@ -74,13 +74,15 @@ Open the latest release, expand Assets and choose the package described below. I
 
 ## 1B. Umbra on Linux
 
-[Umbra for Linux release](https://github.com/PreceptorOfMagic/Umbra/releases/tag/umbra-linux-v0.5.1)
+[Umbra for Linux release](https://github.com/PreceptorOfMagic/Umbra/releases/tag/umbra-linux-v0.5.2)
 
 Open the Umbra for Linux release and expand Assets. If no release is listed, that package has not been published.
 
-**Package:** `Umbra-<version>-linux-x86_64.flatpak`, one Flatpak bundle for x86_64 Linux. You need KDE Plasma or GNOME on Wayland (an X11 desktop gives ordinary streaming only), an NVIDIA or AMD GPU with its current driver, and the games you intend to run already installed. It has been tested on Ubuntu 26.04 with KDE Plasma and with GNOME, on an NVIDIA RTX 2060 SUPER and an AMD Radeon RX Vega.
+**Package:** `Umbra-<version>-linux-x86_64.flatpak`, one Flatpak bundle for x86_64 Linux. You need KDE Plasma or GNOME on Wayland (an X11 desktop gives ordinary streaming only), an NVIDIA or AMD GPU with its current driver, and the games you intend to run already installed.
 
-If you installed the earlier Ubuntu `.deb` (Umbra 0.5.0), remove it first with `systemctl --user disable --now sunshine` and `sudo apt remove umbra`. The Flatpak keeps its own settings, so pair Eclipse with it again.
+**How far it is tested.** Umbra 0.5.1 for Linux was tested on hardware on Ubuntu 26.04 with KDE Plasma 6.6 and with GNOME, on an NVIDIA RTX 2060 SUPER and an AMD Radeon RX Vega. Umbra 0.5.2 is 0.5.1 with one change, its KDE output control, which KDE Plasma 6.7 needs. 0.5.2 was built and checked automatically (installed over 0.5.1, settings kept, every library found) but **has not run on hardware**. Its Plasma 6.7 support has been tested only automatically, with each distribution’s real KWin 6.7.5 on a virtual display device without a GPU.
+
+To update from Umbra 0.5.1, install the new bundle as below with `--reinstall` added (`flatpak install --user --reinstall Umbra-<version>-linux-x86_64.flatpak`); settings and pairings are kept. If you installed the earlier Ubuntu `.deb` (Umbra 0.5.0), remove it first with `systemctl --user disable --now sunshine` and `sudo apt remove umbra`. The Flatpak keeps its own settings, so pair Eclipse with it again.
 
 1. Install Flatpak and add Flathub if you have not already (Ubuntu does not include Flatpak by default):
 
@@ -106,12 +108,13 @@ flatpak install --user Umbra-<version>-linux-x86_64.flatpak
 
 | Desktop | Streaming | Own virtual display per stream | Co-op | HDR |
 |---|---|---|---|---|
-| KDE Plasma on Wayland (tested: Ubuntu 26.04, KWin 6.6.6) | Yes | Yes | Yes | With the KDE HDR extra |
+| KDE Plasma 6.6 on Wayland (tested: Ubuntu 26.04, KWin 6.6.6) | Yes | Yes | Yes | With the KDE HDR extra |
+| KDE Plasma 6.7 on Wayland (KWin 6.7.5, Umbra 0.5.2 or newer) | Expected; untested on hardware | Automated test only | Untested | With the KDE HDR extra; automated test only |
 | GNOME on Wayland (tested: Ubuntu 26.04, Mutter 50.1) | Yes | Yes | Yes | With the GNOME HDR extra; a physical HDR monitor streams HDR without it |
 | X11 desktops (Cinnamon, Xfce, MATE …) | Yes (tested during development on Linux Mint 22.3) | No | No | No |
 | Sway, Hyprland and other wlroots desktops, COSMIC | Not supported | | | |
 
-Other distributions running KDE Plasma or GNOME on Wayland are expected to behave like those rows but have not been tested. One known exception: on KDE Plasma 6.7 (Ubuntu 26.10, Fedora 44 and 45, openSUSE Tumbleweed, Arch, CachyOS), KWin announces its outputs through a newer protocol than Umbra 0.5.1 knows, so Umbra 0.5.1 streams the desktop there without a virtual display per stream, co-op or HDR. The next Umbra release for Linux fixes it. An X11 desktop has no way to create a display while it runs, so there the host streams the desktop but never offers co-op or HDR.
+The “Yes” rows were tested on hardware with Umbra 0.5.1. Other distributions running KDE Plasma or GNOME on Wayland are expected to behave like those rows but have not been tested. KDE Plasma 6.7 (Ubuntu 26.10, Fedora 44 and 45, openSUSE Tumbleweed, Arch, CachyOS) needs Umbra 0.5.2: KWin 6.7 announces its outputs through a newer protocol than Umbra 0.5.1 knows, so Umbra 0.5.1 streams the desktop there without a virtual display per stream, co-op or HDR. An X11 desktop has no way to create a display while it runs, so there the host streams the desktop but never offers co-op or HDR.
 
 **GPUs.** NVIDIA (tested: RTX 2060 SUPER, driver 595) and AMD (tested: Radeon RX Vega) both encode on the GPU. The only AMD card available for testing is a Radeon RX Vega from 2017: its video encoder reaches about 60 fps at 4K and 165 fps only at 1080p, its co-op panes run at about 35 fps, and it has no 10-bit encoder, so its ordinary streams are SDR. The same card hit the same 4K limit on Windows (62 fps), so its age, not Umbra, is the likely limit; newer AMD cards could not be tested. Intel GPUs and PCs with more than one GPU are untested.
 
@@ -121,18 +124,28 @@ Other distributions running KDE Plasma or GNOME on Wayland are expected to behav
 
 ### HDR extras (optional)
 
-Stock KWin and Mutter keep the virtual displays Umbra streams SDR. Two optional extras add HDR virtual displays and 10-bit screen capture: a small patch to KWin for KDE Plasma and one to Mutter for GNOME. Umbra detects them by itself. The release carries them prebuilt for these distributions, each built from that distribution’s own `kwin` or `mutter` package:
+Stock KWin and Mutter keep the virtual displays Umbra streams SDR. Two optional extras add HDR virtual displays and 10-bit screen capture: a small patch to KWin for KDE Plasma and one to Mutter for GNOME. Umbra detects them by itself. The release carries them prebuilt for these distributions, each built from that distribution’s own `kwin` or `mutter` package.
 
-| Distribution | KDE Plasma | GNOME |
-|---|---|---|
-| Ubuntu 26.04 | `Umbra-HDR-KDE-ubuntu26.04.tar.gz` (tested) | `Umbra-HDR-GNOME-ubuntu26.04.tar.gz` (tested) |
-| Ubuntu 26.10 | `Umbra-HDR-KDE-ubuntu26.10.tar.gz` | `Umbra-HDR-GNOME-ubuntu26.10.tar.gz` |
-| Fedora 44 and 45 | `Umbra-HDR-KDE-fedora44.tar.gz`, `…-fedora45.tar.gz` | `Umbra-HDR-GNOME-fedora44.tar.gz`, `…-fedora45.tar.gz` |
-| openSUSE Tumbleweed | `Umbra-HDR-KDE-opensuse-tumbleweed.tar.gz` | `Umbra-HDR-GNOME-opensuse-tumbleweed.tar.gz` |
-| Arch Linux | `Umbra-HDR-KDE-arch.tar.gz` | `Umbra-HDR-GNOME-arch.tar.gz` |
-| CachyOS | `Umbra-HDR-KDE-cachyos.tar.gz` | `Umbra-HDR-GNOME-cachyos.tar.gz` (for CachyOS’s own Mutter) |
+**Their testing is limited, and differs per extra.** Only the two Ubuntu 26.04 extras have run on hardware, with Umbra 0.5.1. Every extra passes an automated test before it is published (described below the table), and that is all the testing the others have had:
 
-Only the Ubuntu 26.04 extras have been tested on hardware. The others are built automatically from the same patches, ported to KWin 6.7 and Mutter 51, and smoke-tested without hardware: each is installed over its distribution’s own packages and rolled back in a clean container, and the patched compositor is run without a GPU.
+| Extra | Fits | Tested on hardware | Automated test |
+|---|---|---|---|
+| `Umbra-HDR-KDE-ubuntu26.04.tar.gz` | Ubuntu 26.04, KWin 6.6 | Yes, with Umbra 0.5.1 (RTX 2060 SUPER, RX Vega); not yet with Umbra 0.5.2 | Passed |
+| `Umbra-HDR-GNOME-ubuntu26.04.tar.gz` | Ubuntu 26.04, Mutter 50 | The patch’s previous revision, with Umbra 0.5.1 (RTX 2060 SUPER, RX Vega). This revision adds two memory-leak fixes and has had the automated test only | Passed |
+| `Umbra-HDR-KDE-ubuntu26.10.tar.gz` | Ubuntu 26.10, KWin 6.7 | None; the KWin 6.7 patch has not run on hardware anywhere | Passed |
+| `Umbra-HDR-GNOME-ubuntu26.10.tar.gz` | Ubuntu 26.10, Mutter 51 | None; the Mutter 51 patch has not run on hardware anywhere | Passed |
+| `Umbra-HDR-KDE-fedora44.tar.gz` | Fedora 44, KWin 6.7 | None | Passed |
+| `Umbra-HDR-GNOME-fedora44.tar.gz` | Fedora 44, Mutter 50 | None (the same patch ran on hardware on Ubuntu 26.04, in its previous revision) | Passed |
+| `Umbra-HDR-KDE-fedora45.tar.gz` | Fedora 45, KWin 6.7 | None | Passed |
+| `Umbra-HDR-GNOME-fedora45.tar.gz` | Fedora 45, Mutter 51 | None | Passed |
+| `Umbra-HDR-KDE-opensuse-tumbleweed.tar.gz` | openSUSE Tumbleweed, KWin 6.7 | None | Passed |
+| `Umbra-HDR-GNOME-opensuse-tumbleweed.tar.gz` | openSUSE Tumbleweed, Mutter 50 | None (the same patch ran on hardware on Ubuntu 26.04, in its previous revision) | Passed |
+| `Umbra-HDR-KDE-arch.tar.gz` | Arch Linux, KWin 6.7 | None | Passed |
+| `Umbra-HDR-GNOME-arch.tar.gz` | Arch Linux, Mutter 51 | None | Passed |
+| `Umbra-HDR-KDE-cachyos.tar.gz` | CachyOS, KWin 6.7 | None | Passed |
+| `Umbra-HDR-GNOME-cachyos.tar.gz` | CachyOS, Mutter 51 (CachyOS’s own) | None | Passed |
+
+The automated test installs each extra over its distribution’s own packages in a clean container of that distribution and runs its `README.txt` commands. The patched compositor then runs without a GPU (KWin on a virtual display device) and must offer HDR and 10-bit capture on the virtual display Umbra asks for, as the stock compositor must not; then the extra is rolled back. It does not use a real GPU or display, does not stream, and does not show HDR on a screen. Each extra’s `README.txt` (TESTED) says the same for that extra in more detail. The KWin 6.7 extras need Umbra 0.5.2 or newer.
 
 1. Download the one for your distribution and desktop, unpack it and check it (Fedora 44 KDE shown):
 
@@ -144,7 +157,7 @@ sha256sum -c SHA256SUMS
 
 1. Read its `README.txt`. It names the exact KWin or Mutter version the packages fit and the command that shows yours; with any other version, do not install them. Then install with its command: `sudo dpkg -i …` on Ubuntu, `sudo dnf install ./…` on Fedora, `sudo zypper install --allow-unsigned-rpm ./…` on openSUSE, `sudo pacman -U …` on Arch and CachyOS.
 
-1. **Other distributions:** add the matching patch from [kwin-virtual-hdr](https://github.com/PreceptorOfMagic/Umbra/tree/release/umbra-linux-0.5/packaging/linux/kwin-virtual-hdr) or [mutter-virtual-hdr](https://github.com/PreceptorOfMagic/Umbra/tree/release/umbra-linux-0.5/packaging/linux/mutter-virtual-hdr) to your distribution’s own `kwin` or `mutter` package, rebuild that package with its usual tools and install it. Debian 13, openSUSE Leap 16.0 and Fedora 43 ship KWin, Mutter or PipeWire versions too old for the patches.
+1. **Other distributions:** add the matching patch from [kwin-virtual-hdr](https://github.com/PreceptorOfMagic/Umbra/tree/umbra-linux-v0.5.2/packaging/linux/kwin-virtual-hdr) or [mutter-virtual-hdr](https://github.com/PreceptorOfMagic/Umbra/tree/umbra-linux-v0.5.2/packaging/linux/mutter-virtual-hdr) to your distribution’s own `kwin` or `mutter` package, rebuild that package with its usual tools and install it. Debian 13, openSUSE Leap 16.0 and Fedora 43 ship KWin, Mutter or PipeWire versions too old for the patches.
 
 1. Log out and back in, then make Umbra check the desktop again before starting it from the applications menu:
 

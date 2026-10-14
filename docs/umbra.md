@@ -30,11 +30,11 @@ Download an attached file under **Assets**, not GitHub’s automatically generat
 
 ## Umbra for Linux
 
-[Umbra for Linux release](https://github.com/PreceptorOfMagic/Umbra/releases/tag/umbra-linux-v0.5.1)
+[Umbra for Linux release](https://github.com/PreceptorOfMagic/Umbra/releases/tag/umbra-linux-v0.5.2)
 
 Open the Umbra for Linux release and expand Assets. If no release is listed, that package has not been published.
 
-Download `Umbra-<version>-linux-x86_64.flatpak` from the Umbra for Linux release and install it with `flatpak install --user`. KDE Plasma and GNOME on Wayland get ordinary streaming, a virtual display for each stream and co-op; X11 desktops get ordinary streaming only. Optional extras add HDR to KDE’s and GNOME’s virtual displays: patches to KWin 6.6.6 and Mutter 50.1, with prebuilt packages for Ubuntu 26.04. The only AMD card tested is a 2017 Radeon RX Vega, whose encoder limits 4K to about 60 fps. [Exact Linux host installation →](installation.md#umbra-linux)
+Download `Umbra-<version>-linux-x86_64.flatpak` from the Umbra for Linux release and install it with `flatpak install --user`. KDE Plasma and GNOME on Wayland get ordinary streaming, a virtual display for each stream and co-op; X11 desktops get ordinary streaming only. Optional extras add HDR to KDE’s and GNOME’s virtual displays: patches to KWin and Mutter, prebuilt for Ubuntu 26.04 and 26.10, Fedora 44 and 45, openSUSE Tumbleweed, Arch Linux and CachyOS. Testing is limited: Umbra on Linux was tested on hardware on Ubuntu 26.04 (KDE Plasma 6.6 and GNOME), and only the Ubuntu 26.04 extras have run on hardware; Umbra 0.5.2’s KDE Plasma 6.7 support and every other extra have been tested only automatically, without a GPU. The only AMD card tested is a 2017 Radeon RX Vega, whose encoder limits 4K to about 60 fps. [Exact Linux host installation →](installation.md#umbra-linux)
 
 <a name="editions"></a>
 
