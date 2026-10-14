@@ -111,7 +111,7 @@ flatpak install --user Umbra-<version>-linux-x86_64.flatpak
 | X11 desktops (Cinnamon, Xfce, MATE …) | Yes (tested during development on Linux Mint 22.3) | No | No | No |
 | Sway, Hyprland and other wlroots desktops, COSMIC | Not supported | | | |
 
-Other distributions running KDE Plasma or GNOME on Wayland are expected to behave like those rows but have not been tested. An X11 desktop has no way to create a display while it runs, so there the host streams the desktop but never offers co-op or HDR.
+Other distributions running KDE Plasma or GNOME on Wayland are expected to behave like those rows but have not been tested. One known exception: on KDE Plasma 6.7 (Ubuntu 26.10, Fedora 44 and 45, openSUSE Tumbleweed, Arch, CachyOS), KWin announces its outputs through a newer protocol than Umbra 0.5.1 knows, so Umbra 0.5.1 streams the desktop there without a virtual display per stream, co-op or HDR. The next Umbra release for Linux fixes it. An X11 desktop has no way to create a display while it runs, so there the host streams the desktop but never offers co-op or HDR.
 
 **GPUs.** NVIDIA (tested: RTX 2060 SUPER, driver 595) and AMD (tested: Radeon RX Vega) both encode on the GPU. The only AMD card available for testing is a Radeon RX Vega from 2017: its video encoder reaches about 60 fps at 4K and 165 fps only at 1080p, its co-op panes run at about 35 fps, and it has no 10-bit encoder, so its ordinary streams are SDR. The same card hit the same 4K limit on Windows (62 fps), so its age, not Umbra, is the likely limit; newer AMD cards could not be tested. Intel GPUs and PCs with more than one GPU are untested.
 
