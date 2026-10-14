@@ -121,20 +121,30 @@ Other distributions running KDE Plasma or GNOME on Wayland are expected to behav
 
 ### HDR extras (optional)
 
-Stock KWin and Mutter keep the virtual displays Umbra streams SDR. Two optional extras add HDR virtual displays and 10-bit screen capture: a small patch to KWin 6.6.6 for KDE Plasma and one to Mutter 50.1 for GNOME. Umbra detects them by itself. Like the Flatpak, they were tested on Ubuntu 26.04, which ships those versions. Both patches apply unchanged to KDE’s and GNOME’s own 6.6.6 and 50.1 releases, so other distributions shipping KWin 6.6.6 or Mutter 50.1 are expected to work but are untested. Other KWin or Mutter versions need the patch adapted.
+Stock KWin and Mutter keep the virtual displays Umbra streams SDR. Two optional extras add HDR virtual displays and 10-bit screen capture: a small patch to KWin for KDE Plasma and one to Mutter for GNOME. Umbra detects them by itself. The release carries them prebuilt for these distributions, each built from that distribution’s own `kwin` or `mutter` package:
 
-1. Check your version: `kwin_wayland --version` must print `kwin 6.6.6` (KDE Plasma), or `gnome-shell --version` must print `GNOME Shell 50.1` (GNOME, which runs on Mutter 50.1).
+| Distribution | KDE Plasma | GNOME |
+|---|---|---|
+| Ubuntu 26.04 | `Umbra-HDR-KDE-ubuntu26.04.tar.gz` (tested) | `Umbra-HDR-GNOME-ubuntu26.04.tar.gz` (tested) |
+| Ubuntu 26.10 | `Umbra-HDR-KDE-ubuntu26.10.tar.gz` | `Umbra-HDR-GNOME-ubuntu26.10.tar.gz` |
+| Fedora 44 and 45 | `Umbra-HDR-KDE-fedora44.tar.gz`, `…-fedora45.tar.gz` | `Umbra-HDR-GNOME-fedora44.tar.gz`, `…-fedora45.tar.gz` |
+| openSUSE Tumbleweed | `Umbra-HDR-KDE-opensuse-tumbleweed.tar.gz` | `Umbra-HDR-GNOME-opensuse-tumbleweed.tar.gz` |
+| Arch Linux | `Umbra-HDR-KDE-arch.tar.gz` | `Umbra-HDR-GNOME-arch.tar.gz` |
+| CachyOS | `Umbra-HDR-KDE-cachyos.tar.gz` | `Umbra-HDR-GNOME-cachyos.tar.gz` (for CachyOS’s own Mutter) |
 
-1. **Ubuntu 26.04:** the release carries prebuilt packages, `Umbra-HDR-KDE-ubuntu26.04.tar.gz` and `Umbra-HDR-GNOME-ubuntu26.04.tar.gz`, built from Ubuntu’s own `kwin` and `mutter` packages. Download the one for your desktop, unpack it, check it and install it (KDE shown; the GNOME one is the same with `GNOME` in its name):
+Only the Ubuntu 26.04 extras have been tested on hardware. The others are built automatically from the same patches, ported to KWin 6.7 and Mutter 51, and smoke-tested without hardware: each is installed over its distribution’s own packages and rolled back in a clean container, and the patched compositor is run without a GPU.
+
+1. Download the one for your distribution and desktop, unpack it and check it (Fedora 44 KDE shown):
 
 ```sh
-tar -xzf Umbra-HDR-KDE-ubuntu26.04.tar.gz
-cd Umbra-HDR-KDE-ubuntu26.04
+tar -xzf Umbra-HDR-KDE-fedora44.tar.gz
+cd Umbra-HDR-KDE-fedora44
 sha256sum -c SHA256SUMS
-sudo dpkg -i *.deb
 ```
 
-1. **Other distributions:** add the [KWin patch](https://github.com/PreceptorOfMagic/Umbra/blob/umbra-linux-v0.5.1/packaging/linux/kwin-virtual-hdr/kwin-virtual-hdr-screencast.patch) or the [Mutter patch](https://github.com/PreceptorOfMagic/Umbra/blob/umbra-linux-v0.5.1/packaging/linux/mutter-virtual-hdr/mutter-virtual-hdr-screencast.patch) to your distribution’s own `kwin` or `mutter` package, rebuild that package with its usual tools and install it.
+1. Read its `README.txt`. It names the exact KWin or Mutter version the packages fit and the command that shows yours; with any other version, do not install them. Then install with its command: `sudo dpkg -i …` on Ubuntu, `sudo dnf install ./…` on Fedora, `sudo zypper install --allow-unsigned-rpm ./…` on openSUSE, `sudo pacman -U …` on Arch and CachyOS.
+
+1. **Other distributions:** add the matching patch from [kwin-virtual-hdr](https://github.com/PreceptorOfMagic/Umbra/tree/release/umbra-linux-0.5/packaging/linux/kwin-virtual-hdr) or [mutter-virtual-hdr](https://github.com/PreceptorOfMagic/Umbra/tree/release/umbra-linux-0.5/packaging/linux/mutter-virtual-hdr) to your distribution’s own `kwin` or `mutter` package, rebuild that package with its usual tools and install it. Debian 13, openSUSE Leap 16.0 and Fedora 43 ship KWin, Mutter or PipeWire versions too old for the patches.
 
 1. Log out and back in, then make Umbra check the desktop again before starting it from the applications menu:
 
@@ -145,7 +155,7 @@ rm -f ~/.var/app/io.github.PreceptorOfMagic.Umbra/config/sunshine/*_virtual_hdr
 
 1. Check that Umbra offers HDR: `curl -s http://localhost:47989/serverinfo | grep -o '<UmbraCoopHdr>[01]'` prints `<UmbraCoopHdr>1`. Then turn HDR on for this host in Eclipse.
 
-The extras replace your desktop’s compositor packages. A distribution update of KWin or Mutter replaces them again and streams return to SDR; do not reinstall a patched build over a newer version. To undo an extra, reinstall your distribution’s own package; for the Ubuntu packages, each extra’s `README.txt` has the one-line rollback. The patches and the Ubuntu source packages are published with the release.
+The extras replace your desktop’s compositor packages. A distribution update of KWin or Mutter replaces them again, and streams return to SDR until a matching extra is published; do not reinstall a patched build over a newer version. To undo an extra, reinstall your distribution’s own package; each extra’s `README.txt` has the one-line rollback. The patches and the source of every prebuilt extra are published with the release.
 
 To remove Umbra, run `flatpak run --command=remove-additional-install.sh io.github.PreceptorOfMagic.Umbra` to remove the input rule and sign-in start, then `flatpak uninstall --user io.github.PreceptorOfMagic.Umbra`.
 
