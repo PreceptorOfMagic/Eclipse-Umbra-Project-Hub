@@ -12,7 +12,7 @@ Install Umbra on each gaming PC, then Eclipse on the display device. Start with 
 
 ### Gaming PC → Umbra
 
-Windows x64 or Ubuntu Linux (22.04 or 24.04) host. Install once for ordinary streaming. Two-PC co-op currently needs two Windows hosts; co-op on Linux hosts is in progress. The game runs here. Already using Vibepollo? [Umbra (Vibepollo)](#umbra-vibepollo) keeps your settings.
+Windows x64 or Linux host. Install once for ordinary streaming, or on two PCs for co-op. On Linux, co-op needs KDE Plasma or GNOME on Wayland. The game runs here. Already using Vibepollo? [Umbra (Vibepollo)](#umbra-vibepollo) keeps your settings.
 
 ### Screen device → Eclipse
 
@@ -74,27 +74,78 @@ Open the latest release, expand Assets and choose the package described below. I
 
 ## 1B. Umbra on Linux
 
-[Umbra Ubuntu releases](https://github.com/PreceptorOfMagic/Umbra/releases)
+[Umbra for Linux release](https://github.com/PreceptorOfMagic/Umbra/releases/tag/umbra-linux-v0.5.1)
 
-Open the latest release, expand Assets and choose the package described below. If no release is listed, that package has not been published.
+Open the Umbra for Linux release and expand Assets. If no release is listed, that package has not been published.
 
-**Package:** the Ubuntu `.deb` for your version: `Umbra-<version>-ubuntu24.04-amd64.deb` for Ubuntu 24.04 or `Umbra-<version>-ubuntu22.04-amd64.deb` for Ubuntu 22.04. They are two separate builds, not one universal Linux package. You need an x86_64 Ubuntu desktop with a graphical session, a supported GPU and current driver, `sudo` access for installation, and the games you intend to run already installed. The packages have passed install, upgrade and removal checks; live testing on a Linux host so far covers one earlier Ubuntu 24.04 build.
+**Package:** `Umbra-<version>-linux-x86_64.flatpak`, one Flatpak bundle for x86_64 Linux. You need KDE Plasma or GNOME on Wayland (an X11 desktop gives ordinary streaming only), an NVIDIA or AMD GPU with its current driver, and the games you intend to run already installed. It has been tested on Ubuntu 26.04 with KDE Plasma and with GNOME, on an NVIDIA RTX 2060 SUPER and an AMD Radeon RX Vega.
 
-1. Open the Umbra release, read its compatibility notes and expand **Assets**. Download the `.deb` for your Ubuntu version and its matching checksum. Compare `sha256sum` of the downloaded file with that checksum.
+If you installed the earlier Ubuntu `.deb` (Umbra 0.5.0), remove it first with `systemctl --user disable --now sunshine` and `sudo apt remove umbra`. The Flatpak keeps its own settings, so pair Eclipse with it again.
 
-1. Install it with `apt` from the download folder, so its dependencies are installed too:
+1. Install Flatpak and add Flathub if you have not already (Ubuntu does not include Flatpak by default):
 
 ```sh
-sudo apt install ./Umbra-<version>-ubuntu24.04-amd64.deb
+sudo apt install flatpak
+flatpak remote-add --user --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
 ```
 
-1. Installation gives the host permission to capture the screen and to create virtual controllers. Start the host for your user with `systemctl --user start sunshine` (the service keeps its upstream name), and run `systemctl --user enable sunshine` to start it whenever you sign in. You can also start **Umbra** from the applications menu.
+1. Download the `.flatpak` and its `.sha256` from the release’s **Assets** into one folder, check it and install it:
 
-1. Open `https://localhost:47990` in a browser on that PC, create the local administrator login and review the available game/desktop entries. If a firewall is enabled, allow the host on your trusted private network.
+```sh
+sha256sum -c Umbra-<version>-linux-x86_64.flatpak.sha256
+flatpak install --user Umbra-<version>-linux-x86_64.flatpak
+```
+
+1. Flatpak fetches the Freedesktop runtime and, on NVIDIA, the driver extension matching your installed driver. Start **Umbra** from the applications menu.
+
+1. Accept **Input Setup** when it is offered. It installs the input rule that streamed controllers, mouse and keyboard need, through your desktop’s administrator prompt, and can start Umbra whenever you sign in. You can reopen it from the applications menu. If the desktop asks to allow screen sharing, allow it.
+
+1. Open `https://localhost:47990` in a browser on that PC, create the local administrator login and review the game/desktop entries. If a firewall is enabled, allow the host on your trusted private network.
 
 1. Keep the client-driven display defaults. Pair Eclipse, approve its PIN in Umbra and test an ordinary Desktop or game session before adding another host.
 
-Linux hosts do not support two-PC co-op yet; it is in progress. Co-op needs a virtual display created on each host for its pane, which Umbra currently provides only on Windows, and the GPU HEVC encoder that lets an NVIDIA PC and an AMD PC share one co-op picture is part of the Windows package. Use Linux as an ordinary streaming host. To remove Umbra, run `sudo apt remove umbra`.
+| Desktop | Streaming | Own virtual display per stream | Co-op | HDR |
+|---|---|---|---|---|
+| KDE Plasma on Wayland (tested: Ubuntu 26.04, KWin 6.6.6) | Yes | Yes | Yes | With the KDE HDR extra |
+| GNOME on Wayland (tested: Ubuntu 26.04, Mutter 50.1) | Yes | Yes | Yes | With the GNOME HDR extra; a physical HDR monitor streams HDR without it |
+| X11 desktops (Cinnamon, Xfce, MATE …) | Yes (tested during development on Linux Mint 22.3) | No | No | No |
+| Sway, Hyprland and other wlroots desktops, COSMIC | Not supported | | | |
+
+Other distributions running KDE Plasma or GNOME on Wayland are expected to behave like those rows but have not been tested. An X11 desktop has no way to create a display while it runs, so there the host streams the desktop but never offers co-op or HDR.
+
+**GPUs.** NVIDIA (tested: RTX 2060 SUPER, driver 595) and AMD (tested: Radeon RX Vega) both encode on the GPU. On AMD the card’s own video encoder sets the limit: an RX Vega reaches about 60 fps at 4K and 165 fps only at 1080p, its co-op panes about 35 fps, and it has no 10-bit encoder, so its ordinary streams are SDR. Intel GPUs and PCs with more than one GPU are untested.
+
+**Co-op.** A Linux host and a Windows host can share one co-op session (tested with Umbra 0.5.0 on Windows). Two Linux hosts together are untested.
+
+<a name="umbra-linux-hdr"></a>
+
+### HDR extras (optional, Ubuntu 26.04)
+
+Stock KWin and Mutter keep the virtual displays Umbra streams SDR. The release carries two optional extras that add HDR virtual displays and 10-bit screen capture: patched KWin packages for KDE Plasma (`Umbra-HDR-KDE-ubuntu26.04.tar.gz`) and patched Mutter packages for GNOME (`Umbra-HDR-GNOME-ubuntu26.04.tar.gz`). Umbra detects them by itself. They are built for Ubuntu 26.04’s own KWin 6.6.6 and Mutter 50.1; do not install them on any other version.
+
+1. Check your version. On KDE, `dpkg-query -W kwin-wayland` must print `4:6.6.6-0ubuntu0.1`; on GNOME, `dpkg-query -W libmutter-18-0` must print `50.1-0ubuntu2.4`.
+
+1. Download the extra for your desktop, unpack it, check it and install its packages (the KDE extra is shown; the GNOME one is the same with `GNOME` in its name):
+
+```sh
+tar -xzf Umbra-HDR-KDE-ubuntu26.04.tar.gz
+cd Umbra-HDR-KDE-ubuntu26.04
+sha256sum -c SHA256SUMS
+sudo dpkg -i *.deb
+```
+
+1. Log out and back in, then make Umbra check the desktop again before starting it from the applications menu:
+
+```sh
+flatpak kill io.github.PreceptorOfMagic.Umbra
+rm -f ~/.var/app/io.github.PreceptorOfMagic.Umbra/config/sunshine/*_virtual_hdr
+```
+
+1. Check that Umbra offers HDR: `curl -s http://localhost:47989/serverinfo | grep -o '<UmbraCoopHdr>[01]'` prints `<UmbraCoopHdr>1`. Then turn HDR on for this host in Eclipse.
+
+The extras replace your desktop’s compositor packages. An Ubuntu update of KWin or Mutter replaces them again and streams return to SDR; do not reinstall these packages over a newer version. Each extra’s `README.txt` has the one-line rollback, and the patches and source packages are published with the release.
+
+To remove Umbra, run `flatpak run --command=remove-additional-install.sh io.github.PreceptorOfMagic.Umbra` to remove the input rule and sign-in start, then `flatpak uninstall --user io.github.PreceptorOfMagic.Umbra`.
 
 <a name="eclipse-webos"></a>
 

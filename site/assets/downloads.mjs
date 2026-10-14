@@ -6,7 +6,8 @@ export const platforms = Object.freeze({
   'windows-setup': { repo: 'Eclipse', label: 'Windows x64 installer', match: /^eclipse-windows-x64-setup(?:-unsigned)?\.exe$/i },
   linux: { repo: 'Eclipse', label: 'Linux x86_64', match: /^eclipse-linux-x86_64\.tar\.gz$/i },
   'umbra-windows': { repo: 'Umbra', label: 'Umbra Windows x64', match: /^(?:umbra(?:-windows-x64)?|apollo)\.exe$/i },
-  'umbra-linux': { repo: 'Umbra', label: 'Umbra Ubuntu 24.04', match: /^umbra-[\w.+-]+-ubuntu24\.04-amd64\.deb$/i },
+  // Linux and Windows Umbra are separate releases; Windows keeps "latest", so Linux is found by its tag.
+  'umbra-linux': { repo: 'Umbra', tagPrefix: 'umbra-linux-v', label: 'Umbra for Linux (Flatpak)', match: /^umbra-[\w.+-]+-linux-x86_64\.flatpak$/i },
   'umbra-vibepollo-windows': { repo: 'Umbra-Vibepollo', label: 'Umbra (Vibepollo) Windows x64', match: /^umbra-vibepollo-windows-x64\.exe$/i },
 });
 
@@ -21,13 +22,19 @@ export function selectAsset(platform, release) {
   return matches.length === 1 ? matches[0] : null;
 }
 
-export async function loadRelease(repo, fetcher = fetch) {
-  const response = await fetcher(`https://api.github.com/repos/PreceptorOfMagic/${repo}/releases/latest`, {
+// tagPrefix: the newest stable release whose tag starts with it, instead of the repository's latest.
+export async function loadRelease(repo, fetcher = fetch, tagPrefix = '') {
+  const api = `https://api.github.com/repos/PreceptorOfMagic/${repo}/releases`;
+  const response = await fetcher(tagPrefix ? `${api}?per_page=30` : `${api}/latest`, {
     headers: { Accept: 'application/vnd.github+json' },
   });
   if (response.status === 404) return { unavailable: true };
   if (!response.ok) throw new Error('Release lookup unavailable');
-  return { release: await response.json() };
+  if (!tagPrefix) return { release: await response.json() };
+  const releases = await response.json();
+  const release = Array.isArray(releases) ? releases.find(item => item && !item.draft && !item.prerelease
+    && typeof item.tag_name === 'string' && item.tag_name.startsWith(tagPrefix)) : null;
+  return release ? { release } : { unavailable: true };
 }
 
 export function displayRelease(control, platform, result) {
@@ -51,7 +58,9 @@ export function displayRelease(control, platform, result) {
   link.textContent = `Download ${config.label}`;
   status.textContent = `${asset.name} · ${result.release.tag_name || 'Latest stable release'} · Read the release notes and verify the matching checksum before installing. `;
   const notes = control.ownerDocument.createElement('a');
-  notes.href = `https://github.com/PreceptorOfMagic/${config.repo}/releases/latest`;
+  notes.href = config.tagPrefix && result.release.tag_name
+    ? `https://github.com/PreceptorOfMagic/${config.repo}/releases/tag/${encodeURIComponent(result.release.tag_name)}`
+    : `https://github.com/PreceptorOfMagic/${config.repo}/releases/latest`;
   notes.textContent = 'Release notes and checksums';
   status.append(notes);
 }
@@ -62,8 +71,9 @@ export async function initialiseDownloads(documentRoot, fetcher = fetch) {
     const platform = control.dataset.download;
     const config = platforms[platform];
     if (!config) return;
-    if (!requests.has(config.repo)) requests.set(config.repo, loadRelease(config.repo, fetcher).catch(() => ({ error: true })));
-    displayRelease(control, platform, await requests.get(config.repo));
+    const key = `${config.repo}|${config.tagPrefix || ''}`;
+    if (!requests.has(key)) requests.set(key, loadRelease(config.repo, fetcher, config.tagPrefix).catch(() => ({ error: true })));
+    displayRelease(control, platform, await requests.get(key));
   }));
 }
 

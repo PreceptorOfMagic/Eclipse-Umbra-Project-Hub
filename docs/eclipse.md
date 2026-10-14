@@ -4,7 +4,7 @@
 
 ## The screen-side app.
 
-Play a Windows PC’s games on your LG webOS TV, Windows PC or Linux desktop. Pair one host for ordinary streaming, or two Umbra hosts for couch co-op.
+Play a Windows or Linux PC’s games on your LG webOS TV, Windows PC or Linux desktop. Pair one host for ordinary streaming, or two Umbra hosts for couch co-op.
 
 Eclipse’s additions use AI-assisted coding. [About the development process.](development.md#development-process)
 

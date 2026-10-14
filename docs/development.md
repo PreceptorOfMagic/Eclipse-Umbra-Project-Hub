@@ -592,6 +592,10 @@ Eclipse 1.3.0 and Umbra 0.5.0 were the first packaged releases, with installers,
 
 PreceptorOfMagic heard the gate cut gunfire and reloads during a long Halo session. Halo: Combat Evolved’s own sound files were extracted from the installed game and matched in recordings of each PC’s sound, so every removal could be judged against what both PCs actually played. Three guards cut the share of one-PC sounds removed from 7% to 3% while keeping duplicate removal, and PreceptorOfMagic preferred the result in A/B listening. The same analysis showed Halo picking its music loops at random on each PC: nearly half of the loop changes differed between the two PCs. Eclipse 1.3.4 shipped the change as the first public release.
 
+### 11–14 October · Umbra on Linux
+
+Umbra for Linux became one Flatpak for KDE Plasma and GNOME on Wayland. As on Windows, each stream gets its own virtual display, created by the desktop at the size and refresh rate Eclipse asks for, and a Linux host can be one of the two co-op PCs alongside a Windows host. Stock KWin and Mutter cannot make a virtual display HDR, so a small patch to each was written and published as optional packages for Ubuntu 26.04. On an AMD Radeon RX Vega the first build passed every frame through the CPU: 4K ran at about 13 fps and co-op at about 10. Keeping frames on the GPU between OpenGL and OpenCL brought 4K to the card’s encoder limit, the same 62 fps measured on Windows, and co-op panes to about 35 fps. PreceptorOfMagic tested KDE Plasma and GNOME on NVIDIA and on AMD, and Umbra 0.5.1 for Linux shipped the result.
+
 <!-- activity-detail:history-product:start -->
 **Behind the build · 23 September–5 October 2026**
 

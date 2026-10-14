@@ -162,7 +162,7 @@ Keyboard shortcuts cover fullscreen, capture and stream controls; Windows rememb
 
 #### Install, update and remove cleanly
 
-Eclipse has a per-user Windows installer that needs no administrator access, with an Apps & features uninstaller that can keep your settings, and per-user install and uninstall scripts on Linux. Umbra has a Windows installer and Ubuntu 22.04/24.04 packages; its uninstaller stops only its own service and processes and lets you keep your settings and shared drivers. Installing a newer version over an older one keeps settings and pairings, and on webOS 26 settings, pairings and co-op keep working after the TV restarts.
+Eclipse has a per-user Windows installer that needs no administrator access, with an Apps & features uninstaller that can keep your settings, and per-user install and uninstall scripts on Linux. Umbra has a Windows installer and a Linux Flatpak; its Windows uninstaller stops only its own service and processes and lets you keep your settings and shared drivers. Installing a newer version over an older one keeps settings and pairings, and on webOS 26 settings, pairings and co-op keep working after the TV restarts.
 
 </details>
 
