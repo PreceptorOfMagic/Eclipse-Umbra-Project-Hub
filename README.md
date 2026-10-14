@@ -268,7 +268,7 @@ An extra quantisation attempt in one revision raised worst-case encode time and 
 
 <details>
 
-<summary>Late September–October · Making it usable and maintainable — Desktop clients, a firmware crash, automatic setup, the thin Apollo fork and the first public release</summary>
+<summary>Late September–October · Making it usable and maintainable — Desktop clients, a firmware crash, automatic setup, the thin Apollo fork, the first public releases and Umbra on Linux</summary>
 
 ### Late September · Desktop clients and session recovery
 
@@ -293,6 +293,14 @@ Player 2’s sound had been drifting behind; batching its audio messages fixed t
 ### 10 October · First releases, and the first public one
 
 Eclipse and Umbra were packaged for the first time. Same-day updates kept settings and co-op working after an LG TV restarts, following an audit of every place the TV app keeps files. Scoring the shared-sound filter against Halo’s own sound files led to guards that keep sounds only one PC played. Eclipse 1.3.4 became the first public release.
+
+### 11 October · Umbra (Vibepollo)
+
+Umbra’s additions were merged into Vibepollo 2.0.0, Nonary’s AI-enhanced version of Apollo, and released as Umbra (Vibepollo) 2.0.0-umbra.1 for people already using Vibepollo. It was installed and tested on the project’s PCs.
+
+### 11–14 October · Umbra on Linux
+
+Umbra for Linux became one Flatpak for KDE Plasma and GNOME on Wayland, with a virtual display for each stream and co-op alongside a Windows host. Small KWin and Mutter patches add HDR to those virtual displays. On a 2017 AMD Radeon RX Vega, keeping frames on the GPU raised 4K from about 13 fps to the card’s own encoder limit. Umbra 0.5.1 for Linux was released.
 
 <!-- activity:history-product:start -->
 **Behind the build · 23 September–5 October 2026**

@@ -16,6 +16,7 @@ Moonlight
   └─ Moonlight Embedded → Moonlight TV → Aurora → Eclipse
 
 Sunshine → Apollo → Umbra
+           └─ Vibepollo → Umbra (Vibepollo)
 
 SudoVDA provides companion virtual-display functionality.
 ```
@@ -49,6 +50,10 @@ moonlight-common-c's Reed–Solomon forward-error-correction implementation cred
 ### Apollo
 
 [Apollo](https://github.com/ClassicOldSong/Apollo) is developed by **[@ClassicOldSong](https://github.com/ClassicOldSong)** and contributors as a Sunshine-derived host with a virtual-display-oriented client workflow. It supplies Umbra’s everyday host functionality. Umbra is Apollo with the additions Eclipse needs for co-op and as little else changed as possible; its separate additions and branding are designed to make Apollo updates easier to integrate.
+
+### Vibepollo
+
+[Vibepollo](https://github.com/Nonary/Vibepollo) is developed by **[@Nonary](https://github.com/Nonary)** and contributors as an AI-enhanced version of Apollo, with its own virtual display and virtual gamepad drivers, display-setting automation and Windows Graphics Capture in service mode. Umbra (Vibepollo) is Vibepollo with the same additions for Eclipse that Umbra adds to Apollo, kept apart so Vibepollo updates can be merged in. Vibepollo is GPL-3.0; its RTX HDR support uses NVIDIA’s TrueHDR runtime under NVIDIA’s own licence terms.
 
 ### Companion projects
 
@@ -115,6 +120,17 @@ Major projects include:
 - Umbra statically links x265 4.1's `dynamicHDR10`/HDR10+ library, Copyright © 2013–2020 MulticoreWare, Inc., authored by **Bhavna Hariharan and Kavitha Sampath**, offered under GPL-2.0-or-later or separate commercial terms. That archive includes [json11](https://github.com/dropbox/json11), Copyright © 2013 Dropbox, Inc., under the MIT License.
 - Platform-specific inherited source includes GLAD/Khronos material and NVIDIA NvFBC/`helper_math` notices.
 - Additional copied or adapted host sources include FrogTheFrog/Sunshine-derived Windows utility code, an Avahi example-derived Linux publisher, keylase/nvidia-patch-derived CUDA constants, a Stack Overflow-derived Linux input routine, `FindWayland.cmake` by Martin Gräßlin and Georges Basile Stavracas Neto, and `nocnokneo/cmake-git-versioning-example`.
+
+## Umbra on Linux
+
+Umbra 0.5.1 for Linux is a Flatpak, and its optional HDR extras patch the desktop’s own compositor. Its exact third-party sources are in the release’s `Umbra-0.5.1-linux-flatpak-sources.tar.gz`, and the HDR extras’ source packages are published beside them.
+
+- [KWin](https://invent.kde.org/plasma/kwin), by **the KDE community**, and [Mutter](https://gitlab.gnome.org/GNOME/mutter), by **the GNOME project** — the compositors that create Umbra’s per-stream virtual displays on KDE Plasma and GNOME. The HDR extras are patches to KWin 6.6.6 and Mutter 50.1, and the release redistributes patched builds of Ubuntu 26.04’s `kwin` and `mutter` packages, maintained by the Kubuntu and Ubuntu developers from the Debian Qt/KDE and Debian GNOME maintainers’ packaging. KWin is mainly GPL-2.0-or-later, with per-file LGPL, MIT and BSD notices; Mutter is GPL-2.0-or-later.
+- KDE output and screencast protocols — `kde-output-device-v2` and `kde-output-management-v2` (MIT-CMU) and `zkde-screencast-unstable-v1` (LGPL-2.1-or-later), by **Sebastian Kügler, Méven Car, Xaver Hugl and Aleix Pol Gonzalez**, with earlier output-protocol text by Kristian Høgsberg, Intel and Collabora. Vendored in Umbra’s `third-party/kde-output-protocols`.
+- The Wayland `color-management-v1` protocol, by **Sebastian Wick, Erwin Burema, AMD, Collabora, Xaver Hugl and Red Hat** — MIT; vendored unmodified from wayland-protocols 1.48.
+- [Flatpak](https://github.com/flatpak/flatpak), [flatpak-builder](https://github.com/flatpak/flatpak-builder), [Flathub](https://flathub.org) and the [Freedesktop SDK](https://gitlab.com/freedesktop-sdk/freedesktop-sdk) — package and run Umbra on Linux. The `org.freedesktop.Platform` 25.08 runtime supplies the system libraries, including [PipeWire](https://gitlab.freedesktop.org/pipewire/pipewire), which carries the desktop’s picture to Umbra, and [Mesa](https://gitlab.freedesktop.org/mesa/mesa), whose rusticl OpenCL driver runs Umbra’s GPU HEVC encoder on AMD. Flathub’s [shared-modules](https://github.com/flathub/shared-modules) recipes build the tray-icon libraries. Each is under its own licence, and their maintainers publish the runtime’s sources.
+- Bundled in the Flatpak: [Ayatana Indicators](https://github.com/AyatanaIndicators)’ `libayatana-appindicator`, `libayatana-indicator` and `ayatana-ido` (LGPL and GPL-3.0 per component), [libdbusmenu](https://launchpad.net/libdbusmenu) (LGPL-3.0 / LGPL-2.1), [libnotify](https://gitlab.gnome.org/GNOME/libnotify) (LGPL-2.1), [libevdev](https://gitlab.freedesktop.org/libevdev/libevdev) (MIT), the [Avahi](https://github.com/avahi/avahi) library (LGPL-2.1) and [numactl](https://github.com/numactl/numactl) (LGPL-2.1 library, GPL-2.0 tools), alongside Boost, nlohmann JSON and miniupnpc listed above.
+- NVIDIA CUDA 12.9 — the compiler (`nvcc`), CCCL and the CUDA runtime are NVIDIA’s software under NVIDIA’s CUDA licence and **are not open source**. They compile Umbra’s CUDA code for NVIDIA capture, and the CUDA runtime is statically linked into the Linux host, as it was in the 0.5.0 Ubuntu packages. They are listed, not included, in the sources archive. GCC 14, compiled from source as CUDA’s host compiler, is a build tool and is not shipped.
 
 ## Experimental GPU HEVC work
 

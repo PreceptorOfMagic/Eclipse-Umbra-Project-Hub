@@ -549,7 +549,7 @@ Raising detail in still pictures meant lowering the encoder’s minimum QP from 
 
 <details>
 
-<summary>Late September–October · Making it usable and maintainable — Desktop co-op, webOS 26, automatic setup, Umbra’s thin fork, co-op audio and the first releases</summary>
+<summary>Late September–October · Making it usable and maintainable — Desktop co-op, webOS 26, automatic setup, Umbra’s thin fork, co-op audio, the first releases and Umbra on Linux</summary>
 
 ### 22–28 September · Desktop co-op, issue by issue
 
@@ -591,6 +591,10 @@ Eclipse 1.3.0 and Umbra 0.5.0 were the first packaged releases, with installers,
 ### 10 October · Scoring the filter against the game’s own sounds
 
 PreceptorOfMagic heard the gate cut gunfire and reloads during a long Halo session. Halo: Combat Evolved’s own sound files were extracted from the installed game and matched in recordings of each PC’s sound, so every removal could be judged against what both PCs actually played. Three guards cut the share of one-PC sounds removed from 7% to 3% while keeping duplicate removal, and PreceptorOfMagic preferred the result in A/B listening. The same analysis showed Halo picking its music loops at random on each PC: nearly half of the loop changes differed between the two PCs. Eclipse 1.3.4 shipped the change as the first public release.
+
+### 11 October · Umbra (Vibepollo)
+
+Someone asked whether Umbra works with Vibepollo. Vibepollo and Umbra share an Apollo base, so Umbra’s additions were merged into Vibepollo 2.0.0 as a real git merge, keeping Vibepollo’s installer, drivers and settings. Umbra (Vibepollo) 2.0.0-umbra.1 replaces Vibepollo, Apollo or Umbra in place, keeping configuration and pairings, and was tested on the project’s PCs.
 
 ### 11–14 October · Umbra on Linux
 
