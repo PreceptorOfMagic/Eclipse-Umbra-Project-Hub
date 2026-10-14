@@ -113,19 +113,19 @@ flatpak install --user Umbra-<version>-linux-x86_64.flatpak
 
 Other distributions running KDE Plasma or GNOME on Wayland are expected to behave like those rows but have not been tested. An X11 desktop has no way to create a display while it runs, so there the host streams the desktop but never offers co-op or HDR.
 
-**GPUs.** NVIDIA (tested: RTX 2060 SUPER, driver 595) and AMD (tested: Radeon RX Vega) both encode on the GPU. On AMD the card’s own video encoder sets the limit: an RX Vega reaches about 60 fps at 4K and 165 fps only at 1080p, its co-op panes about 35 fps, and it has no 10-bit encoder, so its ordinary streams are SDR. Intel GPUs and PCs with more than one GPU are untested.
+**GPUs.** NVIDIA (tested: RTX 2060 SUPER, driver 595) and AMD (tested: Radeon RX Vega) both encode on the GPU. The only AMD card available for testing is a Radeon RX Vega from 2017: its video encoder reaches about 60 fps at 4K and 165 fps only at 1080p, its co-op panes run at about 35 fps, and it has no 10-bit encoder, so its ordinary streams are SDR. The same card hit the same 4K limit on Windows (62 fps), so its age, not Umbra, is the likely limit; newer AMD cards could not be tested. Intel GPUs and PCs with more than one GPU are untested.
 
 **Co-op.** A Linux host and a Windows host can share one co-op session (tested with Umbra 0.5.0 on Windows). Two Linux hosts together are untested.
 
 <a name="umbra-linux-hdr"></a>
 
-### HDR extras (optional, Ubuntu 26.04)
+### HDR extras (optional)
 
-Stock KWin and Mutter keep the virtual displays Umbra streams SDR. The release carries two optional extras that add HDR virtual displays and 10-bit screen capture: patched KWin packages for KDE Plasma (`Umbra-HDR-KDE-ubuntu26.04.tar.gz`) and patched Mutter packages for GNOME (`Umbra-HDR-GNOME-ubuntu26.04.tar.gz`). Umbra detects them by itself. They are built for Ubuntu 26.04’s own KWin 6.6.6 and Mutter 50.1; do not install them on any other version.
+Stock KWin and Mutter keep the virtual displays Umbra streams SDR. Two optional extras add HDR virtual displays and 10-bit screen capture: a small patch to KWin 6.6.6 for KDE Plasma and one to Mutter 50.1 for GNOME. Umbra detects them by itself. Like the Flatpak, they were tested on Ubuntu 26.04, which ships those versions. Both patches apply unchanged to KDE’s and GNOME’s own 6.6.6 and 50.1 releases, so other distributions shipping KWin 6.6.6 or Mutter 50.1 are expected to work but are untested. Other KWin or Mutter versions need the patch adapted.
 
-1. Check your version. On KDE, `dpkg-query -W kwin-wayland` must print `4:6.6.6-0ubuntu0.1`; on GNOME, `dpkg-query -W libmutter-18-0` must print `50.1-0ubuntu2.4`.
+1. Check your version: `kwin_wayland --version` must print `kwin 6.6.6` (KDE Plasma), or `gnome-shell --version` must print `GNOME Shell 50.1` (GNOME, which runs on Mutter 50.1).
 
-1. Download the extra for your desktop, unpack it, check it and install its packages (the KDE extra is shown; the GNOME one is the same with `GNOME` in its name):
+1. **Ubuntu 26.04:** the release carries prebuilt packages, `Umbra-HDR-KDE-ubuntu26.04.tar.gz` and `Umbra-HDR-GNOME-ubuntu26.04.tar.gz`, built from Ubuntu’s own `kwin` and `mutter` packages. Download the one for your desktop, unpack it, check it and install it (KDE shown; the GNOME one is the same with `GNOME` in its name):
 
 ```sh
 tar -xzf Umbra-HDR-KDE-ubuntu26.04.tar.gz
@@ -133,6 +133,8 @@ cd Umbra-HDR-KDE-ubuntu26.04
 sha256sum -c SHA256SUMS
 sudo dpkg -i *.deb
 ```
+
+1. **Other distributions:** add the [KWin patch](https://github.com/PreceptorOfMagic/Umbra/blob/umbra-linux-v0.5.1/packaging/linux/kwin-virtual-hdr/kwin-virtual-hdr-screencast.patch) or the [Mutter patch](https://github.com/PreceptorOfMagic/Umbra/blob/umbra-linux-v0.5.1/packaging/linux/mutter-virtual-hdr/mutter-virtual-hdr-screencast.patch) to your distribution’s own `kwin` or `mutter` package, rebuild that package with its usual tools and install it.
 
 1. Log out and back in, then make Umbra check the desktop again before starting it from the applications menu:
 
@@ -143,7 +145,7 @@ rm -f ~/.var/app/io.github.PreceptorOfMagic.Umbra/config/sunshine/*_virtual_hdr
 
 1. Check that Umbra offers HDR: `curl -s http://localhost:47989/serverinfo | grep -o '<UmbraCoopHdr>[01]'` prints `<UmbraCoopHdr>1`. Then turn HDR on for this host in Eclipse.
 
-The extras replace your desktop’s compositor packages. An Ubuntu update of KWin or Mutter replaces them again and streams return to SDR; do not reinstall these packages over a newer version. Each extra’s `README.txt` has the one-line rollback, and the patches and source packages are published with the release.
+The extras replace your desktop’s compositor packages. A distribution update of KWin or Mutter replaces them again and streams return to SDR; do not reinstall a patched build over a newer version. To undo an extra, reinstall your distribution’s own package; for the Ubuntu packages, each extra’s `README.txt` has the one-line rollback. The patches and the Ubuntu source packages are published with the release.
 
 To remove Umbra, run `flatpak run --command=remove-additional-install.sh io.github.PreceptorOfMagic.Umbra` to remove the input rule and sign-in start, then `flatpak uninstall --user io.github.PreceptorOfMagic.Umbra`.
 

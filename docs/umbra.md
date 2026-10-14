@@ -34,7 +34,7 @@ Download an attached file under **Assets**, not GitHub’s automatically generat
 
 Open the Umbra for Linux release and expand Assets. If no release is listed, that package has not been published.
 
-Download `Umbra-<version>-linux-x86_64.flatpak` from the Umbra for Linux release and install it with `flatpak install --user`. KDE Plasma and GNOME on Wayland get ordinary streaming, a virtual display for each stream and co-op; X11 desktops get ordinary streaming only. Optional extras for Ubuntu 26.04 add HDR to KDE’s and GNOME’s virtual displays. [Exact Linux host installation →](installation.md#umbra-linux)
+Download `Umbra-<version>-linux-x86_64.flatpak` from the Umbra for Linux release and install it with `flatpak install --user`. KDE Plasma and GNOME on Wayland get ordinary streaming, a virtual display for each stream and co-op; X11 desktops get ordinary streaming only. Optional extras add HDR to KDE’s and GNOME’s virtual displays: patches to KWin 6.6.6 and Mutter 50.1, with prebuilt packages for Ubuntu 26.04. The only AMD card tested is a 2017 Radeon RX Vega, whose encoder limits 4K to about 60 fps. [Exact Linux host installation →](installation.md#umbra-linux)
 
 <a name="editions"></a>
 
