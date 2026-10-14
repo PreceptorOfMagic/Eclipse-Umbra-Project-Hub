@@ -4,7 +4,7 @@
 
 Install Umbra on each gaming PC, then Eclipse on the display device. Start with one working stream before adding the second host.
 
-[Umbra · Windows](#umbra-windows) · [Umbra (Vibepollo) · Windows](#umbra-vibepollo) · [Umbra · Linux](#umbra-linux) · [Eclipse · LG webOS](#eclipse-webos) · [Eclipse · Windows](#eclipse-windows) · [Eclipse · Linux](#eclipse-linux)
+[Umbra · Windows](#umbra-windows) · [Umbra (Vibepollo) · Windows](#umbra-vibepollo) · [Umbra · Linux](#umbra-linux) · [Eclipse · LG webOS](#eclipse-webos) · [Eclipse · Windows](#eclipse-windows) · [Eclipse · Linux](#eclipse-linux) · [Eclipse · Android TV](#eclipse-android)
 
 <a name="before-you-start"></a>
 
@@ -16,7 +16,7 @@ Windows x64 or Linux host. Install once for ordinary streaming, or on two PCs fo
 
 ### Screen device → Eclipse
 
-LG webOS, Windows x64 or Linux x86_64 client. Install the package matching the device where you will view and control the stream.
+LG webOS, Windows x64, Linux x86_64 or Android TV (including NVIDIA SHIELD) client. Install the package matching the device where you will view and control the stream.
 
 Download an attached file under **Assets**, not GitHub’s automatically generated **Source code (zip)** or **Source code (tar.gz)**. Those are developer archives, not installable apps. Use the latest compatible stable release. If no package is attached for your platform, that download is not available.
 
@@ -227,6 +227,26 @@ cd eclipse-linux-x86_64
 
 Use the portable archive instructions for Ubuntu, Fedora and Arch-style systems meeting these requirements. Do not substitute an ARM package or assume a source archive is a distro installer.
 
+<a name="eclipse-android"></a>
+
+## 2D. Eclipse on Android TV and NVIDIA SHIELD
+
+[Android TV releases](https://github.com/PreceptorOfMagic/Eclipse/releases)
+
+Open the latest release, expand Assets and choose the package described below. If no release is listed, that package has not been published.
+
+**Package:** `eclipse-android.apk` with its adjacent `.sha256` file. One APK covers every supported device. You need Android TV or Google TV on Android 9 or newer; the NVIDIA SHIELD TV (Android 11) is the primary target. The Android port is new and has not yet been tested on SHIELD hardware, so reports are welcome. Eclipse is sideloaded, like every other Eclipse package: there is no Play Store listing.
+
+1. **On the TV alone:** install **Downloader** (by AFTVnews) from the Play Store. Allow it to install apps under **Settings → Device Preferences → Security & restrictions → Unknown sources** (Google TV: enable developer options by selecting **Settings → System → About → Android TV OS build** seven times, then **Settings → Apps → Security & restrictions → Unknown sources**). Open Downloader, enter the APK's download address from the release page and choose **Install**.
+
+1. **Or from a computer:** on the TV select **Settings → Device Preferences → About → Build** seven times, then turn on **Network debugging** (SHIELD) or **USB/Wireless debugging** under **Developer options**. Install [Android platform tools](https://developer.android.com/tools/releases/platform-tools), check the download with `sha256sum -c eclipse-android.apk.sha256`, then run `adb connect <TV address>:5555` and `adb install eclipse-android.apk`.
+
+1. Launch Eclipse from the TV's apps row, then [pair an Umbra PC](#pairing). To update, install the newer APK the same way; settings and pairings are kept. An update must be signed with the same key as the installed copy, so do not mix a self-built APK with release downloads.
+
+1. On the remote, Back goes back; holding it during a stream opens the stream menu, and a tap sends Escape to the PC. Holding OK is a right click. Red, Info, Guide or the SHIELD remote's Menu key open the stream menu; Blue opens the on-screen keyboard; Channel +/− are Page Up/Down. Game controllers, keyboards and mice work as on the other platforms.
+
+Eclipse switches the TV to the stream's refresh rate while streaming. If it does not change on your device, turn on its frame-rate matching option (SHIELD: **Settings → Device Preferences → Display & Sound → Advanced settings → Match content frame rate**). The audio output device is chosen by Android, not in Eclipse. [Full Android guide, remote keys and building](https://github.com/PreceptorOfMagic/Eclipse/blob/main/docs/BUILD_ANDROID.md).
+
 <a name="pairing"></a>
 
 ## 3. Pair and play one PC.
@@ -271,7 +291,7 @@ If Eclipse is running on one of the gaming PCs, controls for that PC can behave 
 
 1. Reproduce the problem and return to **Share logs…**.
 
-1. On Windows use **Open folder** and attach `logs/eclipse-logs.txt`. Linux offers the saved bundle and a local-network sharing page. On webOS, open the displayed sharing address on another device and download **everything as one file** (`all.txt`), then stop sharing.
+1. On Windows use **Open folder** and attach `logs/eclipse-logs.txt`. Linux offers the saved bundle and a local-network sharing page. On webOS and Android TV, open the displayed sharing address on another device and download **everything as one file** (`all.txt`), then stop sharing.
 
 1. Review logs for hostnames, addresses and other personal details before sharing. Include app versions, OS/firmware, GPU and driver, layout, resolution/frame rate, steps to reproduce and whether a normal stream works.
 

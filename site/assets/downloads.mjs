@@ -5,6 +5,8 @@ export const platforms = Object.freeze({
   windows: { repo: 'Eclipse', label: 'Windows x64', match: /^eclipse-windows-x64(?:-unsigned)?\.zip$/i },
   'windows-setup': { repo: 'Eclipse', label: 'Windows x64 installer', match: /^eclipse-windows-x64-setup(?:-unsigned)?\.exe$/i },
   linux: { repo: 'Eclipse', label: 'Linux x86_64', match: /^eclipse-linux-x86_64\.tar\.gz$/i },
+  // The release APK only: never the debug-signed or self-test builds a developer may attach.
+  android: { repo: 'Eclipse', label: 'Android TV', match: /^eclipse-android\.apk$/i },
   'umbra-windows': { repo: 'Umbra', label: 'Umbra Windows x64', match: /^(?:umbra(?:-windows-x64)?|apollo)\.exe$/i },
   // Linux and Windows Umbra are separate releases; Windows keeps "latest", so Linux is found by its tag.
   'umbra-linux': { repo: 'Umbra', tagPrefix: 'umbra-linux-v', label: 'Umbra for Linux (Flatpak)', match: /^umbra-[\w.+-]+-linux-x86_64\.flatpak$/i },

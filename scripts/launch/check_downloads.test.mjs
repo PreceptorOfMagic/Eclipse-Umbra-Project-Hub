@@ -11,6 +11,7 @@ for (const [platform, name, repo] of [
   ['windows', 'eclipse-windows-x64-unsigned.zip', 'Eclipse'],
   ['linux', 'eclipse-linux-x86_64.tar.gz', 'Eclipse'],
   ['windows-setup', 'eclipse-windows-x64-setup-unsigned.exe', 'Eclipse'],
+  ['android', 'eclipse-android.apk', 'Eclipse'],
   ['umbra-windows', 'Umbra-windows-x64.exe', 'Umbra'],
   ['umbra-linux', 'Umbra-0.5.1-linux-x86_64.flatpak', 'Umbra'],
 ]) test(`${platform}: choose only its package`, () => {
@@ -18,6 +19,8 @@ for (const [platform, name, repo] of [
   assert.equal(selectAsset(platform, release(asset('source.zip'), asset('checksums.sha256'), file)), file);
 });
 test('reject beta app, ARM, debug and unsupported names', () => {
+  assert.equal(selectAsset('android', release(asset('eclipse-android-debug-signed.apk'), asset('eclipse-android-selftest.apk'),
+    asset('eclipse-android-debug.apk'), asset('eclipse-android.apk.sha256'), asset('eclipse-android-symbols.tar.gz'))), null);
   assert.equal(selectAsset('webos', release(asset('com.aurora.gamestream.beta_1.0.8_arm.ipk'))), null);
   assert.equal(selectAsset('windows', release(asset('eclipse-windows-arm64.zip'), asset('eclipse-windows-x64-debug.zip'))), null);
 });
