@@ -15,7 +15,7 @@ your device. If you click a link to a release file, it sends that file's name an
 [`worker.mjs`](worker.mjs) runs on Cloudflare Workers and stores each view in a Cloudflare D1 database: the page, the
 referring site's host name, the UTC date and time, the visible time, and a visitor code used only to count unique
 visitors per day. The code is a hash of that day's random secret, your IP address and your browser's user-agent. The
-IP address is never stored, and each day's secret is deleted when the day ends, so codes cannot be linked across days
+IP address is never stored, and each day's secret is deleted when the day ends (midnight UTC+10), so codes cannot be linked across days
 or turned back into an address. Bots are not counted. Download clicks are stored with their time and page only, with no visitor code. Once an hour
 the counter, and a GitHub Actions job in this repository (`.github/workflows/download-counts.yml`), read the public
 download counts GitHub shows for each release file, so downloads from anywhere are
@@ -35,4 +35,4 @@ wrangler deploy
 ```
 
 Statistics are at `https://hub-count.preceptorofmagic.workers.dev/stats` (the browser asks for the password; any user
-name works). Tests: `node --test scripts/launch/check_count.test.mjs`.
+name works); it can also download the raw rows as CSV. Tests: `node --test scripts/launch/check_count.test.mjs`.

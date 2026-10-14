@@ -1,9 +1,9 @@
 // Hub visit counter: a Cloudflare Worker with a D1 (SQLite) database.
 //
 // What it keeps, per page view: the page, the referring site's host name, the time the page was visible, and a
-// visitor code that is only good for one UTC day. The code is a hash of that day's random salt, the IP address and
-// the browser's user-agent; the salt is deleted when the day ends, so codes cannot be linked across days or turned
-// back into an address. No cookies or browser storage are used, and the IP address is never stored.
+// visitor code that is only good for one day (midnight to midnight UTC+10). The code is a hash of that day's random
+// salt, the IP address and the browser's user-agent; the salt is deleted when the day ends, so codes cannot be linked
+// across days or turned back into an address. No cookies or browser storage are used, and the IP address is never stored.
 // Raw rows are deleted after 13 months.
 //
 // Downloads are counted two ways: a click on a release file on the Hub is recorded with its exact time and page
@@ -19,6 +19,7 @@ const HOST = /^[a-z0-9.-]{1,100}$/;
 const MAX_MS = 3600000;          // a page left open longer than an hour counts as one hour
 const KEEP_DAYS = 396;           // 13 months
 const DAY_MS = 86400000;
+const TZ_MS = 10 * 3600000;      // Brisbane: UTC+10 all year, no daylight saving. Stats days and visitor days use it.
 export const REPOS = ['Eclipse', 'Umbra', 'Umbra-Vibepollo'];
 const FILE = /^[A-Za-z0-9._+-]{1,120}$/;
 
@@ -30,6 +31,7 @@ export default {
 const cors = { 'Access-Control-Allow-Origin': ORIGIN, 'Vary': 'Origin' };
 const empty = (status) => new Response(null, { status, headers: cors });
 export const dayOf = (now) => now.toISOString().slice(0, 10);
+export const localDay = (now) => dayOf(new Date(now.getTime() + TZ_MS));
 
 export async function handle(req, env, now) {
   const url = new URL(req.url);
@@ -58,7 +60,7 @@ async function view(req, db, body, now) {
   if (!PAGES.has(body.p)) return empty(400);
   const ref = typeof body.r === 'string' && HOST.test(body.r) ? body.r : '';
   const day = dayOf(now);
-  const salt = await daySalt(db, day);
+  const salt = await daySalt(db, localDay(now));
   const ip = req.headers.get('CF-Connecting-IP') || '';
   const visitor = (await sha256(`${salt}|${ip}|${ua}`)).slice(0, 16);
   await db.prepare('INSERT OR IGNORE INTO views (id, day, ts, page, ref, visitor, ms) VALUES (?, ?, ?, ?, ?, ?, NULL)')
@@ -167,7 +169,7 @@ async function daySalt(db, day) {
 }
 
 export async function prune(db, now) {
-  await db.prepare('DELETE FROM salts WHERE day < ?').bind(dayOf(now)).run();
+  await db.prepare('DELETE FROM salts WHERE day < ?').bind(localDay(now)).run();
   const cutoff = dayOf(new Date(now.getTime() - KEEP_DAYS * DAY_MS));
   for (const t of ['views', 'clicks', 'downloads']) await db.prepare(`DELETE FROM ${t} WHERE day < ?`).bind(cutoff).run();
 }
@@ -198,37 +200,91 @@ export function duration(ms) {
   return s < 60 ? `${s} s` : `${Math.floor(s / 60)} min ${String(s % 60).padStart(2, '0')} s`;
 }
 
+// Times are stored in UTC and shown in Brisbane time. LOCAL_DAY is the Brisbane date of a row's ts, in SQL.
+const LOCAL_DAY = `date((ts + ${TZ_MS}) / 1000, 'unixepoch')`;
+const localIso = (ms) => new Date(ms + TZ_MS).toISOString();
+export const when = (ms) => ms ? localIso(ms).slice(0, 16).replace('T', ' ') : '–';
+const seconds = (ms) => ms == null ? null : Math.round(ms / 100) / 10;
+
+// RFC 4180, with a byte-order mark so Excel reads it as UTF-8. Text starting like a formula is prefixed with ' so a
+// spreadsheet shows it instead of running it.
+export function csv(rows) {
+  const cell = (v) => {
+    if (v == null) return '';
+    let s = String(v);
+    if (typeof v === 'string' && /^[=+\-@\t\r]/.test(s)) s = "'" + s;
+    return /[",\r\n]/.test(s) ? `"${s.replace(/"/g, '""')}"` : s;
+  };
+  return '\ufeff' + rows.map((r) => r.map(cell).join(',')).join('\r\n') + '\r\n';
+}
+
+// One row per page view, oldest first. The window runs over whole visitor-code days (the inner query starts at the
+// UTC day the period starts in, which also covers codes that changed at midnight UTC before 2026-10-15), so a
+// visitor's page number and previous page are right even at the start of the period.
+async function visitsCsv(db, fromUtc, start) {
+  const rows = (await db.prepare(`SELECT * FROM (SELECT ts, page, ref, ms, visitor,
+      ROW_NUMBER() OVER w AS page_no, COUNT(*) OVER (PARTITION BY visitor) AS pages,
+      LAG(page) OVER w AS prev_page, LAG(ts) OVER w AS prev_ts
+    FROM views WHERE day >= ?1 WINDOW w AS (PARTITION BY visitor ORDER BY ts, id)) WHERE ts >= ?2 ORDER BY ts, visitor`)
+    .bind(fromUtc, start).all()).results;
+  return csv([['Date (Brisbane)', 'Time (Brisbane)', 'Page', 'Came from site', 'Seconds on page', 'Visitor code (one day only)',
+    'Visitor’s page no. that day', 'Visitor’s pages that day', 'Previous page', 'Seconds since previous page', 'UTC time'],
+  ...rows.map((r) => { const t = localIso(r.ts); return [t.slice(0, 10), t.slice(11, 19), r.page, r.ref, seconds(r.ms), r.visitor,
+    r.page_no, r.pages, r.prev_page, r.prev_ts == null ? null : seconds(r.ts - r.prev_ts), new Date(r.ts).toISOString()]; })]);
+}
+
+// Hub button clicks (exact time) and increases in GitHub's counts (happened between the previous reading and this one).
+async function downloadsCsv(db, fromUtc, start) {
+  const rows = (await db.prepare(`SELECT ts, NULL AS since, 'Hub button click' AS how, repo, NULL AS tag, file, 1 AS n, page
+    FROM clicks WHERE day >= ?1 AND ts >= ?2 UNION ALL SELECT ts, since, 'GitHub count', repo, tag, file, n, NULL
+    FROM downloads WHERE day >= ?1 AND ts >= ?2 ORDER BY ts`).bind(fromUtc, start).all()).results;
+  return csv([['Date (Brisbane)', 'Time (Brisbane)', 'Counted by', 'Project', 'Release', 'File', 'Downloads', 'Hub page',
+    'Counted since (Brisbane)', 'UTC time'],
+  ...rows.map((r) => { const t = localIso(r.ts); return [t.slice(0, 10), t.slice(11, 19), r.how, r.repo, r.tag, r.file, r.n, r.page,
+    r.since ? localIso(r.since).slice(0, 19).replace('T', ' ') : null, new Date(r.ts).toISOString()]; })]);
+}
+
 export async function stats(req, env, url, now) {
   if (!(await authorised(req, env))) return new Response('Password required', { status: 401,
     headers: { 'WWW-Authenticate': 'Basic realm="Hub visits", charset="UTF-8"' } });
   const days = [7, 30, 90, 365].includes(Number(url.searchParams.get('days'))) ? Number(url.searchParams.get('days')) : 30;
-  const from = dayOf(new Date(now.getTime() - (days - 1) * DAY_MS));
+  // The period is whole Brisbane days. start = its first midnight in UTC ms; fromUtc narrows by the indexed day column.
+  const today = localDay(now);
+  const from = dayOf(new Date(Date.parse(today) - (days - 1) * DAY_MS));
+  const start = Date.parse(from) - TZ_MS;
+  const fromUtc = dayOf(new Date(start));
   const db = env.DB;
+  const download = url.searchParams.get('download');
+  if (download === 'visits' || download === 'downloads') {
+    const body = await (download === 'visits' ? visitsCsv : downloadsCsv)(db, fromUtc, start);
+    return new Response(body, { headers: { 'Content-Type': 'text/csv; charset=utf-8', 'Cache-Control': 'no-store',
+      'X-Robots-Tag': 'noindex', 'Content-Disposition': `attachment; filename="hub-${download}_${from}_to_${today}.csv"` } });
+  }
   const reading = await meta(db, 'last_reading');
   if (url.searchParams.get('refresh') === '1' || !reading || now.getTime() - reading.ts > 65 * 60000) await pollGitHub(env, env.FETCH || fetch, now);
-  const q = (sql) => db.prepare(sql).bind(from).all().then((r) => r.results);
-  const [total] = await q(`SELECT COUNT(*) AS views, COUNT(DISTINCT day || visitor) AS visitors,
-    AVG(NULLIF(ms, 0)) AS avg_ms FROM views WHERE day >= ?`);
-  const [site] = await q(`SELECT AVG(t) AS avg_ms FROM (SELECT SUM(ms) AS t FROM views WHERE day >= ? AND ms > 0
-    GROUP BY day, visitor)`);
-  const byDay = await q(`SELECT day, COUNT(*) AS views, COUNT(DISTINCT visitor) AS visitors, AVG(NULLIF(ms, 0)) AS avg_ms,
-    MIN(NULLIF(ms, 0)) AS min_ms, MAX(NULLIF(ms, 0)) AS max_ms FROM views WHERE day >= ? GROUP BY day ORDER BY day DESC`);
-  const byPage = await q(`SELECT page, COUNT(*) AS views, COUNT(DISTINCT day || visitor) AS visitors,
-    AVG(NULLIF(ms, 0)) AS avg_ms, MIN(NULLIF(ms, 0)) AS min_ms, MAX(NULLIF(ms, 0)) AS max_ms FROM views WHERE day >= ? GROUP BY page ORDER BY views DESC`);
-  const byRef = await q(`SELECT ref, COUNT(*) AS views FROM views WHERE day >= ? AND ref != '' GROUP BY ref
+  const q = (sql) => db.prepare(sql).bind(fromUtc, start).all().then((r) => r.results);
+  const [total] = await q(`SELECT COUNT(*) AS views, COUNT(DISTINCT ${LOCAL_DAY} || visitor) AS visitors,
+    AVG(NULLIF(ms, 0)) AS avg_ms FROM views WHERE day >= ?1 AND ts >= ?2`);
+  const [site] = await q(`SELECT AVG(t) AS avg_ms FROM (SELECT SUM(ms) AS t FROM views WHERE day >= ?1 AND ts >= ?2 AND ms > 0
+    GROUP BY ${LOCAL_DAY}, visitor)`);
+  const byDay = await q(`SELECT ${LOCAL_DAY} AS day, COUNT(*) AS views, COUNT(DISTINCT visitor) AS visitors, AVG(NULLIF(ms, 0)) AS avg_ms,
+    MIN(NULLIF(ms, 0)) AS min_ms, MAX(NULLIF(ms, 0)) AS max_ms FROM views WHERE day >= ?1 AND ts >= ?2 GROUP BY 1 ORDER BY 1 DESC`);
+  const byPage = await q(`SELECT page, COUNT(*) AS views, COUNT(DISTINCT ${LOCAL_DAY} || visitor) AS visitors,
+    AVG(NULLIF(ms, 0)) AS avg_ms, MIN(NULLIF(ms, 0)) AS min_ms, MAX(NULLIF(ms, 0)) AS max_ms FROM views WHERE day >= ?1 AND ts >= ?2
+    GROUP BY page ORDER BY views DESC`);
+  const byRef = await q(`SELECT ref, COUNT(*) AS views FROM views WHERE day >= ?1 AND ts >= ?2 AND ref != '' GROUP BY ref
     ORDER BY views DESC LIMIT 25`);
   // Only increases after a file's first reading are shown; its starting total (first_count) predates counting.
   const files = await q(`SELECT a.repo, a.tag, a.file,
-    (SELECT COALESCE(SUM(n), 0) FROM downloads d WHERE d.repo = a.repo AND d.file = a.file AND d.tag = a.tag AND d.day >= ?1) AS period,
-    (SELECT COUNT(*) FROM clicks c WHERE c.repo = a.repo AND c.file = a.file AND c.day >= ?1) AS clicks,
+    (SELECT COALESCE(SUM(n), 0) FROM downloads d WHERE d.repo = a.repo AND d.file = a.file AND d.tag = a.tag AND d.day >= ?1 AND d.ts >= ?2) AS period,
+    (SELECT COUNT(*) FROM clicks c WHERE c.repo = a.repo AND c.file = a.file AND c.day >= ?1 AND c.ts >= ?2) AS clicks,
     MAX(COALESCE((SELECT MAX(ts) FROM downloads d WHERE d.repo = a.repo AND d.file = a.file AND d.tag = a.tag), 0),
       COALESCE((SELECT MAX(ts) FROM clicks c WHERE c.repo = a.repo AND c.file = a.file), 0)) AS last
     FROM assets a WHERE a.file NOT LIKE '%.sha256' AND a.file != 'SHA256SUMS' ORDER BY a.repo, period DESC, clicks DESC, a.file`);
-  const recent = await q(`SELECT ts, since, 'GitHub count' AS how, repo, file, n FROM downloads WHERE day >= ?1
-    UNION ALL SELECT ts, NULL, 'Hub button on ' || page, repo, file, 1 FROM clicks WHERE day >= ?1 ORDER BY ts DESC LIMIT 60`);
+  const recent = await q(`SELECT ts, since, 'GitHub count' AS how, repo, file, n FROM downloads WHERE day >= ?1 AND ts >= ?2
+    UNION ALL SELECT ts, NULL, 'Hub button on ' || page, repo, file, 1 FROM clicks WHERE day >= ?1 AND ts >= ?2 ORDER BY ts DESC LIMIT 60`);
   const [lastReading, poll, push] = await Promise.all(['last_reading', 'github_poll', 'github_push'].map((k) => meta(db, k)));
   const status = (m) => m ? `${when(m.ts)}: ${esc(m.note)}, ${m.files} files` : 'not yet';
-  const when = (ms) => ms ? new Date(ms).toISOString().slice(0, 16).replace('T', ' ') + ' UTC' : '–';
   const table = (head, rows) => `<table><tr>${head.map((h) => `<th>${h}</th>`).join('')}</tr>${rows.map((r) =>
     `<tr>${r.map((c) => `<td>${esc(c)}</td>`).join('')}</tr>`).join('')}</table>`;
   const tabs = [7, 30, 90, 365].map((d) => d === days ? `<b>${d} days</b>` : `<a href="?days=${d}">${d} days</a>`).join(' · ');
@@ -237,7 +293,9 @@ export async function stats(req, env, url, now) {
 table{border-collapse:collapse;margin:.5rem 0 1.5rem;font-variant-numeric:tabular-nums}th,td{padding:.3rem .8rem;border-bottom:1px solid #ddd;text-align:right}
 th:first-child,td:first-child{text-align:left}.big{display:flex;gap:2rem;flex-wrap:wrap}.big b{display:block;font-size:1.6rem}
 @media (prefers-color-scheme:dark){body{color:#ecebf2;background:#16151b}th,td{border-color:#333}a{color:#b9a3ff}}</style>
-<h1>Hub visits</h1><p>${tabs} (UTC days, from ${from})</p>
+<h1>Hub visits</h1><p>${tabs} (from ${from}; all days and times are Brisbane time, UTC+10)</p>
+<p>Raw data for these ${days} days, one row each: <a href="?days=${days}&amp;download=visits">page views (CSV)</a> ·
+<a href="?days=${days}&amp;download=downloads">downloads (CSV)</a></p>
 <div class="big"><div><b>${total.views}</b>page views</div><div><b>${total.visitors}</b>daily unique visitors</div>
 <div><b>${duration(total.avg_ms)}</b>average time on a page</div><div><b>${duration(site.avg_ms)}</b>average time on the site per visitor per day</div></div>
 <h2>Pages</h2>${table(['Page', 'Views', 'Daily unique visitors', 'Average time', 'Shortest time', 'Longest time'],
@@ -256,7 +314,9 @@ ${files.length ? table(['File', 'Release', 'Hub button clicks', 'Downloads from 
 two readings.</p>${recent.length ? table(['When', 'Counted by', 'Project', 'File', 'Downloads'],
     recent.map((r) => [r.since ? `between ${when(r.since)} and ${when(r.ts)}` : when(r.ts), r.how, r.repo, r.file, r.n])) : '<p>None in this period.</p>'}
 <h2>Referring sites</h2>${byRef.length ? table(['Site', 'Views'], byRef.map((r) => [r.ref, r.views])) : '<p>None yet.</p>'}
-<p>A visitor is counted once per UTC day; the same person on two days counts twice, by design. Times are how long the page was visible; views where the visitor left before the time was sent show no time and are left out of the average, shortest and longest. A page left open longer than an hour counts as one hour.</p>`;
+<p>A visitor is counted once per Brisbane day; the same person on two days counts twice, by design. Up to 14 October 2026 the
+visitor code changed at 10:00 Brisbane time (midnight UTC), so on those days someone seen both before and after 10:00 counts
+twice. Times are how long the page was visible; views where the visitor left before the time was sent show no time and are left out of the average, shortest and longest. A page left open longer than an hour counts as one hour.</p>`;
   return new Response(html, { headers: { 'Content-Type': 'text/html; charset=utf-8', 'Cache-Control': 'no-store',
     'X-Robots-Tag': 'noindex' } });
 }

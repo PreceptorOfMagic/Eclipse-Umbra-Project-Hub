@@ -2,7 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import { DatabaseSync } from 'node:sqlite';
-import { handle, prune, pollGitHub, ORIGIN, duration } from '../../analytics/worker.mjs';
+import { handle, prune, pollGitHub, ORIGIN, duration, csv } from '../../analytics/worker.mjs';
 import { startCounting, pageName, referrerHost, releaseFile } from '../../site/assets/count.mjs';
 
 // The D1 calls the worker uses, on a real SQLite database.
@@ -197,13 +197,66 @@ test('hourly GitHub reading records only increases after the first reading', asy
     [[2, T0.getTime()], [1, later(7200000).getTime()]]);
   await handle(post('/d', { p: 'setup.html', repo: 'Eclipse', f: 'eclipse-linux-x86_64.tar.gz' }), env, later(3500000));
   const html = await (await handle(new Request('https://count.example/stats', { headers: auth('pw') }), env, later(3 * 3600000 + 60000))).text();
-  assert.match(html, /<td>eclipse-linux-x86_64.tar.gz<\/td><td>eclipse-v1.3.4<\/td><td>1<\/td><td>3<\/td><td>2026-10-11 13:00 UTC<\/td>/);
+  assert.match(html, /<td>eclipse-linux-x86_64.tar.gz<\/td><td>eclipse-v1.3.4<\/td><td>1<\/td><td>3<\/td><td>2026-10-11 23:00<\/td>/);
   assert.ok(!html.includes('Before counting') && !html.includes('All-time'), 'pre-counting totals are not shown');
   assert.ok(!html.includes('<td>eclipse-linux-x86_64.tar.gz.sha256</td>'), 'checksums left out');
-  assert.match(html, /<td>between 2026-10-11 10:00 UTC and 2026-10-11 11:00 UTC<\/td><td>GitHub count<\/td><td>Eclipse<\/td><td>eclipse-linux-x86_64.tar.gz<\/td><td>2<\/td>/);
+  assert.match(html, /<td>between 2026-10-11 20:00 and 2026-10-11 21:00<\/td><td>GitHub count<\/td><td>Eclipse<\/td><td>eclipse-linux-x86_64.tar.gz<\/td><td>2<\/td>/);
   assert.match(html, /<td>Hub button on setup.html<\/td>/);
-  assert.match(html, /by this counter: 2026-10-11 13:00 UTC: Eclipse: GitHub 403 \(rate limited\)/);
-  assert.match(html, /by GitHub Actions: 2026-10-11 13:00 UTC: ok, 1 files/);
+  assert.match(html, /by this counter: 2026-10-11 23:00: Eclipse: GitHub 403 \(rate limited\)/);
+  assert.match(html, /by GitHub Actions: 2026-10-11 23:00: ok, 1 files/);
+  const dl = await (await handle(new Request('https://count.example/stats?days=7&download=downloads', { headers: auth('pw') }), env, later(3 * 3600000 + 60000))).text();
+  assert.deepEqual(dl.trim().split('\r\n').slice(1), [
+    '2026-10-11,20:58:20,Hub button click,Eclipse,,eclipse-linux-x86_64.tar.gz,1,setup.html,,2026-10-11T10:58:20.000Z',
+    '2026-10-11,21:00:00,GitHub count,Eclipse,eclipse-v1.3.4,eclipse-linux-x86_64.tar.gz,2,,2026-10-11 20:00:00,2026-10-11T11:00:00.000Z',
+    '2026-10-11,23:00:30,GitHub count,Eclipse,eclipse-v1.3.4,eclipse-linux-x86_64.tar.gz,1,,2026-10-11 22:00:00,2026-10-11T13:00:30.000Z']);
   await prune(DB, new Date('2028-01-01T00:00:00Z'));
   assert.equal(DB.sql.prepare('SELECT (SELECT COUNT(*) FROM clicks) + (SELECT COUNT(*) FROM downloads) AS n').get().n, 0);
+});
+
+test('days and visitor codes run midnight to midnight Brisbane time (UTC+10)', async () => {
+  const DB = d1(), env = { DB, STATS_PASSWORD: 'pw', FETCH: github({}) };
+  await handle(post('/v', { id: id(1), p: 'index.html' }), env, new Date('2026-10-11T13:59:00Z'));   // 23:59 on the 11th
+  await handle(post('/v', { id: id(2), p: 'index.html' }), env, new Date('2026-10-11T14:01:00Z'));   // 00:01 on the 12th
+  await handle(post('/v', { id: id(3), p: 'setup.html' }), env, new Date('2026-10-12T00:30:00Z'));   // 10:30 on the 12th
+  const v = DB.sql.prepare('SELECT visitor FROM views ORDER BY id').all().map((r) => r.visitor);
+  assert.notEqual(v[0], v[1], 'new code at Brisbane midnight');
+  assert.equal(v[1], v[2], 'same code across midnight UTC');
+  const page = async (at) => (await handle(new Request('https://count.example/stats?days=7', { headers: auth('pw') }), env, new Date(at))).text();
+  const html = await page('2026-10-12T01:00:00Z');
+  assert.match(html, /<td>2026-10-12<\/td><td>2<\/td><td>1<\/td>/);
+  assert.match(html, /<td>2026-10-11<\/td><td>1<\/td><td>1<\/td>/);
+  assert.match(html, /<b>2<\/b>daily unique visitors/);
+  // 7 days ending on the 18th start at Brisbane midnight on the 12th, which is 14:00 UTC on the 11th
+  assert.match(await page('2026-10-18T13:00:00Z'), /<b>2<\/b>page views/);
+});
+
+test('page views download as CSV, one row per view, with each visitor’s path through the site', async () => {
+  const DB = d1(), env = { DB, STATS_PASSWORD: 'pw' };
+  await handle(post('/v', { id: id(1), p: 'index.html', r: 'www.reddit.com' }), env, T0);
+  await handle(post('/l', { id: id(1), ms: 12345 }), env, T0);
+  await handle(post('/v', { id: id(2), p: 'setup.html' }), env, later(20000));
+  await handle(post('/v', { id: id(3), p: 'index.html' }, { ip: '198.51.100.9' }), env, later(30000));
+  const get = (q, h = auth('pw')) => handle(new Request(`https://count.example/stats?${q}`, { headers: h }), env, later(60000));
+  assert.equal((await get('download=visits', {})).status, 401, 'needs the password');
+  const res = await get('days=7&download=visits');
+  assert.equal(res.headers.get('Content-Type'), 'text/csv; charset=utf-8');
+  assert.equal(res.headers.get('Content-Disposition'), 'attachment; filename="hub-visits_2026-10-05_to_2026-10-11.csv"');
+  const bytes = new Uint8Array(await res.arrayBuffer());
+  assert.deepEqual([...bytes.slice(0, 3)], [0xef, 0xbb, 0xbf], 'byte-order mark for Excel');
+  const rows = new TextDecoder().decode(bytes).split('\r\n');
+  assert.equal(rows[0], 'Date (Brisbane),Time (Brisbane),Page,Came from site,Seconds on page,Visitor code (one day only),' +
+    'Visitor’s page no. that day,Visitor’s pages that day,Previous page,Seconds since previous page,UTC time');
+  assert.equal(rows.at(-1), '');
+  const cells = rows.slice(1, -1).map((r) => r.split(','));
+  assert.deepEqual(cells.map((c) => [c[0], c[1], c[2], c[3], c[4], c[6], c[7], c[8], c[9], c[10]]), [
+    ['2026-10-11', '20:00:00', 'index.html', 'www.reddit.com', '12.3', '1', '2', '', '', '2026-10-11T10:00:00.000Z'],
+    ['2026-10-11', '20:00:20', 'setup.html', '', '', '2', '2', 'index.html', '20', '2026-10-11T10:00:20.000Z'],
+    ['2026-10-11', '20:00:30', 'index.html', '', '', '1', '1', '', '', '2026-10-11T10:00:30.000Z']]);
+  assert.equal(cells[0][5], cells[1][5]);
+  assert.notEqual(cells[0][5], cells[2][5]);
+  assert.match(await (await get('days=7')).text(), /href="\?days=7&amp;download=visits"/);
+});
+
+test('CSV quotes what needs quoting and defuses spreadsheet formulas', () => {
+  assert.equal(csv([['a,b', 'say "hi"', '=1+1', '-x', 7, null]]), '\ufeff"a,b","say ""hi""",\'=1+1,\'-x,7,\r\n');
 });
