@@ -1,5 +1,5 @@
 // Anonymous visit counter: no cookies, no browser storage. Sends the page name, the referring site's host name and
-// how long the page was visible, and which release file a download link points to when one is clicked. Skipped when the browser asks not to be tracked. Receiver: analytics/worker.mjs.
+// how long the page was visible, and which release file a download link points to when one is clicked. Skipped when the browser asks not to be tracked. Receiver: the Hub's counter, a Cloudflare Worker kept in a private repository (what it keeps: analytics/README.md).
 export const ENDPOINT = 'https://hub-count.preceptorofmagic.workers.dev';
 
 export function pageName(pathname) {
