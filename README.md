@@ -302,6 +302,10 @@ Umbra’s additions were merged into Vibepollo 2.0.0, Nonary’s AI-enhanced ver
 
 Umbra for Linux became one Flatpak for KDE Plasma and GNOME on Wayland, with a virtual display for each stream and co-op alongside a Windows host. Small KWin and Mutter patches add HDR to those virtual displays. On a 2017 AMD Radeon RX Vega, keeping frames on the GPU raised 4K from about 13 fps to the card’s own encoder limit. Umbra 0.5.1 for Linux was released.
 
+### 15 October · Umbra 0.5.2 for Linux
+
+Umbra 0.5.2 for Linux added KDE Plasma 6.7 and prebuilt HDR extras for seven distributions, each a download of its own on the Hub. Flatpak 1.18.4, a security update, had stopped exporting the desktop-file setting KDE checks before it lets an app create displays; Umbra now restores it. Before release it was tested on one PC on five distributions, with and without each HDR extra.
+
 <!-- activity:history-product:start -->
 **Behind the build · 23 September–5 October 2026**
 
