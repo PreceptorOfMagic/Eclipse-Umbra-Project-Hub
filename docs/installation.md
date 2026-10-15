@@ -80,7 +80,7 @@ Open the Umbra for Linux release and expand Assets. If no release is listed, tha
 
 **Package:** `Umbra-<version>-linux-x86_64.flatpak`, one Flatpak bundle for x86_64 Linux. You need KDE Plasma or GNOME on Wayland (an X11 desktop gives ordinary streaming only), an NVIDIA or AMD GPU with its current driver, and the games you intend to run already installed.
 
-**How far it is tested.** Umbra 0.5.1 for Linux was tested on hardware on Ubuntu 26.04 with KDE Plasma 6.6 and with GNOME, on an NVIDIA RTX 2060 SUPER and an AMD Radeon RX Vega. Umbra 0.5.2 is 0.5.1 with one change, its KDE output control, which KDE Plasma 6.7 needs. 0.5.2 was built and checked automatically (installed over 0.5.1, settings kept, every library found) but **has not run on hardware**. Its Plasma 6.7 support has been tested only automatically, with each distribution’s real KWin 6.7.5 on a virtual display device without a GPU.
+**How far it is tested.** Umbra 0.5.2 for Linux ran on hardware on 2026-10-15, on one PC with an AMD Radeon RX Vega and Secure Boot on: Ubuntu 26.04 and 26.10, Fedora 44 and 45 (pre-release) and openSUSE Tumbleweed, each with KDE Plasma and with GNOME, with the distribution’s own compositor and with its HDR extra. On each it streamed the 4K desktop on its own virtual display, a co-op pane, a co-op disconnect and resume at a new size, and with the extra a co-op pane in 10-bit HDR, checked in the recorded stream. **Not run with 0.5.2:** NVIDIA GPUs (Umbra 0.5.1 was tested on an RTX 2060 SUPER, HDR desktop streams included), an HDR desktop stream (it needs a 10-bit video encoder, which the RX Vega lacks), a co-op session with two hosts, the input setup’s administrator prompt and streamed controller input on the new distributions, and **Arch Linux and CachyOS**: neither can start on the test PC without changing its Secure Boot setup, so both are untested on hardware. On openSUSE Tumbleweed with GNOME, co-op panes ran at about 20 fps on the RX Vega (27 to 39 fps elsewhere); Umbra 0.5.1 measured the same there.
 
 To update from Umbra 0.5.1, install the new bundle as below with `--reinstall` added (`flatpak install --user --reinstall Umbra-<version>-linux-x86_64.flatpak`); settings and pairings are kept. If you installed the earlier Ubuntu `.deb` (Umbra 0.5.0), remove it first with `systemctl --user disable --now sunshine` and `sudo apt remove umbra`. The Flatpak keeps its own settings, so pair Eclipse with it again.
 
@@ -109,12 +109,71 @@ flatpak install --user Umbra-<version>-linux-x86_64.flatpak
 | Desktop | Streaming | Own virtual display per stream | Co-op | HDR |
 |---|---|---|---|---|
 | KDE Plasma 6.6 on Wayland (tested: Ubuntu 26.04, KWin 6.6.6) | Yes | Yes | Yes | With the KDE HDR extra |
-| KDE Plasma 6.7 on Wayland (KWin 6.7.5, Umbra 0.5.2 or newer) | Expected; untested on hardware | Automated test only | Untested | With the KDE HDR extra; automated test only |
-| GNOME on Wayland (tested: Ubuntu 26.04, Mutter 50.1) | Yes | Yes | Yes | With the GNOME HDR extra; a physical HDR monitor streams HDR without it |
+| KDE Plasma 6.7 on Wayland (tested: Ubuntu 26.10, Fedora 44 and 45, openSUSE Tumbleweed; KWin 6.7.5; Umbra 0.5.2 or newer) | Yes | Yes | Yes | With the KDE HDR extra |
+| GNOME on Wayland (tested: Ubuntu 26.04 and 26.10, Fedora 44 and 45, openSUSE Tumbleweed; Mutter 50 and 51) | Yes | Yes | Yes | With the GNOME HDR extra; a physical HDR monitor streams HDR without it |
 | X11 desktops (Cinnamon, Xfce, MATE …) | Yes (tested during development on Linux Mint 22.3) | No | No | No |
 | Sway, Hyprland and other wlroots desktops, COSMIC | Not supported | | | |
 
-The “Yes” rows were tested on hardware with Umbra 0.5.1. Other distributions running KDE Plasma or GNOME on Wayland are expected to behave like those rows but have not been tested. KDE Plasma 6.7 (Ubuntu 26.10, Fedora 44 and 45, openSUSE Tumbleweed, Arch, CachyOS) needs Umbra 0.5.2: KWin 6.7 announces its outputs through a newer protocol than Umbra 0.5.1 knows, so Umbra 0.5.1 streams the desktop there without a virtual display per stream, co-op or HDR. An X11 desktop has no way to create a display while it runs, so there the host streams the desktop but never offers co-op or HDR.
+The “Yes” rows were tested on hardware with Umbra 0.5.2 on the RX Vega; “Co-op” there means this PC’s co-op pane, and “HDR” a co-op pane in 10-bit HDR. Other distributions running KDE Plasma or GNOME on Wayland are expected to behave like those rows but have not been tested. KDE Plasma 6.7 needs Umbra 0.5.2: KWin 6.7 announces its outputs through a newer protocol than Umbra 0.5.1 knows, so Umbra 0.5.1 streams the desktop there without a virtual display per stream, co-op or HDR. On KDE with Flatpak 1.18.4 or newer (every distribution above except Ubuntu 26.04), start Umbra once from the application menu before streaming: it then writes the desktop-file entry KDE needs before it lets Umbra create displays. An X11 desktop has no way to create a display while it runs, so there the host streams the desktop but never offers co-op or HDR.
+
+<details>
+<summary><strong>Testing in detail: each distribution and desktop, and exactly how it was tested</strong></summary>
+
+Everything below ran on one test PC. The Umbra 0.5.2 tests used its AMD Radeon RX Vega from 2017, with Secure Boot on and each distribution on its own partition, started through its own Microsoft-signed boot loader; the Umbra 0.5.1 NVIDIA tests used an RTX 2060 SUPER in the same PC. The tests themselves are described after the tables.
+
+**Tested in person**
+
+| Distribution | Desktop | Umbra and GPU | How it was tested |
+|---|---|---|---|
+| Ubuntu 26.04 | KDE Plasma 6.6.6, with the KDE HDR extra | Umbra 0.5.1 development build, AMD Radeon RX Vega (2026-10-14); Umbra 0.5.2 (2026-10-15) | The in-person test. Then the smoke test with Ubuntu's KWin and with the extra `4:6.6.6-0ubuntu0.1+umbrahdr4` |
+| Ubuntu 26.04 | GNOME 50.1, with the GNOME HDR extra | Umbra 0.5.1 development builds, AMD Radeon RX Vega and NVIDIA RTX 2060 SUPER (2026-10-14); Umbra 0.5.2 (2026-10-15) | The in-person test (on NVIDIA, an HDR co-op session), with the extra's previous revision. Then the smoke test with Ubuntu's Mutter and with the extra `50.1-0ubuntu2.4+umbrahdr2`, and a memory check: seven back-to-back 290 s HDR co-op streams, gnome-shell's memory flat (the picture moved only in the first 3 minutes) |
+
+**Smoke-tested on hardware (Umbra 0.5.2, AMD Radeon RX Vega, 2026-10-15)**
+
+| Distribution | Desktop | Packages tested | How it was tested |
+|---|---|---|---|
+| Ubuntu 26.10 | KDE Plasma 6.7.5 | KWin `6.7.5-0ubuntu1`; extra `4:6.7.5-0ubuntu1+umbrahdr1` | The smoke test with each. It ran a 0.5.2 candidate from before the desktop-file fix, with that copy made by hand (the fix itself was tested on Fedora and Tumbleweed). Umbra 0.5.1 was also run: no virtual display, as documented |
+| Ubuntu 26.10 | GNOME 51.0 | Mutter `51.0-1ubuntu3`; extra `51.0-1ubuntu3+umbrahdr1` | The smoke test with each |
+| Fedora 44 | KDE Plasma 6.7.5 | KWin `6.7.5-1.fc44`; extra `6.7.5-1.fc44.umbrahdr1` | The smoke test with each. On a fresh install, the first start from the application-menu entry wrote the desktop-file copy and offered HDR at once |
+| Fedora 44 | GNOME 50.6 | Mutter `50.6-1.fc44`; extra `50.6-1.fc44.umbrahdr2`, built on the test PC | The smoke test with each. Fedora updated Mutter after the release's extras were first built, so the extra was built on the test PC from the same patch; the published one is rebuilt the same way |
+| Fedora 45 (pre-release) | KDE Plasma 6.7.5 | KWin `6.7.5-1.fc45`; extra `6.7.5-1.fc45.umbrahdr1` | The smoke test with each; the first start wrote the desktop-file copy |
+| Fedora 45 (pre-release) | GNOME 51.1 | Mutter `51.1-1.fc45`; extra `51.1-1.fc45.umbrahdr1`, built on the test PC | The smoke test with each, as for Fedora 44 GNOME |
+| openSUSE Tumbleweed | KDE Plasma 6.7.5 | kwin6 `6.7.5-1.1`; extra `6.7.5-1.1.umbrahdr1` | The smoke test with each; the first start wrote the desktop-file copy |
+| openSUSE Tumbleweed | GNOME 50.5 | mutter `50.5-3.1`; extra `50.5-3.1.umbrahdr2` | The smoke test with each. Co-op panes ran at about 20 fps here (27 to 39 fps elsewhere), with or without the extra; Umbra 0.5.1 measured the same |
+
+**Not tested, expected to work (the same packages or versions as a tested row)**
+
+| Distribution | Desktop | Why it should work | HDR extra |
+|---|---|---|---|
+| Arch Linux | KDE Plasma 6.7.5, GNOME 51 | The same KWin and Mutter releases as the smoke-tested rows. Not run: the test PC cannot start Arch without changing its Secure Boot setup | Automated test only |
+| CachyOS | KDE Plasma 6.7.5, GNOME 51 | As Arch; its GNOME uses CachyOS's own Mutter build. Not run, for the same reason | Automated test only |
+| Kubuntu, Ubuntu Studio and other Ubuntu 26.04 or 26.10 flavours with KDE | KDE Plasma 6.6 or 6.7 | They install the same KWin packages from Ubuntu's archive as the Ubuntu rows | The Ubuntu KDE extra fits |
+| Fedora Kinoite and Silverblue 44, 45 | KDE Plasma 6.7, GNOME | The same KWin and Mutter packages as Fedora | Untested: installing it needs `rpm-ostree`, not the `dnf` command in its README |
+| EndeavourOS | KDE Plasma 6.7, GNOME 51 | It uses Arch's own repositories | As Arch |
+| Other distributions, for example KDE neon or Manjaro | KDE Plasma 6.6 or 6.7, GNOME 50 or 51, on Wayland | The same desktop versions as tested, in the distribution's own builds | A prebuilt extra fits only if its README's version check passes |
+
+**Unlikely to work, or limited**
+
+| Distribution or desktop | What to expect |
+|---|---|
+| Debian 13, openSUSE Leap 16.0 | No HDR: their KWin and Mutter are too old for the patches. Umbra itself is untested there |
+| Fedora 43 | No HDR: its PipeWire cannot announce HDR capture, and its Mutter 49 has no HDR capture. Umbra itself is untested there |
+| X11 desktops (Cinnamon, Xfce, MATE …), for example Linux Mint | Streaming only: no virtual display per stream, co-op or HDR (Linux Mint 22.3 tested during development) |
+| Sway, Hyprland and other wlroots desktops, COSMIC (Pop!_OS) | Not supported |
+
+**GPUs.** Umbra 0.5.2 ran only on the AMD Radeon RX Vega. Its encoder limits 4K to about 59 fps and co-op panes to about 35 fps, and it has no 10-bit video encoder, so HDR was tested through co-op panes only. Umbra 0.5.1 was also smoke-tested on an NVIDIA RTX 2060 SUPER (driver 595) on Ubuntu 26.04 with KDE and GNOME, HDR desktop streams included. Intel GPUs and PCs with more than one GPU are untested.
+
+**The tests**
+
+- **In-person test (2026-10-14):** the maintainer used Umbra on the LG TV through Eclipse: a co-op session with the test PC and a Windows Umbra host. It passed; on AMD with the note that the 2017 card's encoder limited how far it could be pushed.
+- **Smoke test (2026-10-15):** scripted, with nobody at the PC:
+  1. Umbra installed from the bundle with `flatpak install --user`, as in the install steps, and started with the application-menu entry's command. Input Setup was deferred, so its administrator prompt and streamed controllers were not exercised.
+  2. A test client on another PC on the network, built on moonlight-common-c (the streaming library Eclipse uses), paired with Umbra and asked for 25-second streams while a moving test window ran on the desktop: the desktop at 3840x2160 and 165 Hz on its own virtual display; the same in HDR (which cannot pass on the RX Vega, as it has no 10-bit video encoder); the co-op pane at 1920x2176, in 8-bit and in 10-bit HDR; the HDR co-op pane recorded and checked (HEVC Main 10 with BT.2020 and PQ tags, a white area at 10-bit brightness of about 576 to 595 where SDR reads 935 to 974, and one frame tone-mapped and looked at); and a co-op disconnect followed by a resume at a new size (2176x1920).
+  3. A stream passed when frames arrived, nothing failed and, where asked, HDR was on. Decoded frames were looked at, and no virtual display may remain after the last stream.
+  4. Each distribution and desktop ran it twice: with its own compositor, and with its HDR extra installed as its README says (the "ONLY FOR" check, `sha256sum -c`, the install command, a restart, the VERIFY commands).
+- **Automated test (every extra, before it is published):** the extra is installed over the distribution's own packages in a clean container of that distribution and checked with its README.txt commands. The patched compositor then runs without a GPU and must offer HDR and 10-bit capture on the virtual display Umbra asks for, as the stock one must not; then the extra is rolled back. No real GPU, display or stream is involved.
+
+</details>
 
 **GPUs.** NVIDIA (tested: RTX 2060 SUPER, driver 595) and AMD (tested: Radeon RX Vega) both encode on the GPU. The only AMD card available for testing is a Radeon RX Vega from 2017: its video encoder reaches about 60 fps at 4K and 165 fps only at 1080p, its co-op panes run at about 35 fps, and it has no 10-bit encoder, so its ordinary streams are SDR. The same card hit the same 4K limit on Windows (62 fps), so its age, not Umbra, is the likely limit; newer AMD cards could not be tested. Intel GPUs and PCs with more than one GPU are untested.
 
@@ -126,24 +185,24 @@ The “Yes” rows were tested on hardware with Umbra 0.5.1. Other distributions
 
 Stock KWin and Mutter keep the virtual displays Umbra streams SDR. Two optional extras add HDR virtual displays and 10-bit screen capture: a small patch to KWin for KDE Plasma and one to Mutter for GNOME. Umbra detects them by itself. The release carries them prebuilt for these distributions, each built from that distribution’s own `kwin` or `mutter` package.
 
-**Their testing is limited, and differs per extra.** Only the two Ubuntu 26.04 extras have run on hardware, with Umbra 0.5.1. Every extra passes an automated test before it is published (described below the table), and that is all the testing the others have had:
+**Their testing differs per extra.** Ten of the fourteen ran on hardware with Umbra 0.5.2 on the RX Vega: a co-op pane streamed in 10-bit HDR, and the ordinary streams worked as on the stock compositor. An HDR desktop stream and NVIDIA GPUs were not run with them, except the Ubuntu 26.04 ones with Umbra 0.5.1. The Arch Linux and CachyOS extras have had only the automated test (described below the table):
 
 | Extra | Fits | Tested on hardware | Automated test |
 |---|---|---|---|
-| `Umbra-HDR-KDE-ubuntu26.04.tar.gz` | Ubuntu 26.04, KWin 6.6 | Yes, with Umbra 0.5.1 (RTX 2060 SUPER, RX Vega); not yet with Umbra 0.5.2 | Passed |
-| `Umbra-HDR-GNOME-ubuntu26.04.tar.gz` | Ubuntu 26.04, Mutter 50 | The patch’s previous revision, with Umbra 0.5.1 (RTX 2060 SUPER, RX Vega). This revision adds two memory-leak fixes and has had the automated test only | Passed |
-| `Umbra-HDR-KDE-ubuntu26.10.tar.gz` | Ubuntu 26.10, KWin 6.7 | None; the KWin 6.7 patch has not run on hardware anywhere | Passed |
-| `Umbra-HDR-GNOME-ubuntu26.10.tar.gz` | Ubuntu 26.10, Mutter 51 | None; the Mutter 51 patch has not run on hardware anywhere | Passed |
-| `Umbra-HDR-KDE-fedora44.tar.gz` | Fedora 44, KWin 6.7 | None | Passed |
-| `Umbra-HDR-GNOME-fedora44.tar.gz` | Fedora 44, Mutter 50 | None (the same patch ran on hardware on Ubuntu 26.04, in its previous revision) | Passed |
-| `Umbra-HDR-KDE-fedora45.tar.gz` | Fedora 45, KWin 6.7 | None | Passed |
-| `Umbra-HDR-GNOME-fedora45.tar.gz` | Fedora 45, Mutter 51 | None | Passed |
-| `Umbra-HDR-KDE-opensuse-tumbleweed.tar.gz` | openSUSE Tumbleweed, KWin 6.7 | None | Passed |
-| `Umbra-HDR-GNOME-opensuse-tumbleweed.tar.gz` | openSUSE Tumbleweed, Mutter 50 | None (the same patch ran on hardware on Ubuntu 26.04, in its previous revision) | Passed |
-| `Umbra-HDR-KDE-arch.tar.gz` | Arch Linux, KWin 6.7 | None | Passed |
-| `Umbra-HDR-GNOME-arch.tar.gz` | Arch Linux, Mutter 51 | None | Passed |
-| `Umbra-HDR-KDE-cachyos.tar.gz` | CachyOS, KWin 6.7 | None | Passed |
-| `Umbra-HDR-GNOME-cachyos.tar.gz` | CachyOS, Mutter 51 (CachyOS’s own) | None | Passed |
+| `Umbra-HDR-KDE-ubuntu26.04.tar.gz` | Ubuntu 26.04, KWin 6.6 | Yes, with Umbra 0.5.2 (RX Vega); also with Umbra 0.5.1 (RTX 2060 SUPER, RX Vega) | Passed |
+| `Umbra-HDR-GNOME-ubuntu26.04.tar.gz` | Ubuntu 26.04, Mutter 50 | Yes, with Umbra 0.5.2 (RX Vega); gnome-shell memory flat over seven HDR stream starts and stops. The patch’s previous revision also with Umbra 0.5.1 (RTX 2060 SUPER, RX Vega) | Passed |
+| `Umbra-HDR-KDE-ubuntu26.10.tar.gz` | Ubuntu 26.10, KWin 6.7 | Yes, with Umbra 0.5.2 (RX Vega) | Passed |
+| `Umbra-HDR-GNOME-ubuntu26.10.tar.gz` | Ubuntu 26.10, Mutter 51 | Yes, with Umbra 0.5.2 (RX Vega) | Passed |
+| `Umbra-HDR-KDE-fedora44.tar.gz` | Fedora 44, KWin 6.7 | Yes, with Umbra 0.5.2 (RX Vega) | Passed |
+| `Umbra-HDR-GNOME-fedora44.tar.gz` | Fedora 44, Mutter 50 | Yes, as a build of the same version made on the test PC, with Umbra 0.5.2 (RX Vega) | Passed |
+| `Umbra-HDR-KDE-fedora45.tar.gz` | Fedora 45, KWin 6.7 | Yes, with Umbra 0.5.2 (RX Vega) | Passed |
+| `Umbra-HDR-GNOME-fedora45.tar.gz` | Fedora 45, Mutter 51 | Yes, as a build of the same version made on the test PC, with Umbra 0.5.2 (RX Vega) | Passed |
+| `Umbra-HDR-KDE-opensuse-tumbleweed.tar.gz` | openSUSE Tumbleweed, KWin 6.7 | Yes, with Umbra 0.5.2 (RX Vega) | Passed |
+| `Umbra-HDR-GNOME-opensuse-tumbleweed.tar.gz` | openSUSE Tumbleweed, Mutter 50 | Yes, with Umbra 0.5.2 (RX Vega) | Passed |
+| `Umbra-HDR-KDE-arch.tar.gz` | Arch Linux, KWin 6.7 | None: Arch cannot start on the test PC without changing its Secure Boot setup | Passed |
+| `Umbra-HDR-GNOME-arch.tar.gz` | Arch Linux, Mutter 51 | None: as above | Passed |
+| `Umbra-HDR-KDE-cachyos.tar.gz` | CachyOS, KWin 6.7 | None: CachyOS cannot start on the test PC without changing its Secure Boot setup | Passed |
+| `Umbra-HDR-GNOME-cachyos.tar.gz` | CachyOS, Mutter 51 (CachyOS’s own) | None: as above | Passed |
 
 The automated test installs each extra over its distribution’s own packages in a clean container of that distribution and runs its `README.txt` commands. The patched compositor then runs without a GPU (KWin on a virtual display device) and must offer HDR and 10-bit capture on the virtual display Umbra asks for, as the stock compositor must not; then the extra is rolled back. It does not use a real GPU or display, does not stream, and does not show HDR on a screen. Each extra’s `README.txt` (TESTED) says the same for that extra in more detail. The KWin 6.7 extras need Umbra 0.5.2 or newer.
 
