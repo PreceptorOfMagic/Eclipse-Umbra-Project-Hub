@@ -43,6 +43,7 @@
 .disclosure[open]>summary{border-bottom:1px solid var(--line);border-bottom-left-radius:0;border-bottom-right-radius:0}
 .disclosure-body{max-width:90ch;padding:1.25rem 1.4rem 1.5rem;color:var(--muted);overflow-wrap:anywhere}
 .disclosure-wide>.disclosure-body{max-width:none}
+.extra-table{min-width:46rem}.extra-table .download-control{margin:0}.extra-table .button-secondary{min-height:2.35rem;padding:.55rem .85rem;font-size:.82rem}.extra-table .download-control p{margin:.45rem 0 0;color:var(--quiet);font-size:.76rem;overflow-wrap:anywhere}.extra-meta{margin:.6rem 0 0;color:var(--muted);font-size:.8rem}.extra-note{color:var(--quiet);font-size:.86rem}
 .disclosure-wide .disclosure-body>p,.disclosure-wide .disclosure-body>ul{max-width:90ch}
 .disclosure-wide .status-table th,.disclosure-wide .status-table td{overflow-wrap:normal}.disclosure-wide .status-table td:first-child{min-width:10rem}.disclosure-wide .status-table td:nth-child(2){min-width:8.5rem}
 .disclosure-body h3,.disclosure-body h4{margin:1.5rem 0 .5rem;color:var(--ink);font-size:1.12rem;line-height:1.4;letter-spacing:-.015em}

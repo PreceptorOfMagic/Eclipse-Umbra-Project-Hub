@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { selectAsset, loadRelease, displayRelease, initialiseDownloads } from '../../site/assets/downloads.mjs';
+import { selectAsset, loadRelease, displayRelease, displayExtra, initialiseDownloads, platforms, hdrExtraTargets } from '../../site/assets/downloads.mjs';
 
 function asset(name, repo = 'Eclipse') {
   return { name, state: 'uploaded', size: 1234, browser_download_url: `https://github.com/PreceptorOfMagic/${repo}/releases/download/v1/${name}` };
@@ -82,4 +82,45 @@ test('deduplicate repo requests for platform controls', async () => {
   await initialiseDownloads({querySelectorAll:()=>controls},async url=>{urls.push(url);return {status:404};});
   assert.equal(urls.length,2);
   for(const ui of controls) assert.match(ui.status.textContent,/No public stable release/);
+});
+
+test('each HDR extra button picks only its own distribution and desktop', () => {
+  const targets = Object.keys(hdrExtraTargets);
+  const all = targets.flatMap(target => ['KDE', 'GNOME'].flatMap(desktop => [`Umbra-HDR-${desktop}-${target}.tar.gz`,
+    `Umbra-HDR-${desktop}-${target}.tar.gz.sha256`, `Umbra-HDR-${desktop}-${target}-source.tar.gz`]))
+    .concat(['Umbra-0.5.2-linux-x86_64.flatpak', 'Umbra-HDR-KDE-ubuntu26x04.tar.gz', 'SHA256SUMS']).map(name => asset(name, 'Umbra'));
+  assert.equal(targets.length * 2, Object.keys(platforms).filter(key => key.startsWith('umbra-hdr-')).length);
+  for (const target of targets) for (const desktop of ['KDE', 'GNOME']) {
+    const chosen = selectAsset(`umbra-hdr-${desktop.toLowerCase()}-${target}`, release(...all));
+    assert.equal(chosen && chosen.name, `Umbra-HDR-${desktop}-${target}.tar.gz`);
+  }
+  assert.equal(selectAsset('umbra-hdr-kde-fedora44', release(asset('Umbra-HDR-KDE-fedora45.tar.gz', 'Umbra'))), null);
+});
+function cell(platform) {
+  const ui = control(platform); ui.link.setAttribute = (k, v) => { ui.link[k] = v; }; return ui;
+}
+test('an HDR extra cell links its file and its own checksum', () => {
+  const file = asset('Umbra-HDR-GNOME-opensuse-tumbleweed.tar.gz', 'Umbra');
+  const sum = asset('Umbra-HDR-GNOME-opensuse-tumbleweed.tar.gz.sha256', 'Umbra');
+  const ui = cell('umbra-hdr-gnome-opensuse-tumbleweed');
+  displayExtra(ui, 'umbra-hdr-gnome-opensuse-tumbleweed', { release: { ...release(file, sum), tag_name: 'umbra-linux-v0.5.2' } });
+  assert.equal(ui.link.href, file.browser_download_url);
+  assert.equal(ui.link.textContent, 'Download GNOME extra');
+  assert.equal(ui.link['aria-label'], 'Download the GNOME HDR extra for openSUSE Tumbleweed');
+  assert.equal(ui.status.child.href, sum.browser_download_url);
+  const bare = cell('umbra-hdr-gnome-opensuse-tumbleweed');
+  displayExtra(bare, 'umbra-hdr-gnome-opensuse-tumbleweed', { release: { ...release(file), tag_name: 'umbra-linux-v0.5.2' } });
+  assert.equal(bare.status.child.href, 'https://github.com/PreceptorOfMagic/Umbra/releases/tag/umbra-linux-v0.5.2');
+});
+test('a missing HDR extra keeps the release link and says why', () => {
+  for (const result of [{ unavailable: true }, { error: true }, { release: release(asset('Umbra-0.5.1-linux-x86_64.flatpak', 'Umbra')) }]) {
+    const ui = cell('umbra-hdr-kde-arch'); displayExtra(ui, 'umbra-hdr-kde-arch', result);
+    assert.equal(ui.link.href, 'fallback'); assert.ok(ui.status.textContent.length > 20);
+  }
+});
+test('the Flatpak and all HDR extras share one release lookup', async () => {
+  const controls = [control('umbra-linux'), cell('umbra-hdr-kde-fedora44'), cell('umbra-hdr-gnome-arch')];
+  const urls = [];
+  await initialiseDownloads({ querySelectorAll: () => controls }, async url => { urls.push(url); return { status: 404 }; });
+  assert.equal(urls.length, 1);
 });

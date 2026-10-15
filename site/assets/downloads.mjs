@@ -1,5 +1,25 @@
 // No credentials are embedded: private repositories intentionally cannot resolve
 // public downloads. Release attachments remain owned by the component repository.
+
+// The Umbra for Linux release's HDR extras, one file per distribution and desktop (Umbra-HDR-<KDE|GNOME>-<target>.tar.gz).
+export const hdrExtraTargets = Object.freeze({
+  'ubuntu26.04': 'Ubuntu 26.04', 'ubuntu26.10': 'Ubuntu 26.10', fedora44: 'Fedora 44', fedora45: 'Fedora 45',
+  'opensuse-tumbleweed': 'openSUSE Tumbleweed', arch: 'Arch Linux', cachyos: 'CachyOS',
+});
+function hdrExtraPlatforms() {
+  const entries = [];
+  for (const [target, distribution] of Object.entries(hdrExtraTargets)) {
+    for (const [desktop, name] of [['KDE', 'KDE Plasma'], ['GNOME', 'GNOME']]) {
+      entries.push([`umbra-hdr-${desktop.toLowerCase()}-${target}`, {
+        repo: 'Umbra', tagPrefix: 'umbra-linux-v', extra: true, label: `${desktop} extra`,
+        description: `the ${name} HDR extra for ${distribution}`,
+        match: new RegExp(`^Umbra-HDR-${desktop}-${target.replace(/\./g, '\\.')}\\.tar\\.gz$`),
+      }]);
+    }
+  }
+  return Object.fromEntries(entries);
+}
+
 export const platforms = Object.freeze({
   webos: { repo: 'Eclipse', label: 'LG webOS', match: /^com\.aurora\.gamestream_[\w.+-]+_arm\.ipk$/i },
   windows: { repo: 'Eclipse', label: 'Windows x64', match: /^eclipse-windows-x64(?:-unsigned)?\.zip$/i },
@@ -9,6 +29,7 @@ export const platforms = Object.freeze({
   // Linux and Windows Umbra are separate releases; Windows keeps "latest", so Linux is found by its tag.
   'umbra-linux': { repo: 'Umbra', tagPrefix: 'umbra-linux-v', label: 'Umbra for Linux (Flatpak)', match: /^umbra-[\w.+-]+-linux-x86_64\.flatpak$/i },
   'umbra-vibepollo-windows': { repo: 'Umbra-Vibepollo', label: 'Umbra (Vibepollo) Windows x64', match: /^umbra-vibepollo-windows-x64\.exe$/i },
+  ...hdrExtraPlatforms(),
 });
 
 export function selectAsset(platform, release) {
@@ -65,6 +86,32 @@ export function displayRelease(control, platform, result) {
   status.append(notes);
 }
 
+// An HDR extra sits in a table cell: a short label, its file name and a link to its own checksum file.
+export function displayExtra(control, platform, result) {
+  const config = platforms[platform];
+  const link = control.querySelector('[data-download-link]');
+  const status = control.querySelector('[data-download-status]');
+  const asset = result.release ? selectAsset(platform, result.release) : null;
+  if (!asset) {
+    status.textContent = result.error
+      ? 'Release details could not be loaded. Open the release and choose this file under Assets.'
+      : 'Not in the current Umbra for Linux release.';
+    return;
+  }
+  link.href = asset.browser_download_url;
+  link.textContent = `Download ${config.label}`;
+  link.setAttribute?.('aria-label', `Download ${config.description}`);
+  status.textContent = `${asset.name} · `;
+  const sum = result.release.assets.find(item => item && item.name === `${asset.name}.sha256`
+    && item.state === 'uploaded' && typeof item.browser_download_url === 'string'
+    && item.browser_download_url.startsWith(asset.browser_download_url.slice(0, asset.browser_download_url.lastIndexOf('/') + 1)));
+  const check = control.ownerDocument.createElement('a');
+  check.href = sum ? sum.browser_download_url
+    : `https://github.com/PreceptorOfMagic/${config.repo}/releases/tag/${encodeURIComponent(result.release.tag_name || '')}`;
+  check.textContent = sum ? 'checksum' : 'release and checksums';
+  status.append(check);
+}
+
 export async function initialiseDownloads(documentRoot, fetcher = fetch) {
   const requests = new Map();
   await Promise.all([...documentRoot.querySelectorAll('[data-download]')].map(async control => {
@@ -73,7 +120,7 @@ export async function initialiseDownloads(documentRoot, fetcher = fetch) {
     if (!config) return;
     const key = `${config.repo}|${config.tagPrefix || ''}`;
     if (!requests.has(key)) requests.set(key, loadRelease(config.repo, fetcher, config.tagPrefix).catch(() => ({ error: true })));
-    displayRelease(control, platform, await requests.get(key));
+    (config.extra ? displayExtra : displayRelease)(control, platform, await requests.get(key));
   }));
 }
 
