@@ -60,7 +60,7 @@ Choose `eclipse-linux-x86_64.tar.gz`, extract and run `./install.sh` (or `./ecli
 
 
 ![Eclipse on Windows streaming one PC’s desktop full screen](../site/media/eclipse-single-host.webp)
-Host discovery, PIN pairing, game/desktop launch, configurable resolution, frame rate and bitrate, gamepad/keyboard/mouse input, audio and performance diagnostics. H.264 and HEVC on desktop; additional AV1 and HDR paths depend on platform capabilities.
+Host discovery, PIN pairing, game/desktop launch, configurable resolution, frame rate and bitrate, gamepad/keyboard/mouse input, audio and performance diagnostics. H.264 and HEVC on desktop; additional AV1 and HDR paths depend on platform capabilities. Hold Start on any controller for a shortcut wheel (menu, mouse, keyboard, performance).
 
 ### Two-host co-op
 
@@ -68,7 +68,7 @@ Host discovery, PIN pairing, game/desktop launch, configurable resolution, frame
 ![Two Halo players streamed from separate PCs side by side in Eclipse](../site/media/eclipse-two-host.webp)
 [Watch both Halo co-op layouts with audio](https://preceptorofmagic.github.io/Eclipse-Umbra-Project-Hub/#showcase).
 
-Side-by-side or stacked independent game sessions, player/controller assignments, audio mixing or selection and a compatible encoder mode negotiated with Umbra. [What co-op means, requirements and the system map →](../README.md#how-it-works)
+Side-by-side or stacked independent game sessions, player/controller assignments, audio mixing or selection and a compatible encoder mode negotiated with Umbra. In co-op, the controller’s mouse pointer crosses to the other PC like the Magic Remote’s. [What co-op means, requirements and the system map →](../README.md#how-it-works)
 
 <a name="first-stream"></a>
 

@@ -306,6 +306,10 @@ Umbra for Linux became one Flatpak for KDE Plasma and GNOME on Wayland, with a v
 
 Umbra 0.5.2 for Linux added KDE Plasma 6.7 and prebuilt HDR extras for seven distributions, each a download of its own on the Hub. Flatpak 1.18.4, a security update, had stopped exporting the desktop-file setting KDE checks before it lets an app create displays; Umbra now restores it. Before release it was tested on one PC on five distributions, with and without each HDR extra.
 
+### 22 October · Eclipse 1.3.5
+
+An older LG TV refused to install Eclipse 1.3.4 with error -5. Every file inside the 1.3.4 TV package was dated 1 January 1970, a fault reported to make older LG TVs refuse a package; 1.3.5 packages carry real dates. The release also brings controller-mouse fixes from the SHIELD port to every platform: in co-op the controller’s pointer crosses to the other PC like the Magic Remote’s, and on Windows and Linux a fully pulled trigger now clicks. Holding Start opens a shortcut wheel, and Windows and Linux get the Eclipse tile as their icon.
+
 <!-- activity:history-product:start -->
 **Behind the build · 23 September–5 October 2026**
 

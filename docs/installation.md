@@ -249,7 +249,7 @@ Open the latest release, expand Assets and choose the package described below. I
 
 1. Download Eclipse’s `.ipk` asset to the computer. In Dev Manager, select the TV, open **Apps**, choose **Install** and select that file.
 
-1. Launch Eclipse from the TV’s app list, then [pair an Umbra PC](#pairing). To update, install the newer `.ipk` the same way; settings and pairings are kept. After an update, close and reopen Eclipse.
+1. Launch Eclipse from the TV’s app list, then [pair an Umbra PC](#pairing). To update, install the newer `.ipk` the same way; settings and pairings are kept. After an update, close and reopen Eclipse. If an older LG TV refuses the package with error -5, install Eclipse 1.3.5 or later: earlier packages carried file dates that older LG TVs are reported to reject.
 
 Keep Developer Mode active and extend its session before it expires. LG removes development-installed apps when Developer Mode is disabled. This installation method does not require rooting your TV.
 
