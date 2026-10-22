@@ -4,7 +4,7 @@
 
 ## The screen-side app.
 
-Play a Windows or Linux PC’s games on your LG webOS TV, Android TV, Windows PC or Linux desktop. Pair one host for ordinary streaming, or two Umbra hosts for couch co-op.
+Play a Windows or Linux PC’s games on your LG webOS TV, NVIDIA SHIELD TV, Windows PC or Linux desktop. Pair one host for ordinary streaming, or two Umbra hosts for couch co-op.
 
 Eclipse’s additions use AI-assisted coding. [About the development process.](development.md#development-process)
 
@@ -28,17 +28,17 @@ Open the latest release, expand Assets and choose the package described below. I
 
 Choose `com.aurora.gamestream_<version>_arm.ipk`. Enable LG Developer Mode, connect webOS Dev Manager and install the IPK; updates keep settings and pairings. Tested on LG G5 / webOS 26. [Full LG TV installation →](installation.md#eclipse-webos)
 
-<a name="android"></a>
+<a name="shield"></a>
 
-### Android TV / NVIDIA SHIELD
+### NVIDIA SHIELD TV
 
-![Eclipse on an NVIDIA SHIELD TV, showing its Input Settings with the Nintendo controllers option.](../site/media/eclipse-android-settings.webp)
+![Eclipse on an NVIDIA SHIELD TV, showing a paired PC’s Desktop, Steam and game entries.](../site/media/eclipse-shield-app.webp)
 
-[Android TV releases](https://github.com/PreceptorOfMagic/Eclipse/releases)
+[NVIDIA SHIELD releases](https://github.com/PreceptorOfMagic/Eclipse/releases)
 
 Open the latest release, expand Assets and choose the package described below. If no release is listed, that package has not been published.
 
-Choose `eclipse-android.apk`. Sideload it with the Downloader app on the TV or with `adb install`; updates keep settings and pairings. Android 9 or newer. Tested on a 2019 NVIDIA SHIELD TV / Android 11. [Full Android TV installation →](installation.md#eclipse-android)
+Choose `eclipse-android.apk`. Sideload it on the SHIELD with the Downloader app or `adb install`; updates keep settings and pairings. Tested on a 2019 SHIELD TV (Android 11). It may also run on other Android TV devices, but those are untested. [Full SHIELD installation →](installation.md#eclipse-shield)
 
 <a name="windows"></a>
 

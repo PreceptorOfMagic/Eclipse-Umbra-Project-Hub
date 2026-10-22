@@ -4,7 +4,7 @@
 
 Install Umbra on each gaming PC, then Eclipse on the display device. Start with one working stream before adding the second host.
 
-[Umbra · Windows](#umbra-windows) · [Umbra (Vibepollo) · Windows](#umbra-vibepollo) · [Umbra · Linux](#umbra-linux) · [Eclipse · LG webOS](#eclipse-webos) · [Eclipse · Windows](#eclipse-windows) · [Eclipse · Linux](#eclipse-linux) · [Eclipse · Android TV](#eclipse-android)
+[Umbra · Windows](#umbra-windows) · [Umbra (Vibepollo) · Windows](#umbra-vibepollo) · [Umbra · Linux](#umbra-linux) · [Eclipse · LG webOS](#eclipse-webos) · [Eclipse · Windows](#eclipse-windows) · [Eclipse · Linux](#eclipse-linux) · [Eclipse · NVIDIA SHIELD](#eclipse-shield)
 
 <a name="before-you-start"></a>
 
@@ -16,7 +16,7 @@ Windows x64 or Linux host. Install once for ordinary streaming, or on two PCs fo
 
 ### Screen device → Eclipse
 
-LG webOS, Android TV, Windows x64 or Linux x86_64 client. Install the package matching the device where you will view and control the stream.
+LG webOS, NVIDIA SHIELD, Windows x64 or Linux x86_64 client. Install the package matching the device where you will view and control the stream.
 
 Download an attached file under **Assets**, not GitHub’s automatically generated **Source code (zip)** or **Source code (tar.gz)**. Those are developer archives, not installable apps. Use the latest compatible stable release. If no package is attached for your platform, that download is not available.
 
@@ -305,36 +305,48 @@ cd eclipse-linux-x86_64
 
 Use the portable archive instructions for Ubuntu, Fedora and Arch-style systems meeting these requirements. Do not substitute an ARM package or assume a source archive is a distro installer.
 
-<a name="eclipse-android"></a>
+<a name="eclipse-shield"></a>
 
-## 2D. Eclipse on Android TV
+## 2D. Eclipse on the NVIDIA SHIELD TV
 
-![Eclipse on an NVIDIA SHIELD TV: Input Settings, with the Nintendo controllers option](../site/media/eclipse-android-settings.webp)
-[Android TV releases](https://github.com/PreceptorOfMagic/Eclipse/releases)
+![Eclipse on an NVIDIA SHIELD TV, with a paired PC’s apps.](../site/media/eclipse-shield-app.webp)
+[NVIDIA SHIELD releases](https://github.com/PreceptorOfMagic/Eclipse/releases)
 
 Open the latest release, expand Assets and choose the package described below. If no release is listed, that package has not been published.
 
-**Package:** `eclipse-android.apk`, one APK for Android 9 (API 28) or newer on Android TV or Google TV; on an NVIDIA SHIELD TV, SHIELD Experience 8 or later. Unlike the other packages it is signed, with the project’s own release key; its certificate fingerprint is in the [code signing policy](https://github.com/PreceptorOfMagic/Eclipse/blob/main/CODE_SIGNING_POLICY.md). There is no Play Store listing.
+**Package:** `eclipse-android.apk`, made for the NVIDIA SHIELD TV. It was tested on a 2019 SHIELD TV running SHIELD Experience 9 (Android 11) with ordinary streaming, two-PC co-op, the SHIELD remote and Xbox and Nintendo Switch Pro controllers. It installs from SHIELD Experience 8; the 2015 and 2017 SHIELD TVs and the SHIELD TV Pro have not been tried, so reports are welcome. Unlike the other packages it is signed, with the project’s own release key; its certificate fingerprint is in the [code signing policy](https://github.com/PreceptorOfMagic/Eclipse/blob/main/CODE_SIGNING_POLICY.md). There is no Play Store listing.
 
 1. Download `eclipse-android.apk` and its matching SHA-256 file from the same release.
 
-1. On the TV, install **Downloader** (by AFTVnews) from the Play Store and allow it to install apps. Android TV and SHIELD: **Settings → Device Preferences → Security & restrictions → Unknown sources → Downloader**. Google TV: first enable developer options (**Settings → System → About**, select **Android TV OS build** seven times), then **Settings → Apps → Security & restrictions → Unknown sources → Downloader**.
+1. On the SHIELD, install **Downloader** (by AFTVnews) from the Play Store, then allow it to install apps: **Settings → Device Preferences → Security & restrictions → Unknown sources → Downloader**.
 
-1. Open Downloader, enter the APK’s download link from the release page and choose **Install**. Eclipse appears in the TV’s apps row. You can turn **Unknown sources** off again afterwards.
+1. Open Downloader, enter the APK’s download link from the release page and choose **Install**. Eclipse appears in the SHIELD’s apps row. You can turn **Unknown sources** off again afterwards.
 
-1. From a computer instead: on the TV enable developer options (**Settings → Device Preferences → About**, select **Build** seven times) and turn on **Network debugging** (SHIELD) or **USB debugging** / **Wireless debugging**. Then, with Android platform tools:
+1. From a computer instead: on the SHIELD open **Settings → Device Preferences → About** and select **Build** seven times, then turn on **Settings → Device Preferences → Developer options → Network debugging**. With Android platform tools on the computer:
 
 ```sh
 sha256sum -c eclipse-android.apk.sha256
-adb connect <TV IP address>:5555
+adb connect <SHIELD IP address>:5555
 adb install eclipse-android.apk
 ```
 
 1. Install updates the same way; paired hosts and settings are kept. An APK you build yourself is signed with a different key, so it cannot update a release install, or the other way round, without uninstalling, which removes paired hosts and settings. Then [pair the host](#pairing).
 
-On a SHIELD TV the Xbox button stays the SHIELD’s Home button: hold **View** for 2 seconds to send Guide to the PC. A Nintendo Switch Pro Controller follows its printed letters in Eclipse; **Settings → Input → Nintendo controllers** switches it to Xbox positions. During a stream the remote’s Back key sends Escape to the PC, and held it opens the stream menu; holding OK is a right click; Red, Info, Guide or the SHIELD remote’s menu key opens the stream menu, Blue the on-screen keyboard, and Channel +/− are Page Up/Down. Eclipse switches the TV to the stream’s frame rate while it plays; the 2019 SHIELD TV needs no setting for this, but some other devices only switch when their own frame-rate matching option is on. Choose where the sound goes (HDMI, a soundbar, Bluetooth headphones) under **Settings → Audio → Audio output device**.
+The SHIELD keeps the Xbox button for itself as its Home button: hold **View** for 2 seconds to send Guide to the PC, or use **Guide button** in the stream menu. A Nintendo Switch Pro Controller follows its printed letters in Eclipse and its positions in the SHIELD’s own menus; **Settings → Input → Nintendo controllers** switches Eclipse to positions. During a stream the remote’s Back key sends Escape to the PC, and held it opens the stream menu; holding OK is a right click; the SHIELD remote’s menu key opens the stream menu. Eclipse switches the TV to the stream’s frame rate by itself; the SHIELD needs no setting for this. Choose where the sound goes (HDMI, a soundbar, Bluetooth headphones) under **Settings → Audio → Audio output device**.
 
-Remote keys, controllers and building: the [Android TV guide](https://github.com/PreceptorOfMagic/Eclipse/blob/main/docs/BUILD_ANDROID.md).
+Every remote key, controllers and building from source: the [Android guide](https://github.com/PreceptorOfMagic/Eclipse/blob/main/docs/BUILD_ANDROID.md).
+
+<a name="eclipse-android"></a>
+
+### Other Android TV and Google TV devices (untested)
+
+Eclipse for the SHIELD is an ordinary Android app (Android 9 or newer; 64-bit and 32-bit ARM and x86_64), so it may install and run on other Android TV and Google TV devices. None has been tested, and they are not supported: try it only if you accept that it may not work.
+
+- Video decoders differ between devices. A device may not decode the stream’s resolution, frame rate or 10-bit HEVC, or co-op’s double-size picture, and show a black or broken picture. Start with 1080p, 60 FPS and H.264, and one PC.
+- On a less powerful device, co-op sound may crackle: on the SHIELD the work of mixing co-op sound, including the filter that plays sounds both PCs share only once, used about 70% of one processor core. Turn the filter off under **Settings → Co-op → Play shared sounds once** if it does.
+- Some devices only change their refresh rate when their own frame-rate matching option is on, and a remote’s or controller’s buttons may arrive differently.
+
+Install it as on the SHIELD. On Google TV, first enable developer options (**Settings → System → About**, select **Android TV OS build** seven times), then allow Downloader under **Settings → Apps → Security & restrictions → Unknown sources**. If it does not work, uninstall it, and if you can, [share its logs](#diagnostics) in an Eclipse issue with the device’s model and Android version.
 
 <a name="pairing"></a>
 
@@ -380,7 +392,7 @@ If Eclipse is running on one of the gaming PCs, controls for that PC can behave 
 
 1. Reproduce the problem and return to **Share logs…**.
 
-1. On Windows use **Open folder** and attach `logs/eclipse-logs.txt`. Linux offers the saved bundle and a local-network sharing page. On webOS and Android TV, open the displayed sharing address on another device and download **everything as one file** (`all.txt`), then stop sharing.
+1. On Windows use **Open folder** and attach `logs/eclipse-logs.txt`. Linux offers the saved bundle and a local-network sharing page. On webOS and the NVIDIA SHIELD, open the displayed sharing address on another device and download **everything as one file** (`all.txt`), then stop sharing.
 
 1. Review logs for hostnames, addresses and other personal details before sharing. Include app versions, OS/firmware, GPU and driver, layout, resolution/frame rate, steps to reproduce and whether a normal stream works.
 

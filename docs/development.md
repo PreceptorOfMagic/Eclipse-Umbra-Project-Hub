@@ -298,7 +298,7 @@ Distribution-container and WSL checks help find dependency problems. They do not
 
 <details>
 
-<summary>Eclipse · Android TV — Android SDK + NDK → pinned dependencies → three ABIs → checked, signed APK</summary>
+<summary>Eclipse · NVIDIA SHIELD — Android SDK + NDK → pinned dependencies → three ABIs → checked, signed APK</summary>
 
 Build from Linux or macOS (on Windows, WSL) with the Android SDK (platform 35, build-tools 35), NDK 27.2.12479018, JDK 17 and CMake, Ninja, pkg-config, gettext and Python. The first build compiles SDL2, SDL2_image, Mbed TLS, curl, Opus, inih, expat and FreeType from the same pinned, hash-checked source archives as the Linux and Windows packages; later builds reuse them.
 
@@ -310,7 +310,7 @@ export ANDROID_NDK_HOME=$ANDROID_HOME/ndk/27.2.12479018
 
 One APK carries arm64-v8a, armeabi-v7a and x86_64. The script checks what it packages: every library a binary needs is packaged or is an Android system library, and the co-op peer finds its libraries beside it. With the project’s release key configured the result is `dist/eclipse-android.apk`; without it, a build signed with your local debug key, which cannot update a release install. Host tests compile the Android sources on the desktop, and device self-tests install beside a real Eclipse under their own application ID.
 
-[APK builder](https://github.com/PreceptorOfMagic/Eclipse/blob/main/scripts/android/build_apk.sh) · [Android TV guide: building, signing and testing](https://github.com/PreceptorOfMagic/Eclipse/blob/main/docs/BUILD_ANDROID.md#4-building) · [User installation](installation.md#eclipse-android)
+[APK builder](https://github.com/PreceptorOfMagic/Eclipse/blob/main/scripts/android/build_apk.sh) · [Android guide: building, signing and testing](https://github.com/PreceptorOfMagic/Eclipse/blob/main/docs/BUILD_ANDROID.md#4-building) · [User installation](installation.md#eclipse-shield)
 
 </details>
 
@@ -600,7 +600,7 @@ Raising detail in still pictures meant lowering the encoder’s minimum QP from 
 
 <details>
 
-<summary>Late September–October · Making it usable and maintainable — Desktop co-op, webOS 26, automatic setup, Umbra’s thin fork, co-op audio, the first releases, Umbra on Linux and Android TV</summary>
+<summary>Late September–October · Making it usable and maintainable — Desktop co-op, webOS 26, automatic setup, Umbra’s thin fork, co-op audio, the first releases, Umbra on Linux and the NVIDIA SHIELD</summary>
 
 ### 22–28 September · Desktop co-op, issue by issue
 
@@ -651,7 +651,7 @@ Someone asked whether Umbra works with Vibepollo. Vibepollo and Umbra share an A
 
 Umbra for Linux became one Flatpak for KDE Plasma and GNOME on Wayland. As on Windows, each stream gets its own virtual display, created by the desktop at the size and refresh rate Eclipse asks for, and a Linux host can be one of the two co-op PCs alongside a Windows host. Stock KWin and Mutter cannot make a virtual display HDR, so a small patch to each was written and published as optional packages for Ubuntu 26.04. On an AMD Radeon RX Vega the first build passed every frame through the CPU: 4K ran at about 13 fps and co-op at about 10. Keeping frames on the GPU between OpenGL and OpenCL brought 4K to the card’s encoder limit, the same 62 fps measured on Windows, and co-op panes to about 35 fps. PreceptorOfMagic tested KDE Plasma and GNOME on NVIDIA and on AMD, and Umbra 0.5.1 for Linux shipped the result.
 
-### 14–22 October · Eclipse on Android TV
+### 14–22 October · Eclipse on the NVIDIA SHIELD
 
 The client was ported to Android TV, with an NVIDIA SHIELD TV as the test device: a native build of the same client code, Android’s MediaCodec video decoder, APK packaging, self-tests and CI. The 2019 SHIELD TV turned out to run 32-bit Android, and Mbed TLS there needed its entropy from /dev/urandom. Co-op ran in both layouts once the decoder was opened twice as wide for side by side and composites were fed without padding before a slice. In co-op the controller’s mouse was made to point like the Magic Remote, which PreceptorOfMagic found worked well, and to stop when the stick is let go; holding Start opens a shortcut wheel ported from Moonlight V+. Switching the app away mid-stream had frozen it while it closed its audio; patched SDL code fixed that. Measured on the SHIELD, the co-op mixer ran inside the audio callback and overran it in 9% of callbacks, so both players’ sound queues grew to their 500 ms cap; mixing now runs ahead of the device. The SHIELD then could not keep up with the co-op audio filter on busy game sound, which crackled: the thread running it used about 70% of one core. Mixing 50 ms ahead removed the crackle, at the cost of about 35 ms more delay, and a change to how the second player’s sound is handed over brought the filter back to the accuracy PreceptorOfMagic expects by ear; a cheaper filter comes next. Which button is which is now worked out for each controller from the buttons Android reports, because the controller database’s Nintendo Switch Pro line was written for an older Android. On 22 October the port was released as part of Eclipse 1.3.5: a signed APK built from its own tag, because it also carries shared changes the other 1.3.5 packages do not. A 4K stream from one PC that lost about 40% of its packets in the app’s receive buffer on 16 October has not been retested.
 
@@ -705,7 +705,7 @@ The [feature catalogue](../README.md#features) explains the user-facing behaviou
 - **Audio:** a live TV listening test of the passive gate; whispers and other noise-only lines, which are caught at the start but not held; copies playing more than 0.25% slower; noise-only lines lowering the earlier copy slightly; endpoint restoration across disconnect/crash/restart.
 
 - **Automatic setup:** clean-install and in-place upgrade checks with no manual hidden settings. Verify required encoder payload, advertised capabilities, both orientations and ordinary-stream regressions.
-- **Android TV:** a cheaper co-op audio filter, so the SHIELD’s extra 35 ms of co-op sound delay can go; a retest of the 4K stream that lost packets on 16 October; reports from SHIELD models and Android TV devices other than the 2019 SHIELD TV.
+- **NVIDIA SHIELD:** a cheaper co-op audio filter, so the SHIELD’s extra 35 ms of co-op sound delay can go; a retest of the 4K stream that lost packets on 16 October; reports from SHIELD models other than the 2019 SHIELD TV.
 - **Since 1.3.5:** a real-controller test of the co-op controller mouse and the shortcut wheel on webOS, Windows and Linux; the Windows installer over an earlier version; the webOS 5 install fix on the TV that reported it.
 - **Umbra wired route:** apply it when a stream opens and remove it when the stream closes, so a paused co-op session cannot leave a TV unreachable.
 
