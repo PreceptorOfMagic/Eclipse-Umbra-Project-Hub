@@ -10,6 +10,7 @@ for (const [platform, name, repo] of [
   ['webos', 'com.aurora.gamestream_1.0.8_arm.ipk', 'Eclipse'],
   ['windows', 'eclipse-windows-x64-unsigned.zip', 'Eclipse'],
   ['linux', 'eclipse-linux-x86_64.tar.gz', 'Eclipse'],
+  ['android', 'eclipse-android.apk', 'Eclipse'],
   ['windows-setup', 'eclipse-windows-x64-setup-unsigned.exe', 'Eclipse'],
   ['umbra-windows', 'Umbra-windows-x64.exe', 'Umbra'],
   ['umbra-linux', 'Umbra-0.5.1-linux-x86_64.flatpak', 'Umbra'],

@@ -33,7 +33,7 @@ Eclipse follows Moonlight → Moonlight TV → Aurora. Umbra follows Sunshine �
 ### What you need
 
 - One Windows or Linux gaming PC running Umbra; two for two-host co-op.
-- Eclipse on an LG webOS TV, Windows x64 PC or Linux x86_64 desktop.
+- Eclipse on an LG webOS TV, an Android TV device such as the NVIDIA SHIELD TV, a Windows x64 PC or a Linux x86_64 desktop.
 - A reachable home network, ideally wired, plus controllers or keyboard/mouse.
 - Your games installed on each host and any accounts the games require.
 
@@ -117,6 +117,7 @@ Compatibility and test coverage as of October 2026:
 | LG webOS client | LG G5, webOS 26 (11.2.0 / firmware 43.21.77), wired through a UE300 USB Ethernet adapter | **Tested.** Standard streaming and the two-host co-op path run on the project television. | Other LG models, SoCs, decoder combinations and earlier/later webOS releases need community testing. |
 | Windows client | Windows 11 x64 on the Radeon RX Vega test PC; D3D11VA hardware decode | **Tested.** Standard and co-op sessions, diagnostics and recovery have been exercised. | Windows 10, Windows on ARM, Intel-only clients, other GPU generations and broader decoder/driver combinations remain unverified. |
 | Linux client | x86_64 Ubuntu 22.04/26.04, Fedora 44 and Arch environments under WSL; NVIDIA NVDEC | **Tested.** Single-host/co-op streaming and diagnostics exercised under WSL; this is not native-Linux certification. | Bare-metal Linux and native AMD/Intel VAAPI remain unverified. Experimental WSL VAAPI tests showed crashes and visual faults. |
+| Android TV client | NVIDIA SHIELD TV (2019), SHIELD Experience 9 / Android 11 | **Tested.** Standard streaming and two-host co-op, with the SHIELD remote and Xbox and Nintendo Switch Pro controllers. | Other SHIELD models, other Android TV and Google TV devices and other Android versions need community testing. Co-op sound runs about 35 ms later than on the other clients for now. |
 | Umbra hosts | Windows 11 x64; NVIDIA RTX 4070, NVIDIA RTX 3070 and AMD Radeon RX Vega systems | **Tested.** Single-host streaming and host diagnostics work across the project systems. | Windows 10, Windows Server, Windows on ARM, Intel Arc/iGPU hosts and newer AMD generations need coverage. |
 | Umbra Linux hosts | Flatpak with KDE Plasma and GNOME on Wayland on Ubuntu 26.04 and 26.10, Fedora 44 and 45 and openSUSE Tumbleweed (AMD Radeon RX Vega, Umbra 0.5.2); Ubuntu 26.04 also on an NVIDIA RTX 2060 SUPER (Umbra 0.5.1) | **Tested.** Ordinary streaming, a virtual display for each stream, co-op with a Windows host, and HDR with the KWin/Mutter extras. The only AMD card tested, a 2017 RX Vega, is limited by its encoder (about 60 fps at 4K, the same on Windows); its age is the likely limit. | Other distributions and desktop versions (Arch Linux and CachyOS: the test PC cannot start them with its Secure Boot setup), NVIDIA with Umbra 0.5.2, newer AMD GPUs, Intel GPUs, multi-GPU PCs and two Linux hosts in one co-op session. X11 desktops stream only (no co-op or HDR); wlroots desktops and COSMIC are unsupported. |
 | NVIDIA + NVIDIA co-op | RTX 4070 + RTX 3070, Windows 11; 10-bit HEVC/HDR path | **Measured.** Two-host co-op has been used and measured on the primary rig. | Other NVIDIA architectures, driver branches, resolutions and refresh rates need reports. |
@@ -302,9 +303,9 @@ Umbra’s additions were merged into Vibepollo 2.0.0, Nonary’s AI-enhanced ver
 
 Umbra for Linux became one Flatpak for KDE Plasma and GNOME on Wayland, with a virtual display for each stream and co-op alongside a Windows host. Small KWin and Mutter patches add HDR to those virtual displays. On a 2017 AMD Radeon RX Vega, keeping frames on the GPU raised 4K from about 13 fps to the card’s own encoder limit. Umbra 0.5.1 for Linux was released.
 
-### 14–22 October · Eclipse on Android TV, in progress
+### 14–22 October · Eclipse on Android TV
 
-Eclipse was ported to Android TV and tested on an NVIDIA SHIELD TV: the same client with Android’s own video decoder, the TV remote and co-op in both layouts. Two fixes made there, the controller mouse in co-op and the hold-Start wheel, came to every platform in Eclipse 1.3.5. The port is not released yet; its work is public as a draft pull request on the Eclipse repository.
+Eclipse was ported to Android TV and tested on an NVIDIA SHIELD TV: the same client with Android’s own video decoder, the TV remote and co-op in both layouts. Two fixes made there, the controller mouse in co-op and the hold-Start wheel, came to every platform in Eclipse 1.3.5. On 22 October the port itself was released as part of Eclipse 1.3.5: a signed APK for Android 9 and newer.
 
 ### 15 October · Umbra 0.5.2 for Linux
 
@@ -312,7 +313,7 @@ Umbra 0.5.2 for Linux added KDE Plasma 6.7 and prebuilt HDR extras for seven dis
 
 ### 22 October · Eclipse 1.3.5
 
-An older LG TV refused to install Eclipse 1.3.4 with error -5. Every file inside the 1.3.4 TV package was dated 1 January 1970, a fault reported to make older LG TVs refuse a package; 1.3.5 packages carry real dates. The release also brings controller-mouse fixes from the SHIELD port to every platform: in co-op the controller’s pointer crosses to the other PC like the Magic Remote’s, and on Windows and Linux a fully pulled trigger now clicks. Holding Start opens a shortcut wheel, and Windows and Linux get the Eclipse tile as their icon.
+An older LG TV refused to install Eclipse 1.3.4 with error -5. Every file inside the 1.3.4 TV package was dated 1 January 1970, a fault reported to make older LG TVs refuse a package; 1.3.5 packages carry real dates. The release also brings controller-mouse fixes from the SHIELD port to every platform: in co-op the controller’s pointer crosses to the other PC like the Magic Remote’s, and on Windows and Linux a fully pulled trigger now clicks. Holding Start opens a shortcut wheel, and Windows and Linux get the Eclipse tile as their icon. The same release now also carries the first Eclipse for Android TV.
 
 <!-- activity:history-product:start -->
 **Behind the build · 23 September–22 October 2026**

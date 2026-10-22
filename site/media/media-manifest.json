@@ -147,6 +147,13 @@
       "codec": "webp"
     },
     {
+      "name": "eclipse-android-settings.webp",
+      "sha256": "e21698334cc6ca7c36db1ebd829a6706809ece7bb6a89042c8736d37f6667e41",
+      "width": 1920,
+      "height": 1080,
+      "codec": "webp"
+    },
+    {
       "name": "eclipse-share-logs.webp",
       "sha256": "ed04243dbb62d52bda496c0507520b17e66ef01ef395d91485c90317c6277554",
       "width": 1155,

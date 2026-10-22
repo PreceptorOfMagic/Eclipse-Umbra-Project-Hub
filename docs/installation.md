@@ -16,7 +16,7 @@ Windows x64 or Linux host. Install once for ordinary streaming, or on two PCs fo
 
 ### Screen device → Eclipse
 
-LG webOS, Windows x64 or Linux x86_64 client. Install the package matching the device where you will view and control the stream.
+LG webOS, Android TV, Windows x64 or Linux x86_64 client. Install the package matching the device where you will view and control the stream.
 
 Download an attached file under **Assets**, not GitHub’s automatically generated **Source code (zip)** or **Source code (tar.gz)**. Those are developer archives, not installable apps. Use the latest compatible stable release. If no package is attached for your platform, that download is not available.
 
@@ -304,6 +304,35 @@ cd eclipse-linux-x86_64
 1. If hardware decoding fails, update the relevant NVIDIA or Mesa/VAAPI driver and include the exact driver and desktop session in a report. Native AMD/Intel VAAPI still needs validation; the WSL VAAPI test path has known instability.
 
 Use the portable archive instructions for Ubuntu, Fedora and Arch-style systems meeting these requirements. Do not substitute an ARM package or assume a source archive is a distro installer.
+
+<a name="eclipse-android"></a>
+
+## 2D. Eclipse on Android TV
+
+![Eclipse on an NVIDIA SHIELD TV: Input Settings, with the Nintendo controllers option](../site/media/eclipse-android-settings.webp)
+[Android TV releases](https://github.com/PreceptorOfMagic/Eclipse/releases)
+
+Open the latest release, expand Assets and choose the package described below. If no release is listed, that package has not been published.
+
+**Package:** `eclipse-android.apk`, one APK for Android 9 (API 28) or newer on Android TV or Google TV; on an NVIDIA SHIELD TV, SHIELD Experience 8 or later. Unlike the other packages it is signed, with the project’s own release key; its certificate fingerprint is in the [code signing policy](https://github.com/PreceptorOfMagic/Eclipse/blob/main/CODE_SIGNING_POLICY.md). There is no Play Store listing.
+
+1. Download `eclipse-android.apk` and its matching SHA-256 file from the same release.
+
+1. On the TV, install **Downloader** (by AFTVnews) from the Play Store and allow it to install apps. Android TV and SHIELD: **Settings → Device Preferences → Security & restrictions → Unknown sources → Downloader**. Google TV: first enable developer options (**Settings → System → About**, select **Android TV OS build** seven times), then **Settings → Apps → Security & restrictions → Unknown sources → Downloader**.
+
+1. Open Downloader, enter the APK’s download link from the release page and choose **Install**. Eclipse appears in the TV’s apps row. You can turn **Unknown sources** off again afterwards.
+
+1. From a computer instead: on the TV enable developer options (**Settings → Device Preferences → About**, select **Build** seven times) and turn on **Network debugging** (SHIELD) or **USB debugging** / **Wireless debugging**. Then, with Android platform tools:
+
+```sh
+sha256sum -c eclipse-android.apk.sha256
+adb connect <TV IP address>:5555
+adb install eclipse-android.apk
+```
+
+1. Install updates the same way; paired hosts and settings are kept. An APK you build yourself is signed with a different key, so it cannot update a release install, or the other way round, without uninstalling, which removes paired hosts and settings. Then [pair the host](#pairing).
+
+On a SHIELD TV the Xbox button stays the SHIELD’s Home button: hold **View** for 2 seconds to send Guide to the PC. A Nintendo Switch Pro Controller follows its printed letters in Eclipse; **Settings → Input → Nintendo controllers** switches it to Xbox positions. Remote keys, controllers and building: the [Android TV guide](https://github.com/PreceptorOfMagic/Eclipse/blob/main/docs/BUILD_ANDROID.md).
 
 <a name="pairing"></a>
 

@@ -12,6 +12,7 @@ Only reviewed delivery copies belong here. Masters, private capture notes and re
 | `coop-test-pattern.mp4` + poster | 12-second technical illustration on Development. The MP4 preserves readable bands/counters and is smaller than the former WebM copy; the redundant WebM is retired. |
 | `umbra-host-home.webp` | Complete 1410×890 host panel captured 8 October 2026: Umbra 0.4.6-umbra.4, Apollo base status and the separate unavailable published-Umbra comparison are all visible. |
 | `eclipse-webos-app.webp` | Fresh 1920×1080 LG G5 / webOS 26 app-library capture for the TV platform card. |
+| `eclipse-android-settings.webp` | 1920×1080 capture of Eclipse 1.3.5's Input Settings on the project's 2019 NVIDIA SHIELD TV, taken on 22 October 2026 with no host paired, for the Android TV card and installation section. |
 | `eclipse-webos-launcher.webp` | Fresh 1920×1080 webOS launcher capture, with Eclipse selected, for the installation guide. |
 | `eclipse-halo-vertical.mp4` + `eclipse-two-host.webp` | Approved 70.4-second side-by-side Halo excerpt, with audio. Starts at the island cutscene and ends before the death in the second vertical run. Poster/still: 45 seconds into the excerpt. Opening audio glitches need further co-op audio tuning. |
 | `eclipse-halo-horizontal.mp4` + poster | Approved 85.4-second stacked Halo excerpt, with audio. Starts at the island cutscene and ends at the cleared-beach checkpoint. Poster: 54 seconds into the excerpt. |

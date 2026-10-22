@@ -4,7 +4,7 @@
 
 ## The screen-side app.
 
-Play a Windows or Linux PC’s games on your LG webOS TV, Windows PC or Linux desktop. Pair one host for ordinary streaming, or two Umbra hosts for couch co-op.
+Play a Windows or Linux PC’s games on your LG webOS TV, Android TV, Windows PC or Linux desktop. Pair one host for ordinary streaming, or two Umbra hosts for couch co-op.
 
 Eclipse’s additions use AI-assisted coding. [About the development process.](development.md#development-process)
 
@@ -27,6 +27,18 @@ Download an attached file under **Assets**, not GitHub’s automatically generat
 Open the latest release, expand Assets and choose the package described below. If no release is listed, that package has not been published.
 
 Choose `com.aurora.gamestream_<version>_arm.ipk`. Enable LG Developer Mode, connect webOS Dev Manager and install the IPK; updates keep settings and pairings. Tested on LG G5 / webOS 26. [Full LG TV installation →](installation.md#eclipse-webos)
+
+<a name="android"></a>
+
+### Android TV / NVIDIA SHIELD
+
+![Eclipse on an NVIDIA SHIELD TV, showing its Input Settings with the Nintendo controllers option.](../site/media/eclipse-android-settings.webp)
+
+[Android TV releases](https://github.com/PreceptorOfMagic/Eclipse/releases)
+
+Open the latest release, expand Assets and choose the package described below. If no release is listed, that package has not been published.
+
+Choose `eclipse-android.apk`. Sideload it with the Downloader app on the TV or with `adb install`; updates keep settings and pairings. Android 9 or newer. Tested on a 2019 NVIDIA SHIELD TV / Android 11. [Full Android TV installation →](installation.md#eclipse-android)
 
 <a name="windows"></a>
 
