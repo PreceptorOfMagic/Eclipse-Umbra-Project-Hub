@@ -4,9 +4,9 @@
 
 ## Two PCs. One screen. Couch co-op, re-engineered.
 
-**Eclipse** is the client and **Umbra** is the Windows host. Use them for familiar one-PC remote game streaming—or combine two independent PCs into one side-by-side or stacked couch co-op view.
+**Eclipse** is the client and **Umbra** is the host, for Windows and Linux. Use them for familiar one-PC remote game streaming—or combine two independent PCs into one side-by-side or stacked couch co-op view.
 
-**Eclipse:** LG webOS · Windows x64 · Linux x86_64 &nbsp;|&nbsp; **Umbra:** Windows x64
+**Eclipse:** LG webOS · Windows x64 · Linux x86_64 &nbsp;|&nbsp; **Umbra:** Windows x64 · Linux x86_64
 
 [Install Eclipse/Umbra](docs/installation.md) · [See how it works](#how-it-works) · [Open the project website](https://preceptorofmagic.github.io/Eclipse-Umbra-Project-Hub/)
 
@@ -32,7 +32,7 @@ Eclipse follows Moonlight → Moonlight TV → Aurora. Umbra follows Sunshine �
 
 ### What you need
 
-- One Windows gaming PC running Umbra; two for two-host co-op.
+- One Windows or Linux gaming PC running Umbra; two for two-host co-op.
 - Eclipse on an LG webOS TV, Windows x64 PC or Linux x86_64 desktop.
 - A reachable home network, ideally wired, plus controllers or keyboard/mouse.
 - Your games installed on each host and any accounts the games require.
@@ -268,7 +268,7 @@ An extra quantisation attempt in one revision raised worst-case encode time and 
 
 <details>
 
-<summary>Late September–October · Making it usable and maintainable — Desktop clients, a firmware crash, automatic setup, the thin Apollo fork, the first public releases and Umbra on Linux</summary>
+<summary>Late September–October · Making it usable and maintainable — Desktop clients, a firmware crash, automatic setup, the thin Apollo fork, the first public releases, Umbra on Linux and Eclipse on Android TV</summary>
 
 ### Late September · Desktop clients and session recovery
 
@@ -302,6 +302,10 @@ Umbra’s additions were merged into Vibepollo 2.0.0, Nonary’s AI-enhanced ver
 
 Umbra for Linux became one Flatpak for KDE Plasma and GNOME on Wayland, with a virtual display for each stream and co-op alongside a Windows host. Small KWin and Mutter patches add HDR to those virtual displays. On a 2017 AMD Radeon RX Vega, keeping frames on the GPU raised 4K from about 13 fps to the card’s own encoder limit. Umbra 0.5.1 for Linux was released.
 
+### 14–22 October · Eclipse on Android TV, in progress
+
+Eclipse was ported to Android TV and tested on an NVIDIA SHIELD TV: the same client with Android’s own video decoder, the TV remote and co-op in both layouts. Two fixes made there, the controller mouse in co-op and the hold-Start wheel, came to every platform in Eclipse 1.3.5. The port is not released yet; its work is public as a draft pull request on the Eclipse repository.
+
 ### 15 October · Umbra 0.5.2 for Linux
 
 Umbra 0.5.2 for Linux added KDE Plasma 6.7 and prebuilt HDR extras for seven distributions, each a download of its own on the Hub. Flatpak 1.18.4, a security update, had stopped exporting the desktop-file setting KDE checks before it lets an app create displays; Umbra now restores it. Before release it was tested on one PC on five distributions, with and without each HDR extra.
@@ -311,10 +315,10 @@ Umbra 0.5.2 for Linux added KDE Plasma 6.7 and prebuilt HDR extras for seven dis
 An older LG TV refused to install Eclipse 1.3.4 with error -5. Every file inside the 1.3.4 TV package was dated 1 January 1970, a fault reported to make older LG TVs refuse a package; 1.3.5 packages carry real dates. The release also brings controller-mouse fixes from the SHIELD port to every platform: in co-op the controller’s pointer crosses to the other PC like the Magic Remote’s, and on Windows and Linux a fully pulled trigger now clicks. Holding Start opens a shortcut wheel, and Windows and Linux get the Eclipse tile as their icon.
 
 <!-- activity:history-product:start -->
-**Behind the build · 23 September–5 October 2026**
+**Behind the build · 23 September–22 October 2026**
 
-- **User prompts:** 247
-- **Tokens processed:** 5,011,694,573
+- **User prompts:** 751
+- **Tokens processed:** 11,615,044,011
 - **Models:** `claude-opus-4-8`, `claude-opus-5`, `claude-opus-5-5`, `claude-sonnet-5`, `claude-sonnet-5-5`, `gpt-5.6-sol`, `gpt-6-astra`
 <!-- activity:history-product:end -->
 

@@ -243,7 +243,7 @@ Open the latest release, expand Assets and choose the package described below. I
 
 1. On the TV, install **Developer Mode** from Apps, sign in with your LG Developer account, enable Dev Mode Status and reboot when requested. Follow [LG’s official Developer Mode guide](https://webostv.developer.lge.com/develop/getting-started/developer-mode-app).
 
-1. On your computer, get [webOS Dev Manager](https://github.com/webosbrew/dev-manager-desktop/releases/latest): Windows x64 MSI, macOS DMG or Linux AppImage/DEB as appropriate. Install and open it.
+1. On your computer, get [webOS Dev Manager](https://github.com/webosbrew/dev-manager-desktop/releases/latest): Windows x64 MSI, macOS DMG or Linux AppImage/DEB as appropriate. Install and open it. On webOS 26, use version 1.99.20 or newer: older versions cannot copy the app to the TV (“permission denied”).
 
 1. Open Developer Mode on the TV and enable **Key Server**. Add the TV in Dev Manager using the address and case-sensitive passphrase displayed by the TV. Keep both devices on the same reachable network.
 

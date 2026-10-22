@@ -35,6 +35,8 @@ The desktop video module also incorporates and adapts decoding and presentation 
 
 moonlight-common-c's Reed–Solomon forward-error-correction implementation credits **Luigi Rizzo, Alain Knaff and Iwan Timmer**, with portions derived from work by **Phil Karn, Robert Morelos-Zaragoza and Hari Thirumoorthy**. Its notice is BSD-style.
 
+Eclipse's hold-Start shortcut wheel ports the Start gesture from [Moonlight V+](https://github.com/qiin2333/moonlight-vplus) by **qiin2333 and contributors** (GPL-3.0).
+
 ### Sunshine
 
 [Sunshine](https://github.com/LizardByte/Sunshine) was originally created by **[@loki-47-6F-64](https://github.com/loki-47-6F-64/sunshine)** and is now maintained and developed by **[LizardByte](https://github.com/LizardByte)** and contributors. Sunshine is the open host foundation beneath Apollo and Umbra.
@@ -69,12 +71,12 @@ The exact set varies by platform and build. Licence entries describe the upstrea
 
 | Project | Role | Licence family / source |
 |---|---|---|
-| [moonlight-common-c](https://github.com/moonlight-stream/moonlight-common-c) | Core streaming protocol | GPL-3.0; [licence in the Eclipse tree](https://github.com/PreceptorOfMagic/Eclipse/blob/main/core/moonlight-common-c/LICENSE.txt) |
-| [ENet](https://github.com/lsalzman/enet), by **Lee Salzman**, and [Cameron Gutman's Moonlight fork](https://github.com/cgutman/enet) | Network transport dependency | MIT; Eclipse pins fork revision `115a10b`; [licence in the Eclipse tree](https://github.com/PreceptorOfMagic/Eclipse/blob/main/core/moonlight-common-c/enet/LICENSE) |
-| [SS4S](https://github.com/mariotaku/ss4s) | Streaming/media support | LGPL-3.0; [licence in the Eclipse tree](https://github.com/PreceptorOfMagic/Eclipse/blob/main/third_party/ss4s/LICENSE) |
+| [moonlight-common-c](https://github.com/moonlight-stream/moonlight-common-c) | Core streaming protocol | GPL-3.0; [licence in the Eclipse tree](https://github.com/moonlight-stream/moonlight-common-c/blob/c86e0537d11566f9825d6323711ec61e3e702365/LICENSE.txt) |
+| [ENet](https://github.com/lsalzman/enet), by **Lee Salzman**, and [Cameron Gutman's Moonlight fork](https://github.com/cgutman/enet) | Network transport dependency | MIT; Eclipse pins fork revision `115a10b`; [licence in the Eclipse tree](https://github.com/cgutman/enet/blob/115a10baa1d7f291ff5b870765610fd3b4a6e43c/LICENSE) |
+| [SS4S](https://github.com/mariotaku/ss4s) | Streaming/media support | LGPL-3.0; [licence in the Eclipse tree](https://github.com/mariotaku/ss4s/blob/9cbad6a97b951aaf8d957b84f14b652ddb3dd5d2/LICENSE) |
 | [commons-c](https://github.com/mariotaku/commons-c) | Shared C utilities | Upstream project is MIT. Its linked-list header attributes token-pasting macros to a Stack Overflow answer and `sortedinsert` to a GeeksforGeeks example. Its optional CEC loader contains [Pulse-Eight libCEC](https://github.com/Pulse-Eight/libcec)-derived material offered under GPL-2.0-or-later or separate commercial terms. |
 | [LVGL](https://github.com/lvgl/lvgl) / [Mariotaku fork](https://github.com/mariotaku/lvgl) | User interface | MIT |
-| [libmicrodns](https://github.com/videolabs/libmicrodns) | Local service discovery | LGPL-2.1-or-later, with a separate commercial option upstream; [copying file in the Eclipse tree](https://github.com/PreceptorOfMagic/Eclipse/blob/main/third_party/libmicrodns/COPYING) |
+| [libmicrodns](https://github.com/videolabs/libmicrodns) | Local service discovery | LGPL-2.1-or-later, with a separate commercial option upstream; [copying file in the Eclipse tree](https://github.com/videolabs/libmicrodns/blob/8cb6b90e8eb8550515812fcbf1736340185d62fa/COPYING) |
 | [SDL](https://github.com/libsdl-org/SDL) and [SDL_image](https://github.com/libsdl-org/SDL_image) | Window, input and image support | zlib |
 | [SDL-webOS](https://github.com/webosbrew/SDL-webOS) | webOS SDL port | Upstream project notices apply |
 | [SDL_GameControllerDB](https://github.com/gabomdq/SDL_GameControllerDB) | Controller mappings | zlib |
@@ -93,7 +95,7 @@ The exact set varies by platform and build. Licence entries describe the upstrea
 | [OpenSSL](https://github.com/openssl/openssl) | TLS in applicable desktop builds | Apache-2.0 for current versions |
 | [h264bitstream](https://github.com/aizvorski/h264bitstream) | Tracked experimental/dormant codec tooling | LGPL-2.1; [licence in the Eclipse tree](https://github.com/PreceptorOfMagic/Eclipse/blob/main/third_party/h264bitstream/LICENSE) |
 | [CMake](https://github.com/Kitware/CMake) | Copied build modules | BSD-3-Clause notices |
-| [Unity](https://github.com/ThrowTheSwitch/Unity), by Mike Karlesky, Mark VanderVoord, Greg Williams and contributors | Client unit-test framework; development only | MIT; [licence in the Eclipse tree](https://github.com/PreceptorOfMagic/Eclipse/blob/main/third_party/Unity/LICENSE.txt), pinned submodule revision `8ba01386008196a92ef4fdbdb0b00f2434c79563` |
+| [Unity](https://github.com/ThrowTheSwitch/Unity), by Mike Karlesky, Mark VanderVoord, Greg Williams and contributors | Client unit-test framework; development only | MIT; [licence in the Eclipse tree](https://github.com/ThrowTheSwitch/Unity/blob/8ba01386008196a92ef4fdbdb0b00f2434c79563/LICENSE.txt), pinned submodule revision `8ba01386008196a92ef4fdbdb0b00f2434c79563` |
 | [Sharp](https://github.com/lovell/sharp), by Lovell Fuller and contributors, with [libvips](https://github.com/libvips/libvips) and the colour-package contributors | Pinned launch-tool pipeline that renders the social card and webOS artwork; development only, not part of the static site or application runtime | Sharp Apache-2.0; the locked Linux libvips package declares LGPL-3.0-or-later; colour dependencies are MIT; exact versions are in `scripts/launch/package-lock.json` |
 
 Platform and build projects also include [libpbnjson](https://github.com/webosose/libpbnjson), [webOS OSE](https://github.com/webosose), [webos-userland](https://github.com/webosbrew/webos-userland) and [buildroot-nc4](https://github.com/openlgtv/buildroot-nc4). This table records the major source, linked, vendored and generated-asset inputs; it is not an exhaustive list of build-time packages, system dependencies or workstation utilities.

@@ -90,7 +90,7 @@ Shown with two virtual controllers emulated on the client PC.
 
 #### Mouse and keyboard routing
 
-Pane-aware pointer routing translates coordinates into the target desktop. A drag stays with the PC where the button was pressed, and a key release returns to the PC that received its press. You can instead choose “Assign mouse and keyboard like controllers” to pin devices to a PC for the session. Relative/gamepad virtual-mouse input is a separate path; it should not be assumed to follow hover. Windows routing has recorded tests; TV coverage is less complete.
+Pane-aware pointer routing translates coordinates into the target desktop. A drag stays with the PC where the button was pressed, and a key release returns to the PC that received its press. You can instead choose “Assign mouse and keyboard like controllers” to pin devices to a PC for the session. Since Eclipse 1.3.5 the controller’s virtual mouse keeps its own position and crosses to the other PC the same way, except when Eclipse runs on one of the two PCs; other relative mouse input still goes to the first PC. Windows routing has recorded tests; TV coverage is less complete.
 
 [![The pointer crossing from one PC’s half to the other’s (plays on the website)](../site/media/eclipse-coop-pointer-poster.webp)](https://preceptorofmagic.github.io/Eclipse-Umbra-Project-Hub/index.html#features-input)
 
@@ -154,7 +154,7 @@ Settings → Host → Computer’s monitor while streaming offers ask at start, 
 
 #### Prefer the TV’s wired adapter
 
-On webOS, the wired-network option identifies the active USB Ethernet adapter and asks a capable Umbra host to direct the session over that connection. Automatic mode uses the extension only when the host advertises it. Wi-Fi need not be disabled; this is not a guarantee for every adapter chipset.
+On webOS, the wired-network option identifies the active USB Ethernet adapter and asks a capable Umbra host to direct the session over that connection. Automatic mode uses the extension only when the host advertises it. Wi-Fi need not be disabled; this is not a guarantee for every adapter chipset. Known limitation: Umbra applies this route when its app starts and removes it when the app ends, so a paused co-op session keeps it; if the TV’s adapter is unplugged in between, that PC may not reach the TV until its Co-op Pane is quit.
 
 #### A more usable desktop client
 

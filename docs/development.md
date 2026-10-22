@@ -126,7 +126,7 @@ Integration had to add real capture, residual/reconstruction work and rate budge
 
 Both bit-depth builds and the required kernels must accompany a host package. Packaging can otherwise succeed without the custom encoder, leaving a host unsuitable for the intended mixed-vendor mode. Verify advertised capabilities against the actual installed files, then verify the selected path in a real session. Source conformance tests are necessary, not sufficient.
 
-Read: [GPU HEVC source and component tests](https://github.com/PreceptorOfMagic/Eclipse/tree/main/experimental/gpu-hevc), [host encoder packaging](https://github.com/PreceptorOfMagic/Umbra/blob/umbra/thin/cmake/packaging/windows.cmake). The encoder builds on upstream work, including x265; see [Acknowledgements](../ACKNOWLEDGEMENTS.md).
+Read: [GPU HEVC source and component tests](https://github.com/PreceptorOfMagic/Eclipse/tree/main/experimental/gpu-hevc), [host encoder packaging](https://github.com/PreceptorOfMagic/Umbra/blob/release/umbra-0.5/cmake/packaging/windows.cmake). The encoder builds on upstream work, including x265; see [Acknowledgements](../ACKNOWLEDGEMENTS.md).
 
 </details>
 
@@ -142,13 +142,13 @@ Co-op negotiates host capabilities, selects a compatible encoding route, request
 
 *19 seconds · Silent. Recorded by an AI assistant (Codex) as a capability test: every click and key press was planned in advance and played back automatically on live hosts. Real host cursors were enlarged for visibility. Wallpapers: [“Moon Light”](https://steamcommunity.com/sharedfiles/filedetails/?id=1539918440) by Sir Crab and [“KIKI&JIJI”](https://steamcommunity.com/sharedfiles/filedetails/?id=2466412743) (art credited to Ayu) by 鬥丨Dou, from the Wallpaper Engine Steam Workshop.*
 
-Controller assignments associate remembered devices with host destinations. Pane-aware absolute pointing maps the composite coordinate into the selected host’s desktop. Button ownership stays fixed through a drag, and keyboard key-up events return to the destination of their key-down to avoid leaving keys stuck on a different PC. Explicit per-device mouse/keyboard assignment offers an alternative to pane routing; relative and virtual-mouse behaviour needs separate testing.
+Controller assignments associate remembered devices with host destinations. Pane-aware absolute pointing maps the composite coordinate into the selected host’s desktop. Button ownership stays fixed through a drag, and keyboard key-up events return to the destination of their key-down to avoid leaving keys stuck on a different PC. Explicit per-device mouse/keyboard assignment offers an alternative to pane routing. Since 1.3.5 the controller’s virtual mouse keeps its own position in co-op and goes through the same routing, except on a Windows client that is itself one of the hosts; other relative mouse input still goes to the first PC and needs separate testing.
 
 When the Windows client is also a host, focus and injected input can loop back into the client unless the local pane is treated specially. The game needs a separate captured display; putting Eclipse on the same virtual display risks recursive capture. Routing a controller in Eclipse also does not revoke a handle already held by Steam or another local application. Local-device isolation, particularly wireless devices, remains an engineering gap rather than an automatic consumer guarantee.
 
 Monitor-off requests deliberately exclude the PC displaying Eclipse. Speaker restoration tracks the pre-stream playback endpoint and handles delayed/recreated endpoints. These are session-lifecycle behaviours that need disconnect, quit, crash, restart and upgrade coverage—not just a successful first launch.
 
-Read: [input routing](https://github.com/PreceptorOfMagic/Eclipse/tree/main/src/app/stream/input), [co-op assignments and settings](https://github.com/PreceptorOfMagic/Eclipse/blob/main/src/app/ui/settings/panes/coop.pane.c), [host application lifecycle](https://github.com/PreceptorOfMagic/Umbra/blob/umbra/thin/src/process.cpp).
+Read: [input routing](https://github.com/PreceptorOfMagic/Eclipse/tree/main/src/app/stream/input), [co-op assignments and settings](https://github.com/PreceptorOfMagic/Eclipse/blob/main/src/app/ui/settings/panes/coop.pane.c), [host application lifecycle](https://github.com/PreceptorOfMagic/Umbra/blob/release/umbra-0.5/src/process.cpp).
 
 </details>
 
@@ -216,7 +216,7 @@ The public [main](https://github.com/PreceptorOfMagic/Eclipse/tree/main) branch 
 
 ### Umbra
 
-[umbra/thin](https://github.com/PreceptorOfMagic/Umbra/tree/umbra/thin) is the reviewed host integration branch. Apollo/Sunshine owns the ordinary host foundation: capture, encoding, sessions, virtual displays, input and browser configuration. Umbra adds the focused co-op contract and supporting lifecycle work.
+Releases are built from release branches and tagged: Windows (`umbra-v*`) from [release/umbra-0.5](https://github.com/PreceptorOfMagic/Umbra/tree/release/umbra-0.5), the default branch, and Linux (`umbra-linux-v*`) from [release/umbra-linux-0.5](https://github.com/PreceptorOfMagic/Umbra/tree/release/umbra-linux-0.5); build from a tag to match a package. [Umbra (Vibepollo)](https://github.com/PreceptorOfMagic/Umbra-Vibepollo) is a separate repository built on Vibepollo. Apollo/Sunshine owns the ordinary host foundation: capture, encoding, sessions, virtual displays, input and browser configuration. Umbra adds the focused co-op contract and supporting lifecycle work.
 
 ### Project Hub
 
@@ -300,7 +300,7 @@ Distribution-container and WSL checks help find dependency problems. They do not
 
 <summary>Umbra · Windows host and minimal Apollo delta — UCRT64, web assets, custom encoder payload, installer and upstream checks</summary>
 
-Use `umbra/thin` and recursive submodules. The host build uses MSYS2 UCRT64, CMake, Ninja, Node and NSIS alongside its documented capture/encoding, crypto, input and networking dependencies. The host build guide contains an older branch example; select the current integration branch explicitly rather than treating that example as the source of truth.
+Use a release tag (or `release/umbra-0.5`) and recursive submodules. The host build uses MSYS2 UCRT64, CMake, Ninja, Node and NSIS alongside its documented capture/encoding, crypto, input and networking dependencies. The host build guide’s branch example may be older than the release; check out the tag you want to match explicitly.
 
 CMake builds the host and browser assets; CPack produces the NSIS installer or portable package. Build the shared GPU HEVC source for both supported bit depths and include the encoder DLLs plus kernels when configuring the host package. The packaging check rejects an explicitly supplied incomplete encoder directory, but omitting it can produce a package without that encoder. Verify the final payload and capability advertisement before labelling a release mixed-vendor capable.
 
@@ -316,7 +316,38 @@ This checks the changed-file boundary against `scripts/umbra-delta.txt`. Follow 
 
 The installer intentionally replaces Apollo in place and retains its installation/configuration identity. Switching back replaces Umbra. Test config and pairing preservation, upgrade, rollback and uninstall; do not describe the two hosts as independent side-by-side installations.
 
-[Host build guide](https://github.com/PreceptorOfMagic/Umbra/blob/umbra/thin/docs/umbra-windows-build.md) · [Apollo update checklist](https://github.com/PreceptorOfMagic/Umbra/blob/umbra/thin/docs/umbra-upstream-sync.md) · [User installation](installation.md#umbra-windows)
+[Host build guide](https://github.com/PreceptorOfMagic/Umbra/blob/release/umbra-0.5/docs/umbra-windows-build.md) · [Apollo update checklist](https://github.com/PreceptorOfMagic/Umbra/blob/release/umbra-0.5/docs/umbra-upstream-sync.md) · [User installation](installation.md#umbra-windows)
+
+</details>
+
+<details>
+
+<summary>Umbra · Linux Flatpak — flatpak-builder, Freedesktop 25.08, pinned CUDA, GPU HEVC encoder</summary>
+
+Build from an `umbra-linux-v*` tag with flatpak-builder 1.4.4 or newer (1.4.2 stops at `libayatana-indicator`). Initialise only the shared modules the recipe names: a recursive clone fails, because one build-dependency submodule pins a commit that is no longer on any branch.
+
+```
+git clone --branch umbra-linux-v0.5.2 https://github.com/PreceptorOfMagic/Umbra.git && cd Umbra
+git submodule update --init packaging/linux/flatpak/deps/shared-modules
+flatpak-builder --user --install-deps-from=flathub --force-clean --repo=repo build \
+  packaging/linux/flatpak-umbra/io.github.PreceptorOfMagic.Umbra.yml
+flatpak build-bundle --runtime-repo=https://dl.flathub.org/repo/flathub.flatpakrepo \
+  repo Umbra.flatpak io.github.PreceptorOfMagic.Umbra master
+```
+
+The recipe uses the Freedesktop 25.08 runtime and SDK, builds the web interface with Node 22 from locked dependencies and pins its CUDA components by SHA-256. The bundle includes the Linux custom GPU HEVC encoder and the HDR capture path. The release workflow builds the published bundle the same way on GitHub from the tag, with the HDR extras.
+
+[Flatpak build guide](https://github.com/PreceptorOfMagic/Umbra/blob/release/umbra-linux-0.5/packaging/linux/flatpak-umbra/DEVELOPMENT.md) · [Linux co-op record](https://github.com/PreceptorOfMagic/Umbra/blob/release/umbra-linux-0.5/docs/umbra-linux-coop.md) · [User installation](installation.md#umbra-linux)
+
+</details>
+
+<details>
+
+<summary>Umbra (Vibepollo) · Windows host — Vibepollo’s build, with Umbra’s additions merged in</summary>
+
+Umbra (Vibepollo) is Vibepollo with Umbra’s additions merged in as an ordinary git merge, kept apart so later Vibepollo releases can be merged again. It lives in its own repository and builds with Vibepollo’s own procedure and packaging; build from its release tag to match a package.
+
+[Build guide](https://github.com/PreceptorOfMagic/Umbra-Vibepollo/blob/main/docs/building.md) · [How the additions are kept apart](https://github.com/PreceptorOfMagic/Umbra-Vibepollo/blob/main/docs/umbra-vibepollo.md) · [User installation](installation.md#umbra-vibepollo)
 
 </details>
 
@@ -549,7 +580,7 @@ Raising detail in still pictures meant lowering the encoder’s minimum QP from 
 
 <details>
 
-<summary>Late September–October · Making it usable and maintainable — Desktop co-op, webOS 26, automatic setup, Umbra’s thin fork, co-op audio, the first releases and Umbra on Linux</summary>
+<summary>Late September–October · Making it usable and maintainable — Desktop co-op, webOS 26, automatic setup, Umbra’s thin fork, co-op audio, the first releases, Umbra on Linux and Android TV</summary>
 
 ### 22–28 September · Desktop co-op, issue by issue
 
@@ -600,6 +631,10 @@ Someone asked whether Umbra works with Vibepollo. Vibepollo and Umbra share an A
 
 Umbra for Linux became one Flatpak for KDE Plasma and GNOME on Wayland. As on Windows, each stream gets its own virtual display, created by the desktop at the size and refresh rate Eclipse asks for, and a Linux host can be one of the two co-op PCs alongside a Windows host. Stock KWin and Mutter cannot make a virtual display HDR, so a small patch to each was written and published as optional packages for Ubuntu 26.04. On an AMD Radeon RX Vega the first build passed every frame through the CPU: 4K ran at about 13 fps and co-op at about 10. Keeping frames on the GPU between OpenGL and OpenCL brought 4K to the card’s encoder limit, the same 62 fps measured on Windows, and co-op panes to about 35 fps. PreceptorOfMagic tested KDE Plasma and GNOME on NVIDIA and on AMD, and Umbra 0.5.1 for Linux shipped the result.
 
+### 14–22 October · Eclipse on Android TV
+
+The client was ported to Android TV, with an NVIDIA SHIELD TV as the test device: a native build of the same client code, Android’s MediaCodec video decoder, APK packaging, self-tests and CI. The 2019 SHIELD TV turned out to run 32-bit Android, and Mbed TLS there needed its entropy from /dev/urandom. Co-op ran in both layouts once the decoder was opened twice as wide for side by side and composites were fed without padding before a slice. In co-op the controller’s mouse was made to point like the Magic Remote, which PreceptorOfMagic found worked well, and to stop when the stick is let go; holding Start opens a shortcut wheel ported from Moonlight V+. Switching the app away mid-stream had frozen it while it closed its audio; patched SDL code fixed that. Measured on the SHIELD, the co-op mixer ran inside the audio callback and overran it in 9% of callbacks, so both players’ sound queues grew to their 500 ms cap; mixing now runs ahead of the device, and its live test is still owed. Still open: a 4K stream from one PC collapses with about 40% of its packets dropped in the app’s receive buffer. The port is unreleased; its work is a public draft pull request.
+
 ### 15 October · Umbra 0.5.2 for Linux
 
 KDE Plasma 6.7 announces its displays through a newer protocol than Umbra 0.5.1 knew, so on Ubuntu 26.10, Fedora 44 and 45, openSUSE Tumbleweed, Arch Linux and CachyOS, Umbra 0.5.1 shared the whole desktop instead of creating a display for each stream. Umbra 0.5.2 speaks both protocols, and takes the nearest mode when KWin 6.7 reports 165 Hz as 164.95 Hz. Testing found a second cause: Flatpak 1.18.4, a security update from late September, exports only a fixed list of desktop-file settings and drops the one KDE checks before it lets an app use its screen capture, so KDE refused Umbra its displays on every distribution with that Flatpak. Umbra now writes a copy of its desktop file that keeps the setting when it is started from the application menu. The KWin and Mutter HDR patches were built into each distribution’s own packages for Ubuntu 26.04 and 26.10, Fedora 44 and 45, openSUSE Tumbleweed, Arch Linux and CachyOS: fourteen downloads in all, offered one by one on the Hub. On one PC with an AMD Radeon RX Vega and Secure Boot on, each distribution that starts that way was installed and tested with its own compositor and with its HDR extra, with HDR checked in the recorded stream; Arch Linux and CachyOS cannot start there without changing Secure Boot, so they were not. Fedora 45’s mirrors briefly served the new Mutter package without its source, so its GNOME extra joined the release shortly after the others.
@@ -610,17 +645,19 @@ A user reported that their LG TV from 2020 refused to install Eclipse 1.3.4 with
 
 
 <!-- activity-detail:history-product:start -->
-**Behind the build · 23 September–5 October 2026**
+**Behind the build · 23 September–22 October 2026**
 
-- **User prompts:** 247
-- **Tokens processed:** 5,011,694,573
+- **User prompts:** 751
+- **Tokens processed:** 11,615,044,011
 - **Models:** `claude-opus-4-8`, `claude-opus-5`, `claude-opus-5-5`, `claude-sonnet-5`, `claude-sonnet-5-5`, `gpt-5.6-sol`, `gpt-6-astra`
 
 | Week | User prompts | Tokens processed | Models |
 |---|---:|---:|---|
 | 23–27 September | 63 | 2,524,520,564 | `claude-opus-5`, `claude-opus-5-5`, `claude-sonnet-5`, `gpt-5.6-sol`, `gpt-6-astra` |
 | 28 September–4 October | 169 | 2,386,602,743 | `claude-opus-4-8`, `claude-opus-5-5`, `claude-sonnet-5`, `claude-sonnet-5-5`, `gpt-5.6-sol`, `gpt-6-astra` |
-| 5 October | 15 | 100,571,266 | `claude-opus-5-5`, `gpt-6-astra` |
+| 5–11 October | 241 | 3,345,424,769 | `claude-opus-5-5`, `gpt-6-astra` |
+| 12–18 October | 202 | 2,362,276,947 | `claude-opus-5-5`, `gpt-6-astra` |
+| 19–22 October | 76 | 996,218,988 | `claude-opus-5-5` |
 <!-- activity-detail:history-product:end -->
 
 </details>
@@ -648,6 +685,9 @@ The [feature catalogue](../README.md#features) explains the user-facing behaviou
 - **Audio:** a live TV listening test of the passive gate; whispers and other noise-only lines, which are caught at the start but not held; copies playing more than 0.25% slower; noise-only lines lowering the earlier copy slightly; endpoint restoration across disconnect/crash/restart.
 
 - **Automatic setup:** clean-install and in-place upgrade checks with no manual hidden settings. Verify required encoder payload, advertised capabilities, both orientations and ordinary-stream regressions.
+- **Android TV:** finish and release the NVIDIA SHIELD TV port: a 4K stream that collapses with about 40% of its packets dropped in the app’s receive buffer, and live tests of its co-op audio.
+- **Since 1.3.5:** a real-controller test of the co-op controller mouse and the shortcut wheel on webOS, Windows and Linux; the Windows installer over an earlier version; the webOS 5 install fix on the TV that reported it.
+- **Umbra wired route:** apply it when a stream opens and remove it when the stream closes, so a paused co-op session cannot leave a TV unreachable.
 
 ### A contribution that can be reviewed
 
