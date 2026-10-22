@@ -4,7 +4,7 @@
 
 Install Umbra on each gaming PC, then Eclipse on the display device. Start with one working stream before adding the second host.
 
-[Umbra · Windows](#umbra-windows) · [Umbra (Vibepollo) · Windows](#umbra-vibepollo) · [Umbra · Linux](#umbra-linux) · [Eclipse · LG webOS](#eclipse-webos) · [Eclipse · Windows](#eclipse-windows) · [Eclipse · Linux](#eclipse-linux)
+[Umbra · Windows](#umbra-windows) · [Umbra (Vibepollo) · Windows](#umbra-vibepollo) · [Umbra · Linux](#umbra-linux) · [Eclipse · LG webOS](#eclipse-webos) · [Eclipse · Windows](#eclipse-windows) · [Eclipse · Linux](#eclipse-linux) · [Eclipse · Android TV](#eclipse-android)
 
 <a name="before-you-start"></a>
 
@@ -332,7 +332,9 @@ adb install eclipse-android.apk
 
 1. Install updates the same way; paired hosts and settings are kept. An APK you build yourself is signed with a different key, so it cannot update a release install, or the other way round, without uninstalling, which removes paired hosts and settings. Then [pair the host](#pairing).
 
-On a SHIELD TV the Xbox button stays the SHIELD’s Home button: hold **View** for 2 seconds to send Guide to the PC. A Nintendo Switch Pro Controller follows its printed letters in Eclipse; **Settings → Input → Nintendo controllers** switches it to Xbox positions. Remote keys, controllers and building: the [Android TV guide](https://github.com/PreceptorOfMagic/Eclipse/blob/main/docs/BUILD_ANDROID.md).
+On a SHIELD TV the Xbox button stays the SHIELD’s Home button: hold **View** for 2 seconds to send Guide to the PC. A Nintendo Switch Pro Controller follows its printed letters in Eclipse; **Settings → Input → Nintendo controllers** switches it to Xbox positions. During a stream the remote’s Back key sends Escape to the PC, and held it opens the stream menu; holding OK is a right click; Red, Info, Guide or the SHIELD remote’s menu key opens the stream menu, Blue the on-screen keyboard, and Channel +/− are Page Up/Down. Eclipse switches the TV to the stream’s frame rate while it plays; the 2019 SHIELD TV needs no setting for this, but some other devices only switch when their own frame-rate matching option is on. Choose where the sound goes (HDMI, a soundbar, Bluetooth headphones) under **Settings → Audio → Audio output device**.
+
+Remote keys, controllers and building: the [Android TV guide](https://github.com/PreceptorOfMagic/Eclipse/blob/main/docs/BUILD_ANDROID.md).
 
 <a name="pairing"></a>
 
@@ -378,7 +380,7 @@ If Eclipse is running on one of the gaming PCs, controls for that PC can behave 
 
 1. Reproduce the problem and return to **Share logs…**.
 
-1. On Windows use **Open folder** and attach `logs/eclipse-logs.txt`. Linux offers the saved bundle and a local-network sharing page. On webOS, open the displayed sharing address on another device and download **everything as one file** (`all.txt`), then stop sharing.
+1. On Windows use **Open folder** and attach `logs/eclipse-logs.txt`. Linux offers the saved bundle and a local-network sharing page. On webOS and Android TV, open the displayed sharing address on another device and download **everything as one file** (`all.txt`), then stop sharing.
 
 1. Review logs for hostnames, addresses and other personal details before sharing. Include app versions, OS/firmware, GPU and driver, layout, resolution/frame rate, steps to reproduce and whether a normal stream works.
 

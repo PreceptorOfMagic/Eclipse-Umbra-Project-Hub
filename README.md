@@ -6,7 +6,7 @@
 
 **Eclipse** is the client and **Umbra** is the host, for Windows and Linux. Use them for familiar one-PC remote game streaming—or combine two independent PCs into one side-by-side or stacked couch co-op view.
 
-**Eclipse:** LG webOS · Windows x64 · Linux x86_64 &nbsp;|&nbsp; **Umbra:** Windows x64 · Linux x86_64
+**Eclipse:** LG webOS · Android TV · Windows x64 · Linux x86_64 &nbsp;|&nbsp; **Umbra:** Windows x64 · Linux x86_64
 
 [Install Eclipse/Umbra](docs/installation.md) · [See how it works](#how-it-works) · [Open the project website](https://preceptorofmagic.github.io/Eclipse-Umbra-Project-Hub/)
 

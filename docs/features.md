@@ -16,7 +16,7 @@ Discover or add a host, pair with a PIN, browse its apps and launch a game or de
 
 #### Control picture and sound
 
-Choose resolution, frame rate, bitrate, codec and audio options to suit your connection. H.264 and HEVC are available on current desktop paths; compatible webOS paths can expose AV1 and HDR. Availability is hardware-dependent, not a promise that every combination is tested. Ordinary streaming retains compatible stereo/surround options and stream statistics.
+Choose resolution, frame rate, bitrate, codec and audio options to suit your connection. H.264 and HEVC are available on current desktop paths; compatible webOS paths can expose AV1 and HDR, and Android TV offers HDR10 where its decoder and TV support it. Availability is hardware-dependent, not a promise that every combination is tested. Ordinary streaming retains compatible stereo/surround options and stream statistics.
 
 #### Use the controls you have
 
@@ -100,11 +100,11 @@ One mouse, two PCs: crossing the middle line moves input to the other PC. The mo
 
 #### Nintendo buttons, without remapping every pad
 
-Detected Switch Pro/Joy-Con controllers can follow their printed A/B/X/Y labels or Xbox-style physical positions. Other controllers keep their normal mapping. Recognition is device-dependent, so untested third-party pads may need a report.
+Detected Switch Pro/Joy-Con controllers can follow their printed A/B/X/Y labels or Xbox-style physical positions. Other controllers keep their normal mapping. On Android TV, each controller’s buttons are matched from the buttons Android reports for it, so a mapping written for another Android version cannot misplace them. Recognition is device-dependent, so untested third-party pads may need a report.
 
 #### Remotes do not take the first gamepad slot
 
-Recognised TV/media remotes are excluded from webOS game-controller allocation. On desktop platforms, remote-like devices are placed in higher slots so ordinary gamepads get the low player slots.
+Recognised TV/media remotes are excluded from webOS game-controller allocation, and on Android TV a remote is never a player’s controller. On desktop platforms, remote-like devices are placed in higher slots so ordinary gamepads get the low player slots.
 
 [Input ownership and local-host limitations](development.md#input-routing)
 
@@ -162,7 +162,7 @@ Keyboard shortcuts cover fullscreen, capture and stream controls; Windows rememb
 
 #### Install, update and remove cleanly
 
-Eclipse has a per-user Windows installer that needs no administrator access, with an Apps & features uninstaller that can keep your settings, and per-user install and uninstall scripts on Linux. Umbra has a Windows installer and a Linux Flatpak; its Windows uninstaller stops only its own service and processes and lets you keep your settings and shared drivers. Installing a newer version over an older one keeps settings and pairings, and on webOS 26 settings, pairings and co-op keep working after the TV restarts.
+Eclipse has a per-user Windows installer that needs no administrator access, with an Apps & features uninstaller that can keep your settings, and per-user install and uninstall scripts on Linux. On Android TV it is a sideloaded APK signed with the project’s own key, so updates install over it. Umbra has a Windows installer and a Linux Flatpak; its Windows uninstaller stops only its own service and processes and lets you keep your settings and shared drivers. Installing a newer version over an older one keeps settings and pairings, and on webOS 26 settings, pairings and co-op keep working after the TV restarts.
 
 </details>
 
@@ -180,7 +180,7 @@ Enable logging in Settings → About, reproduce the issue and export a report. I
 
 #### Export from the device you are using
 
-Windows saves a local bundle. Linux can also provide a temporary network download page, and webOS lets a phone or PC retrieve the report over the LAN. Crash, frozen-interface and unclean-exit records preserve useful evidence for the next start; they do not automatically repair the fault.
+Windows saves a local bundle. Linux can also provide a temporary network download page, and webOS and Android TV let a phone or PC retrieve the report over the LAN. Crash, frozen-interface and unclean-exit records preserve useful evidence for the next start; they do not automatically repair the fault.
 
 Known secret fields are redacted, but device names and network addresses can remain. Review a bundle before posting it publicly. A TV app that cannot stay open cannot serve its download page.
 

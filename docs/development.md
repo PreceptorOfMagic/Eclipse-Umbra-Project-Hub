@@ -202,13 +202,13 @@ A development branch is not a release identifier; use the exact source commit re
 
 ### Eclipse
 
-The public [main](https://github.com/PreceptorOfMagic/Eclipse/tree/main) branch holds each release, and the `eclipse-v*` tags mark the exact commit every package was built from. Day-to-day development happens privately and lands in `main` with each release, so build from a release tag to match the published packages.
+The public [main](https://github.com/PreceptorOfMagic/Eclipse/tree/main) branch holds each release, and the `eclipse-v*` tags mark the exact commit every package was built from. An Android build whose code differs from its release’s other packages gets its own `eclipse-android-v*` tag, as 1.3.5’s APK did. Day-to-day development happens privately and lands in `main` with each release, so build from a release tag to match the published packages.
 
 - `src/app/ui/`: LVGL launcher, settings, co-op selection and stream interface.
 
 - `src/app/stream/`: session workers and peer IPC; `video/` contains HEVC parsing, sequencing, concealment and submission; `audio/` contains mixing and the duplicate-sound filters; `input/` owns host-directed input.
 
-- `third_party/ss4s/` and platform modules: media backends, including webOS and desktop FFmpeg paths. Windows uses D3D11VA decode; Linux has NVDEC/VAAPI paths with different test coverage.
+- `third_party/ss4s/` and platform modules: media backends, including webOS, Android MediaCodec and desktop FFmpeg paths. Windows uses D3D11VA decode; Linux has NVDEC/VAAPI paths with different test coverage.
 
 - `experimental/gpu-hevc/`: shared custom host encoder source, kernels and component tests. Its location in the client repository does not mean it runs as a client-side re-encoder.
 
@@ -256,7 +256,7 @@ A rebuild can overwrite the same versioned IPK filename, so preserve a known-goo
 
 <details>
 
-<summary>Eclipse · Windows portable client — PowerShell + MSYS2 MINGW64 → CMake/Ninja → dependency closure → ZIP</summary>
+<summary>Eclipse · Windows client — PowerShell + MSYS2 MINGW64 → CMake/Ninja → dependency closure → ZIP and installer</summary>
 
 The Windows client uses the common LVGL client code, not a separate Qt rewrite. Run the portable builder from Windows PowerShell with its MSYS2 MINGW64 environment. This differs from Umbra’s UCRT64 host toolchain.
 
@@ -264,7 +264,7 @@ The Windows client uses the common LVGL client code, not a separate Qt rewrite. 
 powershell.exe -NoProfile -ExecutionPolicy Bypass -File scripts/windows/build_portable.ps1
 ```
 
-The script configures/builds with CMake and Ninja, installs into staging, then follows PE imports to collect the needed MinGW DLLs without bundling Windows system DLLs. It adds the runtime assets and produces the unsigned client ZIP and checksum in `dist/`. The executable retains its inherited `moonlight-tv.exe` name.
+The script configures/builds with CMake and Ninja, installs into staging, then follows PE imports to collect the needed MinGW DLLs without bundling Windows system DLLs. It adds the runtime assets and produces the unsigned client ZIP and checksum in `dist/`; `scripts/windows/build_installer.ps1` then wraps that verified package in the per-user NSIS installer (it needs `makensis`). The executable retains its inherited `moonlight-tv.exe` name.
 
 Preserve the whole extracted directory. Verify package provenance and dependencies on a clean Windows machine, then ordinary streaming, both co-op orientations, input, audio and reconnect/quit. Hardware decoding does not imply zero-copy display: the current readback/presentation path can bottleneck high-resolution output independently of the decoder.
 
@@ -291,6 +291,26 @@ The bundle deliberately does not carry glibc or a replacement GPU driver. Its la
 Distribution-container and WSL checks help find dependency problems. They do not verify every native display server, compositor or GPU driver. Recorded co-op coverage uses NVDEC under WSL; native AMD/Intel VAAPI needs independent validation, and the experimental WSL VAAPI path showed instability.
 
 [Portable builder](https://github.com/PreceptorOfMagic/Eclipse/blob/main/scripts/linux/build_portable.sh) · [Sysroot and dependency scripts](https://github.com/PreceptorOfMagic/Eclipse/tree/main/scripts/linux/portable) · [User installation](installation.md#eclipse-linux)
+
+</details>
+
+<a name="build-android"></a>
+
+<details>
+
+<summary>Eclipse · Android TV — Android SDK + NDK → pinned dependencies → three ABIs → checked, signed APK</summary>
+
+Build from Linux or macOS (on Windows, WSL) with the Android SDK (platform 35, build-tools 35), NDK 27.2.12479018, JDK 17 and CMake, Ninja, pkg-config, gettext and Python. The first build compiles SDL2, SDL2_image, Mbed TLS, curl, Opus, inih, expat and FreeType from the same pinned, hash-checked source archives as the Linux and Windows packages; later builds reuse them.
+
+```
+export ANDROID_HOME=~/Android/Sdk
+export ANDROID_NDK_HOME=$ANDROID_HOME/ndk/27.2.12479018
+./scripts/android/build_apk.sh --clean --require-clean-tree
+```
+
+One APK carries arm64-v8a, armeabi-v7a and x86_64. The script checks what it packages: every library a binary needs is packaged or is an Android system library, and the co-op peer finds its libraries beside it. With the project’s release key configured the result is `dist/eclipse-android.apk`; without it, a build signed with your local debug key, which cannot update a release install. Host tests compile the Android sources on the desktop, and device self-tests install beside a real Eclipse under their own application ID.
+
+[APK builder](https://github.com/PreceptorOfMagic/Eclipse/blob/main/scripts/android/build_apk.sh) · [Android TV guide: building, signing and testing](https://github.com/PreceptorOfMagic/Eclipse/blob/main/docs/BUILD_ANDROID.md#4-building) · [User installation](installation.md#eclipse-android)
 
 </details>
 
