@@ -648,7 +648,7 @@ A user reported that their LG TV from 2020 refused to install Eclipse 1.3.4 with
 **Behind the build · 23 September–22 October 2026**
 
 - **User prompts:** 751
-- **Tokens processed:** 11,615,044,011
+- **Tokens processed:** 11,615,264,672
 - **Models:** `claude-opus-4-8`, `claude-opus-5`, `claude-opus-5-5`, `claude-sonnet-5`, `claude-sonnet-5-5`, `gpt-5.6-sol`, `gpt-6-astra`
 
 | Week | User prompts | Tokens processed | Models |
@@ -656,7 +656,7 @@ A user reported that their LG TV from 2020 refused to install Eclipse 1.3.4 with
 | 23–27 September | 63 | 2,524,520,564 | `claude-opus-5`, `claude-opus-5-5`, `claude-sonnet-5`, `gpt-5.6-sol`, `gpt-6-astra` |
 | 28 September–4 October | 169 | 2,386,602,743 | `claude-opus-4-8`, `claude-opus-5-5`, `claude-sonnet-5`, `claude-sonnet-5-5`, `gpt-5.6-sol`, `gpt-6-astra` |
 | 5–11 October | 241 | 3,345,424,769 | `claude-opus-5-5`, `gpt-6-astra` |
-| 12–18 October | 202 | 2,362,276,947 | `claude-opus-5-5`, `gpt-6-astra` |
+| 12–18 October | 202 | 2,362,497,608 | `claude-opus-5-5`, `gpt-6-astra` |
 | 19–22 October | 76 | 996,218,988 | `claude-opus-5-5` |
 <!-- activity-detail:history-product:end -->
 

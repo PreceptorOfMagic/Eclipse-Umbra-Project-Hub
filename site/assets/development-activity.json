@@ -351,13 +351,13 @@
         "codexTranscripts": 141
       },
       "excludedUnmarkedClaudeMessages": 5,
-      "requests": 45143,
+      "requests": 45144,
       "tokens": {
-        "uncachedInput": 70004110,
+        "uncachedInput": 70005876,
         "cacheWrite": 79345427,
-        "cacheRead": 11437612348,
-        "output": 28082126,
-        "total": 11615044011
+        "cacheRead": 11437824700,
+        "output": 28088669,
+        "total": 11615264672
       },
       "models": [
         "claude-opus-4-8",
@@ -423,7 +423,7 @@
             "gpt-6-astra"
           ],
           "recordsIncomplete": false,
-          "tokens": 2362276947
+          "tokens": 2362497608
         },
         {
           "from": "2026-10-19",

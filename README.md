@@ -318,7 +318,7 @@ An older LG TV refused to install Eclipse 1.3.4 with error -5. Every file inside
 **Behind the build · 23 September–22 October 2026**
 
 - **User prompts:** 751
-- **Tokens processed:** 11,615,044,011
+- **Tokens processed:** 11,615,264,672
 - **Models:** `claude-opus-4-8`, `claude-opus-5`, `claude-opus-5-5`, `claude-sonnet-5`, `claude-sonnet-5-5`, `gpt-5.6-sol`, `gpt-6-astra`
 <!-- activity:history-product:end -->
 
