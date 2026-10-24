@@ -25,7 +25,9 @@ export const platforms = Object.freeze({
   android: { repo: 'Eclipse', label: 'NVIDIA SHIELD', match: /^eclipse-android\.apk$/i },
   windows: { repo: 'Eclipse', label: 'Windows x64', match: /^eclipse-windows-x64(?:-unsigned)?\.zip$/i },
   'windows-setup': { repo: 'Eclipse', label: 'Windows x64 installer', match: /^eclipse-windows-x64-setup(?:-unsigned)?\.exe$/i },
-  linux: { repo: 'Eclipse', label: 'Linux x86_64', match: /^eclipse-linux-x86_64\.tar\.gz$/i },
+  // Linux: the Flatpak is the package from 1.3.6 on; the Ubuntu-built tarball stays on each release.
+  'linux-flatpak': { repo: 'Eclipse', label: 'Linux x86_64 (Flatpak)', match: /^eclipse-[\w.+-]+-linux-x86_64\.flatpak$/i },
+  linux: { repo: 'Eclipse', label: 'Linux x86_64 tarball', match: /^eclipse-linux-x86_64\.tar\.gz$/i },
   'umbra-windows': { repo: 'Umbra', label: 'Umbra Windows x64', match: /^(?:umbra(?:-windows-x64)?|apollo)\.exe$/i },
   // Linux and Windows Umbra are separate releases; Windows keeps "latest", so Linux is found by its tag.
   'umbra-linux': { repo: 'Umbra', tagPrefix: 'umbra-linux-v', label: 'Umbra for Linux (Flatpak)', match: /^umbra-[\w.+-]+-linux-x86_64\.flatpak$/i },

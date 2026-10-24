@@ -10,6 +10,7 @@ for (const [platform, name, repo] of [
   ['webos', 'com.aurora.gamestream_1.0.8_arm.ipk', 'Eclipse'],
   ['windows', 'eclipse-windows-x64-unsigned.zip', 'Eclipse'],
   ['linux', 'eclipse-linux-x86_64.tar.gz', 'Eclipse'],
+  ['linux-flatpak', 'Eclipse-1.3.6-linux-x86_64.flatpak', 'Eclipse'],
   ['android', 'eclipse-android.apk', 'Eclipse'],
   ['windows-setup', 'eclipse-windows-x64-setup-unsigned.exe', 'Eclipse'],
   ['umbra-windows', 'Umbra-windows-x64.exe', 'Umbra'],
@@ -21,6 +22,16 @@ for (const [platform, name, repo] of [
 test('reject beta app, ARM, debug and unsupported names', () => {
   assert.equal(selectAsset('webos', release(asset('com.aurora.gamestream.beta_1.0.8_arm.ipk'))), null);
   assert.equal(selectAsset('windows', release(asset('eclipse-windows-arm64.zip'), asset('eclipse-windows-x64-debug.zip'))), null);
+});
+test('Eclipse Linux: the Flatpak button and the tarball button each pick only their own file', () => {
+  const bundle = asset('Eclipse-1.3.6-linux-x86_64.flatpak');
+  const tarball = asset('eclipse-linux-x86_64.tar.gz');
+  const others = ['Eclipse-1.3.6-linux-x86_64.flatpak.sha256', 'Eclipse-1.3.6-linux-flatpak-sources.tar.gz',
+    'eclipse-linux-x86_64.tar.gz.sha256', 'eclipse-project-source-9f520ae4.tar.gz', 'eclipse-android.apk'].map(name => asset(name));
+  assert.equal(selectAsset('linux-flatpak', release(...others, bundle, tarball)), bundle);
+  assert.equal(selectAsset('linux', release(...others, bundle, tarball)), tarball);
+  assert.equal(selectAsset('linux-flatpak', release(...others, tarball)), null);
+  assert.equal(selectAsset('linux-flatpak', release(asset('Umbra-0.5.2-linux-x86_64.flatpak'))), null);
 });
 test('Linux button picks the Flatpak, not its checksum, sources, HDR extras or the old .deb', () => {
   const bundle = asset('Umbra-0.5.1-linux-x86_64.flatpak', 'Umbra');
@@ -68,7 +79,7 @@ test('resolved UI links directly to file and retains release notes', () => {
   const ui=control('linux'); const file=asset('eclipse-linux-x86_64.tar.gz');
   displayRelease(ui,'linux',{release:release(file)});
   assert.equal(ui.link.href,file.browser_download_url);
-  assert.equal(ui.link.textContent,'Download Linux x86_64');
+  assert.equal(ui.link.textContent,'Download Linux x86_64 tarball');
   assert.equal(ui.status.child.href,'https://github.com/PreceptorOfMagic/Eclipse/releases/latest');
 });
 test('unavailable and failed lookups retain the working releases fallback', () => {

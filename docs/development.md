@@ -272,11 +272,32 @@ Preserve the whole extracted directory. Verify package provenance and dependenci
 
 </details>
 
+<a name="build-linux-flatpak"></a>
+
+<details>
+
+<summary>Eclipse · Linux Flatpak — Freedesktop 25.08 SDK → pinned dependencies → client → bundle</summary>
+
+The Flatpak is the Linux package from Eclipse 1.3.6 on. Its manifest builds the client from a pinned Eclipse commit with the same dependency pins and options as the tarball, on `org.freedesktop.Platform` 25.08, the runtime Umbra for Linux uses. SDL2 is bundled because that runtime’s SDL2 is sdl2-compat over SDL3, and one shared mbedTLS serves curl, libgamestream and moonlight-common-c.
+
+```
+flatpak-builder --user --install-deps-from=flathub --force-clean --repo=repo build \
+  packaging/linux/flatpak/io.github.PreceptorOfMagic.Eclipse.yml
+flatpak build-bundle --runtime-repo=https://dl.flathub.org/repo/flathub.flatpakrepo \
+  repo Eclipse-<version>-linux-x86_64.flatpak io.github.PreceptorOfMagic.Eclipse
+```
+
+The manifest pins the commit it builds, so it lives in the commit after that one; the release tag marks the code commit. The bundle shares the tarball’s settings folder, ships the same third-party licences, and on NVIDIA decodes through the runtime’s matching driver extension. VA-API pictures go to the screen without a copy back from the graphics card, on Wayland and on X11.
+
+[Flatpak manifest](https://github.com/PreceptorOfMagic/Eclipse/blob/main/packaging/linux/flatpak/io.github.PreceptorOfMagic.Eclipse.yml) · [User installation](installation.md#eclipse-linux)
+
+</details>
+
 <a name="build-linux"></a>
 
 <details>
 
-<summary>Eclipse · Linux portable client — Ubuntu 22.04 baseline → pinned dependencies → runtime staging → archive</summary>
+<summary>Eclipse · Linux tarball (older package) — Ubuntu 22.04 baseline → pinned dependencies → runtime staging → archive</summary>
 
 The portable route targets an x86_64 glibc 2.35 baseline using an Ubuntu 22.04 sysroot. The sysroot and dependency builders prepare that environment; the portable script then configures the client with its toolchain, stages runtime libraries and inspects dynamic dependencies.
 
@@ -288,9 +309,9 @@ The portable route targets an x86_64 glibc 2.35 baseline using an Ubuntu 22.04 s
 
 The bundle deliberately does not carry glibc or a replacement GPU driver. Its launcher establishes the intended library search paths and selective fallbacks; starting the internal executable directly is not equivalent. Packaging includes source/build state, licences and hashes so the archive can be traced to what was built.
 
-Distribution-container and WSL checks help find dependency problems. They do not verify every native display server, compositor or GPU driver. Recorded co-op coverage uses NVDEC under WSL; native AMD/Intel VAAPI needs independent validation, and the experimental WSL VAAPI path showed instability.
+Since 1.3.6 the tarball is the older Linux package, still attached to each release. Distribution-container and WSL checks help find its dependency problems; hardware tests of the Linux client use the Flatpak.
 
-[Portable builder](https://github.com/PreceptorOfMagic/Eclipse/blob/main/scripts/linux/build_portable.sh) · [Sysroot and dependency scripts](https://github.com/PreceptorOfMagic/Eclipse/tree/main/scripts/linux/portable) · [User installation](installation.md#eclipse-linux)
+[Portable builder](https://github.com/PreceptorOfMagic/Eclipse/blob/main/scripts/linux/build_portable.sh) · [Sysroot and dependency scripts](https://github.com/PreceptorOfMagic/Eclipse/tree/main/scripts/linux/portable) · [User installation](installation.md#eclipse-linux-tarball)
 
 </details>
 
@@ -707,6 +728,7 @@ The [feature catalogue](../README.md#features) explains the user-facing behaviou
 - **Automatic setup:** clean-install and in-place upgrade checks with no manual hidden settings. Verify required encoder payload, advertised capabilities, both orientations and ordinary-stream regressions.
 - **NVIDIA SHIELD:** a cheaper co-op audio filter, so the SHIELD’s extra 35 ms of co-op sound delay can go; a retest of the 4K stream that lost packets on 16 October; reports from SHIELD models other than the 2019 SHIELD TV.
 - **Since 1.3.5:** a real-controller test of the co-op controller mouse and the shortcut wheel on webOS, Windows and Linux; the Windows installer over an earlier version; the webOS 5 install fix on the TV that reported it.
+- **Since 1.3.6:** a hardware run of the 1.3.6 packages themselves; the app-menu fix on webOS, Windows and Linux; the Linux Flatpak with Intel graphics, NVIDIA on KDE Plasma or X11, and wlroots desktops.
 - **Umbra wired route:** apply it when a stream opens and remove it when the stream closes, so a paused co-op session cannot leave a TV unreachable.
 
 ### A contribution that can be reviewed

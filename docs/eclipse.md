@@ -58,11 +58,11 @@ Choose the installer `eclipse-windows-x64-setup-unsigned.exe` (or the portable `
 
 
 ![Eclipse running in a Linux desktop window](../site/media/eclipse-linux-window.webp)
-[Linux x86_64 releases](https://github.com/PreceptorOfMagic/Eclipse/releases)
+[Linux x86_64 release](https://github.com/PreceptorOfMagic/Eclipse/releases/latest)
 
 Open the latest release, expand Assets and choose the package described below. If no release is listed, that package has not been published.
 
-Choose `eclipse-linux-x86_64.tar.gz`, extract and run `./install.sh` (or `./eclipse` to run it in place). Requires glibc 2.35+ and GPU drivers. Native-Linux coverage remains limited. [Full Linux installation →](installation.md#eclipse-linux)
+Choose the Flatpak `Eclipse-<version>-linux-x86_64.flatpak`, verify its checksum and run `flatpak install --user` on it; it runs on any x86_64 distribution with Flatpak and keeps the tarball’s settings and pairings. Tested on Ubuntu 26.04 with AMD and NVIDIA graphics. The older tarball `eclipse-linux-x86_64.tar.gz` is still attached. [Full Linux installation →](installation.md#eclipse-linux)
 
 <a name="features"></a>
 

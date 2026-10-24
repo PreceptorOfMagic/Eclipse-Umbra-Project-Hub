@@ -280,14 +280,54 @@ Open the latest release, expand Assets and choose the package described below. I
 ## 2C. Eclipse on Linux
 
 
-![Eclipse on Linux, started with ./eclipse, with a paired PC’s apps](../site/media/eclipse-linux-window.webp)
-[Linux x86_64 releases](https://github.com/PreceptorOfMagic/Eclipse/releases)
+![Eclipse on Linux, with a paired PC’s apps](../site/media/eclipse-linux-window.webp)
+[Linux x86_64 release](https://github.com/PreceptorOfMagic/Eclipse/releases/latest)
 
 Open the latest release, expand Assets and choose the package described below. If no release is listed, that package has not been published.
 
-**Package:** `eclipse-linux-x86_64.tar.gz`. Use an x86_64 Linux desktop with glibc 2.35 or newer (Ubuntu 22.04 baseline), a graphical session and working GPU drivers. Bundled application libraries do not replace your graphics driver. Current testing is in WSL Linux environments, not broad native-Linux certification.
+**Package:** `Eclipse-<version>-linux-x86_64.flatpak`, one Flatpak bundle for x86_64 Linux, on Wayland or X11. It runs on the Freedesktop runtime from Flathub, the same one Umbra for Linux uses, and needs your graphics card’s current driver (Mesa for AMD and Intel, NVIDIA’s own driver for NVIDIA). It is the Linux package from Eclipse 1.3.6 on; the older tarball is still attached to each release ([below](#eclipse-linux-tarball)).
 
-1. Download the portable archive and, when supplied, its matching SHA-256 file from the same release. Compare `sha256sum eclipse-linux-x86_64.tar.gz` with that checksum.
+**Already using the tarball?** The Flatpak uses the same settings folder, `~/.local/share/com.limelight/moonlight-tv`, so your paired PCs and settings carry over and nothing needs pairing again. Once the Flatpak works, you can remove the tarball install with `~/.local/share/eclipse/app/uninstall.sh --keep-settings`; `--keep-settings` leaves that shared folder alone.
+
+1. Install Flatpak and add Flathub if you have not already. Ubuntu does not include Flatpak by default; Fedora does; elsewhere install the `flatpak` package with your distribution’s package manager.
+
+```sh
+sudo apt install flatpak
+flatpak remote-add --user --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
+```
+
+1. Download the `.flatpak` and its `.sha256` from the release’s **Assets** into one folder, check it and install it:
+
+```sh
+sha256sum -c Eclipse-<version>-linux-x86_64.flatpak.sha256
+flatpak install --user Eclipse-<version>-linux-x86_64.flatpak
+```
+
+1. Flatpak fetches the runtime and, on NVIDIA, the driver extension matching your installed driver (on Intel, the VA-API driver). Start **Eclipse** from the applications menu, or with `flatpak run io.github.PreceptorOfMagic.Eclipse`, then [pair your host](#pairing).
+
+1. To update, install the newer bundle the same way with `--reinstall` added (`flatpak install --user --reinstall Eclipse-<version>-linux-x86_64.flatpak`); settings and pairings are kept. To remove Eclipse, run `flatpak uninstall --user io.github.PreceptorOfMagic.Eclipse`; your settings and pairings stay in the folder above.
+
+1. If hardware decoding fails, update the NVIDIA driver or Mesa and include the exact driver, graphics card and desktop session in a report. When Eclipse was started from the menu, its log is `~/.var/app/io.github.PreceptorOfMagic.Eclipse/.local/state/eclipse/eclipse.log`.
+
+**If something goes wrong.** A PC that does not appear may be hidden by the distribution’s firewall (firewalld on Fedora and openSUSE): add it by its address instead. On Debian, an install that fails with “Could not connect: No such file or directory” means the system D-Bus is not running; it always is on a normal desktop, so this happens only in containers and WSL.
+
+| Desktop | AMD (VA-API) | NVIDIA (NVDEC) | Intel (VA-API) |
+|---|---|---|---|
+| GNOME on Wayland (Ubuntu 26.04) | Tested: 4K60 streams and two-PC co-op (Radeon RX Vega) | Tested: 4K60 streams and two-PC co-op (RTX 2060 SUPER) | Untested |
+| KDE Plasma on Wayland (Ubuntu 26.04) | Tested: 4K60 streams (Radeon RX Vega) | Untested | Untested |
+| KDE Plasma on X11 (Ubuntu 26.04) | Tested: 4K60 streams (Radeon RX Vega) | Untested | Untested |
+
+**How far it is tested.** The hardware tests above ran in October 2026 on development builds with the same Linux changes as 1.3.6, on one PC at the TV: 4K60 streams at 80 Mbps with no lost packets, scaled desktops at 150% and 200% defaulting to 4K, and co-op with two PCs. The 1.3.5 Flatpak was also installed and streamed on fresh Ubuntu 26.04, Fedora 44, openSUSE Tumbleweed, Arch Linux and Debian 13 under WSL, keeping the tarball’s settings and pairings. The 1.3.6 bundle itself has not been run on hardware.
+
+**How likely it is to work on your PC.** **Low risk:** Ubuntu, Fedora, Arch, openSUSE, Debian and Linux Mint with GNOME, KDE Plasma, Cinnamon or Xfce on AMD or NVIDIA graphics. **Untested, probably fine:** Intel graphics; NVIDIA on an X11 desktop; controller gyro and rumble on distributions without udev rules for controllers; a brand-new NVIDIA driver before Flathub publishes its matching extension. **More likely to have problems:** wlroots desktops such as Hyprland and Sway, and COSMIC (fullscreen and mouse capture); the older Flatpak 1.12 to 1.14 of Ubuntu 22.04, Linux Mint 21 and Debian 12 (the tarball below is an alternative there); Steam Deck Game Mode. **Slow:** the open-source nouveau driver on older NVIDIA cards decodes in software. **Not supported:** ARM computers.
+
+<a name="eclipse-linux-tarball"></a>
+
+### The older tarball
+
+**Package:** `eclipse-linux-x86_64.tar.gz`, built against Ubuntu 22.04 and kept on each release for anyone who prefers it. It needs glibc 2.35 or newer, a graphical session and working GPU drivers.
+
+1. Download the archive and its `.sha256` from the same release and check it with `sha256sum -c eclipse-linux-x86_64.tar.gz.sha256`.
 
 1. Extract and install from a terminal:
 
@@ -299,11 +339,7 @@ cd eclipse-linux-x86_64
 
 1. `install.sh` installs Eclipse for your user, without a password, and adds it to the applications menu; the downloaded folder can then be deleted. Installing a newer version the same way keeps your settings and pairings.
 
-1. For portable use instead, run `./eclipse` from the extracted folder and keep the folder together; `./install-desktop-entry.sh` adds that copy to the menu. Then [pair the host](#pairing). To remove an installed copy, run `~/.local/share/eclipse/app/uninstall.sh` (add `--keep-settings` to keep your settings and pairings).
-
-1. If hardware decoding fails, update the relevant NVIDIA or Mesa/VAAPI driver and include the exact driver and desktop session in a report. Native AMD/Intel VAAPI still needs validation; the WSL VAAPI test path has known instability.
-
-Use the portable archive instructions for Ubuntu, Fedora and Arch-style systems meeting these requirements. Do not substitute an ARM package or assume a source archive is a distro installer.
+1. For portable use instead, run `./eclipse` from the extracted folder and keep the folder together; `./install-desktop-entry.sh` adds that copy to the menu. To remove an installed copy, run `~/.local/share/eclipse/app/uninstall.sh` (add `--keep-settings` to keep your settings and pairings).
 
 <a name="eclipse-shield"></a>
 
