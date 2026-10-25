@@ -50,7 +50,12 @@ test('page script reports clicks on release files only', () => {
   w.fire('d:click', link('https://github.com/PreceptorOfMagic/Eclipse/releases/latest'));
   w.fire('d:click', link('https://github.com/someone/Eclipse/releases/download/v1/x.ipk'));
   w.fire('d:click', { target: { closest: () => null } });
-  assert.deepEqual(w.sent.slice(1), [['https://count.example/d', { p: 'setup.html', repo: 'Eclipse', f: 'com.aurora.gamestream_1.3.4_arm.ipk' }]]);
-  assert.equal(releaseFile('https://github.com/PreceptorOfMagic/Umbra/releases/download/umbra-v0.5.0/Umbra-windows-x64.exe').f, 'Umbra-windows-x64.exe');
+  w.fire('d:auxclick', { button: 1, ...link(IPK) });
+  w.fire('d:auxclick', { button: 2, ...link(IPK) });
+  const sent = ['https://count.example/d', { p: 'setup.html', repo: 'Eclipse', t: 'eclipse-v1.3.4', f: 'com.aurora.gamestream_1.3.4_arm.ipk' }];
+  assert.deepEqual(w.sent.slice(1), [sent, sent], 'a click and a middle click; a right click is not a download');
+  assert.deepEqual(releaseFile('https://github.com/PreceptorOfMagic/Umbra/releases/download/umbra-v0.5.0/Umbra-windows-x64.exe'),
+    { repo: 'Umbra', t: 'umbra-v0.5.0', f: 'Umbra-windows-x64.exe' });
+  assert.equal(releaseFile('https://github.com/PreceptorOfMagic/Umbra/releases/download/%E0/x.exe'), null);
 });
 
