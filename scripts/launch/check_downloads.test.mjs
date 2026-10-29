@@ -51,7 +51,7 @@ test('Linux release is found by its tag, not the repository latest', async () =>
   const ui = control('umbra-linux');
   displayRelease(ui, 'umbra-linux', result);
   assert.equal(ui.link.textContent, 'Download Umbra for Linux (Flatpak)');
-  assert.equal(ui.status.child.href, 'https://github.com/PreceptorOfMagic/Umbra/releases/tag/umbra-linux-v0.5.1');
+  assert.equal(ui.github.href, 'https://github.com/PreceptorOfMagic/Umbra/releases/tag/umbra-linux-v0.5.1');
 });
 test('do not guess when multiple matching files exist', () => {
   assert.equal(selectAsset('windows', release(asset('eclipse-windows-x64.zip'), asset('eclipse-windows-x64-unsigned.zip'))), null);
@@ -71,21 +71,26 @@ test('404 remains unavailable; server errors are not claimed to be empty release
   assert.deepEqual(await loadRelease('Eclipse', async () => ({status:200,ok:true,json:async()=>data})), {release:data});
 });
 function control(platform) {
-  const link={href:'fallback',textContent:'Open releases'};
+  const ui={dataset:{download:platform},github:null};
+  const link={href:'fallback',textContent:'Open releases',after(node){node.isConnected=true;ui.github=node;}};
   const status={textContent:'',append(node){this.child=node;}};
-  return {dataset:{download:platform},link,status,querySelector(s){return s==='[data-download-link]'?link:status;},ownerDocument:{createElement(){return {};}}};
+  return Object.assign(ui,{link,status,querySelector(s){return s==='[data-download-link]'?link:s==='[data-github-link]'?ui.github:status;},
+    ownerDocument:{createElement(){return {setAttribute(k,v){this[k]=v;}};}}});
 }
 test('resolved UI links directly to file and retains release notes', () => {
   const ui=control('linux'); const file=asset('eclipse-linux-x86_64.tar.gz');
   displayRelease(ui,'linux',{release:release(file)});
   assert.equal(ui.link.href,file.browser_download_url);
   assert.equal(ui.link.textContent,'Download Linux x86_64 tarball');
-  assert.equal(ui.status.child.href,'https://github.com/PreceptorOfMagic/Eclipse/releases/latest');
+  assert.equal(ui.github.href,'https://github.com/PreceptorOfMagic/Eclipse/releases/tag/v1','the link under the button opens the exact release');
+  assert.match(ui.github.textContent,/^Open v1 on GitHub/);
+  displayRelease(ui,'linux',{release:release(file)});
+  assert.equal(ui.github.isConnected,true,'shown once, not added twice');
 });
 test('unavailable and failed lookups retain the working releases fallback', () => {
   for (const result of [{unavailable:true},{error:true},{release:release()}]) {
     const ui=control('linux'); displayRelease(ui,'linux',result);
-    assert.equal(ui.link.href,'fallback'); assert.ok(ui.status.textContent.length>20);
+    assert.equal(ui.link.href,'fallback'); assert.ok(ui.status.textContent.length>20); assert.equal(ui.github,null);
   }
 });
 test('deduplicate repo requests for platform controls', async () => {

@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { startCounting, pageName, referrerHost, releaseFile } from '../../site/assets/count.mjs';
+import { startCounting, pageName, referrerHost, releaseFile, releasePage } from '../../site/assets/count.mjs';
 
 // The page's counting script. The counter that receives it is kept in a private repository.
 const id = (n) => `00000000-0000-4000-8000-${String(n).padStart(12, '0')}`;
@@ -47,7 +47,6 @@ test('page script reports clicks on release files only', () => {
   startCounting(w.win, 'https://count.example');
   const link = (href) => ({ target: { closest: () => ({ href }) } });
   w.fire('d:click', link(IPK));
-  w.fire('d:click', link('https://github.com/PreceptorOfMagic/Eclipse/releases/latest'));
   w.fire('d:click', link('https://github.com/someone/Eclipse/releases/download/v1/x.ipk'));
   w.fire('d:click', { target: { closest: () => null } });
   w.fire('d:auxclick', { button: 1, ...link(IPK) });
@@ -59,3 +58,19 @@ test('page script reports clicks on release files only', () => {
   assert.equal(releaseFile('https://github.com/PreceptorOfMagic/Umbra/releases/download/%E0/x.exe'), null);
 });
 
+
+test('page script reports links to a release page on GitHub, apart from downloads', () => {
+  const w = fakeWindow();
+  startCounting(w.win, 'https://count.example');
+  const link = (href) => ({ target: { closest: () => ({ href }) } });
+  w.fire('d:click', link('https://github.com/PreceptorOfMagic/Eclipse/releases/tag/eclipse-v1.3.6'));
+  w.fire('d:auxclick', { button: 1, ...link('https://github.com/PreceptorOfMagic/Umbra/releases/latest') });
+  w.fire('d:click', link('https://github.com/PreceptorOfMagic/Umbra-Vibepollo/releases'));
+  w.fire('d:click', link('https://github.com/PreceptorOfMagic/Eclipse'));
+  w.fire('d:click', link('https://github.com/someone/Eclipse/releases/tag/v1'));
+  assert.deepEqual(w.sent.slice(1), [
+    ['https://count.example/g', { p: 'setup.html', repo: 'Eclipse', t: 'eclipse-v1.3.6' }],
+    ['https://count.example/g', { p: 'setup.html', repo: 'Umbra' }],
+    ['https://count.example/g', { p: 'setup.html', repo: 'Umbra-Vibepollo' }]]);
+  assert.equal(releasePage('https://github.com/PreceptorOfMagic/Eclipse/releases/download/v1/x.ipk'), null);
+});

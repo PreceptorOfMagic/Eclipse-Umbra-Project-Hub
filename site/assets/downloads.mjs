@@ -80,13 +80,17 @@ export function displayRelease(control, platform, result) {
   }
   link.href = asset.browser_download_url;
   link.textContent = `Download ${config.label}`;
-  status.textContent = `${asset.name} · ${result.release.tag_name || 'Latest stable release'} · Read the release notes and verify the matching checksum before installing. `;
-  const notes = control.ownerDocument.createElement('a');
-  notes.href = config.tagPrefix && result.release.tag_name
+  status.textContent = `${asset.name} · ${result.release.tag_name || 'Latest stable release'} · Read the release notes and verify the matching checksum before installing.`;
+  // Under the button: the release this file comes from, on GitHub (its notes, checksums and every other file).
+  const doc = control.ownerDocument;
+  const github = control.querySelector('[data-github-link]') || doc.createElement('a');
+  github.className = 'download-github';
+  github.setAttribute('data-github-link', '');
+  github.href = result.release.tag_name
     ? `https://github.com/PreceptorOfMagic/${config.repo}/releases/tag/${encodeURIComponent(result.release.tag_name)}`
     : `https://github.com/PreceptorOfMagic/${config.repo}/releases/latest`;
-  notes.textContent = 'Release notes and checksums';
-  status.append(notes);
+  github.textContent = `Open ${result.release.tag_name || 'this release'} on GitHub: release notes, checksums and every file`;
+  if (!github.isConnected) link.after(github);
 }
 
 // An HDR extra sits in a table cell: a short label, its file name and a link to its own checksum file.
