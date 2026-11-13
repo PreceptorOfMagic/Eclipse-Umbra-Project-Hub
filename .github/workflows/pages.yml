@@ -31,6 +31,8 @@ jobs:
         run: node scripts/launch/check_public_site.mjs
       - name: Validate funding button
         run: node scripts/launch/check_funding.mjs
+      - name: Validate the update list (site/updates.json, read by Eclipse and Umbra)
+        run: node scripts/updates/updates.mjs validate && node --test scripts/updates/updates.test.mjs
       - name: Test publication budgets
         run: node --test scripts/launch/check_publication_limits.test.mjs
       - name: Install media inspection tools

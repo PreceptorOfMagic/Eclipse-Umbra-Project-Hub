@@ -1,0 +1,63 @@
+{
+  "schema": 1,
+  "eclipse": {
+    "download_url": "https://github.com/PreceptorOfMagic/Eclipse/releases/latest",
+    "how_to_update": {
+      "webos": "Download the new .ipk from the release page and install it with webOS Dev Manager, as you did the first time. Your settings and paired PCs are kept. Close and reopen Eclipse afterwards.",
+      "windows": "Download the new installer from the release page and run it. It installs over this version and keeps your settings and paired PCs. With the portable ZIP, extract the new one and run it; settings are kept in the same place.",
+      "linux": "Download the new .flatpak from the release page and install it over this one with: flatpak install --user --reinstall <file>.flatpak. Your settings and paired PCs are kept.",
+      "android": "Download the new eclipse-android.apk from the release page and install it the way you installed this one. It updates this version in place and keeps your settings and paired PCs."
+    },
+    "releases": [
+      {
+        "version": "1.3.6",
+        "date": "2026-10-24",
+        "notes_url": "https://github.com/PreceptorOfMagic/Eclipse/releases/tag/eclipse-v1.3.6",
+        "highlights": [
+          "Linux: Eclipse is now a Flatpak; it keeps the settings and paired PCs of the older package",
+          "Linux: 4K streams with VA-API no longer stutter or lose packets",
+          "Linux: co-op stays on the graphics card and plays without crackle",
+          "The app menu now starts the app it shows"
+        ]
+      }
+    ]
+  },
+  "umbra": {
+    "download_url": "https://github.com/PreceptorOfMagic/Umbra/releases",
+    "how_to_update": {
+      "windows": "Download the new installer from the release page and run it. It replaces this version in place and keeps your settings and paired devices.",
+      "linux": "Download the new .flatpak from the release page and install it over this one with: flatpak install --user --reinstall <file>.flatpak. Your settings and pairings are kept."
+    },
+    "releases": [
+      {
+        "version": "0.5.0",
+        "date": "2026-10-09",
+        "platforms": ["windows"],
+        "notes_url": "https://github.com/PreceptorOfMagic/Umbra/releases/tag/umbra-v0.5.0",
+        "highlights": []
+      },
+      {
+        "version": "0.5.2",
+        "date": "2026-10-15",
+        "platforms": ["linux"],
+        "notes_url": "https://github.com/PreceptorOfMagic/Umbra/releases/tag/umbra-linux-v0.5.2",
+        "highlights": []
+      }
+    ]
+  },
+  "umbra-vibepollo": {
+    "download_url": "https://github.com/PreceptorOfMagic/Umbra-Vibepollo/releases/latest",
+    "how_to_update": {
+      "windows": "Download the new installer from the release page and run it. It upgrades this version in place and keeps your configuration, applications and paired devices."
+    },
+    "releases": [
+      {
+        "version": "2.0.0-umbra.1",
+        "date": "2026-10-11",
+        "platforms": ["windows"],
+        "notes_url": "https://github.com/PreceptorOfMagic/Umbra-Vibepollo/releases/tag/v2.0.0-umbra.1",
+        "highlights": []
+      }
+    ]
+  }
+}
