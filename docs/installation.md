@@ -285,7 +285,7 @@ Open the latest release, expand Assets and choose the package described below. I
 
 Open the latest release, expand Assets and choose the package described below. If no release is listed, that package has not been published.
 
-**Package:** `Eclipse-<version>-linux-x86_64.flatpak`, one Flatpak bundle for x86_64 Linux, on Wayland or X11. It runs on the Freedesktop runtime from Flathub, the same one Umbra for Linux uses, and needs your graphics card’s current driver (Mesa for AMD and Intel, NVIDIA’s own driver for NVIDIA). It is the Linux package from Eclipse 1.3.6 on; the older tarball is still attached to each release ([below](#eclipse-linux-tarball)).
+**Package:** `Eclipse-<version>-linux-x86_64.flatpak`, one Flatpak bundle for x86_64 Linux, on Wayland or X11. It runs on the Freedesktop runtime from Flathub, the same one Umbra for Linux uses, and needs your graphics card’s current driver (Mesa for AMD and Intel, NVIDIA’s own driver for NVIDIA). It is the Linux package from Eclipse 1.3.6 on; the older tarball is still on the 1.3.6 release ([below](#eclipse-linux-tarball)) but no longer published.
 
 **Already using the tarball?** The Flatpak uses the same settings folder, `~/.local/share/com.limelight/moonlight-tv`, so your paired PCs and settings carry over and nothing needs pairing again. Once the Flatpak works, you can remove the tarball install with `~/.local/share/eclipse/app/uninstall.sh --keep-settings`; `--keep-settings` leaves that shared folder alone.
 
@@ -319,13 +319,13 @@ flatpak install --user Eclipse-<version>-linux-x86_64.flatpak
 
 **How far it is tested.** The hardware tests above ran in October 2026 on development builds with the same Linux changes as 1.3.6, on one PC at the TV: 4K60 streams at 80 Mbps with no lost packets, scaled desktops at 150% and 200% defaulting to 4K, and co-op with two PCs. The 1.3.5 Flatpak was also installed and streamed on fresh Ubuntu 26.04, Fedora 44, openSUSE Tumbleweed, Arch Linux and Debian 13 under WSL, keeping the tarball’s settings and pairings. The 1.3.6 bundle itself has not been run on hardware.
 
-**How likely it is to work on your PC.** **Low risk:** Ubuntu, Fedora, Arch, openSUSE, Debian and Linux Mint with GNOME, KDE Plasma, Cinnamon or Xfce on AMD or NVIDIA graphics. **Untested, probably fine:** Intel graphics; NVIDIA on an X11 desktop; controller gyro and rumble on distributions without udev rules for controllers; a brand-new NVIDIA driver before Flathub publishes its matching extension. **More likely to have problems:** wlroots desktops such as Hyprland and Sway, and COSMIC (fullscreen and mouse capture); the older Flatpak 1.12 to 1.14 of Ubuntu 22.04, Linux Mint 21 and Debian 12 (the tarball below is an alternative there); Steam Deck Game Mode. **Slow:** the open-source nouveau driver on older NVIDIA cards decodes in software. **Not supported:** ARM computers.
+**How likely it is to work on your PC.** **Low risk:** Ubuntu, Fedora, Arch, openSUSE, Debian and Linux Mint with GNOME, KDE Plasma, Cinnamon or Xfce on AMD or NVIDIA graphics. **Untested, probably fine:** Intel graphics; NVIDIA on an X11 desktop; controller gyro and rumble on distributions without udev rules for controllers; a brand-new NVIDIA driver before Flathub publishes its matching extension. **More likely to have problems:** wlroots desktops such as Hyprland and Sway, and COSMIC (fullscreen and mouse capture); the older Flatpak 1.12 to 1.14 of Ubuntu 22.04, Linux Mint 21 and Debian 12 (the 1.3.6 tarball below is an alternative there); Steam Deck Game Mode. **Slow:** the open-source nouveau driver on older NVIDIA cards decodes in software. **Not supported:** ARM computers.
 
 <a name="eclipse-linux-tarball"></a>
 
 ### The older tarball
 
-**Package:** `eclipse-linux-x86_64.tar.gz`, built against Ubuntu 22.04 and kept on each release for anyone who prefers it. It needs glibc 2.35 or newer, a graphical session and working GPU drivers.
+**Package:** `eclipse-linux-x86_64.tar.gz`, built against Ubuntu 22.04 and last published with Eclipse 1.3.6 and kept on that release for anyone who prefers it; it gets no newer versions. It needs glibc 2.35 or newer, a graphical session and working GPU drivers.
 
 1. Download the archive and its `.sha256` from the same release and check it with `sha256sum -c eclipse-linux-x86_64.tar.gz.sha256`.
 

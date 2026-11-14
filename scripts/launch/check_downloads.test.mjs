@@ -94,11 +94,20 @@ test('unavailable and failed lookups retain the working releases fallback', () =
   }
 });
 test('deduplicate repo requests for platform controls', async () => {
-  const controls=[control('linux'),control('windows'),control('webos'),control('umbra-windows')];
+  const controls=[control('linux-flatpak'),control('windows'),control('webos'),control('umbra-windows')];
   const urls=[];
   await initialiseDownloads({querySelectorAll:()=>controls},async url=>{urls.push(url);return {status:404};});
   assert.equal(urls.length,2);
   for(const ui of controls) assert.match(ui.status.textContent,/No public stable release/);
+});
+test('the Linux tarball comes from the 1.3.6 release, the last one that has it', async () => {
+  const tarball = asset('eclipse-linux-x86_64.tar.gz');
+  const releases = [{ tag_name: 'eclipse-v1.3.7', draft: false, prerelease: false, assets: [] },
+    { tag_name: 'eclipse-v1.3.6', draft: false, prerelease: false, assets: [tarball] }];
+  const result = await loadRelease('Eclipse', async () => ({ status: 200, ok: true, json: async () => releases }),
+    platforms.linux.tagPrefix);
+  assert.equal(result.release.tag_name, 'eclipse-v1.3.6');
+  assert.equal(selectAsset('linux', result.release), tarball);
 });
 
 test('each HDR extra button picks only its own distribution and desktop', () => {

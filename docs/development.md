@@ -309,7 +309,7 @@ The portable route targets an x86_64 glibc 2.35 baseline using an Ubuntu 22.04 s
 
 The bundle deliberately does not carry glibc or a replacement GPU driver. Its launcher establishes the intended library search paths and selective fallbacks; starting the internal executable directly is not equivalent. Packaging includes source/build state, licences and hashes so the archive can be traced to what was built.
 
-Since 1.3.6 the tarball is the older Linux package, still attached to each release. Distribution-container and WSL checks help find its dependency problems; hardware tests of the Linux client use the Flatpak.
+Since 1.3.6 the tarball is the older Linux package, last published with 1.3.6; from 1.3.7 the Flatpak is the only Linux package. Distribution-container and WSL checks help find its dependency problems; hardware tests of the Linux client use the Flatpak.
 
 [Portable builder](https://github.com/PreceptorOfMagic/Eclipse/blob/main/scripts/linux/build_portable.sh) · [Sysroot and dependency scripts](https://github.com/PreceptorOfMagic/Eclipse/tree/main/scripts/linux/portable) · [User installation](installation.md#eclipse-linux-tarball)
 

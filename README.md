@@ -319,6 +319,10 @@ An older LG TV refused to install Eclipse 1.3.4 with error -5. Every file inside
 
 Eclipse for Linux became a Flatpak, like Umbra for Linux: one bundle for any x86_64 distribution, which keeps the settings and pairings of the earlier tarball. On a PC at the TV, 4K streams with AMD graphics had been losing about a quarter of their video packets, because each picture was copied back from the graphics card on the thread that receives the stream; pictures now go straight to the screen, and the loss is gone on Wayland and X11. Co-op on Linux no longer falls back to software decoding at the start, and plays through PulseAudio without crackle. On every platform, an app’s menu left open through a refresh of the app list no longer starts a different app. The tarball stays on the release.
 
+### 14 November · Eclipse 1.3.7
+
+Eclipse can now run on one of the two co-op PCs: on Windows, and on Linux with GNOME, that PC's half runs locally on a display of its own instead of being streamed to itself, and only the other PC is streamed. The mouse crosses between the halves at the divider, and controllers given to the other PC are kept away from this PC's games. Eclipse also tells you when a new version is out, shows streaming tips and takes up to 16 controllers per stream. The Linux tarball is no longer published; the Flatpak is the Linux package.
+
 <!-- activity:history-product:start -->
 **Behind the build · 23 September–22 October 2026**
 
