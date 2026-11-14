@@ -321,7 +321,7 @@ Eclipse for Linux became a Flatpak, like Umbra for Linux: one bundle for any x86
 
 ### 14 November · Eclipse 1.3.7
 
-Eclipse can now run on one of the two co-op PCs: on Windows, and on Linux with GNOME, that PC's half runs locally on a display of its own instead of being streamed to itself, and only the other PC is streamed. The mouse crosses between the halves at the divider, and controllers given to the other PC are kept away from this PC's games. Eclipse also tells you when a new version is out, shows streaming tips and takes up to 16 controllers per stream. The Linux tarball is no longer published; the Flatpak is the Linux package.
+Eclipse can now run on one of the two co-op PCs: on Windows, and on Linux with GNOME or KDE Plasma, that PC's half runs locally on a display of its own instead of being streamed to itself, and only the other PC is streamed. The mouse crosses between the halves at the divider, and controllers given to the other PC are kept away from this PC's games. Eclipse also tells you when a new version is out, shows streaming tips and takes up to 16 controllers per stream. The Linux tarball is no longer published; the Flatpak is the Linux package. Umbra 0.5.1 for Windows installs HidHide, which that needs; Umbra 0.5.3 for Linux adds the update notice.
 
 <!-- activity:history-product:start -->
 **Behind the build · 23 September–22 October 2026**
