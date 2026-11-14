@@ -32,30 +32,19 @@
       {
         "version": "0.5.0",
         "date": "2026-10-09",
-        "platforms": ["windows"],
+        "platforms": [
+          "windows"
+        ],
         "notes_url": "https://github.com/PreceptorOfMagic/Umbra/releases/tag/umbra-v0.5.0",
         "highlights": []
       },
       {
         "version": "0.5.2",
         "date": "2026-10-15",
-        "platforms": ["linux"],
+        "platforms": [
+          "linux"
+        ],
         "notes_url": "https://github.com/PreceptorOfMagic/Umbra/releases/tag/umbra-linux-v0.5.2",
-        "highlights": []
-      }
-    ]
-  },
-  "umbra-vibepollo": {
-    "download_url": "https://github.com/PreceptorOfMagic/Umbra-Vibepollo/releases/latest",
-    "how_to_update": {
-      "windows": "Download the new installer from the release page and run it. It upgrades this version in place and keeps your configuration, applications and paired devices."
-    },
-    "releases": [
-      {
-        "version": "2.0.0-umbra.1",
-        "date": "2026-10-11",
-        "platforms": ["windows"],
-        "notes_url": "https://github.com/PreceptorOfMagic/Umbra-Vibepollo/releases/tag/v2.0.0-umbra.1",
         "highlights": []
       }
     ]

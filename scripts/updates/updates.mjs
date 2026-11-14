@@ -20,11 +20,11 @@ import { fileURLToPath } from "node:url";
 const here = path.dirname(fileURLToPath(import.meta.url));
 export const defaultFile = path.resolve(here, "../../site/updates.json");
 
-export const products = ["eclipse", "umbra", "umbra-vibepollo"];
+// Umbra (Vibepollo) is not listed: it keeps its own update check, which reads GitHub (user 2026-11-14).
+export const products = ["eclipse", "umbra"];
 export const platforms = {
   eclipse: ["webos", "windows", "linux", "android"],
   umbra: ["windows", "linux"],
-  "umbra-vibepollo": ["windows"],
 };
 const maxHighlights = 10;
 const maxHighlightLength = 160;
