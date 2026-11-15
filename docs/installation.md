@@ -74,11 +74,13 @@ Open the latest release, expand Assets and choose the package described below. I
 
 ## 1B. Umbra on Linux
 
-[Umbra for Linux release](https://github.com/PreceptorOfMagic/Umbra/releases/tag/umbra-linux-v0.5.2)
+[Umbra for Linux release](https://github.com/PreceptorOfMagic/Umbra/releases/tag/umbra-linux-v0.5.3)
 
 Open the Umbra for Linux release and expand Assets. If no release is listed, that package has not been published.
 
 **Package:** `Umbra-<version>-linux-x86_64.flatpak`, one Flatpak bundle for x86_64 Linux. You need KDE Plasma or GNOME on Wayland (an X11 desktop gives ordinary streaming only), an NVIDIA or AMD GPU with its current driver, and the games you intend to run already installed.
+
+**Current release: 0.5.3.** Umbra 0.5.3 adds an update notice to the web interface; its streaming code is unchanged from 0.5.2. The October hardware results below are historical 0.5.2 tests, not new tests of 0.5.3. Current HDR downloads and exact package versions are listed separately below.
 
 **How far it is tested.** Umbra 0.5.2 for Linux ran on hardware on 2026-10-15, on one PC with an AMD Radeon RX Vega and Secure Boot on: Ubuntu 26.04 and 26.10, Fedora 44 and 45 (pre-release) and openSUSE Tumbleweed, each with KDE Plasma and with GNOME, with the distribution’s own compositor and with its HDR extra. On each it streamed the 4K desktop on its own virtual display, a co-op pane, a co-op disconnect and resume at a new size, and with the extra a co-op pane in 10-bit HDR, checked in the recorded stream. **Not run with 0.5.2:** NVIDIA GPUs (Umbra 0.5.1 was tested on an RTX 2060 SUPER, HDR desktop streams included), an HDR desktop stream (it needs a 10-bit video encoder, which the RX Vega lacks), a co-op session with two hosts, the input setup’s administrator prompt and streamed controller input on the new distributions, and **Arch Linux and CachyOS**: neither can start on the test PC without changing its Secure Boot setup, so both are untested on hardware. On openSUSE Tumbleweed with GNOME, co-op panes ran at about 20 fps on the RX Vega (27 to 39 fps elsewhere); Umbra 0.5.1 measured the same there.
 
@@ -193,21 +195,21 @@ Everything below ran on one test PC. The Umbra 0.5.2 tests used its AMD Radeon R
 
 | Distribution | KDE Plasma (KWin) | GNOME (Mutter) |
 |---|---|---|
-| Ubuntu 26.04 | [Umbra-HDR-KDE-ubuntu26.04.tar.gz](https://github.com/PreceptorOfMagic/Umbra/releases/download/umbra-linux-v0.5.2/Umbra-HDR-KDE-ubuntu26.04.tar.gz) ([checksum](https://github.com/PreceptorOfMagic/Umbra/releases/download/umbra-linux-v0.5.2/Umbra-HDR-KDE-ubuntu26.04.tar.gz.sha256)): fits KWin 6.6; Tested in person and smoke-tested | [Umbra-HDR-GNOME-ubuntu26.04.tar.gz](https://github.com/PreceptorOfMagic/Umbra/releases/download/umbra-linux-v0.5.2/Umbra-HDR-GNOME-ubuntu26.04.tar.gz) ([checksum](https://github.com/PreceptorOfMagic/Umbra/releases/download/umbra-linux-v0.5.2/Umbra-HDR-GNOME-ubuntu26.04.tar.gz.sha256)): fits Mutter 50; Tested in person and smoke-tested |
-| Ubuntu 26.10 | [Umbra-HDR-KDE-ubuntu26.10.tar.gz](https://github.com/PreceptorOfMagic/Umbra/releases/download/umbra-linux-v0.5.2/Umbra-HDR-KDE-ubuntu26.10.tar.gz) ([checksum](https://github.com/PreceptorOfMagic/Umbra/releases/download/umbra-linux-v0.5.2/Umbra-HDR-KDE-ubuntu26.10.tar.gz.sha256)): fits KWin 6.7; Smoke-tested | [Umbra-HDR-GNOME-ubuntu26.10.tar.gz](https://github.com/PreceptorOfMagic/Umbra/releases/download/umbra-linux-v0.5.2/Umbra-HDR-GNOME-ubuntu26.10.tar.gz) ([checksum](https://github.com/PreceptorOfMagic/Umbra/releases/download/umbra-linux-v0.5.2/Umbra-HDR-GNOME-ubuntu26.10.tar.gz.sha256)): fits Mutter 51; Smoke-tested |
-| Fedora 44 | [Umbra-HDR-KDE-fedora44.tar.gz](https://github.com/PreceptorOfMagic/Umbra/releases/download/umbra-linux-v0.5.2/Umbra-HDR-KDE-fedora44.tar.gz) ([checksum](https://github.com/PreceptorOfMagic/Umbra/releases/download/umbra-linux-v0.5.2/Umbra-HDR-KDE-fedora44.tar.gz.sha256)): fits KWin 6.7; Smoke-tested | [Umbra-HDR-GNOME-fedora44.tar.gz](https://github.com/PreceptorOfMagic/Umbra/releases/download/umbra-linux-v0.5.2/Umbra-HDR-GNOME-fedora44.tar.gz) ([checksum](https://github.com/PreceptorOfMagic/Umbra/releases/download/umbra-linux-v0.5.2/Umbra-HDR-GNOME-fedora44.tar.gz.sha256)): fits Mutter 50; Smoke-tested* |
-| Fedora 45 (pre-release) | [Umbra-HDR-KDE-fedora45.tar.gz](https://github.com/PreceptorOfMagic/Umbra/releases/download/umbra-linux-v0.5.2/Umbra-HDR-KDE-fedora45.tar.gz) ([checksum](https://github.com/PreceptorOfMagic/Umbra/releases/download/umbra-linux-v0.5.2/Umbra-HDR-KDE-fedora45.tar.gz.sha256)): fits KWin 6.7; Smoke-tested | [Umbra-HDR-GNOME-fedora45.tar.gz](https://github.com/PreceptorOfMagic/Umbra/releases/download/umbra-linux-v0.5.2/Umbra-HDR-GNOME-fedora45.tar.gz) ([checksum](https://github.com/PreceptorOfMagic/Umbra/releases/download/umbra-linux-v0.5.2/Umbra-HDR-GNOME-fedora45.tar.gz.sha256)): fits Mutter 51; Smoke-tested* |
-| openSUSE Tumbleweed | [Umbra-HDR-KDE-opensuse-tumbleweed.tar.gz](https://github.com/PreceptorOfMagic/Umbra/releases/download/umbra-linux-v0.5.2/Umbra-HDR-KDE-opensuse-tumbleweed.tar.gz) ([checksum](https://github.com/PreceptorOfMagic/Umbra/releases/download/umbra-linux-v0.5.2/Umbra-HDR-KDE-opensuse-tumbleweed.tar.gz.sha256)): fits KWin 6.7; Smoke-tested | [Umbra-HDR-GNOME-opensuse-tumbleweed.tar.gz](https://github.com/PreceptorOfMagic/Umbra/releases/download/umbra-linux-v0.5.2/Umbra-HDR-GNOME-opensuse-tumbleweed.tar.gz) ([checksum](https://github.com/PreceptorOfMagic/Umbra/releases/download/umbra-linux-v0.5.2/Umbra-HDR-GNOME-opensuse-tumbleweed.tar.gz.sha256)): fits Mutter 50; Smoke-tested |
-| Arch Linux | [Umbra-HDR-KDE-arch.tar.gz](https://github.com/PreceptorOfMagic/Umbra/releases/download/umbra-linux-v0.5.2/Umbra-HDR-KDE-arch.tar.gz) ([checksum](https://github.com/PreceptorOfMagic/Umbra/releases/download/umbra-linux-v0.5.2/Umbra-HDR-KDE-arch.tar.gz.sha256)): fits KWin 6.7; Automated test only | [Umbra-HDR-GNOME-arch.tar.gz](https://github.com/PreceptorOfMagic/Umbra/releases/download/umbra-linux-v0.5.2/Umbra-HDR-GNOME-arch.tar.gz) ([checksum](https://github.com/PreceptorOfMagic/Umbra/releases/download/umbra-linux-v0.5.2/Umbra-HDR-GNOME-arch.tar.gz.sha256)): fits Mutter 51; Automated test only |
-| CachyOS | [Umbra-HDR-KDE-cachyos.tar.gz](https://github.com/PreceptorOfMagic/Umbra/releases/download/umbra-linux-v0.5.2/Umbra-HDR-KDE-cachyos.tar.gz) ([checksum](https://github.com/PreceptorOfMagic/Umbra/releases/download/umbra-linux-v0.5.2/Umbra-HDR-KDE-cachyos.tar.gz.sha256)): fits KWin 6.7; Automated test only | [Umbra-HDR-GNOME-cachyos.tar.gz](https://github.com/PreceptorOfMagic/Umbra/releases/download/umbra-linux-v0.5.2/Umbra-HDR-GNOME-cachyos.tar.gz) ([checksum](https://github.com/PreceptorOfMagic/Umbra/releases/download/umbra-linux-v0.5.2/Umbra-HDR-GNOME-cachyos.tar.gz.sha256)): fits Mutter 51 (CachyOS's own); Automated test only |
+| Ubuntu 26.04 | [Umbra-HDR-KDE-ubuntu26.04.tar.gz](https://github.com/PreceptorOfMagic/Umbra/releases/download/umbra-linux-v0.5.3/Umbra-HDR-KDE-ubuntu26.04.tar.gz) ([checksum](https://github.com/PreceptorOfMagic/Umbra/releases/download/umbra-linux-v0.5.3/Umbra-HDR-KDE-ubuntu26.04.tar.gz.sha256)) — KWin 6.6.6; package 4:6.6.6-0ubuntu0.1+umbrahdr4. Hardware-tested with 0.5.2. | [Umbra-HDR-GNOME-ubuntu26.04.tar.gz](https://github.com/PreceptorOfMagic/Umbra/releases/download/umbra-linux-v0.5.3/Umbra-HDR-GNOME-ubuntu26.04.tar.gz) ([checksum](https://github.com/PreceptorOfMagic/Umbra/releases/download/umbra-linux-v0.5.3/Umbra-HDR-GNOME-ubuntu26.04.tar.gz.sha256)) — Mutter 50.1; package 50.1-0ubuntu2.5+umbrahdr2. Updated package: automated test only. |
+| Ubuntu 26.10 | [Umbra-HDR-KDE-ubuntu26.10.tar.gz](https://github.com/PreceptorOfMagic/Umbra/releases/download/umbra-linux-v0.5.3/Umbra-HDR-KDE-ubuntu26.10.tar.gz) ([checksum](https://github.com/PreceptorOfMagic/Umbra/releases/download/umbra-linux-v0.5.3/Umbra-HDR-KDE-ubuntu26.10.tar.gz.sha256)) — KWin 6.7.5; package 4:6.7.5-0ubuntu1+umbrahdr1. Hardware-tested with 0.5.2. | [Umbra-HDR-GNOME-ubuntu26.10.tar.gz](https://github.com/PreceptorOfMagic/Umbra/releases/download/umbra-linux-v0.5.3/Umbra-HDR-GNOME-ubuntu26.10.tar.gz) ([checksum](https://github.com/PreceptorOfMagic/Umbra/releases/download/umbra-linux-v0.5.3/Umbra-HDR-GNOME-ubuntu26.10.tar.gz.sha256)) — Mutter 51.0; package 51.0-1ubuntu3+umbrahdr1. Hardware-tested with 0.5.2. |
+| Fedora 44 | Not available in 0.5.3: KWin 6.8 patch pending. | [Umbra-HDR-GNOME-fedora44.tar.gz](https://github.com/PreceptorOfMagic/Umbra/releases/download/umbra-linux-v0.5.3/Umbra-HDR-GNOME-fedora44.tar.gz) ([checksum](https://github.com/PreceptorOfMagic/Umbra/releases/download/umbra-linux-v0.5.3/Umbra-HDR-GNOME-fedora44.tar.gz.sha256)) — Mutter 50.6; package 50.6-2.fc44.umbrahdr2. Updated package: automated test only. |
+| Fedora 45 | Not available in 0.5.3: KWin 6.8 patch pending. | [Umbra-HDR-GNOME-fedora45.tar.gz](https://github.com/PreceptorOfMagic/Umbra/releases/download/umbra-linux-v0.5.3/Umbra-HDR-GNOME-fedora45.tar.gz) ([checksum](https://github.com/PreceptorOfMagic/Umbra/releases/download/umbra-linux-v0.5.3/Umbra-HDR-GNOME-fedora45.tar.gz.sha256)) — Mutter 51.1; package 51.1-1.fc45.umbrahdr1. Same version built and tested on hardware with 0.5.2. |
+| openSUSE Tumbleweed | Not available in 0.5.3: KWin 6.8 patch pending. | [Umbra-HDR-GNOME-opensuse-tumbleweed.tar.gz](https://github.com/PreceptorOfMagic/Umbra/releases/download/umbra-linux-v0.5.3/Umbra-HDR-GNOME-opensuse-tumbleweed.tar.gz) ([checksum](https://github.com/PreceptorOfMagic/Umbra/releases/download/umbra-linux-v0.5.3/Umbra-HDR-GNOME-opensuse-tumbleweed.tar.gz.sha256)) — Mutter 51.1; package 51.1-1.1.umbrahdr1. Updated package: automated test only. |
+| Arch Linux | Not available in 0.5.3: KWin 6.8 patch pending. | [Umbra-HDR-GNOME-arch.tar.gz](https://github.com/PreceptorOfMagic/Umbra/releases/download/umbra-linux-v0.5.3/Umbra-HDR-GNOME-arch.tar.gz) ([checksum](https://github.com/PreceptorOfMagic/Umbra/releases/download/umbra-linux-v0.5.3/Umbra-HDR-GNOME-arch.tar.gz.sha256)) — Mutter 51.1; package 51.1-1. Automated test only; no hardware test. |
+| CachyOS | Not available in 0.5.3: KWin 6.8 patch pending. | Not available in 0.5.3: package mirror failed during the build. |
 
-\* Fedora updated Mutter after the release's extras were first built, so these were tested as a build of the same version made on the test PC from the same patch. Smoke-tested means the scripted hardware test on an AMD Radeon RX Vega with Umbra 0.5.2; Arch Linux and CachyOS could not be started on that PC with its Secure Boot setup, so their extras have had only the automated test without a GPU. [Testing in detail](#umbra-linux-testing) says exactly how each was tested.
+All eight published extras passed automated installation, capture-capability and rollback checks without a GPU. Earlier hardware tests used Umbra 0.5.2; updated Ubuntu 26.04, Fedora 44 and Tumbleweed GNOME packages have not been run on hardware at these exact versions. In Umbra 0.5.3, KDE HDR extras are available for Ubuntu 26.04 and 26.10 only. Fedora 44/45, Arch, CachyOS and openSUSE Tumbleweed now use KWin 6.8, whose HDR patch is not ready; their KDE virtual displays stream in SDR. The CachyOS GNOME extra is also unavailable because its package mirror failed during the build. Never install an older extra over a different compositor version.
 
-1. Download the extra for your distribution and desktop from the table, unpack it and check it (Fedora 44 KDE shown):
+1. Download the extra for your distribution and desktop from the table, unpack it and check it (Ubuntu 26.04 KDE shown):
 
 ```sh
-tar -xzf Umbra-HDR-KDE-fedora44.tar.gz
-cd Umbra-HDR-KDE-fedora44
+tar -xzf Umbra-HDR-KDE-ubuntu26.04.tar.gz
+cd Umbra-HDR-KDE-ubuntu26.04
 sha256sum -c SHA256SUMS
 ```
 
@@ -221,7 +223,7 @@ rm -f ~/.var/app/io.github.PreceptorOfMagic.Umbra/config/sunshine/*_virtual_hdr
 
 1. Check that Umbra offers HDR: `curl -s http://localhost:47989/serverinfo | grep -o '<UmbraCoopHdr>[01]'` prints `<UmbraCoopHdr>1`. Then turn HDR on for this host in Eclipse.
 
-**No extra for your distribution?** Add the matching patch from [kwin-virtual-hdr](https://github.com/PreceptorOfMagic/Umbra/tree/umbra-linux-v0.5.2/packaging/linux/kwin-virtual-hdr) or [mutter-virtual-hdr](https://github.com/PreceptorOfMagic/Umbra/tree/umbra-linux-v0.5.2/packaging/linux/mutter-virtual-hdr) to your distribution's own `kwin` or `mutter` package, rebuild that package with its usual tools and install it. Debian 13, openSUSE Leap 16.0 and Fedora 43 ship KWin, Mutter or PipeWire versions too old for the patches.
+**No extra for your distribution?** Add the matching patch from [kwin-virtual-hdr](https://github.com/PreceptorOfMagic/Umbra/tree/umbra-linux-v0.5.3/packaging/linux/kwin-virtual-hdr) or [mutter-virtual-hdr](https://github.com/PreceptorOfMagic/Umbra/tree/umbra-linux-v0.5.3/packaging/linux/mutter-virtual-hdr) to your distribution's own `kwin` or `mutter` package, rebuild that package with its usual tools and install it. Debian 13, openSUSE Leap 16.0 and Fedora 43 ship KWin, Mutter or PipeWire versions too old for the patches.
 
 The extras replace your desktop's compositor packages. A distribution update of KWin or Mutter replaces them again, and streams return to SDR until a matching extra is published; do not reinstall a patched build over a newer version. To undo an extra, reinstall your distribution's own package; each extra's `README.txt` has the one-line rollback. The patches and the source of every prebuilt extra are published with the release.
 
@@ -317,6 +319,8 @@ flatpak install --user Eclipse-<version>-linux-x86_64.flatpak
 | KDE Plasma on Wayland (Ubuntu 26.04) | Tested: 4K60 streams (Radeon RX Vega) | Untested | Untested |
 | KDE Plasma on X11 (Ubuntu 26.04) | Tested: 4K60 streams (Radeon RX Vega) | Untested | Untested |
 
+**Current release: 0.5.3.** Umbra 0.5.3 adds an update notice to the web interface; its streaming code is unchanged from 0.5.2. The October hardware results below are historical 0.5.2 tests, not new tests of 0.5.3. Current HDR downloads and exact package versions are listed separately below.
+
 **How far it is tested.** The hardware tests above ran in October 2026 on development builds with the same Linux changes as 1.3.6, on one PC at the TV: 4K60 streams at 80 Mbps with no lost packets, scaled desktops at 150% and 200% defaulting to 4K, and co-op with two PCs. The 1.3.5 Flatpak was also installed and streamed on fresh Ubuntu 26.04, Fedora 44, openSUSE Tumbleweed, Arch Linux and Debian 13 under WSL, keeping the tarball’s settings and pairings. The 1.3.6 bundle itself has not been run on hardware.
 
 **How likely it is to work on your PC.** **Low risk:** Ubuntu, Fedora, Arch, openSUSE, Debian and Linux Mint with GNOME, KDE Plasma, Cinnamon or Xfce on AMD or NVIDIA graphics. **Untested, probably fine:** Intel graphics; NVIDIA on an X11 desktop; controller gyro and rumble on distributions without udev rules for controllers; a brand-new NVIDIA driver before Flathub publishes its matching extension. **More likely to have problems:** wlroots desktops such as Hyprland and Sway, and COSMIC (fullscreen and mouse capture); the older Flatpak 1.12 to 1.14 of Ubuntu 22.04, Linux Mint 21 and Debian 12 (the 1.3.6 tarball below is an alternative there); Steam Deck Game Mode. **Slow:** the open-source nouveau driver on older NVIDIA cards decodes in software. **Not supported:** ARM computers.
@@ -406,7 +410,7 @@ For remote access outside your home, establish a trusted private connection betw
 
 
 ![The co-op dialog: two PCs, a layout and which side is Player 1](../site/media/eclipse-coop-dialog.webp)
-1. Pair two distinct Umbra PCs and verify a normal stream from each one.
+1. For two remote PCs, pair both and verify a normal stream from each. If Eclipse runs on one of the gaming PCs, use the co-op-with-this-PC steps below; this PC needs no pairing in that mode.
 
 1. In Eclipse choose **Co-op**, select the two hosts, choose side-by-side or stacked, and choose the primary/Player 1 side.
 
@@ -418,7 +422,23 @@ The normal install flow uses working co-op defaults. Eclipse requests the built-
 
 **Settings → Co-op → Play shared sounds once** (Accurate by default) plays a sound both games make, such as narration or music, only once. Some games choose their music at random on each PC, so the two PCs play different tracks the filter cannot merge; if music sounds doubled or messy, turn the game’s music off on one PC.
 
-If Eclipse is running on one of the gaming PCs, controls for that PC can behave differently: its local game reads its controller directly. Keyboard/mouse focus and virtual-display placement remain areas of active testing. A TV or separate client avoids that local-host focus complication.
+<a name="coop-this-pc"></a>
+
+### Co-op with this PC as one of the two
+
+In Eclipse 1.3.7, the Windows or Linux PC running Eclipse can be one of the two co-op PCs. Its game runs on its own display, shown directly in its half of the Eclipse window; only the other PC is streamed. Move the mouse across the divider to control the other PC. Linux needs GNOME or KDE Plasma on Wayland for this mode; other desktops and X11 keep the older streaming-to-itself path.
+
+Install Umbra 0.5.1 on Windows or Umbra 0.5.3 on Linux on the gaming PCs, and Eclipse 1.3.7 on the PC where you play. Keep Umbra running on this PC; it does not need to be paired with itself. Pair the other PC and check an ordinary stream from it first. Open Co-op, choose this PC and the other PC, select the layout and assign controllers.
+
+Controllers assigned to the other PC are kept away from this PC’s games. On Windows, Umbra 0.5.1 supplies the required driver and Eclipse offers to restart apps that already had the controller open. On Linux, Eclipse takes exclusive access to the controller without an extra driver; programs reading PlayStation or Switch devices directly can still see them, and Eclipse identifies those programs.
+
+On Windows, approve Eclipse’s administrator prompt once per co-op session. On Linux, allow the desktop’s input-capture request (Share on GNOME, Allow on KDE); approve the shortcut request when it first appears. Keep the games in their respective halves.
+
+Ctrl+Alt+Shift+Q ends the session; Ctrl+Alt+Shift+Z gives back the mouse. On Windows, the taskbar icon’s right-click menu also offers Disconnect, Quit stream, Give back the mouse and Resume co-op.
+
+GNOME limitations: the Capture Input request appears each session. Do not stop sharing through the orange top-bar icon during co-op; end the session with Ctrl+Alt+Shift+Q instead. Touchscreens, tablets and KVMs using absolute mouse mode can point to the wrong place; an ordinary mouse is unaffected. On KDE, this PC’s half was measured at about 48 pictures per second (60 on GNOME); its game runs at its own rate.
+
+Testing: the Windows mode ran across many sessions on two PCs. Linux was exercised on Ubuntu 26.04 with GNOME 50 and KDE Plasma 6.6, using a Flatpak and a native build, virtual controllers and a test animation. Other distributions, GNOME 51 and Plasma 6.7 were not tested for this mode. The 1.3.7 TV and SHIELD packages themselves were not stream-tested; TV smoke tests used a beta build. Read the release notes for the full coverage and known issues.
 
 <a name="diagnostics"></a>
 

@@ -20,6 +20,14 @@ Eclipse/Umbra’s additions use AI-assisted coding, including Claude and Codex. 
 
 <p align="center"><sub>Human-played Halo: Combat Evolved Anniversary on two Umbra hosts, streamed by Eclipse on Windows. Capture and trimming by Codex. Halo is a Microsoft game.</sub></p>
 
+## New release · 15 November 2026
+
+**Eclipse 1.3.7 · Umbra 0.5.1 for Windows · Umbra 0.5.3 for Linux**
+
+Play co-op on one of the two gaming PCs: on Windows, GNOME or KDE Plasma, your half runs directly on that PC and only the other PC is streamed. This release also adds update notices, streaming tips, up to 16 controllers per stream and right-stick menu scrolling.
+
+[Set up co-op with this PC](docs/installation.md#coop-this-pc) · [Eclipse release notes](https://github.com/PreceptorOfMagic/Eclipse/releases/tag/eclipse-v1.3.7) · [Umbra Windows](https://github.com/PreceptorOfMagic/Umbra/releases/tag/umbra-v0.5.1) · [Umbra Linux](https://github.com/PreceptorOfMagic/Umbra/releases/tag/umbra-linux-v0.5.3)
+
 <a name="streaming-basics"></a>
 
 ## Your games run on your PC. Play where you want.
@@ -58,7 +66,7 @@ Pair Eclipse with Umbra, choose a game or desktop, and stream to the TV or deskt
 
 ### Two-host co-op: what co-op means here
 
-Choose two paired Umbra PCs. Eclipse receives both live sessions, places them side by side or stacked, and routes each player's assigned controls to the correct host.
+Choose two Umbra PCs for side-by-side or stacked co-op. On a TV or separate client, Eclipse receives both live sessions and routes each player’s controls to the correct host. Since 1.3.7, a Windows PC or a GNOME/KDE Plasma Wayland PC running Eclipse can also play its own half directly, streaming only the other PC.
 
 - Two independently rendered games
 - Side-by-side or top-and-bottom layouts
@@ -109,6 +117,8 @@ The work was kept as a coordinated client-and-host project because broad co-op c
 ## What has been tested—and what still needs your hardware.
 
 The table separates working targets from combinations that have actually been exercised. A supported code path is not the same as a promise that every TV, OS, GPU and driver combination has been verified.
+
+The matrix below records the earlier October coverage. For 1.3.7, co-op with this PC was additionally exercised on Windows and on Ubuntu 26.04 with GNOME 50 and KDE Plasma 6.6. The TV used a beta build; the final TV and SHIELD packages were not stream-tested. Umbra Linux 0.5.3 retains 0.5.2’s streaming code; some current HDR extras are unavailable or have only automated tests at their new package versions. [Current co-op coverage](docs/installation.md#coop-this-pc) · [Current HDR extras](docs/installation.md#umbra-linux-hdr).
 
 Compatibility and test coverage as of October 2026:
 
@@ -319,9 +329,9 @@ An older LG TV refused to install Eclipse 1.3.4 with error -5. Every file inside
 
 Eclipse for Linux became a Flatpak, like Umbra for Linux: one bundle for any x86_64 distribution, which keeps the settings and pairings of the earlier tarball. On a PC at the TV, 4K streams with AMD graphics had been losing about a quarter of their video packets, because each picture was copied back from the graphics card on the thread that receives the stream; pictures now go straight to the screen, and the loss is gone on Wayland and X11. Co-op on Linux no longer falls back to software decoding at the start, and plays through PulseAudio without crackle. On every platform, an app’s menu left open through a refresh of the app list no longer starts a different app. The tarball stays on the release.
 
-### 14 November · Eclipse 1.3.7
+### 15 November · Eclipse 1.3.7
 
-Eclipse can now run on one of the two co-op PCs: on Windows, and on Linux with GNOME or KDE Plasma, that PC's half runs locally on a display of its own instead of being streamed to itself, and only the other PC is streamed. The mouse crosses between the halves at the divider, and controllers given to the other PC are kept away from this PC's games. Eclipse also tells you when a new version is out, shows streaming tips and takes up to 16 controllers per stream. The Linux tarball is no longer published; the Flatpak is the Linux package. Umbra 0.5.1 for Windows installs HidHide, which that needs; Umbra 0.5.3 for Linux adds the update notice.
+Eclipse can now run on one of the two co-op PCs: on Windows, and on Linux with GNOME or KDE Plasma, that PC's half runs locally on a display of its own instead of being streamed to itself, and only the other PC is streamed. The mouse crosses between the halves at the divider, and controllers given to the other PC are kept away from this PC's games. Eclipse also tells you when a new version is out, shows streaming tips and takes up to 16 controllers per stream. The Linux tarball is no longer published; the Flatpak is the Linux package. Umbra 0.5.1 for Windows supplies the controller-ownership support for this mode; Umbra 0.5.3 for Linux adds the update notice.
 
 <!-- activity:history-product:start -->
 **Behind the build · 23 September–22 October 2026**

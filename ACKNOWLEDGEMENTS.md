@@ -111,6 +111,7 @@ Major projects include:
 - [Simple-Web-Server fork](https://github.com/ClassicOldSong/Simple-Web-Server) — MIT, by Ole Christian Eidheim and contributors.
 - [ViGEmClient](https://github.com/LizardByte/Virtual-Gamepad-Emulation-Client) — MIT, Copyright © 2017–2023 **Benjamin “Nefarius” Höglinger-Stelzer**, Nefarius Software Solutions e.U. and contributors; client revision `8d71f674`.
 - [ViGEmBus 1.21.442.0](https://github.com/nefarius/ViGEmBus/releases/tag/v1.21.442.0) — BSD-3-Clause, Nefarius Software Solutions. This is a separate signed driver installer.
+- [HidHide 1.5.230](https://github.com/nefarius/HidHide) — MIT, Nefarius Software Solutions and contributors. Bundled with Umbra 0.5.1 for Windows; Eclipse uses it for controller ownership during co-op with this PC.
 - [qrcodejs](https://github.com/davidshimjs/qrcodejs) by David Shim — MIT. The bundled minified file matches upstream commit `04f46c6`.
 - [nanors](https://github.com/sleepybishop/nanors), by **Joseph Calderon**, and [tray](https://github.com/LizardByte/tray), originally by **Serge Zaitsev** — permissive projects; nanors includes nested `sse2neon` material.
 - [TPCircularBuffer](https://github.com/michaeltyson/TPCircularBuffer), by **Michael Tyson / A Tasty Pixel**, using a technique by **Philip Howard** adapted by **Kurt Revis** — its podspec says MIT, while the redistributed C/H files carry zlib-style terms including an altered-source marking condition.

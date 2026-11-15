@@ -10,6 +10,14 @@ Eclipse’s additions use AI-assisted coding. [About the development process.](d
 
 [Choose your download](#downloads) · [Explore the Project Hub](../README.md) · [Eclipse repository](https://github.com/PreceptorOfMagic/Eclipse)
 
+## New release · 15 November 2026
+
+**Eclipse 1.3.7 · Umbra 0.5.1 for Windows · Umbra 0.5.3 for Linux**
+
+Play co-op on one of the two gaming PCs: on Windows, GNOME or KDE Plasma, your half runs directly on that PC and only the other PC is streamed. This release also adds update notices, streaming tips, up to 16 controllers per stream and right-stick menu scrolling.
+
+[Set up co-op with this PC](installation.md#coop-this-pc) · [Eclipse release notes](https://github.com/PreceptorOfMagic/Eclipse/releases/tag/eclipse-v1.3.7) · [Umbra Windows](https://github.com/PreceptorOfMagic/Umbra/releases/tag/umbra-v0.5.1) · [Umbra Linux](https://github.com/PreceptorOfMagic/Umbra/releases/tag/umbra-linux-v0.5.3)
+
 <a name="downloads"></a>
 
 ## Eclipse downloads
@@ -62,7 +70,7 @@ Choose the installer `eclipse-windows-x64-setup-unsigned.exe` (or the portable `
 
 Open the latest release, expand Assets and choose the package described below. If no release is listed, that package has not been published.
 
-Choose the Flatpak `Eclipse-<version>-linux-x86_64.flatpak`, verify its checksum and run `flatpak install --user` on it; it runs on any x86_64 distribution with Flatpak and keeps the tarball’s settings and pairings. Tested on Ubuntu 26.04 with AMD and NVIDIA graphics. The older tarball `eclipse-linux-x86_64.tar.gz` is still attached. [Full Linux installation →](installation.md#eclipse-linux)
+Choose the Flatpak `Eclipse-<version>-linux-x86_64.flatpak`, verify its checksum and run `flatpak install --user` on it; it runs on any x86_64 distribution with Flatpak and keeps the tarball’s settings and pairings. Tested on Ubuntu 26.04 with AMD and NVIDIA graphics. The older tarball `eclipse-linux-x86_64.tar.gz` stays on the [1.3.6 release](https://github.com/PreceptorOfMagic/Eclipse/releases/tag/eclipse-v1.3.6); no tarball is published for 1.3.7. [Full Linux installation →](installation.md#eclipse-linux)
 
 <a name="features"></a>
 
@@ -86,7 +94,7 @@ Side-by-side or stacked independent game sessions, player/controller assignments
 
 ## After installation
 
-Pair one Umbra host and launch a game or desktop. For co-op, verify each host alone before choosing two hosts in Eclipse. You do not need to manually create a host application or edit encoder settings.
+Pair one Umbra host and launch a game or desktop. For two remote PCs, verify each host alone before choosing both in Eclipse. When this PC runs its own co-op half directly, it needs Umbra running but does not need to be paired with itself. [Follow the co-op setup guide.](installation.md#coop-this-pc)
 
 [Pair your first host](installation.md#pairing) · [Compatibility and known gaps](../README.md#status) · [Report a problem](installation.md#diagnostics)
 

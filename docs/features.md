@@ -34,7 +34,7 @@ The [hardware matrix](../README.md#status) records the testing limits; the [inst
 
 #### Side-by-side or stacked co-op
 
-Choose two paired Umbra PCs and a layout. Each PC runs its own game and sends its own pane; Eclipse combines the compatible HEVC picture data before decoding the shared view. Neither game needs native split-screen support. This does not add multiplayer to a single-player game: joining the same world still depends on the games and accounts.
+Choose two Umbra PCs and a layout. On a TV or separate client, each PC sends its pane and Eclipse combines compatible HEVC picture data before decoding the shared view. With Eclipse running on one of the two PCs in the new local mode, that PC’s half is shown directly instead. Neither game needs split-screen support, but joining the same world still depends on the games and accounts.
 
 #### Desktops that fit their panes
 
@@ -70,7 +70,7 @@ Disconnect from the stream overlay leaves both PCs’ sessions running: the Co-o
 
 #### More useful launch failures
 
-A busy host is identified so you can resolve its existing session. If the client lacks launch permission, the message directs you to the host’s Clients settings rather than leaving you with an unexplained permission error.
+A busy host is identified so you can resolve its existing session. Missing launch permission points you to the host’s Clients settings. In 1.3.7, the first PC’s stream stays visible while Eclipse waits for the second PC; after 20 seconds it asks whether to keep waiting, up to one minute, or end.
 
 </details>
 
@@ -82,7 +82,7 @@ A busy host is identified so you can resolve its existing session. If the client
 
 #### Named, remembered controller assignments
 
-The co-op launch screen and Settings → Co-op let you place controllers under the PC they should control. Assignments are remembered, unclaimed controllers can be distributed, and previously seen disconnected pads remain manageable. Forgetting a controller clears its saved assignments. A controller physically attached to a host is not automatically movable through client forwarding.
+The co-op launch screen and Settings → Co-op let you assign controllers to each PC. Assignments are remembered, and disconnected controllers remain manageable. Eclipse 1.3.7 supports up to 16 controllers per stream (five were exercised together on Windows); the game may support fewer players. Steam Controller (2026) support is included on Windows and Linux, with Linux hardware testing still outstanding.
 
 ![Co-op session dialog listing an Xbox 360 Controller under VEGA and a PS4 Controller under the second PC](../site/media/eclipse-coop-controllers.webp)
 
@@ -90,7 +90,7 @@ Shown with two virtual controllers emulated on the client PC.
 
 #### Mouse and keyboard routing
 
-Pane-aware pointer routing translates coordinates into the target desktop. A drag stays with the PC where the button was pressed, and a key release returns to the PC that received its press. You can instead choose “Assign mouse and keyboard like controllers” to pin devices to a PC for the session. Since Eclipse 1.3.5 the controller’s virtual mouse keeps its own position and crosses to the other PC the same way, except when Eclipse runs on one of the two PCs; other relative mouse input still goes to the first PC. Windows routing has recorded tests; TV coverage is less complete.
+Pane-aware pointer routing translates coordinates into the target desktop. A drag stays with the PC where the button was pressed, and a key release returns to the PC that received its press. You can instead choose “Assign mouse and keyboard like controllers” to pin devices to a PC for the session. Since Eclipse 1.3.5 the controller’s virtual mouse keeps its own position and crosses to the other PC the same way, except when Eclipse runs on one of the two PCs; in the older two-stream mode, other relative mouse input still goes to the first PC. Windows routing has recorded tests; TV coverage is less complete. In 1.3.7’s local co-op mode on Windows and GNOME/KDE Wayland, the ordinary mouse crosses between this PC’s half and the streamed half at the divider.
 
 [![The pointer crossing from one PC’s half to the other’s (plays on the website)](../site/media/eclipse-coop-pointer-poster.webp)](https://preceptorofmagic.github.io/Eclipse-Umbra-Project-Hub/index.html#features-input)
 
@@ -142,13 +142,13 @@ When both games play the same narration, music or effect, Eclipse’s passive ga
 
 <summary>Fit the setup you actually use — Local-host play, monitor control, wired TV networking, desktop usability and clean installs</summary>
 
-#### A Windows PC can be a host and the client
+#### Play on one of the two co-op PCs
 
-Run a game on its own virtual display while Eclipse shows the combined view on a separate display. Cursor and focus hand-off support controlling that local pane without feeding input back into Eclipse. Keep the client off the display being captured. Local controller isolation is not universally solved, especially when other software already holds a controller open.
+In Eclipse 1.3.7, the Windows or Linux PC running Eclipse can be one of the two co-op PCs. Its game runs on its own display, shown directly in its half of the Eclipse window; only the other PC is streamed. Move the mouse across the divider to control the other PC. Linux needs GNOME or KDE Plasma on Wayland for this mode; other desktops and X11 keep the older streaming-to-itself path. Controllers assigned to the other PC are kept away from this PC’s games. On Windows, Umbra 0.5.1 supplies the required driver and Eclipse offers to restart apps that already had the controller open. On Linux, Eclipse takes exclusive access to the controller without an extra driver; programs reading PlayStation or Switch devices directly can still see them, and Eclipse identifies those programs.
 
 #### Choose what happens to remote monitors
 
-Settings → Host → Computer’s monitor while streaming offers ask at start, always off or always on. The launch prompt can start co-op with remote monitors off, without switching off the screen of the PC running Eclipse. Requires Umbra support; recorded verification is on Windows, with TV-side coverage still needed.
+Settings → Host → Computer’s monitor while streaming controls monitors for ordinary streaming. Co-op always leaves host monitors on, including the display of the PC running Eclipse.
 
 ![Eclipse Host Settings with the monitor choices open: Choose when starting a stream, Always off and Always on](../site/media/eclipse-host-monitor.webp)
 
@@ -158,11 +158,11 @@ On webOS, the wired-network option identifies the active USB Ethernet adapter an
 
 #### A more usable desktop client
 
-Keyboard shortcuts cover fullscreen, capture and stream controls; Windows remembers window position, size and maximisation. Settings can scroll instead of compressing their text into an unreadable panel.
+Keyboard shortcuts cover fullscreen, capture and stream controls; Windows remembers window position, size and maximisation. The right stick scrolls long menus and dialogs. Eclipse 1.3.7 adds platform-specific streaming tips on the connecting screen and in Settings, with Next tip and All tips.
 
 #### Install, update and remove cleanly
 
-Eclipse has a per-user Windows installer that needs no administrator access, with an Apps & features uninstaller that can keep your settings, and per-user install and uninstall scripts on Linux. On the NVIDIA SHIELD it is a sideloaded APK signed with the project’s own key, so updates install over it. Umbra has a Windows installer and a Linux Flatpak; its Windows uninstaller stops only its own service and processes and lets you keep your settings and shared drivers. Installing a newer version over an older one keeps settings and pairings, and on webOS 26 settings, pairings and co-op keep working after the TV restarts.
+Eclipse has a per-user Windows installer and a Linux Flatpak. The Windows installer needs no administrator access; co-op with this PC asks separately once per session. The SHIELD APK uses the project’s release key, so it updates an existing release install. Upgrades keep settings and pairings. Eclipse checks for updates once a day when the launcher opens and shows a dot in Settings → About, with What’s new and device-specific update instructions. It never interrupts a stream and can be turned off in About. Umbra 0.5.1 on Windows and 0.5.3 on Linux show update notices in the host web interface.
 
 </details>
 

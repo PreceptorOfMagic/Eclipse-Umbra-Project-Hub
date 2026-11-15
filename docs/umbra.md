@@ -10,6 +10,14 @@ Umbra’s additions use AI-assisted coding. [About the development process.](dev
 
 [Choose your download](#windows) · [Explore the Project Hub](../README.md) · [Umbra repository](https://github.com/PreceptorOfMagic/Umbra) · [Using Vibepollo? See Umbra (Vibepollo)](#editions)
 
+## New release · 15 November 2026
+
+**Eclipse 1.3.7 · Umbra 0.5.1 for Windows · Umbra 0.5.3 for Linux**
+
+Play co-op on one of the two gaming PCs: on Windows, GNOME or KDE Plasma, your half runs directly on that PC and only the other PC is streamed. This release also adds update notices, streaming tips, up to 16 controllers per stream and right-stick menu scrolling.
+
+[Set up co-op with this PC](installation.md#coop-this-pc) · [Eclipse release notes](https://github.com/PreceptorOfMagic/Eclipse/releases/tag/eclipse-v1.3.7) · [Umbra Windows](https://github.com/PreceptorOfMagic/Umbra/releases/tag/umbra-v0.5.1) · [Umbra Linux](https://github.com/PreceptorOfMagic/Umbra/releases/tag/umbra-linux-v0.5.3)
+
 <a name="windows"></a>
 
 ## Umbra for Windows x64
@@ -30,17 +38,17 @@ Download an attached file under **Assets**, not GitHub’s automatically generat
 
 ## Umbra for Linux
 
-[Umbra for Linux release](https://github.com/PreceptorOfMagic/Umbra/releases/tag/umbra-linux-v0.5.2)
+[Umbra for Linux release](https://github.com/PreceptorOfMagic/Umbra/releases/tag/umbra-linux-v0.5.3)
 
 Open the Umbra for Linux release and expand Assets. If no release is listed, that package has not been published.
 
-Download `Umbra-<version>-linux-x86_64.flatpak` from the Umbra for Linux release and install it with `flatpak install --user`. KDE Plasma and GNOME on Wayland get ordinary streaming, a virtual display for each stream and co-op; X11 desktops get ordinary streaming only. Optional extras add HDR to KDE’s and GNOME’s virtual displays: patches to KWin and Mutter, prebuilt for Ubuntu 26.04 and 26.10, Fedora 44 and 45, openSUSE Tumbleweed, Arch Linux and CachyOS. Testing: Umbra 0.5.2 ran on hardware with an AMD Radeon RX Vega on Ubuntu 26.04 and 26.10, Fedora 44 and 45 and openSUSE Tumbleweed, with KDE Plasma and GNOME, with and without each HDR extra. NVIDIA GPUs and HDR desktop streams were not run with 0.5.2 (0.5.1 was tested on an RTX 2060 SUPER), and Arch Linux and CachyOS are untested on hardware because the test PC cannot start them without changing its Secure Boot setup. The only AMD card tested is a 2017 Radeon RX Vega, whose encoder limits 4K to about 60 fps. [Exact Linux host installation →](installation.md#umbra-linux) · [HDR extras for your distribution →](installation.md#umbra-linux-hdr)
+Download the Umbra 0.5.3 Flatpak for x86_64 Linux. KDE Plasma and GNOME on Wayland support ordinary streaming, a virtual display per stream and co-op; X11 supports ordinary streaming only. This release adds the update notice, with streaming code unchanged from 0.5.2. Hardware coverage remains the October 0.5.2 tests on an AMD Radeon RX Vega; NVIDIA was tested with 0.5.1, and Arch and CachyOS were not run on hardware. In Umbra 0.5.3, KDE HDR extras are available for Ubuntu 26.04 and 26.10 only. Fedora 44/45, Arch, CachyOS and openSUSE Tumbleweed now use KWin 6.8, whose HDR patch is not ready; their KDE virtual displays stream in SDR. The CachyOS GNOME extra is also unavailable because its package mirror failed during the build. Never install an older extra over a different compositor version. [Linux host installation](installation.md#umbra-linux) · [HDR downloads and compatibility](installation.md#umbra-linux-hdr).
 
 <a name="editions"></a>
 
 ## Umbra.
 
-Umbra comes in two versions: Umbra, built on Apollo, and Umbra (Vibepollo), built on Vibepollo. Both carry the same additions for Eclipse; they differ only in the host they are built on. Choose the one built on the host you would otherwise use.
+Umbra comes in two editions: Umbra, built on Apollo, and Umbra (Vibepollo), built on Vibepollo. For Eclipse 1.3.7 co-op with this Windows PC, use Umbra 0.5.1. The published Vibepollo edition remains 2.0.0-umbra.1; the planned umbra.2 update is not released. It keeps its own GitHub update check.
 
 | | Umbra | Umbra (Vibepollo) |
 |---|---|---|
