@@ -195,6 +195,7 @@ Everything below ran on one test PC. The Umbra 0.5.2 tests used its AMD Radeon R
 
 | Distribution | KDE Plasma (KWin) | GNOME (Mutter) |
 |---|---|---|
+<!-- generated:hdr-rows:start -->
 | Ubuntu 26.04 | [Umbra-HDR-KDE-ubuntu26.04.tar.gz](https://github.com/PreceptorOfMagic/Umbra/releases/download/umbra-linux-v0.5.3/Umbra-HDR-KDE-ubuntu26.04.tar.gz) ([checksum](https://github.com/PreceptorOfMagic/Umbra/releases/download/umbra-linux-v0.5.3/Umbra-HDR-KDE-ubuntu26.04.tar.gz.sha256)) — KWin 6.6.6; package 4:6.6.6-0ubuntu0.1+umbrahdr4. Hardware-tested with 0.5.2. | [Umbra-HDR-GNOME-ubuntu26.04.tar.gz](https://github.com/PreceptorOfMagic/Umbra/releases/download/umbra-linux-v0.5.3/Umbra-HDR-GNOME-ubuntu26.04.tar.gz) ([checksum](https://github.com/PreceptorOfMagic/Umbra/releases/download/umbra-linux-v0.5.3/Umbra-HDR-GNOME-ubuntu26.04.tar.gz.sha256)) — Mutter 50.1; package 50.1-0ubuntu2.5+umbrahdr2. Updated package: automated test only. |
 | Ubuntu 26.10 | [Umbra-HDR-KDE-ubuntu26.10.tar.gz](https://github.com/PreceptorOfMagic/Umbra/releases/download/umbra-linux-v0.5.3/Umbra-HDR-KDE-ubuntu26.10.tar.gz) ([checksum](https://github.com/PreceptorOfMagic/Umbra/releases/download/umbra-linux-v0.5.3/Umbra-HDR-KDE-ubuntu26.10.tar.gz.sha256)) — KWin 6.7.5; package 4:6.7.5-0ubuntu1+umbrahdr1. Hardware-tested with 0.5.2. | [Umbra-HDR-GNOME-ubuntu26.10.tar.gz](https://github.com/PreceptorOfMagic/Umbra/releases/download/umbra-linux-v0.5.3/Umbra-HDR-GNOME-ubuntu26.10.tar.gz) ([checksum](https://github.com/PreceptorOfMagic/Umbra/releases/download/umbra-linux-v0.5.3/Umbra-HDR-GNOME-ubuntu26.10.tar.gz.sha256)) — Mutter 51.0; package 51.0-1ubuntu3+umbrahdr1. Hardware-tested with 0.5.2. |
 | Fedora 44 | Not available in 0.5.3: KWin 6.8 patch pending. | [Umbra-HDR-GNOME-fedora44.tar.gz](https://github.com/PreceptorOfMagic/Umbra/releases/download/umbra-linux-v0.5.3/Umbra-HDR-GNOME-fedora44.tar.gz) ([checksum](https://github.com/PreceptorOfMagic/Umbra/releases/download/umbra-linux-v0.5.3/Umbra-HDR-GNOME-fedora44.tar.gz.sha256)) — Mutter 50.6; package 50.6-2.fc44.umbrahdr2. Updated package: automated test only. |
@@ -202,6 +203,7 @@ Everything below ran on one test PC. The Umbra 0.5.2 tests used its AMD Radeon R
 | openSUSE Tumbleweed | Not available in 0.5.3: KWin 6.8 patch pending. | [Umbra-HDR-GNOME-opensuse-tumbleweed.tar.gz](https://github.com/PreceptorOfMagic/Umbra/releases/download/umbra-linux-v0.5.3/Umbra-HDR-GNOME-opensuse-tumbleweed.tar.gz) ([checksum](https://github.com/PreceptorOfMagic/Umbra/releases/download/umbra-linux-v0.5.3/Umbra-HDR-GNOME-opensuse-tumbleweed.tar.gz.sha256)) — Mutter 51.1; package 51.1-1.1.umbrahdr1. Updated package: automated test only. |
 | Arch Linux | Not available in 0.5.3: KWin 6.8 patch pending. | [Umbra-HDR-GNOME-arch.tar.gz](https://github.com/PreceptorOfMagic/Umbra/releases/download/umbra-linux-v0.5.3/Umbra-HDR-GNOME-arch.tar.gz) ([checksum](https://github.com/PreceptorOfMagic/Umbra/releases/download/umbra-linux-v0.5.3/Umbra-HDR-GNOME-arch.tar.gz.sha256)) — Mutter 51.1; package 51.1-1. Automated test only; no hardware test. |
 | CachyOS | Not available in 0.5.3: KWin 6.8 patch pending. | Not available in 0.5.3: package mirror failed during the build. |
+<!-- generated:hdr-rows:end -->
 
 All eight published extras passed automated installation, capture-capability and rollback checks without a GPU. Earlier hardware tests used Umbra 0.5.2; updated Ubuntu 26.04, Fedora 44 and Tumbleweed GNOME packages have not been run on hardware at these exact versions. In Umbra 0.5.3, KDE HDR extras are available for Ubuntu 26.04 and 26.10 only. Fedora 44/45, Arch, CachyOS and openSUSE Tumbleweed now use KWin 6.8, whose HDR patch is not ready; their KDE virtual displays stream in SDR. The CachyOS GNOME extra is also unavailable because its package mirror failed during the build. Never install an older extra over a different compositor version.
 
@@ -422,6 +424,7 @@ The normal install flow uses working co-op defaults. Eclipse requests the built-
 
 **Settings → Co-op → Play shared sounds once** (Accurate by default) plays a sound both games make, such as narration or music, only once. Some games choose their music at random on each PC, so the two PCs play different tracks the filter cannot merge; if music sounds doubled or messy, turn the game’s music off on one PC.
 
+<!-- generated:local-coop:start -->
 <a name="coop-this-pc"></a>
 
 ### Co-op with this PC as one of the two
@@ -439,6 +442,7 @@ Ctrl+Alt+Shift+Q ends the session; Ctrl+Alt+Shift+Z gives back the mouse. On Win
 GNOME limitations: the Capture Input request appears each session. Do not stop sharing through the orange top-bar icon during co-op; end the session with Ctrl+Alt+Shift+Q instead. Touchscreens, tablets and KVMs using absolute mouse mode can point to the wrong place; an ordinary mouse is unaffected. On KDE, this PC’s half was measured at about 48 pictures per second (60 on GNOME); its game runs at its own rate.
 
 Testing: the Windows mode ran across many sessions on two PCs. Linux was exercised on Ubuntu 26.04 with GNOME 50 and KDE Plasma 6.6, using a Flatpak and a native build, virtual controllers and a test animation. Other distributions, GNOME 51 and Plasma 6.7 were not tested for this mode. The 1.3.7 TV and SHIELD packages themselves were not stream-tested; TV smoke tests used a beta build. Read the release notes for the full coverage and known issues.
+<!-- generated:local-coop:end -->
 
 <a name="diagnostics"></a>
 

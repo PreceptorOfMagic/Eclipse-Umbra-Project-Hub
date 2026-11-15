@@ -29,6 +29,8 @@ jobs:
         run: node scripts/launch/check_hub_boundary.mjs
       - name: Validate public site
         run: node scripts/launch/check_public_site.mjs
+      - name: Validate shared release facts and setup chooser
+        run: node scripts/guide/build.mjs --check && node --test scripts/guide/guide.test.mjs
       - name: Validate funding button
         run: node scripts/launch/check_funding.mjs
       - name: Validate the update list (site/updates.json, read by Eclipse and Umbra)

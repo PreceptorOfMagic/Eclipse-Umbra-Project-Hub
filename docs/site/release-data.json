@@ -1,0 +1,146 @@
+{
+  "release": {
+    "date": "15 November 2026",
+    "eclipse": "1.3.7",
+    "windows": "0.5.1",
+    "linux": "0.5.3",
+    "summary": "Your PC can now be one of the two co-op players. Its half runs locally; only the other PC is streamed. Plus update notices, streaming tips and up to 16 controllers per stream."
+  },
+  "localCoop": [
+    "In Eclipse 1.3.7, the Windows or Linux PC running Eclipse can be one of the two co-op PCs. Its game runs on its own display, shown directly in its half of the Eclipse window; only the other PC is streamed. Move the mouse across the divider to control the other PC. Linux needs GNOME or KDE Plasma on Wayland for this mode; other desktops and X11 keep the older streaming-to-itself path.",
+    "Install Umbra 0.5.1 on Windows or Umbra 0.5.3 on Linux on the gaming PCs, and Eclipse 1.3.7 on the PC where you play. Keep Umbra running on this PC; it does not need to be paired with itself. Pair the other PC and check an ordinary stream from it first. Open Co-op, choose this PC and the other PC, select the layout and assign controllers.",
+    "Controllers assigned to the other PC are kept away from this PC’s games. On Windows, Umbra 0.5.1 supplies the required driver and Eclipse offers to restart apps that already had the controller open. On Linux, Eclipse takes exclusive access to the controller without an extra driver; programs reading PlayStation or Switch devices directly can still see them, and Eclipse identifies those programs.",
+    "On Windows, approve Eclipse’s administrator prompt once per co-op session. On Linux, allow the desktop’s input-capture request (Share on GNOME, Allow on KDE); approve the shortcut request when it first appears. Keep the games in their respective halves.",
+    "Ctrl+Alt+Shift+Q ends the session; Ctrl+Alt+Shift+Z gives back the mouse. On Windows, the taskbar icon’s right-click menu also offers Disconnect, Quit stream, Give back the mouse and Resume co-op.",
+    "GNOME limitations: the Capture Input request appears each session. Do not stop sharing through the orange top-bar icon during co-op; end the session with Ctrl+Alt+Shift+Q instead. Touchscreens, tablets and KVMs using absolute mouse mode can point to the wrong place; an ordinary mouse is unaffected. On KDE, this PC’s half was measured at about 48 pictures per second (60 on GNOME); its game runs at its own rate.",
+    "Testing: the Windows mode ran across many sessions on two PCs. Linux was exercised on Ubuntu 26.04 with GNOME 50 and KDE Plasma 6.6, using a Flatpak and a native build, virtual controllers and a test animation. Other distributions, GNOME 51 and Plasma 6.7 were not tested for this mode. The 1.3.7 TV and SHIELD packages themselves were not stream-tested; TV smoke tests used a beta build. Read the release notes for the full coverage and known issues."
+  ],
+  "hdrExtras": [
+    {
+      "key": "umbra-hdr-kde-ubuntu26.04",
+      "desktop": "kde",
+      "target": "ubuntu26.04",
+      "distribution": "Ubuntu 26.04",
+      "available": true,
+      "metadata": "KWin 6.6.6; package 4:6.6.6-0ubuntu0.1+umbrahdr4. Hardware-tested with 0.5.2.",
+      "filename": "Umbra-HDR-KDE-ubuntu26.04.tar.gz"
+    },
+    {
+      "key": "umbra-hdr-gnome-ubuntu26.04",
+      "desktop": "gnome",
+      "target": "ubuntu26.04",
+      "distribution": "Ubuntu 26.04",
+      "available": true,
+      "metadata": "Mutter 50.1; package 50.1-0ubuntu2.5+umbrahdr2. Updated package: automated test only.",
+      "filename": "Umbra-HDR-GNOME-ubuntu26.04.tar.gz"
+    },
+    {
+      "key": "umbra-hdr-kde-ubuntu26.10",
+      "desktop": "kde",
+      "target": "ubuntu26.10",
+      "distribution": "Ubuntu 26.10",
+      "available": true,
+      "metadata": "KWin 6.7.5; package 4:6.7.5-0ubuntu1+umbrahdr1. Hardware-tested with 0.5.2.",
+      "filename": "Umbra-HDR-KDE-ubuntu26.10.tar.gz"
+    },
+    {
+      "key": "umbra-hdr-gnome-ubuntu26.10",
+      "desktop": "gnome",
+      "target": "ubuntu26.10",
+      "distribution": "Ubuntu 26.10",
+      "available": true,
+      "metadata": "Mutter 51.0; package 51.0-1ubuntu3+umbrahdr1. Hardware-tested with 0.5.2.",
+      "filename": "Umbra-HDR-GNOME-ubuntu26.10.tar.gz"
+    },
+    {
+      "key": "umbra-hdr-kde-fedora44",
+      "desktop": "kde",
+      "target": "fedora44",
+      "distribution": "Fedora 44",
+      "available": false,
+      "metadata": "Not available in 0.5.3: KWin 6.8 patch pending.",
+      "filename": "Umbra-HDR-KDE-fedora44.tar.gz"
+    },
+    {
+      "key": "umbra-hdr-gnome-fedora44",
+      "desktop": "gnome",
+      "target": "fedora44",
+      "distribution": "Fedora 44",
+      "available": true,
+      "metadata": "Mutter 50.6; package 50.6-2.fc44.umbrahdr2. Updated package: automated test only.",
+      "filename": "Umbra-HDR-GNOME-fedora44.tar.gz"
+    },
+    {
+      "key": "umbra-hdr-kde-fedora45",
+      "desktop": "kde",
+      "target": "fedora45",
+      "distribution": "Fedora 45",
+      "available": false,
+      "metadata": "Not available in 0.5.3: KWin 6.8 patch pending.",
+      "filename": "Umbra-HDR-KDE-fedora45.tar.gz"
+    },
+    {
+      "key": "umbra-hdr-gnome-fedora45",
+      "desktop": "gnome",
+      "target": "fedora45",
+      "distribution": "Fedora 45",
+      "available": true,
+      "metadata": "Mutter 51.1; package 51.1-1.fc45.umbrahdr1. Same version built and tested on hardware with 0.5.2.",
+      "filename": "Umbra-HDR-GNOME-fedora45.tar.gz"
+    },
+    {
+      "key": "umbra-hdr-kde-opensuse-tumbleweed",
+      "desktop": "kde",
+      "target": "opensuse-tumbleweed",
+      "distribution": "openSUSE Tumbleweed",
+      "available": false,
+      "metadata": "Not available in 0.5.3: KWin 6.8 patch pending.",
+      "filename": "Umbra-HDR-KDE-opensuse-tumbleweed.tar.gz"
+    },
+    {
+      "key": "umbra-hdr-gnome-opensuse-tumbleweed",
+      "desktop": "gnome",
+      "target": "opensuse-tumbleweed",
+      "distribution": "openSUSE Tumbleweed",
+      "available": true,
+      "metadata": "Mutter 51.1; package 51.1-1.1.umbrahdr1. Updated package: automated test only.",
+      "filename": "Umbra-HDR-GNOME-opensuse-tumbleweed.tar.gz"
+    },
+    {
+      "key": "umbra-hdr-kde-arch",
+      "desktop": "kde",
+      "target": "arch",
+      "distribution": "Arch Linux",
+      "available": false,
+      "metadata": "Not available in 0.5.3: KWin 6.8 patch pending.",
+      "filename": "Umbra-HDR-KDE-arch.tar.gz"
+    },
+    {
+      "key": "umbra-hdr-gnome-arch",
+      "desktop": "gnome",
+      "target": "arch",
+      "distribution": "Arch Linux",
+      "available": true,
+      "metadata": "Mutter 51.1; package 51.1-1. Automated test only; no hardware test.",
+      "filename": "Umbra-HDR-GNOME-arch.tar.gz"
+    },
+    {
+      "key": "umbra-hdr-kde-cachyos",
+      "desktop": "kde",
+      "target": "cachyos",
+      "distribution": "CachyOS",
+      "available": false,
+      "metadata": "Not available in 0.5.3: KWin 6.8 patch pending.",
+      "filename": "Umbra-HDR-KDE-cachyos.tar.gz"
+    },
+    {
+      "key": "umbra-hdr-gnome-cachyos",
+      "desktop": "gnome",
+      "target": "cachyos",
+      "distribution": "CachyOS",
+      "available": false,
+      "metadata": "Not available in 0.5.3: package mirror failed during the build.",
+      "filename": "Umbra-HDR-GNOME-cachyos.tar.gz"
+    }
+  ]
+}

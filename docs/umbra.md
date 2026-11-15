@@ -10,13 +10,15 @@ Umbra’s additions use AI-assisted coding. [About the development process.](dev
 
 [Choose your download](#windows) · [Explore the Project Hub](../README.md) · [Umbra repository](https://github.com/PreceptorOfMagic/Umbra) · [Using Vibepollo? See Umbra (Vibepollo)](#editions)
 
-## New release · 15 November 2026
+<!-- generated:release:start -->
+## Latest release · 15 November 2026
 
-**Eclipse 1.3.7 · Umbra 0.5.1 for Windows · Umbra 0.5.3 for Linux**
+**Eclipse 1.3.7 · Umbra 0.5.1 Windows / 0.5.3 Linux**
 
-Play co-op on one of the two gaming PCs: on Windows, GNOME or KDE Plasma, your half runs directly on that PC and only the other PC is streamed. This release also adds update notices, streaming tips, up to 16 controllers per stream and right-stick menu scrolling.
+Your PC can now be one of the two co-op players. Its half runs locally; only the other PC is streamed. Plus update notices, streaming tips and up to 16 controllers per stream.
 
-[Set up co-op with this PC](installation.md#coop-this-pc) · [Eclipse release notes](https://github.com/PreceptorOfMagic/Eclipse/releases/tag/eclipse-v1.3.7) · [Umbra Windows](https://github.com/PreceptorOfMagic/Umbra/releases/tag/umbra-v0.5.1) · [Umbra Linux](https://github.com/PreceptorOfMagic/Umbra/releases/tag/umbra-linux-v0.5.3)
+[Choose your setup](https://preceptorofmagic.github.io/Eclipse-Umbra-Project-Hub/setup.html#choose-setup) · [Co-op with this PC](installation.md#coop-this-pc) · [Eclipse release notes](https://github.com/PreceptorOfMagic/Eclipse/releases/tag/eclipse-v1.3.7) · [Umbra Windows](https://github.com/PreceptorOfMagic/Umbra/releases/tag/umbra-v0.5.1) · [Umbra Linux](https://github.com/PreceptorOfMagic/Umbra/releases/tag/umbra-linux-v0.5.3)
+<!-- generated:release:end -->
 
 <a name="windows"></a>
 
