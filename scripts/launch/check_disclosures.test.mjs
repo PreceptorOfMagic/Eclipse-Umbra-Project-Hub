@@ -24,7 +24,7 @@ test('missing, malformed and ordinary section fragments are harmless', () => {
   for (const hash of ['', '#', '#missing', '#%ZZ', '#section']) assert.equal(openDisclosureTarget(doc, hash), null);
 });
 
-for (const [page, count] of [['index.html', 11], ['development.html', 21], ['setup.html', 10]]) {
+for (const [page, count] of [['index.html', 12], ['development.html', 22], ['setup.html', 10]]) {
   test(`${page} uses labelled native disclosures, closed until chosen`, () => {
     const html = fs.readFileSync(new URL(`../../site/${page}`, import.meta.url), 'utf8');
     const details = [...html.matchAll(/<details\b([^>]*)>(\s*<summary>[\s\S]*?<\/summary>)/g)];

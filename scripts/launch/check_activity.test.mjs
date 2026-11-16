@@ -13,8 +13,8 @@ test('snapshot is a fixed, aggregate-only record with an explicit scope', () => 
   assert.match(snapshot.asOf, /^\d{4}-\d\d-\d\dT[\d:.]+Z$/);
   assert.match(snapshot.scope, /overlapping/);
   assert.deepEqual(Object.keys(snapshot).sort(), ['asOf', 'coverage', 'schemaVersion', 'scope', 'timezone', 'windows']);
-  assert.equal(snapshot.windows.length, 5);
-  assert.equal(new Set(snapshot.windows.map(window => window.id)).size, 5);
+  assert.equal(snapshot.windows.length, 6);
+  assert.equal(new Set(snapshot.windows.map(window => window.id)).size, 6);
   assert.doesNotMatch(JSON.stringify(snapshot), /response_id|session_id|message_id|promptText|\/home\/|msg_[a-z0-9]|resp_[a-z0-9]/i);
 });
 

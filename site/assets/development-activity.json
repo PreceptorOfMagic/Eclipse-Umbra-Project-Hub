@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "asOf": "2026-10-22T04:28:29.000Z",
+  "asOf": "2026-11-16T14:00:00.000Z",
   "timezone": "Australia/Brisbane",
   "scope": "Retained project activity in overlapping date windows; not per-feature allocation or complete billing history.",
   "coverage": {
@@ -434,6 +434,77 @@
           ],
           "recordsIncomplete": false,
           "tokens": 996218988
+        }
+      ]
+    },
+    {
+      "id": "history-this-pc",
+      "from": "2026-10-23",
+      "to": "2026-11-16",
+      "label": "23 October–16 November 2026",
+      "prompts": 146,
+      "promptSources": {
+        "claudeJournal": 0,
+        "claudeTranscripts": 146,
+        "codexTranscripts": 0
+      },
+      "excludedUnmarkedClaudeMessages": 0,
+      "requests": 2615,
+      "tokens": {
+        "uncachedInput": 5508,
+        "cacheWrite": 10505967,
+        "cacheRead": 831888526,
+        "output": 1831788,
+        "total": 844231789
+      },
+      "models": [
+        "claude-opus-5-5"
+      ],
+      "recordedUsageDates": {
+        "first": "2026-10-23",
+        "last": "2026-11-16"
+      },
+      "recordsIncomplete": true,
+      "weeks": [
+        {
+          "from": "2026-10-23",
+          "to": "2026-10-25",
+          "prompts": 30,
+          "models": [
+            "claude-opus-5-5"
+          ],
+          "recordsIncomplete": false,
+          "tokens": 307477406
+        },
+        {
+          "from": "2026-10-26",
+          "to": "2026-11-01",
+          "prompts": 39,
+          "models": [
+            "claude-opus-5-5"
+          ],
+          "recordsIncomplete": false,
+          "tokens": 47897484
+        },
+        {
+          "from": "2026-11-09",
+          "to": "2026-11-15",
+          "prompts": 73,
+          "models": [
+            "claude-opus-5-5"
+          ],
+          "recordsIncomplete": true,
+          "tokens": 469607352
+        },
+        {
+          "from": "2026-11-16",
+          "to": "2026-11-16",
+          "prompts": 4,
+          "models": [
+            "claude-opus-5-5"
+          ],
+          "recordsIncomplete": false,
+          "tokens": 19249547
         }
       ]
     }

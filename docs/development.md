@@ -703,6 +703,75 @@ A user reported that their LG TV from 2020 refused to install Eclipse 1.3.4 with
 
 </details>
 
+<a name="detail-this-pc"></a>
+
+<details>
+
+<summary>23 October–16 November · Co-op from the PC you play on — Linux 4K and audio, the second PC’s start, controller ownership, the local pane on Windows, GNOME and KDE Plasma, release testing and the 1.3.7 releases</summary>
+
+### 23 October · 4K on Linux without a readback
+
+Each decoded picture had been copied back from the graphics card on the thread that receives the stream. On an AMD Radeon RX Vega at 4K60 and 80 Mbps that thread fell behind, and 26% of the video packets were lost. Pictures now go from the decoder to the screen as shared GPU buffers, and SDL uses EGL on X11 as well as Wayland so they stay there; the loss went to none on both. The damaged pictures a co-op stream starts with, until both PCs have sent a full one, had been counted as decoder failures, which switched co-op to software decoding; they now have an allowance of about 5 seconds of their own. Through ALSA a late block of sound became a short gap, about five a second in co-op, so PulseAudio became the default output. On a desktop scaled to 200%, the default stream size is now the panel’s own instead of 1080p.
+
+### 24 October · Eclipse 1.3.6
+
+The Flatpak became the Linux package, reading the tarball’s settings folder so nothing has to be paired again; the tarball stayed on the release. With an app’s menu open, a refresh of the app list could make *Start streaming* start a different app; the menu now keeps the app itself, a fix first made for the NVIDIA SHIELD. Every package came from one commit again. The 1.3.6 packages themselves, the app-menu fix outside the SHIELD and the Windows installer over 1.3.5 were not tested on hardware before release, which was judged low risk.
+
+### 22 October–10 November · Waiting for the second PC
+
+On 22 October a co-op start failed whenever the second PC took longer than the first PC would wait: Eclipse waited for the second PC inside the first one’s video setup, sent no video pings meanwhile, and the first PC dropped the session with an initial ping timeout about 8.7 seconds after connecting. The next day, with the Linux client, the first PC waited 7.3 to 9.2 seconds across four starts and dropped one of them. On 10 November, re-measured on Windows at 8.3 seconds, the wait moved to its own thread beside the stream on every platform, as the Android client already did. The limit rose from 30 to 60 seconds, and after 20 seconds the stream screen asks whether to keep waiting. Both answers were tested before release with a second PC slowed to 28 seconds.
+
+### 3–4 November · Controllers that belong to the other PC
+
+When the PC running Eclipse is one of the two co-op PCs, a controller given to the other PC must stop reaching this PC’s games, wired or wireless, with any Bluetooth adapter, and without relying on opening the controller exclusively, because Steam and the GameInput service also hold controllers open. HidHide met those requirements. On Windows, Eclipse adds the controllers given to the other PC to HidHide’s list for the session, finds the programs that already hold them and offers to close and reopen them; it never restarts Steam while a Steam game is running. Changing HidHide’s list was measured to need no administrator rights, and recovery after a crash was smoke-tested. The Steam Controller (2026) mapping was measured on the real controller, and Nintendo controllers’ X and Y now follow the Xbox layout, as A and B already did.
+
+### 4–11 November · Host and client in two streams
+
+Until then, this PC’s half came from its own Umbra as a second stream. A cursor fence kept the pointer in the right half, windows dragged onto the client’s monitor were sent back, the outer edges of the panes became walls, and this PC’s sound went to the real speakers when the default was still the host’s virtual one. Ending a stream now says “Quitting game…” or “Disconnecting…” to match what was chosen. In a live session on 10 November, Steam could be dragged over the other PC’s half, Red Dead Redemption 2 opened windowed across both halves after an administrator prompt, out of reach of the window guard, and the pointer slid onto the virtual display about 50 times. Fixes were built for both, but PreceptorOfMagic changed the direction instead: this PC should run its half fully locally and compose in only the other PC’s stream, without going through the pairing routines.
+
+### 10–13 November · This PC’s half runs locally on Windows
+
+Eclipse now adds a virtual display itself through the SudoVDA driver Umbra installs, shows it in its half with Windows Graphics Capture, and opens one ordinary stream to the other PC’s co-op pane at half the size and half the bitrate. This PC’s own host is asked for nothing: no status query, wake, PIN, app list or launch, so it needs no pairing. A probe on 11 November, without administrator rights, had the display up in 125 ms at the requested 1280×1440 and 165 Hz as the primary display, captured at 164.5 pictures per second, and removing it restored the screen layout; the first session ran the same day. Eclipse then asks for administrator rights once per session, saying why, so that it can restart services holding a hidden controller. Alt+Tab had minimised Eclipse and left the session; the minimise was measured to come from SDL’s own key handling, which no longer does it during a session.
+
+### 12 November · A crash on every resume
+
+Resuming a stream crashed Eclipse when a cover image arrived for a tile that had already been deleted: the cover loader removed the first callback attached to the tile, not its own. With that fixed, 14 resumes in one run did not crash. Launcher tiles no longer zoom when focused, so the focus outline is drawn at its real size.
+
+### 13 November · An update notice and streaming tips
+
+Once a day, when the launcher opens, Eclipse reads the Project Hub’s list of releases; a newer version puts a dot on Settings and in Settings › About, with what it brings and how to update on that device. There are no pop-ups and nothing during a stream, the check can be turned off, and a release can be published without the notice. The four connecting-screen tips became 82, chosen for each platform and ranked so that someone who sees few tips sees the important ones; none repeats until all have been shown. The settings bar shows one too, with *Next tip* and *All tips*. On the TV the remote could not scroll *All tips* and the panel cut off the bar’s focus outline; both were fixed, the second confirmed by PreceptorOfMagic. A stream now takes up to 16 controllers instead of 4.
+
+### 14–15 November · Linux, on GNOME and KDE Plasma
+
+On GNOME 50 the local half is a virtual monitor made through Mutter’s remote-desktop and screen-cast interfaces, placed beside the real screens on the stream’s side, and shown through PipeWire; the pointer crosses the divider through the input-capture portal and libei. The portal only activated when it was enabled after connecting to libei, and GNOME 50.1 crashed when the virtual monitor was removed with the pointer on it, so Eclipse moves the pointer to a real screen first. Eclipse draws this PC’s pointer from the cursor information Mutter supplies. KDE Plasma 6.6 followed, where this PC’s half is shown at about 48 pictures per second (60 on GNOME); the game itself runs at its own rate. Ctrl+Alt+Shift+Q and Z go through the global-shortcuts portal, because a session could read no keyboard directly, and are requested only after the input-capture question has been answered: GNOME lost both when asked together. Controllers given to the other PC are taken exclusively by Eclipse, so no extra software is needed on Linux.
+
+### 14 November · Release testing
+
+Five virtual controllers reached the host as five. Testing found a crash when the slow-connection question was shown, a 30-second wait for a launch reply that was shorter than co-op’s new 60-second limit (now 120 seconds), and a deadlock in network discovery that froze co-op at “Checking…” on Linux; the same deadlock had been fixed for Android only, and is now fixed everywhere. A photo from PreceptorOfMagic showed the Windows launcher half-drawn after the screen mode changed: SDL’s Direct3D renderer discards its render targets about 226 ms after a mode change, so Eclipse now recreates its screen texture, verified with the reset logged 186 ms after the change and the launcher fully drawn. For co-op, Eclipse also asks this PC’s own host at 127.0.0.1, so this PC is found without waiting for network discovery.
+
+### 15 November · Eclipse 1.3.7, Umbra 0.5.1 and Umbra 0.5.3 for Linux
+
+Eclipse 1.3.7’s Windows, Linux and source packages were built from the release commit; the LG TV and Android packages came from an earlier candidate that differs only in desktop code, none of which they compile. The Linux tarball is no longer published. Umbra 0.5.1 for Windows installs HidHide silently, as it does ViGEmBus, leaves an existing HidHide alone and removes it only if it installed it; a fresh install took 8 seconds without a restart, and an upgrade over Umbra (Vibepollo) kept its pairings. Umbra 0.5.3 for Linux adds the update notice to 0.5.2. Umbra (Vibepollo) 2.0.0-umbra.2 was held back: HidHide’s installer failed when run from inside Vibepollo’s Windows Installer package. Not tested before release: the NVIDIA SHIELD build, the 1.3.7 packages themselves on the TV and the SHIELD, and co-op with this PC on other Linux distributions, GNOME 51 and Plasma 6.7.
+
+<!-- activity-detail:history-this-pc:start -->
+**Behind the build · 23 October–16 November 2026**
+
+- **User prompts:** 146
+- **Tokens processed:** 844,231,789
+- **Models:** `claude-opus-5-5`
+
+| Week | User prompts | Tokens processed | Models |
+|---|---:|---:|---|
+| 23–25 October | 30 | 307,477,406 | `claude-opus-5-5` |
+| 26 October–1 November | 39 | 47,897,484 | `claude-opus-5-5` |
+| 9–15 November † | 73 | 469,607,352 | `claude-opus-5-5` |
+| 16 November | 4 | 19,249,547 | `claude-opus-5-5` |
+
+Weeks marked † are incomplete because some records from this period were deleted.
+<!-- activity-detail:history-this-pc:end -->
+
+</details>
+
 <a name="open-work"></a>
 
 ## Useful work starts with a reproducible gap.
