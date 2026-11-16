@@ -1,7 +1,9 @@
 # Visit counting
 
 The Project Hub counts visits with its own small counter instead of a third-party analytics service. It uses no
-cookies and no browser storage. The counter itself (a Cloudflare Worker and its database) is kept in a private
+cookies and no browser storage for visitors. The only exception is the maintainer's own browsers: opened with a
+private link (`?me=` followed by a key), a browser keeps that key in its local storage and sends it with its visits,
+so the maintainer's own visits can be left out of the figures; `?me=off` removes it. The counter itself (a Cloudflare Worker and its database) is kept in a private
 repository; the part that runs in your browser is [`site/assets/count.mjs`](../site/assets/count.mjs).
 
 ## What is sent

@@ -74,3 +74,23 @@ test('page script reports links to a release page on GitHub, apart from download
     ['https://count.example/g', { p: 'setup.html', repo: 'Umbra-Vibepollo' }]]);
   assert.equal(releasePage('https://github.com/PreceptorOfMagic/Eclipse/releases/download/v1/x.ipk'), null);
 });
+
+test('the maintainer link: ?me= is kept, sent with every beacon, taken out of the address bar, and ?me=off forgets it', async () => {
+  const { ownerKey } = await import('../../site/assets/count.mjs');
+  const store = new Map(), replaced = [];
+  const mk = (href) => ({ location: { href }, history: { state: null, replaceState: (s, t, u) => replaced.push(u) },
+    localStorage: { getItem: (k) => store.get(k) ?? null, setItem: (k, v) => store.set(k, v), removeItem: (k) => store.delete(k) } });
+  const key = 'AbCdEfGhIjKlMnOpQrStUvWx_-12';
+  assert.equal(ownerKey(mk(`https://h.example/Hub/setup.html?me=${key}&days=1#x`)), key);
+  assert.deepEqual(replaced, ['/Hub/setup.html?days=1#x']);
+  assert.equal(ownerKey(mk('https://h.example/Hub/')), key);
+  const w = fakeWindow(); Object.assign(w.win, mk('https://h.example/Hub/setup.html'));
+  w.win.location.pathname = '/Hub/setup.html'; w.win.location.hostname = 'h.example';
+  startCounting(w.win, 'https://count.example');
+  assert.equal(w.sent[0][1].k, key);
+  assert.equal(ownerKey(mk('https://h.example/Hub/?me=bad')), key);
+  assert.equal(ownerKey(mk('https://h.example/Hub/?me=off')), null);
+  assert.equal(ownerKey({ location: {} }), null);
+  const plain = fakeWindow(); startCounting(plain.win, 'https://count.example');
+  assert.equal('k' in plain.sent[0][1], false);
+});

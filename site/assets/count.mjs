@@ -1,6 +1,24 @@
-// Anonymous visit counter: no cookies, no browser storage. Sends the page name, the referring site's host name and
+// Anonymous visit counter: no cookies, and no browser storage for visitors. Sends the page name, the referring site's host name and
 // how long the page was visible, and which release file (and release) a download link points to when one is clicked, or which release page a link to GitHub opens. Skipped when the browser asks not to be tracked. Receiver: the Hub's counter, a Cloudflare Worker kept in a private repository (what it keeps: analytics/README.md).
+// The one exception is the maintainer's own browser: opened with their personal link (?me=<key>), it keeps that key so
+// the counter can set their visits apart from everyone else's; ?me=off forgets it.
 export const ENDPOINT = 'https://hub-count.preceptorofmagic.workers.dev';
+
+const OWNER_KEY = /^[A-Za-z0-9_-]{22,64}$/, STORE = 'hub-count-me';
+// Reads ?me= (keeping or forgetting the key), removes it from the address bar, and returns the kept key, if any.
+export function ownerKey(win) {
+  try {
+    const url = new URL(win.location.href), me = url.searchParams.get('me');
+    if (me !== null) {
+      if (OWNER_KEY.test(me)) win.localStorage.setItem(STORE, me);
+      else if (me === 'off') win.localStorage.removeItem(STORE);
+      url.searchParams.delete('me');
+      win.history.replaceState(win.history.state, '', url.pathname + url.search + url.hash);
+    }
+    const kept = win.localStorage.getItem(STORE);
+    return kept && OWNER_KEY.test(kept) ? kept : null;
+  } catch { return null; }
+}
 
 export function pageName(pathname) {
   const last = pathname.split('/').pop();
@@ -28,11 +46,11 @@ export function releasePage(href) {
 }
 
 export function startCounting(win = globalThis, endpoint = ENDPOINT) {
-  const nav = win.navigator, doc = win.document;
+  const nav = win.navigator, doc = win.document, k = ownerKey(win);
   if (!endpoint || !nav || typeof nav.sendBeacon !== 'function' || !win.crypto?.randomUUID) return null;
   if (nav.webdriver || nav.globalPrivacyControl === true || nav.doNotTrack === '1') return null;
   const id = win.crypto.randomUUID();
-  const send = (path, body) => { try { nav.sendBeacon(endpoint + path, JSON.stringify(body)); } catch {} };
+  const send = (path, body) => { try { nav.sendBeacon(endpoint + path, JSON.stringify(k ? { ...body, k } : body)); } catch {} };
   let shown = 0, since = doc.visibilityState === 'hidden' ? null : win.performance.now();
   const flush = () => {
     if (since !== null) { shown += win.performance.now() - since; since = null; }
