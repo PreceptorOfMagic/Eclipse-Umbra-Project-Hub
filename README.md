@@ -374,11 +374,9 @@ Eclipse can now run on one of the two co-op PCs: on Windows, and on Linux with G
 <!-- activity:history-this-pc:start -->
 **Behind the build · 23 October–16 November 2026**
 
-- **User prompts:** 146
-- **Tokens processed:** 844,231,789
-- **Models:** `claude-opus-5-5`
-
-These numbers are incomplete because some records from this period were deleted.
+- **User prompts:** 344
+- **Tokens processed:** 2,395,374,457
+- **Models:** `claude-fable-5-2`, `claude-opus-5-5`
 <!-- activity:history-this-pc:end -->
 
 </details>

@@ -756,18 +756,17 @@ Eclipse 1.3.7’s Windows, Linux and source packages were built from the release
 <!-- activity-detail:history-this-pc:start -->
 **Behind the build · 23 October–16 November 2026**
 
-- **User prompts:** 146
-- **Tokens processed:** 844,231,789
-- **Models:** `claude-opus-5-5`
+- **User prompts:** 344
+- **Tokens processed:** 2,395,374,457
+- **Models:** `claude-fable-5-2`, `claude-opus-5-5`
 
 | Week | User prompts | Tokens processed | Models |
 |---|---:|---:|---|
-| 23–25 October | 30 | 307,477,406 | `claude-opus-5-5` |
+| 23–25 October | 38 | 307,477,406 | `claude-opus-5-5` |
 | 26 October–1 November | 39 | 47,897,484 | `claude-opus-5-5` |
-| 9–15 November † | 73 | 469,607,352 | `claude-opus-5-5` |
-| 16 November | 4 | 19,249,547 | `claude-opus-5-5` |
-
-Weeks marked † are incomplete because some records from this period were deleted.
+| 2–8 November | 66 | 379,251,186 | `claude-opus-5-5` |
+| 9–15 November | 196 | 1,641,498,834 | `claude-fable-5-2`, `claude-opus-5-5` |
+| 16 November | 5 | 19,249,547 | `claude-opus-5-5` |
 <!-- activity-detail:history-this-pc:end -->
 
 </details>

@@ -442,34 +442,35 @@
       "from": "2026-10-23",
       "to": "2026-11-16",
       "label": "23 October–16 November 2026",
-      "prompts": 146,
+      "prompts": 344,
       "promptSources": {
         "claudeJournal": 0,
-        "claudeTranscripts": 146,
+        "claudeTranscripts": 344,
         "codexTranscripts": 0
       },
       "excludedUnmarkedClaudeMessages": 0,
-      "requests": 2615,
+      "requests": 6468,
       "tokens": {
-        "uncachedInput": 5508,
-        "cacheWrite": 10505967,
-        "cacheRead": 831888526,
-        "output": 1831788,
-        "total": 844231789
+        "uncachedInput": 13596,
+        "cacheWrite": 25418020,
+        "cacheRead": 2364582489,
+        "output": 5360352,
+        "total": 2395374457
       },
       "models": [
+        "claude-fable-5-2",
         "claude-opus-5-5"
       ],
       "recordedUsageDates": {
         "first": "2026-10-23",
         "last": "2026-11-16"
       },
-      "recordsIncomplete": true,
+      "recordsIncomplete": false,
       "weeks": [
         {
           "from": "2026-10-23",
           "to": "2026-10-25",
-          "prompts": 30,
+          "prompts": 38,
           "models": [
             "claude-opus-5-5"
           ],
@@ -487,19 +488,30 @@
           "tokens": 47897484
         },
         {
-          "from": "2026-11-09",
-          "to": "2026-11-15",
-          "prompts": 73,
+          "from": "2026-11-02",
+          "to": "2026-11-08",
+          "prompts": 66,
           "models": [
             "claude-opus-5-5"
           ],
-          "recordsIncomplete": true,
-          "tokens": 469607352
+          "recordsIncomplete": false,
+          "tokens": 379251186
+        },
+        {
+          "from": "2026-11-09",
+          "to": "2026-11-15",
+          "prompts": 196,
+          "models": [
+            "claude-fable-5-2",
+            "claude-opus-5-5"
+          ],
+          "recordsIncomplete": false,
+          "tokens": 1641498834
         },
         {
           "from": "2026-11-16",
           "to": "2026-11-16",
-          "prompts": 4,
+          "prompts": 5,
           "models": [
             "claude-opus-5-5"
           ],
