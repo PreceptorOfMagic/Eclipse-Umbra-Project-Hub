@@ -327,14 +327,6 @@ Umbra 0.5.2 for Linux added KDE Plasma 6.7 and prebuilt HDR extras for seven dis
 
 An older LG TV refused to install Eclipse 1.3.4 with error -5. Every file inside the 1.3.4 TV package was dated 1 January 1970, a fault reported to make older LG TVs refuse a package; 1.3.5 packages carry real dates. The release also brings controller-mouse fixes from the SHIELD port to every platform: in co-op the controller’s pointer crosses to the other PC like the Magic Remote’s, and on Windows and Linux a fully pulled trigger now clicks. Holding Start opens a shortcut wheel, and Windows and Linux get the Eclipse tile as their icon. The same release now also carries the first Eclipse for the NVIDIA SHIELD.
 
-### 24 October · Eclipse 1.3.6
-
-Eclipse for Linux became a Flatpak, like Umbra for Linux: one bundle for any x86_64 distribution, which keeps the settings and pairings of the earlier tarball. On a PC at the TV, 4K streams with AMD graphics had been losing about a quarter of their video packets, because each picture was copied back from the graphics card on the thread that receives the stream; pictures now go straight to the screen, and the loss is gone on Wayland and X11. Co-op on Linux no longer falls back to software decoding at the start, and plays through PulseAudio without crackle. On every platform, an app’s menu left open through a refresh of the app list no longer starts a different app. The tarball stays on the release.
-
-### 15 November · Eclipse 1.3.7
-
-Eclipse can now run on one of the two co-op PCs: on Windows, and on Linux with GNOME or KDE Plasma, that PC's half runs locally on a display of its own instead of being streamed to itself, and only the other PC is streamed. The mouse crosses between the halves at the divider, and controllers given to the other PC are kept away from this PC's games. Eclipse also tells you when a new version is out, shows streaming tips and takes up to 16 controllers per stream. The Linux tarball is no longer published; the Flatpak is the Linux package. Umbra 0.5.1 for Windows supplies the controller-ownership support for this mode; Umbra 0.5.3 for Linux adds the update notice.
-
 <!-- activity:history-product:start -->
 **Behind the build · 23 September–22 October 2026**
 
@@ -342,6 +334,50 @@ Eclipse can now run on one of the two co-op PCs: on Windows, and on Linux with G
 - **Tokens processed:** 11,615,264,672
 - **Models:** `claude-opus-4-8`, `claude-opus-5`, `claude-opus-5-5`, `claude-sonnet-5`, `claude-sonnet-5-5`, `gpt-5.6-sol`, `gpt-6-astra`
 <!-- activity:history-product:end -->
+
+</details>
+
+<a name="history-this-pc"></a>
+
+<details>
+
+<summary>23 October–16 November · Co-op from the PC you play on — Eclipse 1.3.6, controllers that belong to one PC, this PC’s half running locally on Windows and Linux, an update notice and Eclipse 1.3.7</summary>
+
+### 24 October · Eclipse 1.3.6
+
+Eclipse for Linux became a Flatpak, like Umbra for Linux: one bundle for any x86_64 distribution, which keeps the settings and pairings of the earlier tarball. On a PC at the TV, 4K streams with AMD graphics had been losing about a quarter of their video packets, because each picture was copied back from the graphics card on the thread that receives the stream; pictures now go straight to the screen, and the loss is gone on Wayland and X11. Co-op on Linux no longer falls back to software decoding at the start, and plays through PulseAudio without crackle. On every platform, an app’s menu left open through a refresh of the app list no longer starts a different app.
+
+### 3–10 November · One PC streaming its own half to itself
+
+When the PC running Eclipse was also one of the two co-op PCs, it streamed its own half to itself through Umbra. A controller given to the other PC still reached this PC’s games, so Eclipse began hiding such controllers with HidHide and naming the programs that already had them open. A live session on 10 November showed the limits of that design: a game started as administrator opened across both halves, out of Eclipse’s reach, and the pointer kept slipping onto the virtual display. PreceptorOfMagic asked for this PC to run its half locally instead, without pairing with itself.
+
+### 10 November · Waiting for the second PC
+
+A co-op start failed when the second PC took more than about 8 seconds: Eclipse waited for it inside the first PC’s video setup and sent no video pings meanwhile, so the first PC dropped the session. Eclipse now waits beside the first stream, asks after 20 seconds whether to keep waiting, and gives up after a minute.
+
+### 10–13 November · This PC’s half runs locally
+
+On Windows, Eclipse now adds a virtual display of its own for this PC’s games and shows it in its half; only the other PC is streamed. That removes the capture, encode and decode of this PC’s half. A first probe had the display up in 125 ms at the requested 1280×1440 and 165 Hz, captured at about 164 pictures per second, and the first side-by-side session ran on 11 November. Fixes followed for the pointer crossing the divider, a single administrator prompt per session, and Windows minimising Eclipse on Alt+Tab, which was traced to SDL’s key handling.
+
+### 13–14 November · An update notice and streaming tips
+
+Eclipse checks the Project Hub’s list of releases once a day and puts a dot on Settings when a newer version is out; Umbra’s web interface does the same. 82 streaming tips, chosen for each platform and ranked so the most useful come first, replaced the four old ones, and a stream now takes up to 16 controllers.
+
+### 14–15 November · Linux, on GNOME and KDE Plasma
+
+On Linux, this PC’s half became a virtual monitor created through the desktop’s own screen-sharing interfaces, with the pointer handed across the divider through the input-capture portal. Eclipse takes controllers given to the other PC for itself, so this PC’s programs no longer read them. GNOME 50.1 crashed when the virtual monitor was removed with the pointer on it, so Eclipse moves the pointer back first. Release testing also caught a freeze at “Checking…” when starting co-op on Linux and a Windows launcher left half-drawn after a screen-mode change.
+
+### 15 November · Eclipse 1.3.7, Umbra 0.5.1 and Umbra 0.5.3 for Linux
+
+Eclipse can now run on one of the two co-op PCs: on Windows, and on Linux with GNOME or KDE Plasma, that PC’s half runs locally on a display of its own instead of being streamed to itself, and only the other PC is streamed. The mouse crosses between the halves at the divider, and controllers given to the other PC are kept away from this PC’s games. Eclipse also tells you when a new version is out, shows streaming tips and takes up to 16 controllers per stream. The Linux tarball is no longer published; the Flatpak is the Linux package. Umbra 0.5.1 for Windows installs HidHide, which this mode uses on Windows; Umbra 0.5.3 for Linux adds the update notice. Umbra (Vibepollo) 2.0.0-umbra.2 was held back, because installing HidHide from inside its Windows Installer package failed.
+
+<!-- activity:history-this-pc:start -->
+**Behind the build · 23 October–16 November 2026**
+
+- **User prompts:** 344
+- **Tokens processed:** 2,395,374,457
+- **Models:** `claude-fable-5-2`, `claude-opus-5-5`
+<!-- activity:history-this-pc:end -->
 
 </details>
 
