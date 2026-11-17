@@ -1,3 +1,4 @@
+import {initialiseDownloads} from './downloads.mjs';
 export function setupPlan(mode,client,host,release){
  const names={webos:'LG webOS TV',shield:'NVIDIA SHIELD TV',windows:'Windows PC',linux:'Linux PC'};
  if(!['single','remote','local'].includes(mode))mode='single';
@@ -26,10 +27,25 @@ export function initGuides(root=document){
    const mixed=host.querySelector('[value="mixed"]');mixed.hidden=mode!=='remote';mixed.disabled=mode!=='remote';if(mode!=='remote'&&host.value==='mixed')host.value='windows';
    section.querySelector('[data-host-label]').textContent=mode==='single'?'Your gaming PC runs':mode==='local'?'The other gaming PC runs':'Your gaming PCs run';
    const plan=setupPlan(mode,client.value,host.value,data.release);
-   const hostCards=plan.operatingSystems.map(os=>`<div class="guide-download"><strong>Umbra ${data.release[os]} · ${labels[os]}</strong><small>Install on ${mode==='local'&&os===client.value?'this PC'+(host.value===os?' and the other PC':''):'the gaming PC'+(mode==='remote'&&host.value!=='mixed'?'s':'')}.</small><a class="button-secondary" href="${data.releases[os]}">Download Umbra ↗</a><a href="setup.html#umbra-${os}">Install steps</a></div>`).join('');
-   result.innerHTML=`<h3>${plan.title}</h3><p class="guide-result-intro">${mode==='local'?'Eclipse and Umbra on this PC. Umbra on the other.':'Umbra on the gaming '+(mode==='single'?'PC':'PCs')+'. Eclipse on your '+labels[client.value]+'.'}</p><div class="guide-downloads">${hostCards}<div class="guide-download"><strong>Eclipse ${data.release.eclipse} · ${labels[client.value]}</strong><small>Choose <code>${h(files[client.value])}</code> under Assets. Check its matching checksum.</small><a class="button-secondary" href="${data.releases.eclipse}">Download Eclipse ↗</a><a href="setup.html#eclipse-${client.value}">Install steps</a></div></div><ol class="guide-steps">${plan.steps.map(step=>`<li>${h(step)}</li>`).join('')}</ol><p class="guide-note">${h(plan.note)} ${mode==='local'?'<a href="setup.html#local-coop-limits">Read known limitations and test coverage.</a>':''}</p>${mode==='local'?'<a class="text-link" href="eclipse.html#local-coop-demo">Watch the controller and startup walkthrough →</a>':''}`;
+   const hostCards=plan.operatingSystems.map(os=>card(`Umbra ${data.release[os]} · ${labels[os]}`,`Install on ${mode==='local'&&os===client.value?'this PC'+(host.value===os?' and the other PC':''):'the gaming PC'+(mode==='remote'&&host.value!=='mixed'?'s':'')}.`,umbraPackage[os],data.releases[os],'Download Umbra',`setup.html#umbra-${os}`)).join('');
+   const eclipseCard=card(`Eclipse ${data.release.eclipse} · ${labels[client.value]}`,`Install on ${mode==='local'?'this PC':'your '+labels[client.value]}: <code>${h(files[client.value])}</code>.`,eclipsePackage[client.value],data.releases.eclipse,'Download Eclipse',`setup.html#eclipse-${client.value}`);
+   result.innerHTML=`<h3>${plan.title}</h3><p class="guide-result-intro">${mode==='local'?'Eclipse and Umbra on this PC. Umbra on the other.':'Umbra on the gaming '+(mode==='single'?'PC':'PCs')+'. Eclipse on your '+labels[client.value]+'.'}</p><div class="guide-downloads">${hostCards}${eclipseCard}</div><ol class="guide-steps">${plan.steps.map(step=>`<li>${h(step)}</li>`).join('')}</ol><p class="guide-note">${h(plan.note)} ${mode==='local'?'<a href="setup.html#local-coop-limits">Read known limitations and test coverage.</a>':''}</p>${mode==='local'?'<a class="text-link" href="eclipse.html#local-coop-demo">Watch the controller and startup walkthrough →</a>':''}`;
+   initialiseDownloads(result,cachedFetch);
   }
   form.addEventListener('change',update);update();
  }
+}
+// Each download card is a download control (downloads.mjs): the button becomes the file itself once the release is read,
+// with the release on GitHub linked underneath, like every other download button. Until then it opens the release page.
+const umbraPackage={windows:'umbra-windows',linux:'umbra-linux'};
+const eclipsePackage={webos:'webos',shield:'android',windows:'windows-setup',linux:'linux-flatpak'};
+function card(title,note,platform,releasePage,label,steps){
+ return `<div class="guide-download"><strong>${title}</strong><small>${note}</small><div class="download-control guide-control" data-download="${platform}"><a class="button-secondary" data-download-link href="${releasePage}">${label} ↗</a><p data-download-status aria-live="polite"></p></div><a class="guide-install" href="${steps}">Install steps</a></div>`;
+}
+// One GitHub lookup per release for the page's life: the chooser re-renders on every change, and GitHub limits lookups.
+const lookups=new Map();
+export function cachedFetch(url,options,fetcher=globalThis.fetch){
+ if(!lookups.has(url))lookups.set(url,fetcher(url,options).then(async r=>({status:r.status,ok:r.ok,body:r.ok?await r.json():null})).catch(e=>{lookups.delete(url);throw e;}));
+ return lookups.get(url).then(c=>({status:c.status,ok:c.ok,json:async()=>c.body}));
 }
 if(typeof document!=='undefined')initGuides();

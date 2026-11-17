@@ -27,3 +27,16 @@ test('unavailable HDR packages have no clickable download control',()=>{
  }
  assert.equal(data.hdrExtras.filter(x=>x.available).length,8);
 });
+
+test('the chooser looks each release up once, however often it re-renders', async () => {
+  const { cachedFetch } = await import('../../site/assets/guide.mjs');
+  let calls = 0;
+  const fetcher = async () => { calls++; return { status: 200, ok: true, json: async () => ({ tag_name: 't' }) }; };
+  const a = await cachedFetch('https://api.example/r1', {}, fetcher), b = await cachedFetch('https://api.example/r1', {}, fetcher);
+  assert.equal(calls, 1);
+  assert.deepEqual([a.ok, (await b.json()).tag_name], [true, 't']);
+  const failing = async () => { calls++; throw new Error('offline'); };
+  await assert.rejects(cachedFetch('https://api.example/r2', {}, failing));
+  await cachedFetch('https://api.example/r2', {}, fetcher);
+  assert.equal(calls, 3, 'a failed lookup is tried again');
+});
