@@ -64,7 +64,7 @@ Open the latest release, expand Assets and choose the package described below. I
 
 1. **Installing over Vibepollo keeps your settings.** Umbra (Vibepollo) upgrades a Vibepollo installation in place, the same way Vibepollo upgrades itself: your configuration, applications and paired devices stay. The installer shows **Switch to Umbra (Vibepollo)**. Installing over Apollo or the Apollo-based Umbra also keeps settings and pairings; the installer removes the old program first. Back up your host configuration before switching anyway.
 
-1. Keep the bundled virtual-display and virtual gamepad drivers selected. Until code signing is set up, the gamepad driver is signed with Umbra’s own certificate, which the installer adds to the PC’s trusted certificates.
+1. Keep the bundled virtual-display and virtual gamepad drivers selected. Until code signing is set up, the gamepad driver is signed with Umbra’s own certificate, which the installer adds to the PC’s trusted certificates. Setup also installs HidHide unless it is already there, for co-op with this PC as one of the two; uninstalling removes it only if setup installed it.
 
 1. Open the host’s web interface from the Start menu or tray, sign in, pair Eclipse and test an ordinary Desktop stream before co-op. For co-op, install a compatible Umbra on the second PC as well.
 

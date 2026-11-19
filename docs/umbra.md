@@ -50,7 +50,7 @@ Download the Umbra 0.5.3 Flatpak for x86_64 Linux. KDE Plasma and GNOME on Wayla
 
 ## Umbra.
 
-Umbra comes in two editions: Umbra, built on Apollo, and Umbra (Vibepollo), built on Vibepollo. For Eclipse 1.3.7 co-op with this Windows PC, use Umbra 0.5.1. The published Vibepollo edition remains 2.0.0-umbra.1; the planned umbra.2 update is not released. It keeps its own GitHub update check.
+Umbra comes in two editions: Umbra, built on Apollo, and Umbra (Vibepollo), built on Vibepollo. For Eclipse 1.3.7 co-op with this Windows PC, use Umbra 0.5.1 or Umbra (Vibepollo) 2.18.9-umbra.1 (built on Vibepollo 2.18.9, released 20 November); both install HidHide, which that mode uses. The Vibepollo edition keeps its own GitHub update check.
 
 | | Umbra | Umbra (Vibepollo) |
 |---|---|---|
